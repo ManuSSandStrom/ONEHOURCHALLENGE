@@ -190,8 +190,8 @@ export default function AIAssistant() {
         {/* Body */}
         <div className="ai-side-body">
           {activeTab === 'ai' ? (
-            <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-              <div style={{ flex: 1, overflowY: 'auto', marginBottom: '16px' }}>
+            <div className="ai-chat-container">
+              <div className="ai-messages-list">
                 {messages.map((msg, i) => (
                   <div
                     key={i}
@@ -200,7 +200,6 @@ export default function AIAssistant() {
                   >
                     <div
                       className={`ai-bubble ${msg.role === 'user' ? 'ai-bubble-user' : 'ai-bubble-bot'}`}
-                      style={{ maxWidth: '90%', fontSize: '0.9rem' }}
                       dangerouslySetInnerHTML={{ __html: formatMessage(msg.content) }}
                     />
                   </div>
@@ -217,27 +216,27 @@ export default function AIAssistant() {
                 <div ref={messagesEndRef} />
               </div>
 
-              <div className="ai-panel-input" style={{ position: 'sticky', bottom: 0, padding: 0 }}>
+              <div className="ai-panel-input">
                 <input
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   onKeyDown={handleKeyPress}
-                  placeholder="Ask about fitness, plans..."
+                  placeholder="Ask anything..."
                   disabled={loading}
-                  style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)' }}
                 />
                 <button
                   onClick={sendMessage}
                   disabled={loading || !input.trim()}
-                  className="btn btn-primary"
-                  style={{ padding: '8px 12px', minWidth: '40px' }}
+                  className="btn btn-primary btn-sm"
                 >
                   <FiSend size={18} />
                 </button>
               </div>
             </div>
           ) : (
-            <CalorieCalculator onClose={handleToggle} />
+            <div className="ai-calculator-container">
+              <CalorieCalculator onClose={handleToggle} />
+            </div>
           )}
         </div>
       </div>
