@@ -147,13 +147,13 @@ ONEHOURCHALLENGE/
 
 - `MONGODB_URI`: Your MongoDB connection string.
 - `OPENAI_API_KEY`: API Key for the AI assistant.
-- `CLIENT_URL`: URL of your frontend (e.g., `http://localhost:5174`).
+- `CLIENT_URL`: URL of your frontend (e.g., `https://your-app.netlify.app`).
 - `CLERK_SECRET_KEY`: Private key from Clerk dashboard.
 
 ### Client (`/client/.env`)
 
 - `VITE_CLERK_PUBLISHABLE_KEY`: Public key from Clerk.
-- `VITE_API_URL`: Backend API URL (e.g., `http://localhost:5000/api`).
+- `VITE_API_URL`: Backend API URL (e.g., `https://onehourchallenge.onrender.com/api`).
 
 ---
 
@@ -161,7 +161,7 @@ ONEHOURCHALLENGE/
 
 - **Admin Email:** manoharbasappagari18@gmail.com
 - **Business WhatsApp:** +91 95150 22680
-- **Website:** [http://localhost:5174](http://localhost:5174)
+- **Website:** [https://onehourchallenge.onrender.com](https://onehourchallenge.onrender.com) (or your Netlify URL)
 
 ---
 
