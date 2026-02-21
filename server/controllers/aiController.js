@@ -12,7 +12,7 @@ const getOpenAI = () => {
       apiKey: process.env.OPENAI_API_KEY,
       baseURL: isOpenRouter ? 'https://openrouter.ai/api/v1' : undefined,
       defaultHeaders: isOpenRouter ? {
-        'HTTP-Referer': process.env.CLIENT_URL || 'http://localhost:5174',
+        'HTTP-Referer': process.env.CLIENT_URL,
         'X-Title': 'OneHour Challenge',
       } : undefined,
     });
