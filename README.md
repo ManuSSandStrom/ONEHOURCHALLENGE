@@ -115,6 +115,30 @@ ONEHOURCHALLENGE/
     └── index.js            # Main server entry point
 ```
 
+## 🚀 Deployment Guide
+
+### Backend (Render)
+
+1. **New Web Service**: Connect your GitHub repository.
+2. **Build Command**: `cd server && npm install`
+3. **Start Command**: `node server/index.js` (or set `Root Directory` to `server` and use `node index.js`)
+4. **Environment Variables**:
+   - `MONGODB_URI`
+   - `OPENAI_API_KEY`
+   - `CLERK_SECRET_KEY`
+   - `CLIENT_URL`: Your Netlify URL (e.g., `https://your-app.netlify.app`)
+   - `NODE_ENV`: `production`
+
+### Frontend (Netlify)
+
+1. **New Site**: Import from GitHub.
+2. **Base Directory**: `client`
+3. **Build Command**: `npm run build`
+4. **Publish Directory**: `client/dist`
+5. **Environment Variables**:
+   - `VITE_API_URL`: Your Render URL (e.g., `https://your-api.onrender.com/api`)
+   - `VITE_CLERK_PUBLISHABLE_KEY`: Your Clerk Public Key
+
 ---
 
 ## 🔑 Environment Variables
