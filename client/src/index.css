@@ -3809,3 +3809,240 @@ textarea {
   color: #fff;
   font-weight: 700;
 }
+
+/* ===================== HOW IT WORKS PAGE ===================== */
+.how-it-works-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 40px;
+  margin-top: 40px;
+}
+
+.session-structure-card {
+  background: linear-gradient(135deg, #1a1a20, #0f0f13);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 24px;
+  padding: 40px;
+  position: relative;
+}
+
+.card-title-lg {
+  font-size: 1.8rem;
+  font-weight: 800;
+  margin-bottom: 12px;
+  color: #fff;
+}
+
+.timeline {
+  margin-top: 40px;
+  position: relative;
+  padding-left: 30px;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 40px;
+}
+
+.timeline-item:last-child {
+  margin-bottom: 0;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: -34px;
+  top: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--color-gray-700);
+  border: 2px solid #0f0f13;
+  z-index: 2;
+}
+
+.timeline-content h4 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--color-red-light);
+}
+
+.timeline-content p {
+  font-size: 0.95rem;
+  color: var(--color-gray-400);
+  line-height: 1.6;
+}
+
+.session-note {
+  margin-top: 40px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  background: rgba(229, 57, 53, 0.05);
+  border-radius: 12px;
+  font-size: 0.9rem;
+  color: var(--color-gray-300);
+}
+
+.benefits-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.benefit-item {
+  display: flex;
+  gap: 20px;
+  padding: 24px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  transition: transform 0.3s ease;
+}
+
+.benefit-item:hover {
+  transform: translateX(10px);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.benefit-icon {
+  font-size: 1.5rem;
+  color: var(--color-red);
+  flex-shrink: 0;
+}
+
+.benefit-item h4 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+  color: #fff;
+}
+
+.benefit-item p {
+  font-size: 0.85rem;
+  color: var(--color-gray-500);
+  line-height: 1.4;
+}
+
+.programs-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.program-detail-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  padding: 30px;
+  transition: all 0.3s ease;
+}
+
+.program-detail-card:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(229, 57, 53, 0.3);
+  transform: translateY(-5px);
+}
+
+.program-icon-wrap {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.program-detail-card h3 {
+  font-size: 1.3rem;
+  font-weight: 800;
+  margin-bottom: 12px;
+  color: #fff;
+}
+
+.program-detail-card p {
+  font-size: 0.9rem;
+  color: var(--color-gray-400);
+  margin-bottom: 24px;
+  line-height: 1.5;
+}
+
+.program-points {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.program-points li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.85rem;
+  color: var(--color-gray-300);
+}
+
+.program-points li svg {
+  color: var(--color-red);
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+
+.programs-secondary-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.program-detail-card.horizontal {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+
+.program-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.program-tag {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 6px 12px;
+  border-radius: 100px;
+  font-size: 0.75rem;
+  color: var(--color-gray-400);
+}
+
+@media (max-width: 992px) {
+  .how-it-works-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .programs-detail-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .programs-detail-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .programs-secondary-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .program-detail-card.horizontal {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
