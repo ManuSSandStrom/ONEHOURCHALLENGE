@@ -90,7 +90,7 @@ export default function HowItWorks() {
                   </div>
                 </div>
                 <div className="timeline-item">
-                  <div className="timeline-dot" style={{ background: 'var(--color-red)' }}></div>
+                  <div className="timeline-dot" style={{ background: 'var(--color-primary)' }}></div>
                   <div className="timeline-content">
                     <h4>40 Minutes – Main Workout</h4>
                     <p>Fitness, Yoga, or Zumba — focused, high-intensity programming.</p>
@@ -106,7 +106,7 @@ export default function HowItWorks() {
               </div>
               
               <div className="session-note">
-                <FiCheckCircle style={{ color: 'var(--color-red)' }} />
+                <FiCheckCircle style={{ color: 'var(--color-primary)' }} />
                 <span>Sessions are scalable for beginners and advanced participants.</span>
               </div>
             </div>

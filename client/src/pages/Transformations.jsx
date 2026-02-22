@@ -45,7 +45,7 @@ export default function Transformations() {
       <section className="cta-section">
         <div className="container reveal">
           <h2 className="cta-title">
-            Your Transformation is <span style={{ color: 'var(--color-red)' }}>Next</span>
+            Your Transformation is <span style={{ color: 'var(--color-primary)' }}>Next</span>
           </h2>
           <p className="cta-subtitle">Join the community that's changing lives, one hour at a time.</p>
           <button 

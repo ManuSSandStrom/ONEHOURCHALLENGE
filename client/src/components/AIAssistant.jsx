@@ -146,7 +146,7 @@ export default function AIAssistant() {
                 width: '40px',
                 height: '40px',
                 borderRadius: '12px',
-                background: 'linear-gradient(135deg, var(--color-red), var(--color-red-dark))',
+                background: 'linear-gradient(135deg, var(--color-primary), var(--color-primary-dark))',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',

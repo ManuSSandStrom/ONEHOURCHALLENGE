@@ -66,15 +66,15 @@ export default function Dashboard() {
     <div className="dashboard">
       {/* Background video placeholder */}
       <div className="dashboard-video-bg" style={{
-        background: 'linear-gradient(135deg, #0a0a0a 0%, #111 100%)',
+        background: 'linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%)',
       }}>
         {/* Replace with: <video autoPlay muted loop playsInline src={PLACEHOLDERS.dashboardVideo} /> */}
       </div>
 
       <div className="dashboard-content">
         <div className="container">
-          <h1 style={{ fontFamily: 'var(--font-heading)', fontWeight: 800, color: 'var(--color-white)', marginBottom: '24px', fontSize: '1.8rem' }}>
-            Welcome, <span style={{ color: 'var(--color-red)' }}>{userName}</span>
+          <h1 style={{ fontFamily: 'var(--font-heading)', fontWeight: 800, color: 'var(--color-gray-900)', marginBottom: '24px', fontSize: '1.8rem' }}>
+            Welcome, <span style={{ color: 'var(--color-primary)' }}>{userName}</span>
           </h1>
 
           <div className="dashboard-grid">
@@ -111,7 +111,7 @@ export default function Dashboard() {
                   <div className="dashboard-stat-grid">
                     <div className="dashboard-stat-card">
                       <div className="dashboard-stat-label">Active Plan</div>
-                      <div className="dashboard-stat-value" style={{ color: 'var(--color-red)' }}>
+                      <div className="dashboard-stat-value" style={{ color: 'var(--color-primary)' }}>
                         {bookings.length > 0 ? bookings[0].planType : '—'}
                       </div>
                     </div>
@@ -181,8 +181,8 @@ export default function Dashboard() {
                           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '12px' }}>
                             <div>
                               <span style={{ 
-                                background: 'rgba(229,57,53,0.15)', 
-                                color: 'var(--color-red)', 
+                                background: 'rgba(0,109,60,0.1)', 
+                                color: 'var(--color-primary)', 
                                 padding: '4px 12px', 
                                 borderRadius: '50px', 
                                 fontSize: '0.75rem', 
@@ -281,15 +281,15 @@ export default function Dashboard() {
                       <img
                         src={user.imageUrl}
                         alt={userName}
-                        style={{ width: '52px', height: '52px', borderRadius: '50%', border: '2px solid var(--color-red)' }}
+                        style={{ width: '52px', height: '52px', borderRadius: '50%', border: '2px solid var(--color-primary)' }}
                       />
                     ) : (
-                      <div style={{ width: '52px', height: '52px', borderRadius: '50%', background: 'linear-gradient(135deg, #e53935, #b71c1c)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.2rem', fontWeight: 700, color: '#fff' }}>
+                      <div style={{ width: '52px', height: '52px', borderRadius: '50%', background: 'linear-gradient(135deg, var(--color-primary), var(--color-primary-dark))', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.2rem', fontWeight: 700, color: '#fff' }}>
                         {userName.charAt(0).toUpperCase()}
                       </div>
                     )}
                     <div>
-                      <p style={{ color: 'var(--color-white)', fontWeight: 700, fontSize: '1rem', margin: '0 0 2px' }}>{user?.fullName || userName}</p>
+                      <p style={{ color: 'var(--color-gray-900)', fontWeight: 700, fontSize: '1rem', margin: '0 0 2px' }}>{user?.fullName || userName}</p>
                       <p style={{ color: 'var(--color-gray-500)', fontSize: '0.8rem', margin: 0 }}>{userEmail}</p>
                     </div>
                   </div>

@@ -112,7 +112,7 @@ export default function BookingModal({ isOpen, onClose, planType, onSuccess }) {
                 flex: 1,
                 height: '3px',
                 borderRadius: '2px',
-                background: s <= step ? 'var(--color-red)' : 'var(--color-dark-alt)',
+                background: s <= step ? 'var(--color-primary)' : 'var(--color-dark-alt)',
                 transition: 'background 0.3s ease',
               }} />
             ))}
@@ -229,7 +229,7 @@ export default function BookingModal({ isOpen, onClose, planType, onSuccess }) {
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', paddingTop: '12px', borderTop: '1px solid var(--color-gray-800)' }}>
                   <span style={{ color: 'var(--color-gray-300)', fontWeight: 600 }}>Total</span>
-                  <span style={{ color: 'var(--color-red)', fontWeight: 800, fontSize: '1.2rem', fontFamily: 'var(--font-heading)' }}>₹{price?.toLocaleString()}</span>
+                  <span style={{ color: 'var(--color-primary)', fontWeight: 800, fontSize: '1.2rem', fontFamily: 'var(--font-heading)' }}>₹{price?.toLocaleString()}</span>
                 </div>
               </div>
             </>
@@ -271,7 +271,7 @@ export default function BookingModal({ isOpen, onClose, planType, onSuccess }) {
               }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
                   <span style={{ color: 'var(--color-gray-500)', fontSize: '0.8rem' }}>Amount Payable</span>
-                  <span style={{ color: 'var(--color-red)', fontWeight: 700 }}>₹{price.toLocaleString()}</span>
+                  <span style={{ color: 'var(--color-primary)', fontWeight: 700 }}>₹{price.toLocaleString()}</span>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                   <span style={{ color: 'var(--color-gray-500)', fontSize: '0.8rem' }}>Booking ID</span>

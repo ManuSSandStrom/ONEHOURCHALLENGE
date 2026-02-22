@@ -116,10 +116,10 @@ export default function Navbar() {
           <button className="mobile-nav-link" onClick={() => scrollToSection('trainers')}>Trainers</button>
           <Link to="/contact" className="mobile-nav-link">Contact</Link>
           {isSignedIn ? (
-            <Link to="/dashboard" className="mobile-nav-link" style={{ color: 'var(--color-red)' }}>Dashboard</Link>
+            <Link to="/dashboard" className="mobile-nav-link" style={{ color: 'var(--color-primary)' }}>Dashboard</Link>
           ) : (
             <SignInButton mode="modal" forceRedirectUrl="/">
-              <button className="mobile-nav-link" style={{ color: 'var(--color-red)' }}>Login</button>
+              <button className="mobile-nav-link" style={{ color: 'var(--color-primary)' }}>Login</button>
             </SignInButton>
           )}
           <button className="btn btn-primary btn-lg" style={{ width: '100%', marginTop: 'auto' }} onClick={() => scrollToSection('pricing')}>Join Now</button>

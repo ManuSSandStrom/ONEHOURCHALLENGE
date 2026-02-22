@@ -642,7 +642,7 @@ export default function Home() {
           </div>
 
           <p className="reveal" style={{ textAlign: 'center', color: 'var(--color-gray-400)', fontSize: '1rem', marginTop: '40px', maxWidth: '600px', marginLeft: 'auto', marginRight: 'auto', lineHeight: '1.6' }}>
-            Matched from our team of <span style={{ color: 'var(--color-red)', fontWeight: 700 }}>15+ trainers</span> and <span style={{ color: 'var(--color-red)', fontWeight: 700 }}>certified nutritionists</span> to fit your goals.
+            Matched from our team of <span style={{ color: 'var(--color-primary)', fontWeight: 700 }}>15+ trainers</span> and <span style={{ color: 'var(--color-primary)', fontWeight: 700 }}>certified nutritionists</span> to fit your goals.
           </p>
 
           <div style={{ textAlign: 'center', marginTop: '32px' }}>
@@ -659,7 +659,7 @@ export default function Home() {
           <div className="section-header reveal">
             <div className="section-badge">Our Team</div>
             <h2 className="section-title" style={{ fontSize: 'clamp(1.8rem, 4vw, 2.5rem)' }}>
-              Meet Your <span>Coaches</span>.
+              Meet Your <span style={{ color: 'var(--color-primary)' }}>Coaches</span>.
             </h2>
             <p className="section-subtitle">Certified professionals dedicated to your transformation</p>
           </div>
@@ -667,23 +667,23 @@ export default function Home() {
           <div className="trainers-grid reveal">
             {[
               {
-                icon: <FiAward size={40} style={{ color: 'var(--color-red)' }} />,
+                icon: <FiAward size={40} style={{ color: 'var(--color-primary)' }} />,
                 title: 'Global Certifications',
                 desc: 'Our elite coaching team is certified by world-recognized bodies including ACE (USA), ISSA, and Yoga Alliance (500hr RYT).'
               },
               {
-                icon: <FiBriefcase size={40} style={{ color: 'var(--color-red)' }} />,
+                icon: <FiBriefcase size={40} style={{ color: 'var(--color-primary)' }} />,
                 title: 'Veteran Expertise',
                 desc: 'With over 25 years of collective experience, we’ve successfully guided 1000+ professionals through body transformations.'
               },
               {
-                icon: <FiTrendingUp size={40} style={{ color: 'var(--color-red)' }} />,
+                icon: <FiTrendingUp size={40} style={{ color: 'var(--color-primary)' }} />,
                 title: 'Scientific Approach',
                 desc: 'We use evidence-based programming and metabolic tracking to ensure your progress is efficient, safe, and sustainable.'
               }
             ].map((expertise, i) => (
               <div className="trainer-card" key={i} style={{ textAlign: 'center', padding: '50px 30px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '20px' }}>
-                <div className="expertise-icon-wrapper" style={{ padding: '20px', background: 'rgba(229, 57, 53, 0.05)', borderRadius: '20px', marginBottom: '10px' }}>
+                <div className="expertise-icon-wrapper" style={{ padding: '20px', background: 'rgba(0, 109, 60, 0.05)', borderRadius: '20px', marginBottom: '10px' }}>
                   {expertise.icon}
                 </div>
                 <h4 className="trainer-name" style={{ margin: 0 }}>{expertise.title}</h4>
@@ -701,7 +701,7 @@ export default function Home() {
         <div className="container reveal">
           <div className="section-badge">Start Today</div>
           <h2 className="cta-title">
-            Consistency. Structure.<br /><span style={{ color: 'var(--color-red)' }}>Results.</span>
+            Consistency. Structure.<br /><span style={{ color: 'var(--color-primary)' }}>Results.</span>
           </h2>
           <p className="cta-subtitle">
             Join hundreds of professionals who've transformed their health with OneHour Challenge.
