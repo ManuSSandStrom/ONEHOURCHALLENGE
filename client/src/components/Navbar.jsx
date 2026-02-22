@@ -89,26 +89,41 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* Mobile Nav */}
+      {/* Mobile Nav Overlay */}
       <div className={`mobile-nav ${mobileOpen ? 'open' : ''}`}>
-        <button className="mobile-nav-close" onClick={() => setMobileOpen(false)}>
-          <FiX size={32} />
-        </button>
-        <button className="mobile-nav-link" onClick={() => scrollToSection('about')}>About</button>
-        <Link to="/how-it-works" className="mobile-nav-link">How It Works</Link>
-        <button className="mobile-nav-link" onClick={() => scrollToSection('programs')}>Programs</button>
-        <button className="mobile-nav-link" onClick={() => scrollToSection('pricing')}>Pricing</button>
-        <Link to="/transformations" className="mobile-nav-link">Transformations</Link>
-        <button className="mobile-nav-link" onClick={() => scrollToSection('trainers')}>Trainers</button>
-        <Link to="/contact" className="mobile-nav-link">Contact</Link>
-        {isSignedIn ? (
-          <Link to="/dashboard" className="mobile-nav-link" style={{ color: 'var(--color-red)' }}>Dashboard</Link>
-        ) : (
-          <SignInButton mode="modal" forceRedirectUrl="/">
-            <button className="mobile-nav-link" style={{ color: 'var(--color-red)' }}>Login</button>
-          </SignInButton>
-        )}
-        <button className="btn btn-primary" onClick={() => scrollToSection('pricing')}>Join Now</button>
+        <div className="mobile-nav-header">
+          <div className="navbar-logo">
+            <img 
+              src="https://res.cloudinary.com/dt37ji5yp/image/upload/v1771514832/Onehour_2__page-0001_zy1elu.jpg" 
+              alt="OneHour Challenge" 
+              className="navbar-logo-img"
+            />
+            <span className="navbar-logo-text">
+              ONEHOUR <span>CHALLENGE</span>
+            </span>
+          </div>
+          <button className="mobile-nav-close" onClick={() => setMobileOpen(false)}>
+            <FiX size={24} />
+          </button>
+        </div>
+
+        <div className="mobile-nav-body">
+          <button className="mobile-nav-link" onClick={() => scrollToSection('about')}>About</button>
+          <Link to="/how-it-works" className="mobile-nav-link">How It Works</Link>
+          <button className="mobile-nav-link" onClick={() => scrollToSection('programs')}>Programs</button>
+          <button className="mobile-nav-link" onClick={() => scrollToSection('pricing')}>Pricing</button>
+          <Link to="/transformations" className="mobile-nav-link">Transformations</Link>
+          <button className="mobile-nav-link" onClick={() => scrollToSection('trainers')}>Trainers</button>
+          <Link to="/contact" className="mobile-nav-link">Contact</Link>
+          {isSignedIn ? (
+            <Link to="/dashboard" className="mobile-nav-link" style={{ color: 'var(--color-red)' }}>Dashboard</Link>
+          ) : (
+            <SignInButton mode="modal" forceRedirectUrl="/">
+              <button className="mobile-nav-link" style={{ color: 'var(--color-red)' }}>Login</button>
+            </SignInButton>
+          )}
+          <button className="btn btn-primary btn-lg" style={{ width: '100%', marginTop: 'auto' }} onClick={() => scrollToSection('pricing')}>Join Now</button>
+        </div>
       </div>
     </>
   );
