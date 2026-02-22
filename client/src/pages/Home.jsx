@@ -112,7 +112,7 @@ export default function Home() {
 
           <div className="hero-pills">
             <button className="hero-pill" onClick={() => scrollToSection('programs')}>
-              STRENGTH TRAINING <FiArrowUpRight />
+              FITNESS <FiArrowUpRight />
             </button>
             <button className="hero-pill" onClick={() => scrollToSection('programs')}>
               ZUMBA <FiArrowUpRight />

@@ -2,7 +2,7 @@
 
 ![OneHour Challenge Logo](https://res.cloudinary.com/dt37ji5yp/image/upload/v1771514832/Onehour_2__page-0001_zy1elu.jpg)
 
-**OneHour Challenge** is a sophisticated, full-stack fitness platform designed for modern professionals. It offers 1-hour live online sessions including **Strength Training**, **Zumba**, and **Yoga**. The platform features an integrated AI Fitness Assistant, a precise Calorie Calculator, and a direct-to-WhatsApp communication bridge for seamless client conversions.
+**OneHour Challenge** is a sophisticated, full-stack fitness platform designed for modern professionals. It offers 1-hour live online sessions including **Fitness**, **Zumba**, and **Yoga**. The platform features an integrated AI Fitness Assistant, a precise Calorie Calculator, and a direct-to-WhatsApp communication bridge for seamless client conversions.
 
 ---
 
@@ -10,7 +10,7 @@
 
 ### 🏋️ Specialized Fitness Programs
 
-- **Strength Training:** Expert-led sessions focused on muscle building and metabolism.
+- **Fitness:** Expert-led sessions focused on muscle building and metabolism.
 - **Zumba:** High-energy cardio dance sessions for calorie burning and stress relief.
 - **Yoga:** Specialized flow sessions for flexibility, mobility, and mental clarity.
 
