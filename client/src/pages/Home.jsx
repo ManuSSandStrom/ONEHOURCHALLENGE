@@ -259,11 +259,11 @@ export default function Home() {
           <div className="bento-grid reveal">
             <div className="bento-card bento-large" onClick={() => requireLogin(() => scrollToSection('pricing'))}>
               <div className="bento-card-bg">
-                <img src="https://res.cloudinary.com/dt37ji5yp/image/upload/v1771512242/ST_3_or_main_ipyg24.png" alt="Fitness" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                <img src="https://res.cloudinary.com/dt37ji5yp/image/upload/v1771782797/Gemini_Generated_Image_s8xw7ls8xw7ls8xw_1_z96yp5.png" alt="1-on-1 Training" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
               </div>
               <div className="bento-card-overlay"></div>
               <div className="bento-card-content">
-                <h3 className="bento-card-title">Fitness</h3>
+                <h3 className="bento-card-title">1-on-1 Training</h3>
                 <span className="bento-card-arrow"><FiArrowRight /></span>
               </div>
             </div>
