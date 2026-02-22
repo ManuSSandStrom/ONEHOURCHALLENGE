@@ -24,7 +24,7 @@ export default function Footer() {
 
           <div>
             <h4 className="footer-title">Programs</h4>
-            <a href="/#programs" className="footer-link">Strength Training</a>
+            <a href="/#programs" className="footer-link">Fitness</a>
             <a href="/#programs" className="footer-link">Zumba</a>
             <a href="/#programs" className="footer-link">Yoga</a>
           </div>

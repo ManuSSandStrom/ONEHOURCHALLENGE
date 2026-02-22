@@ -35,7 +35,7 @@ export default function AIAssistant() {
     setMessages([
       {
         role: 'assistant',
-        content: `Welcome, ${userName.split(' ')[0]}! 👋\n\nI'm your OneHour Challenge fitness assistant. I can help you with:\n\n• **Programs** — Strength Training, Zumba, Yoga\n• **Plans & Pricing** — PRO & ADVANCE memberships\n• **Fitness guidance** — Workouts, nutrition, tips\n• **Booking help** — How to get started\n\nHow can I help you today?`,
+        content: `Welcome, ${userName.split(' ')[0]}! 👋\n\nI'm your OneHour Challenge fitness assistant. I can help you with:\n\n• **Programs** — Fitness, Zumba, Yoga\n• **Plans & Pricing** — PRO & ADVANCE memberships\n• **Fitness guidance** — Workouts, nutrition, tips\n• **Booking help** — How to get started\n\nHow can I help you today?`,
       },
     ]);
 

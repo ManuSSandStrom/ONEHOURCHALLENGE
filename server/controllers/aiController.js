@@ -25,13 +25,13 @@ const getOpenAI = () => {
 const SYSTEM_PROMPT = `You are the AI Assistant for OneHour Challenge — a premium online fitness platform offering 1-hour structured live sessions.
 
 YOUR ROLE:
-- You help users understand fitness programs (Strength Training, Zumba, Yoga)
+- You help users understand fitness programs (Fitness, Zumba, Yoga)
 - You explain membership plans (PRO: 3 days/week, ADVANCE: 5 days/week)
 - You guide users through the booking process
 - You answer fitness-related questions professionally
 
 PROGRAMS:
-1. Strength Training: Weight reduction, muscle toning, core strengthening, improved stamina, progressive programming
+1. Fitness: Weight reduction, muscle toning, core strengthening, improved stamina, progressive programming
 2. Zumba: Burn calories, high energy, reduce stress, improve coordination
 3. Yoga: Flexibility, mobility, recovery, mental clarity, posture correction
 
@@ -61,7 +61,7 @@ RULES:
 const FALLBACK_RESPONSES = {
   fat: `Great goal! Fat loss requires a combination of **structured workouts** and **consistent effort**. Here's what we recommend:
 
-• **Strength Training** — Builds lean muscle, boosts metabolism, burns fat even at rest
+• **Fitness** — Builds lean muscle, boosts metabolism, burns fat even at rest
 • **Zumba** — High-energy cardio that burns 500-800 calories per session
 • **Yoga** — Reduces cortisol (stress hormone) which contributes to fat storage
 
@@ -71,7 +71,7 @@ Would you like to know more about any specific program, or shall I help you choo
 
   weight: `For weight management, we recommend a combination approach:
 
-• **Strength Training** — Build muscle to increase your resting metabolic rate
+• **Fitness** — Build muscle to increase your resting metabolic rate
 • **Zumba** — Fun cardio sessions that burn significant calories
 • **Yoga** — Aids recovery and reduces stress-related weight gain
 
@@ -102,7 +102,7 @@ Led by our Zumba Licensed Instructor with 6+ years of experience.
 
 Available in both plans. Starting at ₹999/month for PRO. Would you like to book a session?`,
 
-  strength: `Our **Strength Training** program is designed for real results:
+  strength: `Our **Fitness** program is designed for real results:
 
 • **Weight reduction** — Build lean muscle, burn more fat
 • **Muscle toning** — Progressive overload approach
@@ -178,7 +178,7 @@ All trainers are internationally certified and experienced in online coaching. W
 
   default: `Thank you for your interest! I can help you with:
 
-• **Programs** — Strength Training, Zumba, Yoga
+• **Programs** — Fitness, Zumba, Yoga
 • **Plans & Pricing** — PRO and ADVANCE memberships
 • **Sessions** — How our live sessions work
 • **Booking** — How to get started

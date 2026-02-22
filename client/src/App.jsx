@@ -7,6 +7,7 @@ import Home from './pages/Home';
 import Transformations from './pages/Transformations';
 import Contact from './pages/Contact';
 import Dashboard from './pages/Dashboard';
+import HowItWorks from './pages/HowItWorks';
 import AIAssistant from './components/AIAssistant';
 import WhatsAppButton from './components/WhatsAppButton';
 import MobileCTA from './components/MobileCTA';
@@ -32,6 +33,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/transformations" element={<Transformations />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/how-it-works" element={<HowItWorks />} />
         <Route
           path="/dashboard"
           element={

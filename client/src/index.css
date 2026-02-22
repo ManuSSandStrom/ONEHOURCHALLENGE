@@ -460,11 +460,25 @@ textarea {
 
 .mobile-nav-close {
   position: absolute;
-  top: 20px;
-  right: 24px;
-  background: none;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--color-red);
   color: var(--color-white);
-  font-size: 1.8rem;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  box-shadow: 0 4px 20px rgba(229, 57, 53, 0.4);
+  border: 4px solid rgba(255, 255, 255, 0.1);
+  transition: var(--transition-smooth);
+}
+
+.mobile-nav-close:hover {
+  transform: translateX(-50%) scale(1.1);
 }
 
 /* ===================== HERO — Full-screen centered ===================== */

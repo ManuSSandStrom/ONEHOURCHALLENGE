@@ -57,6 +57,7 @@ export default function Navbar() {
           <div className="navbar-links">
             <button className="navbar-link" onClick={() => scrollToSection('about')}>About</button>
             <button className="navbar-link" onClick={() => scrollToSection('programs')}>Programs</button>
+            <Link to="/how-it-works" className="navbar-link">How It Works</Link>
             <button className="navbar-link" onClick={() => scrollToSection('pricing')}>Pricing</button>
             <Link to="/transformations" className="navbar-link">Transformations</Link>
             <button className="navbar-link" onClick={() => scrollToSection('trainers')}>Trainers</button>
@@ -91,9 +92,10 @@ export default function Navbar() {
       {/* Mobile Nav */}
       <div className={`mobile-nav ${mobileOpen ? 'open' : ''}`}>
         <button className="mobile-nav-close" onClick={() => setMobileOpen(false)}>
-          <FiX />
+          <FiX size={32} />
         </button>
         <button className="mobile-nav-link" onClick={() => scrollToSection('about')}>About</button>
+        <Link to="/how-it-works" className="mobile-nav-link">How It Works</Link>
         <button className="mobile-nav-link" onClick={() => scrollToSection('programs')}>Programs</button>
         <button className="mobile-nav-link" onClick={() => scrollToSection('pricing')}>Pricing</button>
         <Link to="/transformations" className="mobile-nav-link">Transformations</Link>
