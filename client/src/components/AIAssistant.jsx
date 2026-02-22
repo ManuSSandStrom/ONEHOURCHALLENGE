@@ -157,9 +157,9 @@ export default function AIAssistant() {
                 OC
               </div>
               <div>
-                <h3 style={{ color: '#fff', fontSize: '1rem', fontWeight: 700 }}>OneHour Challenge</h3>
-                <p style={{ color: '#4caf50', fontSize: '0.7rem', display: 'flex', alignItems: 'center', gap: '4px' }}>
-                  <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#4caf50' }} />
+                <h3 style={{ color: 'var(--color-gray-900)', fontSize: '1rem', fontWeight: 700 }}>OneHour Challenge</h3>
+                <p style={{ color: 'var(--color-primary)', fontSize: '0.7rem', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                  <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: 'var(--color-primary)' }} />
                   Active Assistant
                 </p>
               </div>

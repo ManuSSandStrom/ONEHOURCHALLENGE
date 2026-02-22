@@ -210,14 +210,14 @@ textarea {
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #e53935 0%, #b71c1c 100%);
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
   color: var(--color-white);
-  box-shadow: 0 4px 15px rgba(229, 57, 53, 0.3);
+  box-shadow: 0 4px 15px rgba(0, 109, 60, 0.2);
 }
 
 .btn-primary:hover {
   transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(229, 57, 53, 0.5);
+  box-shadow: 0 8px 25px rgba(0, 109, 60, 0.35);
 }
 
 .btn-secondary {
@@ -950,6 +950,7 @@ textarea {
   font-weight: 800;
   color: #ffffff;
   margin: 0;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
 }
 
 .bento-card-arrow {
@@ -2429,9 +2430,10 @@ textarea {
   right: 0;
   z-index: 1400;
   padding: 12px 16px;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  border-top: 1px solid var(--color-dark-alt);
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(15px);
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.03);
 }
 
 .mobile-sticky-cta .btn {
@@ -3665,17 +3667,18 @@ textarea {
 }
 
 .calc-select option {
-  background: #15151a;
-  color: #fff;
+  background: var(--color-white);
+  color: var(--color-gray-800);
   padding: 12px;
 }
 
 .calc-result-card {
   margin-top: 24px;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.01));
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: linear-gradient(135deg, #f8fafc, #ffffff);
+  border: 1px solid rgba(0, 0, 0, 0.05);
   border-radius: 16px;
   padding: 24px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
   animation: slideUpFade 0.5s ease;
 }
 
@@ -3684,7 +3687,7 @@ textarea {
   justify-content: space-between;
   align-items: center;
   padding: 12px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .result-item:last-child {
@@ -3729,18 +3732,18 @@ textarea {
 .ai-panel-input {
   display: flex;
   gap: 12px;
-  background: #15151a;
+  background: #f8fafc;
   padding: 16px 20px;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.2);
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.02);
 }
 
 .ai-panel-input input {
   flex: 1;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--color-white);
+  border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 10px;
-  color: #fff;
+  color: var(--color-gray-800);
   padding: 12px 16px;
   font-size: 0.95rem;
   transition: all 0.3s ease;
