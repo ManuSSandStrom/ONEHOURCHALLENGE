@@ -6,32 +6,34 @@ import API from '../utils/api';
 import { ADMIN_EMAIL, ADMIN_PHONE } from '../utils/constants';
 
 export default function Contact() {
-  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [formData, setFormData] = useState({ name: '', email: '', mobile: '', message: '' });
   const [loading, setLoading] = useState(false);
   const [sent, setSent] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!formData.name || !formData.email || !formData.message) {
+    if (!formData.name || !formData.email || !formData.mobile || !formData.message) {
       toast.error('Please fill in all fields');
       return;
     }
+    
     setLoading(true);
+
+    // Prepare message
+    const waMessage = `Hi OneHour Challenge! 👋\n\n*Form Submission:*\n👤 *Name:* ${formData.name}\n📧 *Email:* ${formData.email}\n📱 *Mobile:* ${formData.mobile}\n💬 *Message:* ${formData.message}`;
+    const waUrl = `https://wa.me/919515022680?text=${encodeURIComponent(waMessage)}`;
+
     try {
-      // Still log to backend as a lead (optional but recommended for record keeping)
-      await API.post('/contact', formData).catch(err => console.log('Lead sync failed', err));
+      // 🚀 FAST APPROACH: Fire lead sync to backend without 'await' to avoid waiting for SMTP/DB
+      API.post('/contact', formData).catch(err => console.log('Lead sync background failed', err));
       
-      // WhatsApp Redirection
-      const waMessage = `Hi OneHour Challenge! 👋\n\n*Form Submission:*\n👤 *Name:* ${formData.name}\n📧 *Email:* ${formData.email}\n💬 *Message:* ${formData.message}`;
-      const waUrl = `https://wa.me/919515022680?text=${encodeURIComponent(waMessage)}`;
+      // Redirect IMMEDIATELY for speed
+      window.open(waUrl, '_blank');
       
-      toast.success('Opening WhatsApp...');
-      setTimeout(() => {
-        window.open(waUrl, '_blank');
-        setSent(true);
-        setFormData({ name: '', email: '', message: '' });
-        setLoading(false);
-      }, 1000);
+      toast.success('Redirecting to WhatsApp...');
+      setSent(true);
+      setFormData({ name: '', email: '', mobile: '', message: '' });
+      setLoading(false);
     } catch (error) {
       console.error(error);
       toast.error('Failed to process. Please try again.');
@@ -122,6 +124,17 @@ export default function Contact() {
                       value={formData.email}
                       onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
                       id="contact-email"
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label className="form-label">Mobile Number</label>
+                    <input
+                      className="form-input"
+                      type="tel"
+                      placeholder="Your 10-digit mobile number"
+                      value={formData.mobile}
+                      onChange={(e) => setFormData(prev => ({ ...prev, mobile: e.target.value }))}
+                      id="contact-mobile"
                     />
                   </div>
                   <div className="form-group">

@@ -91,11 +91,12 @@ export const sendPaymentConfirmationEmail = async (payment) => {
   }
 };
 
-export const sendContactEmail = async ({ name, email, message }) => {
+export const sendContactEmail = async ({ name, email, mobile, message }) => {
   const content = `
     <p>New contact form submission:</p>
     <div class="info-row"><span class="info-label">Name</span><span class="info-value">${name}</span></div>
     <div class="info-row"><span class="info-label">Email</span><span class="info-value">${email}</span></div>
+    <div class="info-row"><span class="info-label">Mobile</span><span class="info-value">${mobile || 'N/A'}</span></div>
     <div style="margin-top: 15px;">
       <p style="color: #888; font-size: 14px; margin-bottom: 5px;">Message:</p>
       <p style="color: #fff; background: #1a1a1a; padding: 15px; border-radius: 8px; border-left: 3px solid #e53935;">${message}</p>
