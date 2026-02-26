@@ -63,7 +63,7 @@ export default function Dashboard() {
         API.get(`/profile/${userId}`).catch(() => ({ data: { exists: false, profile: null } })),
       ]);
       setBookings(bookingsRes.data);
-      
+
       if (profileRes.data?.exists && profileRes.data?.profile) {
         const p = profileRes.data.profile;
         setProfileData({
@@ -81,13 +81,12 @@ export default function Dashboard() {
         });
         setProfileExists(true);
       } else {
-        // Pre-fill from Clerk data
         setProfileData(prev => ({
           ...prev,
           name: user?.fullName || '',
           email: userEmail,
         }));
-        setIsEditing(true); // Show edit mode for first time
+        setIsEditing(true);
       }
     } catch (error) {
       console.error('Dashboard fetch error:', error);
@@ -143,39 +142,33 @@ export default function Dashboard() {
 
   return (
     <div className="dashboard">
-      <div className="dashboard-video-bg" style={{
-        background: 'linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%)',
-      }}></div>
+      <div className="dashboard-video-bg" style={{ background: 'linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%)' }}></div>
 
       <div className="dashboard-content">
         <div className="container">
-          {/* Welcome Header */}
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '16px', marginBottom: '28px' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+          {/* ── Welcome Header ── */}
+          <div className="dashboard-welcome">
+            <div className="dashboard-welcome-left">
               {user?.imageUrl ? (
-                <img src={user.imageUrl} alt={userName} style={{ width: '56px', height: '56px', borderRadius: '50%', border: '3px solid var(--color-primary)', objectFit: 'cover' }} />
+                <img src={user.imageUrl} alt={userName} style={{ width: '48px', height: '48px', borderRadius: '50%', border: '3px solid var(--color-primary)', objectFit: 'cover', flexShrink: 0 }} />
               ) : (
-                <div style={{ width: '56px', height: '56px', borderRadius: '50%', background: 'linear-gradient(135deg, var(--color-primary), var(--color-primary-dark))', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.4rem', fontWeight: 700, color: '#fff' }}>
-                  {userName.charAt(0).toUpperCase()}
-                </div>
+                <div className="dashboard-profile-avatar">{userName.charAt(0).toUpperCase()}</div>
               )}
-              <div>
-                <h1 style={{ fontFamily: 'var(--font-heading)', fontWeight: 800, color: 'var(--color-gray-900)', fontSize: '1.6rem', margin: 0 }}>
-                  Welcome, <span style={{ color: 'var(--color-primary)' }}>{userName}</span>
-                </h1>
-                <p style={{ color: 'var(--color-gray-500)', fontSize: '0.85rem', margin: '4px 0 0' }}>{userEmail}</p>
+              <div style={{ minWidth: 0 }}>
+                <h1>Welcome, <span style={{ color: 'var(--color-primary)' }}>{userName}</span></h1>
+                <p>{userEmail}</p>
               </div>
             </div>
             {profileData.fitnessGoal && (
-              <div style={{ background: 'rgba(0, 109, 60, 0.08)', border: '1px solid rgba(0, 109, 60, 0.15)', borderRadius: 'var(--radius-md)', padding: '10px 20px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <span style={{ fontSize: '1.3rem' }}>{GOAL_EMOJIS[profileData.fitnessGoal] || '🎯'}</span>
-                <span style={{ color: 'var(--color-primary)', fontWeight: 700, fontSize: '0.85rem' }}>{profileData.fitnessGoal}</span>
+              <div className="dashboard-goal-badge">
+                <span>{GOAL_EMOJIS[profileData.fitnessGoal] || '🎯'}</span>
+                <span>{profileData.fitnessGoal}</span>
               </div>
             )}
           </div>
 
           <div className="dashboard-grid">
-            {/* Sidebar */}
+            {/* ── Sidebar / Tab Nav ── */}
             <div className="dashboard-sidebar">
               {navItems.map(item => (
                 <button
@@ -187,7 +180,6 @@ export default function Dashboard() {
                   {item.label}
                 </button>
               ))}
-
               <div style={{ marginTop: 'auto', paddingTop: '16px', borderTop: '1px solid var(--color-dark-alt)' }}>
                 <button className="dashboard-nav-item logout-btn" onClick={handleLogout} id="logout-btn">
                   <FiLogOut /> Logout
@@ -195,24 +187,25 @@ export default function Dashboard() {
               </div>
             </div>
 
-            {/* Main Content */}
+            {/* ── Main Content ── */}
             <div className="dashboard-main">
+
               {/* ============ OVERVIEW ============ */}
               {activeTab === 'overview' && (
                 <>
-                  {/* Profile Completion Banner */}
+                  {/* Profile Completion */}
                   {profileCompletionPercent < 100 && (
-                    <div style={{ background: 'linear-gradient(135deg, rgba(0, 109, 60, 0.06), rgba(0, 109, 60, 0.02))', border: '1px solid rgba(0, 109, 60, 0.15)', borderRadius: 'var(--radius-lg)', padding: '24px', marginBottom: '24px' }}>
-                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
-                        <h4 style={{ color: 'var(--color-gray-900)', fontFamily: 'var(--font-heading)', fontWeight: 700, margin: 0, fontSize: '1rem' }}>
+                    <div className="dashboard-card" style={{ background: 'linear-gradient(135deg, rgba(0, 109, 60, 0.06), rgba(0, 109, 60, 0.02))', border: '1px solid rgba(0, 109, 60, 0.15)' }}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
+                        <h4 style={{ color: 'var(--color-gray-900)', fontFamily: 'var(--font-heading)', fontWeight: 700, margin: 0, fontSize: '0.95rem' }}>
                           Complete Your Profile
                         </h4>
-                        <span style={{ color: 'var(--color-primary)', fontWeight: 700, fontSize: '0.9rem' }}>{profileCompletionPercent}%</span>
+                        <span style={{ color: 'var(--color-primary)', fontWeight: 700, fontSize: '0.85rem' }}>{profileCompletionPercent}%</span>
                       </div>
-                      <div style={{ height: '6px', background: 'var(--color-dark-alt)', borderRadius: '3px', overflow: 'hidden' }}>
-                        <div style={{ height: '100%', width: `${profileCompletionPercent}%`, background: 'var(--color-primary)', borderRadius: '3px', transition: 'width 0.5s ease' }}></div>
+                      <div className="completion-bar-track">
+                        <div className="completion-bar-fill" style={{ width: `${profileCompletionPercent}%` }}></div>
                       </div>
-                      <p style={{ color: 'var(--color-gray-500)', fontSize: '0.8rem', marginTop: '10px', marginBottom: '12px' }}>
+                      <p style={{ color: 'var(--color-gray-500)', fontSize: '0.78rem', marginTop: '10px', marginBottom: '12px' }}>
                         Fill in your fitness details for a personalized experience.
                       </p>
                       <button className="btn btn-primary btn-sm" onClick={() => { setActiveTab('profile'); setIsEditing(true); }} style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
@@ -221,74 +214,68 @@ export default function Dashboard() {
                     </div>
                   )}
 
-                  {/* Stats Grid */}
+                  {/* Stats */}
                   <div className="dashboard-stat-grid">
                     <div className="dashboard-stat-card">
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
-                        <div style={{ width: '36px', height: '36px', borderRadius: '10px', background: 'rgba(0, 109, 60, 0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                          <FiTarget size={18} style={{ color: 'var(--color-primary)' }} />
-                        </div>
-                        <div className="dashboard-stat-label">Goal</div>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
+                        <FiTarget size={16} style={{ color: 'var(--color-primary)' }} />
+                        <div className="dashboard-stat-label" style={{ margin: 0 }}>Goal</div>
                       </div>
-                      <div className="dashboard-stat-value" style={{ color: 'var(--color-primary)', fontSize: '1.1rem' }}>
+                      <div className="dashboard-stat-value" style={{ color: 'var(--color-primary)' }}>
                         {profileData.fitnessGoal || '—'}
                       </div>
                     </div>
                     <div className="dashboard-stat-card">
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
-                        <div style={{ width: '36px', height: '36px', borderRadius: '10px', background: 'rgba(0, 109, 60, 0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                          <FiActivity size={18} style={{ color: 'var(--color-primary)' }} />
-                        </div>
-                        <div className="dashboard-stat-label">BMI</div>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
+                        <FiActivity size={16} style={{ color: 'var(--color-primary)' }} />
+                        <div className="dashboard-stat-label" style={{ margin: 0 }}>BMI</div>
                       </div>
-                      <div className="dashboard-stat-value" style={{ fontSize: '1.1rem' }}>
+                      <div className="dashboard-stat-value">
                         {bmi ? (
                           <span style={{ color: getBmiCategory(Number(bmi)).color }}>
-                            {bmi} <span style={{ fontSize: '0.7rem', fontWeight: 500 }}>({getBmiCategory(Number(bmi)).label})</span>
+                            {bmi} <span style={{ fontSize: '0.6rem', fontWeight: 500 }}>({getBmiCategory(Number(bmi)).label})</span>
                           </span>
                         ) : '—'}
                       </div>
                     </div>
                     <div className="dashboard-stat-card">
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
-                        <div style={{ width: '36px', height: '36px', borderRadius: '10px', background: 'rgba(0, 109, 60, 0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                          <FiCalendar size={18} style={{ color: 'var(--color-primary)' }} />
-                        </div>
-                        <div className="dashboard-stat-label">Bookings</div>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
+                        <FiCalendar size={16} style={{ color: 'var(--color-primary)' }} />
+                        <div className="dashboard-stat-label" style={{ margin: 0 }}>Bookings</div>
                       </div>
-                      <div className="dashboard-stat-value" style={{ fontSize: '1.1rem' }}>{bookings.length}</div>
+                      <div className="dashboard-stat-value">{bookings.length}</div>
                     </div>
                   </div>
 
-                  {/* Body Metrics Card (if profile exists) */}
+                  {/* Body Metrics */}
                   {profileExists && (profileData.height || profileData.weight) && (
-                    <div className="dashboard-card" style={{ marginTop: '20px' }}>
+                    <div className="dashboard-card">
                       <h3 className="dashboard-card-title" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                         <FiHeart style={{ color: 'var(--color-primary)' }} /> Body Metrics
                       </h3>
-                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))', gap: '16px', marginTop: '16px' }}>
+                      <div className="body-metrics-grid">
                         {profileData.height && (
-                          <div style={{ background: 'var(--color-bg-light)', borderRadius: 'var(--radius-md)', padding: '16px', textAlign: 'center' }}>
-                            <div style={{ fontSize: '0.75rem', color: 'var(--color-gray-500)', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '6px' }}>Height</div>
-                            <div style={{ fontSize: '1.4rem', fontWeight: 800, color: 'var(--color-gray-900)', fontFamily: 'var(--font-heading)' }}>{profileData.height}<span style={{ fontSize: '0.8rem', fontWeight: 500 }}> cm</span></div>
+                          <div className="body-metric-card">
+                            <div className="body-metric-label">Height</div>
+                            <div className="body-metric-value">{profileData.height}<span> cm</span></div>
                           </div>
                         )}
                         {profileData.weight && (
-                          <div style={{ background: 'var(--color-bg-light)', borderRadius: 'var(--radius-md)', padding: '16px', textAlign: 'center' }}>
-                            <div style={{ fontSize: '0.75rem', color: 'var(--color-gray-500)', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '6px' }}>Weight</div>
-                            <div style={{ fontSize: '1.4rem', fontWeight: 800, color: 'var(--color-gray-900)', fontFamily: 'var(--font-heading)' }}>{profileData.weight}<span style={{ fontSize: '0.8rem', fontWeight: 500 }}> kg</span></div>
+                          <div className="body-metric-card">
+                            <div className="body-metric-label">Weight</div>
+                            <div className="body-metric-value">{profileData.weight}<span> kg</span></div>
                           </div>
                         )}
                         {profileData.targetWeight && (
-                          <div style={{ background: 'var(--color-bg-light)', borderRadius: 'var(--radius-md)', padding: '16px', textAlign: 'center' }}>
-                            <div style={{ fontSize: '0.75rem', color: 'var(--color-gray-500)', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '6px' }}>Target</div>
-                            <div style={{ fontSize: '1.4rem', fontWeight: 800, color: 'var(--color-primary)', fontFamily: 'var(--font-heading)' }}>{profileData.targetWeight}<span style={{ fontSize: '0.8rem', fontWeight: 500 }}> kg</span></div>
+                          <div className="body-metric-card">
+                            <div className="body-metric-label">Target</div>
+                            <div className="body-metric-value" style={{ color: 'var(--color-primary)' }}>{profileData.targetWeight}<span> kg</span></div>
                           </div>
                         )}
                         {profileData.age && (
-                          <div style={{ background: 'var(--color-bg-light)', borderRadius: 'var(--radius-md)', padding: '16px', textAlign: 'center' }}>
-                            <div style={{ fontSize: '0.75rem', color: 'var(--color-gray-500)', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '6px' }}>Age</div>
-                            <div style={{ fontSize: '1.4rem', fontWeight: 800, color: 'var(--color-gray-900)', fontFamily: 'var(--font-heading)' }}>{profileData.age}<span style={{ fontSize: '0.8rem', fontWeight: 500 }}> yrs</span></div>
+                          <div className="body-metric-card">
+                            <div className="body-metric-label">Age</div>
+                            <div className="body-metric-value">{profileData.age}<span> yrs</span></div>
                           </div>
                         )}
                       </div>
@@ -296,19 +283,19 @@ export default function Dashboard() {
                   )}
 
                   {/* Quick Actions */}
-                  <div className="dashboard-card" style={{ marginTop: '20px' }}>
+                  <div className="dashboard-card">
                     <h3 className="dashboard-card-title" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                       <FiTrendingUp style={{ color: 'var(--color-primary)' }} /> Quick Actions
                     </h3>
-                    <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', marginTop: '16px' }}>
-                      <button className="btn btn-primary" onClick={handleWhatsAppBooking} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                        <FaWhatsapp size={18} /> Book a Session
+                    <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+                      <button className="btn btn-primary btn-sm" onClick={handleWhatsAppBooking} style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                        <FaWhatsapp size={16} /> Book Session
                       </button>
-                      <button className="btn btn-secondary" onClick={() => setActiveTab('profile')}>
-                        <FiUser size={16} style={{ marginRight: '6px' }} /> Edit Profile
+                      <button className="btn btn-secondary btn-sm" onClick={() => setActiveTab('profile')} style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                        <FiUser size={14} /> Edit Profile
                       </button>
-                      <button className="btn btn-secondary" onClick={() => setActiveTab('bookings')}>
-                        <FiCalendar size={16} style={{ marginRight: '6px' }} /> View Bookings
+                      <button className="btn btn-secondary btn-sm" onClick={() => setActiveTab('bookings')} style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                        <FiCalendar size={14} /> Bookings
                       </button>
                     </div>
                   </div>
@@ -318,66 +305,60 @@ export default function Dashboard() {
               {/* ============ MY PROFILE ============ */}
               {activeTab === 'profile' && (
                 <div className="dashboard-card">
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px', gap: '10px' }}>
                     <h3 className="dashboard-card-title" style={{ margin: 0 }}>My Fitness Profile</h3>
                     {!isEditing ? (
-                      <button className="btn btn-secondary btn-sm" onClick={() => setIsEditing(true)} style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                      <button className="btn btn-secondary btn-sm" onClick={() => setIsEditing(true)} style={{ display: 'flex', alignItems: 'center', gap: '6px', flexShrink: 0 }}>
                         <FiEdit3 size={14} /> Edit
                       </button>
                     ) : (
-                      <button className="btn btn-primary btn-sm" onClick={handleProfileSave} disabled={saving} style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                        <FiSave size={14} /> {saving ? 'Saving...' : 'Save Profile'}
+                      <button className="btn btn-primary btn-sm" onClick={handleProfileSave} disabled={saving} style={{ display: 'flex', alignItems: 'center', gap: '6px', flexShrink: 0 }}>
+                        <FiSave size={14} /> {saving ? 'Saving...' : 'Save'}
                       </button>
                     )}
                   </div>
 
                   {/* Avatar Card */}
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '28px', padding: '20px', background: 'linear-gradient(135deg, rgba(0, 109, 60, 0.04), rgba(0, 109, 60, 0.01))', borderRadius: 'var(--radius-lg)', border: '1px solid rgba(0, 109, 60, 0.1)' }}>
+                  <div className="dashboard-profile-header">
                     {user?.imageUrl ? (
-                      <img src={user.imageUrl} alt={userName} style={{ width: '64px', height: '64px', borderRadius: '50%', border: '3px solid var(--color-primary)', objectFit: 'cover' }} />
+                      <img src={user.imageUrl} alt={userName} />
                     ) : (
-                      <div style={{ width: '64px', height: '64px', borderRadius: '50%', background: 'linear-gradient(135deg, var(--color-primary), var(--color-primary-dark))', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem', fontWeight: 700, color: '#fff', flexShrink: 0 }}>
+                      <div className="dashboard-profile-avatar">
                         {userName.charAt(0).toUpperCase()}
                       </div>
                     )}
-                    <div>
-                      <p style={{ color: 'var(--color-gray-900)', fontWeight: 700, fontSize: '1.1rem', margin: '0 0 4px', fontFamily: 'var(--font-heading)' }}>
-                        {profileData.name || userName}
-                      </p>
-                      <p style={{ color: 'var(--color-gray-500)', fontSize: '0.85rem', margin: 0, display: 'flex', alignItems: 'center', gap: '6px' }}>
-                        <FiMail size={13} /> {profileData.email || userEmail}
-                      </p>
+                    <div className="dashboard-profile-info">
+                      <p className="dashboard-profile-name">{profileData.name || userName}</p>
+                      <p className="dashboard-profile-detail"><FiMail size={13} /> {profileData.email || userEmail}</p>
                       {profileData.phone && (
-                        <p style={{ color: 'var(--color-gray-500)', fontSize: '0.85rem', margin: '2px 0 0', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                          <FiPhone size={13} /> {profileData.phone}
-                        </p>
+                        <p className="dashboard-profile-detail"><FiPhone size={13} /> {profileData.phone}</p>
                       )}
                     </div>
                   </div>
 
                   {isEditing ? (
                     /* ── Edit Mode ── */
-                    <div style={{ display: 'grid', gap: '20px' }}>
+                    <div style={{ display: 'grid', gap: '24px' }}>
                       {/* Personal Info */}
                       <div>
-                        <h4 style={{ color: 'var(--color-gray-900)', fontFamily: 'var(--font-heading)', fontSize: '0.9rem', fontWeight: 700, marginBottom: '12px', textTransform: 'uppercase', letterSpacing: '1px' }}>Personal Information</h4>
-                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '14px' }}>
-                          <div>
-                            <label style={{ display: 'block', fontSize: '0.8rem', color: 'var(--color-gray-500)', marginBottom: '6px', fontWeight: 500 }}>Full Name</label>
+                        <h4 className="form-section-title">Personal Information</h4>
+                        <div className="form-fields-grid">
+                          <div className="form-field">
+                            <label>Full Name</label>
                             <input className="form-input" value={profileData.name} onChange={e => setProfileData({ ...profileData, name: e.target.value })} placeholder="Your full name" />
                           </div>
-                          <div>
-                            <label style={{ display: 'block', fontSize: '0.8rem', color: 'var(--color-gray-500)', marginBottom: '6px', fontWeight: 500 }}>Phone Number</label>
+                          <div className="form-field">
+                            <label>Phone Number</label>
                             <input className="form-input" value={profileData.phone} onChange={e => setProfileData({ ...profileData, phone: e.target.value })} placeholder="+91 XXXXX XXXXX" />
                           </div>
-                          <div>
-                            <label style={{ display: 'block', fontSize: '0.8rem', color: 'var(--color-gray-500)', marginBottom: '6px', fontWeight: 500 }}>Age</label>
+                          <div className="form-field">
+                            <label>Age</label>
                             <input className="form-input" type="number" value={profileData.age} onChange={e => setProfileData({ ...profileData, age: e.target.value })} placeholder="25" />
                           </div>
-                          <div>
-                            <label style={{ display: 'block', fontSize: '0.8rem', color: 'var(--color-gray-500)', marginBottom: '6px', fontWeight: 500 }}>Gender</label>
+                          <div className="form-field">
+                            <label>Gender</label>
                             <select className="form-input" value={profileData.gender} onChange={e => setProfileData({ ...profileData, gender: e.target.value })}>
-                              <option value="">Select Gender</option>
+                              <option value="">Select</option>
                               {GENDER_OPTIONS.map(g => <option key={g} value={g}>{g}</option>)}
                             </select>
                           </div>
@@ -386,18 +367,18 @@ export default function Dashboard() {
 
                       {/* Body Metrics */}
                       <div>
-                        <h4 style={{ color: 'var(--color-gray-900)', fontFamily: 'var(--font-heading)', fontSize: '0.9rem', fontWeight: 700, marginBottom: '12px', textTransform: 'uppercase', letterSpacing: '1px' }}>Body Metrics</h4>
-                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: '14px' }}>
-                          <div>
-                            <label style={{ display: 'block', fontSize: '0.8rem', color: 'var(--color-gray-500)', marginBottom: '6px', fontWeight: 500 }}>Height (cm)</label>
+                        <h4 className="form-section-title">Body Metrics</h4>
+                        <div className="form-fields-grid">
+                          <div className="form-field">
+                            <label>Height (cm)</label>
                             <input className="form-input" type="number" value={profileData.height} onChange={e => setProfileData({ ...profileData, height: e.target.value })} placeholder="170" />
                           </div>
-                          <div>
-                            <label style={{ display: 'block', fontSize: '0.8rem', color: 'var(--color-gray-500)', marginBottom: '6px', fontWeight: 500 }}>Current Weight (kg)</label>
+                          <div className="form-field">
+                            <label>Current Weight (kg)</label>
                             <input className="form-input" type="number" value={profileData.weight} onChange={e => setProfileData({ ...profileData, weight: e.target.value })} placeholder="70" />
                           </div>
-                          <div>
-                            <label style={{ display: 'block', fontSize: '0.8rem', color: 'var(--color-gray-500)', marginBottom: '6px', fontWeight: 500 }}>Target Weight (kg)</label>
+                          <div className="form-field">
+                            <label>Target Weight (kg)</label>
                             <input className="form-input" type="number" value={profileData.targetWeight} onChange={e => setProfileData({ ...profileData, targetWeight: e.target.value })} placeholder="65" />
                           </div>
                         </div>
@@ -405,83 +386,72 @@ export default function Dashboard() {
 
                       {/* Fitness Goals */}
                       <div>
-                        <h4 style={{ color: 'var(--color-gray-900)', fontFamily: 'var(--font-heading)', fontSize: '0.9rem', fontWeight: 700, marginBottom: '12px', textTransform: 'uppercase', letterSpacing: '1px' }}>Fitness Goals</h4>
-                        <div>
-                          <label style={{ display: 'block', fontSize: '0.8rem', color: 'var(--color-gray-500)', marginBottom: '8px', fontWeight: 500 }}>Your Primary Goal</label>
-                          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
-                            {GOAL_OPTIONS.map(goal => (
-                              <button
-                                key={goal}
-                                type="button"
-                                onClick={() => setProfileData({ ...profileData, fitnessGoal: goal })}
-                                style={{
-                                  padding: '10px 18px',
-                                  borderRadius: 'var(--radius-md)',
-                                  border: profileData.fitnessGoal === goal ? '2px solid var(--color-primary)' : '1px solid var(--color-dark-alt)',
-                                  background: profileData.fitnessGoal === goal ? 'rgba(0, 109, 60, 0.08)' : 'var(--color-white)',
-                                  color: profileData.fitnessGoal === goal ? 'var(--color-primary)' : 'var(--color-gray-600)',
-                                  fontWeight: profileData.fitnessGoal === goal ? 700 : 500,
-                                  cursor: 'pointer',
-                                  fontSize: '0.85rem',
-                                  transition: 'all 0.2s ease',
-                                  display: 'flex', alignItems: 'center', gap: '6px',
-                                }}
-                              >
-                                {GOAL_EMOJIS[goal]} {goal}
-                                {profileData.fitnessGoal === goal && <FiCheck size={14} />}
-                              </button>
-                            ))}
+                        <h4 className="form-section-title">Fitness Goals</h4>
+                        <label style={{ display: 'block', fontSize: '0.8rem', color: 'var(--color-gray-500)', marginBottom: '8px', fontWeight: 500 }}>Your Primary Goal</label>
+                        <div className="goal-chips">
+                          {GOAL_OPTIONS.map(goal => (
+                            <button
+                              key={goal}
+                              type="button"
+                              className={`goal-chip ${profileData.fitnessGoal === goal ? 'selected' : ''}`}
+                              onClick={() => setProfileData({ ...profileData, fitnessGoal: goal })}
+                            >
+                              {GOAL_EMOJIS[goal]} {goal}
+                              {profileData.fitnessGoal === goal && <FiCheck size={14} />}
+                            </button>
+                          ))}
+                        </div>
+
+                        <div style={{ marginTop: '16px' }}>
+                          <div className="form-field">
+                            <label>Activity Level</label>
+                            <select className="form-input" value={profileData.activityLevel} onChange={e => setProfileData({ ...profileData, activityLevel: e.target.value })}>
+                              <option value="">Select Activity Level</option>
+                              {ACTIVITY_OPTIONS.map(a => <option key={a} value={a}>{a}</option>)}
+                            </select>
                           </div>
                         </div>
 
-                        <div style={{ marginTop: '16px' }}>
-                          <label style={{ display: 'block', fontSize: '0.8rem', color: 'var(--color-gray-500)', marginBottom: '6px', fontWeight: 500 }}>Activity Level</label>
-                          <select className="form-input" value={profileData.activityLevel} onChange={e => setProfileData({ ...profileData, activityLevel: e.target.value })}>
-                            <option value="">Select Activity Level</option>
-                            {ACTIVITY_OPTIONS.map(a => <option key={a} value={a}>{a}</option>)}
-                          </select>
-                        </div>
-
-                        <div style={{ marginTop: '16px' }}>
-                          <label style={{ display: 'block', fontSize: '0.8rem', color: 'var(--color-gray-500)', marginBottom: '6px', fontWeight: 500 }}>Medical Conditions (Optional)</label>
-                          <textarea className="form-textarea" value={profileData.medicalConditions} onChange={e => setProfileData({ ...profileData, medicalConditions: e.target.value })} placeholder="Any injuries, allergies, or medical conditions we should know about..." rows={3} style={{ minHeight: '80px' }} />
+                        <div style={{ marginTop: '14px' }}>
+                          <div className="form-field">
+                            <label>Medical Conditions (Optional)</label>
+                            <textarea className="form-input" value={profileData.medicalConditions} onChange={e => setProfileData({ ...profileData, medicalConditions: e.target.value })} placeholder="Any injuries, allergies, or conditions..." rows={3} style={{ minHeight: '80px', resize: 'vertical' }} />
+                          </div>
                         </div>
                       </div>
 
-                      {/* Save Button (Mobile) */}
-                      <div style={{ paddingTop: '16px', borderTop: '1px solid var(--color-dark-alt)' }}>
-                        <button className="btn btn-primary btn-lg" onClick={handleProfileSave} disabled={saving} style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
+                      {/* Save Button */}
+                      <div style={{ paddingTop: '12px', borderTop: '1px solid var(--color-dark-alt)' }}>
+                        <button className="btn btn-primary" onClick={handleProfileSave} disabled={saving} style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
                           <FiSave size={16} /> {saving ? 'Saving...' : 'Save Profile'}
                         </button>
                       </div>
                     </div>
                   ) : (
                     /* ── View Mode ── */
-                    <div style={{ display: 'grid', gap: '0' }}>
+                    <div>
                       {[
-                        { label: 'Full Name', value: profileData.name, icon: <FiUser size={15} /> },
-                        { label: 'Email', value: profileData.email, icon: <FiMail size={15} /> },
-                        { label: 'Phone', value: profileData.phone, icon: <FiPhone size={15} /> },
+                        { label: 'Full Name', value: profileData.name, icon: <FiUser size={14} /> },
+                        { label: 'Email', value: profileData.email, icon: <FiMail size={14} /> },
+                        { label: 'Phone', value: profileData.phone, icon: <FiPhone size={14} /> },
                         { label: 'Age', value: profileData.age ? `${profileData.age} years` : '' },
                         { label: 'Gender', value: profileData.gender },
                         { label: 'Height', value: profileData.height ? `${profileData.height} cm` : '' },
                         { label: 'Weight', value: profileData.weight ? `${profileData.weight} kg` : '' },
-                        { label: 'Target Weight', value: profileData.targetWeight ? `${profileData.targetWeight} kg` : '' },
-                        { label: 'Fitness Goal', value: profileData.fitnessGoal ? `${GOAL_EMOJIS[profileData.fitnessGoal] || ''} ${profileData.fitnessGoal}` : '' },
-                        { label: 'Activity Level', value: profileData.activityLevel },
+                        { label: 'Target', value: profileData.targetWeight ? `${profileData.targetWeight} kg` : '' },
+                        { label: 'Goal', value: profileData.fitnessGoal ? `${GOAL_EMOJIS[profileData.fitnessGoal] || ''} ${profileData.fitnessGoal}` : '' },
+                        { label: 'Activity', value: profileData.activityLevel },
                         { label: 'BMI', value: bmi ? `${bmi} (${getBmiCategory(Number(bmi)).label})` : '' },
                       ].filter(item => item.value).map((item, i) => (
-                        <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '14px 0', borderBottom: '1px solid var(--color-dark-alt)' }}>
-                          <span style={{ color: 'var(--color-gray-500)', fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                            {item.icon} {item.label}
-                          </span>
-                          <span style={{ color: 'var(--color-gray-900)', fontWeight: 600, fontSize: '0.9rem' }}>{item.value}</span>
+                        <div className="profile-view-row" key={i}>
+                          <span className="profile-view-label">{item.icon} {item.label}</span>
+                          <span className="profile-view-value">{item.value}</span>
                         </div>
                       ))}
                       {profileData.medicalConditions && (
                         <div style={{ padding: '14px 0' }}>
-                          <span style={{ color: 'var(--color-gray-500)', fontSize: '0.9rem', display: 'block', marginBottom: '6px' }}>Medical Notes</span>
-                          <p style={{ color: 'var(--color-gray-700)', fontSize: '0.85rem', lineHeight: '1.6', margin: 0, background: 'var(--color-bg-light)', padding: '12px', borderRadius: 'var(--radius-sm)' }}>{profileData.medicalConditions}</p>
+                          <span style={{ color: 'var(--color-gray-500)', fontSize: '0.85rem', display: 'block', marginBottom: '6px' }}>Medical Notes</span>
+                          <p style={{ color: 'var(--color-gray-700)', fontSize: '0.82rem', lineHeight: '1.6', margin: 0, background: 'var(--color-bg-light)', padding: '12px', borderRadius: 'var(--radius-sm)' }}>{profileData.medicalConditions}</p>
                         </div>
                       )}
                     </div>
@@ -492,53 +462,51 @@ export default function Dashboard() {
               {/* ============ MY BOOKINGS ============ */}
               {activeTab === 'bookings' && (
                 <div className="dashboard-card">
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px', gap: '10px' }}>
                     <h3 className="dashboard-card-title" style={{ margin: 0 }}>My Bookings</h3>
-                    <button className="btn btn-primary btn-sm" onClick={handleWhatsAppBooking} style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                      <FaWhatsapp size={16} /> Book via WhatsApp
+                    <button className="btn btn-primary btn-sm" onClick={handleWhatsAppBooking} style={{ display: 'flex', alignItems: 'center', gap: '6px', flexShrink: 0 }}>
+                      <FaWhatsapp size={14} /> Book
                     </button>
                   </div>
 
                   {bookings.length === 0 ? (
-                    <div style={{ textAlign: 'center', padding: '50px 24px' }}>
-                      <div style={{ fontSize: '3rem', marginBottom: '16px' }}>📋</div>
-                      <h4 style={{ color: 'var(--color-gray-900)', fontFamily: 'var(--font-heading)', marginBottom: '8px' }}>No Bookings Yet</h4>
-                      <p style={{ color: 'var(--color-gray-500)', marginBottom: '24px', maxWidth: '360px', marginLeft: 'auto', marginRight: 'auto', lineHeight: '1.6' }}>
-                        Start your fitness journey by booking a session through WhatsApp. Our team will guide you!
+                    <div style={{ textAlign: 'center', padding: '40px 16px' }}>
+                      <div style={{ fontSize: '2.5rem', marginBottom: '12px' }}>📋</div>
+                      <h4 style={{ color: 'var(--color-gray-900)', fontFamily: 'var(--font-heading)', marginBottom: '8px', fontSize: '1rem' }}>No Bookings Yet</h4>
+                      <p style={{ color: 'var(--color-gray-500)', marginBottom: '20px', maxWidth: '320px', marginLeft: 'auto', marginRight: 'auto', lineHeight: '1.6', fontSize: '0.85rem' }}>
+                        Start your fitness journey by booking a session through WhatsApp.
                       </p>
-                      <button className="btn btn-primary btn-lg" onClick={handleWhatsAppBooking} style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
-                        <FaWhatsapp size={18} /> Book Your First Session
+                      <button className="btn btn-primary" onClick={handleWhatsAppBooking} style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+                        <FaWhatsapp size={16} /> Book First Session
                       </button>
                     </div>
                   ) : (
-                    <div style={{ display: 'grid', gap: '14px' }}>
+                    <div style={{ display: 'grid', gap: '12px' }}>
                       {bookings.map((booking, i) => (
-                        <div key={i} style={{ background: 'var(--color-bg-light)', borderRadius: 'var(--radius-md)', padding: '20px', border: '1px solid var(--color-dark-alt)', transition: 'all 0.2s ease' }}>
-                          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '12px' }}>
-                            <div>
-                              <span style={{ background: 'rgba(0,109,60,0.1)', color: 'var(--color-primary)', padding: '4px 14px', borderRadius: '50px', fontSize: '0.75rem', fontWeight: 700 }}>
-                                {booking.planType}
-                              </span>
-                            </div>
-                            <span style={{ color: booking.paymentStatus === 'completed' ? '#10b981' : '#f59e0b', fontSize: '0.8rem', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '4px' }}>
-                              {booking.paymentStatus === 'completed' ? <><FiCheck size={14} /> Paid</> : '⏳ Pending'}
+                        <div className="booking-card" key={i}>
+                          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '10px', gap: '8px' }}>
+                            <span style={{ background: 'rgba(0,109,60,0.1)', color: 'var(--color-primary)', padding: '3px 12px', borderRadius: '50px', fontSize: '0.72rem', fontWeight: 700 }}>
+                              {booking.planType}
+                            </span>
+                            <span style={{ color: booking.paymentStatus === 'completed' ? '#10b981' : '#f59e0b', fontSize: '0.75rem', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '4px', flexShrink: 0 }}>
+                              {booking.paymentStatus === 'completed' ? <><FiCheck size={13} /> Paid</> : '⏳ Pending'}
                             </span>
                           </div>
-                          <p style={{ color: 'var(--color-gray-700)', fontSize: '0.9rem', marginBottom: '8px', fontWeight: 500 }}>
+                          <p style={{ color: 'var(--color-gray-700)', fontSize: '0.85rem', marginBottom: '8px', fontWeight: 500 }}>
                             {booking.duration} • {booking.preferredDays?.join(', ')} • {booking.preferredTimeSlot}
                           </p>
-                          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                            <p style={{ color: 'var(--color-gray-500)', fontSize: '0.75rem', margin: 0 }}>
-                              Booked on {new Date(booking.createdAt).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}
+                          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '8px' }}>
+                            <p style={{ color: 'var(--color-gray-500)', fontSize: '0.72rem', margin: 0 }}>
+                              {new Date(booking.createdAt).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}
                             </p>
                             <button
                               onClick={() => {
-                                const msg = `Hi! Regarding my booking:\n\n📋 *Plan:* ${booking.planType}\n⏰ *Duration:* ${booking.duration}\n📅 *Days:* ${booking.preferredDays?.join(', ')}\n🕐 *Time:* ${booking.preferredTimeSlot}\n\nI need assistance with this booking.`;
+                                const msg = `Hi! Regarding my booking:\n\n📋 *Plan:* ${booking.planType}\n⏰ *Duration:* ${booking.duration}\n📅 *Days:* ${booking.preferredDays?.join(', ')}\n🕐 *Time:* ${booking.preferredTimeSlot}\n\nI need assistance.`;
                                 window.open(getWhatsAppUrl(msg), '_blank');
                               }}
-                              style={{ background: 'none', border: 'none', color: '#25d366', cursor: 'pointer', fontSize: '0.8rem', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '4px' }}
+                              style={{ background: 'none', border: 'none', color: '#25d366', cursor: 'pointer', fontSize: '0.78rem', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '4px', flexShrink: 0 }}
                             >
-                              <FaWhatsapp size={14} /> Contact
+                              <FaWhatsapp size={13} /> Contact
                             </button>
                           </div>
                         </div>
