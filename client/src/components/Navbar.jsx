@@ -50,6 +50,7 @@ export default function Navbar() {
           </Link>
 
           <div className="navbar-links">
+            <Link to="/" className={`navbar-link ${isActive('/') ? 'active' : ''}`}>Home</Link>
             <Link to="/about" className={`navbar-link ${isActive('/about') ? 'active' : ''}`}>About</Link>
             <Link to="/programs" className={`navbar-link ${isActive('/programs') ? 'active' : ''}`}>Programs</Link>
             <Link to="/how-it-works" className={`navbar-link ${isActive('/how-it-works') ? 'active' : ''}`}>How It Works</Link>
@@ -103,6 +104,7 @@ export default function Navbar() {
         </div>
 
         <div className="mobile-nav-body">
+          <Link to="/" className={`mobile-nav-link ${isActive('/') ? 'active' : ''}`}>Home</Link>
           <Link to="/about" className={`mobile-nav-link ${isActive('/about') ? 'active' : ''}`}>About</Link>
           <Link to="/programs" className={`mobile-nav-link ${isActive('/programs') ? 'active' : ''}`}>Programs</Link>
           <Link to="/how-it-works" className={`mobile-nav-link ${isActive('/how-it-works') ? 'active' : ''}`}>How It Works</Link>
