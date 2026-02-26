@@ -10,6 +10,7 @@ import contactRoutes from './routes/contactRoutes.js';
 import aiRoutes from './routes/aiRoutes.js';
 import adminRoutes from './routes/adminRoutes.js';
 import upiRoutes from './routes/upiRoutes.js';
+import profileRoutes from './routes/profileRoutes.js';
 
 dotenv.config();
 
@@ -31,6 +32,7 @@ app.use('/api/contact', contactRoutes);
 app.use('/api/ai', aiRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/upi', upiRoutes);
+app.use('/api/profile', profileRoutes);
 
 // Health check
 app.get('/api/health', (req, res) => {
