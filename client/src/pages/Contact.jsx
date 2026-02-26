@@ -113,6 +113,8 @@ export default function Contact() {
                       value={formData.name}
                       onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
                       id="contact-name"
+                      name="name"
+                      autoComplete="name"
                     />
                   </div>
                   <div className="form-group">
@@ -124,6 +126,8 @@ export default function Contact() {
                       value={formData.email}
                       onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
                       id="contact-email"
+                      name="email"
+                      autoComplete="email"
                     />
                   </div>
                   <div className="form-group">
@@ -135,6 +139,8 @@ export default function Contact() {
                       value={formData.mobile}
                       onChange={(e) => setFormData(prev => ({ ...prev, mobile: e.target.value }))}
                       id="contact-mobile"
+                      name="mobile"
+                      autoComplete="tel"
                     />
                   </div>
                   <div className="form-group">
@@ -145,6 +151,8 @@ export default function Contact() {
                       value={formData.message}
                       onChange={(e) => setFormData(prev => ({ ...prev, message: e.target.value }))}
                       id="contact-message"
+                      name="message"
+                      autoComplete="off"
                     />
                   </div>
                   <button 

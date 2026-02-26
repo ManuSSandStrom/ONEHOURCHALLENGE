@@ -344,20 +344,20 @@ export default function Dashboard() {
                         <h4 className="form-section-title">Personal Information</h4>
                         <div className="form-fields-grid">
                           <div className="form-field">
-                            <label>Full Name</label>
-                            <input className="form-input" value={profileData.name} onChange={e => setProfileData({ ...profileData, name: e.target.value })} placeholder="Your full name" />
+                            <label htmlFor="profile-name">Full Name</label>
+                            <input className="form-input" id="profile-name" name="name" autoComplete="name" value={profileData.name} onChange={e => setProfileData({ ...profileData, name: e.target.value })} placeholder="Your full name" />
                           </div>
                           <div className="form-field">
-                            <label>Phone Number</label>
-                            <input className="form-input" value={profileData.phone} onChange={e => setProfileData({ ...profileData, phone: e.target.value })} placeholder="+91 XXXXX XXXXX" />
+                            <label htmlFor="profile-phone">Phone Number</label>
+                            <input className="form-input" id="profile-phone" name="phone" autoComplete="tel" type="tel" value={profileData.phone} onChange={e => setProfileData({ ...profileData, phone: e.target.value })} placeholder="+91 XXXXX XXXXX" />
                           </div>
                           <div className="form-field">
-                            <label>Age</label>
-                            <input className="form-input" type="number" value={profileData.age} onChange={e => setProfileData({ ...profileData, age: e.target.value })} placeholder="25" />
+                            <label htmlFor="profile-age">Age</label>
+                            <input className="form-input" id="profile-age" name="age" autoComplete="off" type="number" value={profileData.age} onChange={e => setProfileData({ ...profileData, age: e.target.value })} placeholder="25" />
                           </div>
                           <div className="form-field">
-                            <label>Gender</label>
-                            <select className="form-input" value={profileData.gender} onChange={e => setProfileData({ ...profileData, gender: e.target.value })}>
+                            <label htmlFor="profile-gender">Gender</label>
+                            <select className="form-input" id="profile-gender" name="gender" autoComplete="sex" value={profileData.gender} onChange={e => setProfileData({ ...profileData, gender: e.target.value })}>
                               <option value="">Select</option>
                               {GENDER_OPTIONS.map(g => <option key={g} value={g}>{g}</option>)}
                             </select>
@@ -370,16 +370,16 @@ export default function Dashboard() {
                         <h4 className="form-section-title">Body Metrics</h4>
                         <div className="form-fields-grid">
                           <div className="form-field">
-                            <label>Height (cm)</label>
-                            <input className="form-input" type="number" value={profileData.height} onChange={e => setProfileData({ ...profileData, height: e.target.value })} placeholder="170" />
+                            <label htmlFor="profile-height">Height (cm)</label>
+                            <input className="form-input" id="profile-height" name="height" autoComplete="off" type="number" value={profileData.height} onChange={e => setProfileData({ ...profileData, height: e.target.value })} placeholder="170" />
                           </div>
                           <div className="form-field">
-                            <label>Current Weight (kg)</label>
-                            <input className="form-input" type="number" value={profileData.weight} onChange={e => setProfileData({ ...profileData, weight: e.target.value })} placeholder="70" />
+                            <label htmlFor="profile-weight">Current Weight (kg)</label>
+                            <input className="form-input" id="profile-weight" name="weight" autoComplete="off" type="number" value={profileData.weight} onChange={e => setProfileData({ ...profileData, weight: e.target.value })} placeholder="70" />
                           </div>
                           <div className="form-field">
-                            <label>Target Weight (kg)</label>
-                            <input className="form-input" type="number" value={profileData.targetWeight} onChange={e => setProfileData({ ...profileData, targetWeight: e.target.value })} placeholder="65" />
+                            <label htmlFor="profile-target-weight">Target Weight (kg)</label>
+                            <input className="form-input" id="profile-target-weight" name="targetWeight" autoComplete="off" type="number" value={profileData.targetWeight} onChange={e => setProfileData({ ...profileData, targetWeight: e.target.value })} placeholder="65" />
                           </div>
                         </div>
                       </div>
@@ -404,8 +404,8 @@ export default function Dashboard() {
 
                         <div style={{ marginTop: '16px' }}>
                           <div className="form-field">
-                            <label>Activity Level</label>
-                            <select className="form-input" value={profileData.activityLevel} onChange={e => setProfileData({ ...profileData, activityLevel: e.target.value })}>
+                            <label htmlFor="profile-activity">Activity Level</label>
+                            <select className="form-input" id="profile-activity" name="activityLevel" autoComplete="off" value={profileData.activityLevel} onChange={e => setProfileData({ ...profileData, activityLevel: e.target.value })}>
                               <option value="">Select Activity Level</option>
                               {ACTIVITY_OPTIONS.map(a => <option key={a} value={a}>{a}</option>)}
                             </select>
@@ -414,8 +414,8 @@ export default function Dashboard() {
 
                         <div style={{ marginTop: '14px' }}>
                           <div className="form-field">
-                            <label>Medical Conditions (Optional)</label>
-                            <textarea className="form-input" value={profileData.medicalConditions} onChange={e => setProfileData({ ...profileData, medicalConditions: e.target.value })} placeholder="Any injuries, allergies, or conditions..." rows={3} style={{ minHeight: '80px', resize: 'vertical' }} />
+                            <label htmlFor="profile-medical">Medical Conditions (Optional)</label>
+                            <textarea className="form-input" id="profile-medical" name="medicalConditions" autoComplete="off" value={profileData.medicalConditions} onChange={e => setProfileData({ ...profileData, medicalConditions: e.target.value })} placeholder="Any injuries, allergies, or conditions..." rows={3} style={{ minHeight: '80px', resize: 'vertical' }} />
                           </div>
                         </div>
                       </div>

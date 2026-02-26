@@ -75,6 +75,9 @@ export default function CalorieCalculator({ onClose }) {
             <input
               type="number"
               className="calc-input"
+              id="calc-age"
+              name="age"
+              autoComplete="off"
               placeholder="e.g. 25"
               value={formData.age}
               onChange={(e) => setFormData({ ...formData, age: e.target.value })}
@@ -85,6 +88,9 @@ export default function CalorieCalculator({ onClose }) {
             <input
               type="number"
               className="calc-input"
+              id="calc-weight"
+              name="weight"
+              autoComplete="off"
               placeholder="e.g. 70"
               value={formData.weight}
               onChange={(e) => setFormData({ ...formData, weight: e.target.value })}
@@ -97,6 +103,9 @@ export default function CalorieCalculator({ onClose }) {
           <input
             type="number"
             className="calc-input"
+            id="calc-height"
+            name="height"
+            autoComplete="off"
             placeholder="e.g. 175"
             value={formData.height}
             onChange={(e) => setFormData({ ...formData, height: e.target.value })}
@@ -107,6 +116,9 @@ export default function CalorieCalculator({ onClose }) {
           <label className="calc-label">Activity Level</label>
           <select
             className="calc-select"
+            id="calc-activity"
+            name="activity"
+            autoComplete="off"
             value={formData.activity}
             onChange={(e) => setFormData({ ...formData, activity: e.target.value })}
           >

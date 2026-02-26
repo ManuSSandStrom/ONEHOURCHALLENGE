@@ -127,6 +127,9 @@ export default function BookingModal({ isOpen, onClose, planType, onSuccess }) {
                 <label className="form-label">Full Name</label>
                 <input
                   className="form-input"
+                  id="booking-name"
+                  name="name"
+                  autoComplete="name"
                   placeholder="Enter your full name"
                   value={formData.name}
                   onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
@@ -136,6 +139,9 @@ export default function BookingModal({ isOpen, onClose, planType, onSuccess }) {
                 <label className="form-label">Email</label>
                 <input
                   className="form-input"
+                  id="booking-email"
+                  name="email"
+                  autoComplete="email"
                   type="email"
                   placeholder="Enter your email"
                   value={formData.email}
@@ -146,6 +152,9 @@ export default function BookingModal({ isOpen, onClose, planType, onSuccess }) {
                 <label className="form-label">Mobile</label>
                 <input
                   className="form-input"
+                  id="booking-mobile"
+                  name="mobile"
+                  autoComplete="tel"
                   type="tel"
                   placeholder="Enter 10-digit mobile number"
                   value={formData.mobile}
@@ -173,6 +182,9 @@ export default function BookingModal({ isOpen, onClose, planType, onSuccess }) {
                 <label className="form-label">Duration</label>
                 <select
                   className="form-select"
+                  id="booking-duration"
+                  name="duration"
+                  autoComplete="off"
                   value={formData.duration}
                   onChange={(e) => setFormData(prev => ({ ...prev, duration: e.target.value }))}
                 >
@@ -208,6 +220,9 @@ export default function BookingModal({ isOpen, onClose, planType, onSuccess }) {
                 <label className="form-label">Preferred Time Slot</label>
                 <select
                   className="form-select"
+                  id="booking-timeslot"
+                  name="preferredTimeSlot"
+                  autoComplete="off"
                   value={formData.preferredTimeSlot}
                   onChange={(e) => setFormData(prev => ({ ...prev, preferredTimeSlot: e.target.value }))}
                 >

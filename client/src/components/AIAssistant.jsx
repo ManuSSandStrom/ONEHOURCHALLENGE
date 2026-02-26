@@ -218,6 +218,9 @@ export default function AIAssistant() {
 
               <div className="ai-panel-input">
                 <input
+                  id="ai-chat-input"
+                  name="message"
+                  autoComplete="off"
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   onKeyDown={handleKeyPress}
