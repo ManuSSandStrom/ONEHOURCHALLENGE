@@ -3496,28 +3496,36 @@ textarea {
   color: var(--color-gray-600);
 }
 
-.ai-panel-input button {
+.ai-panel-input button,
+.ai-send-btn {
   width: 40px;
   height: 40px;
-  border-radius: 8px;
-  background: var(--color-primary);
-  color: var(--color-gray-900);
+  min-width: 40px;
+  border-radius: 50%;
+  background: var(--color-gray-900);
+  color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
   border: none;
   cursor: pointer;
-  transition: var(--transition-fast);
+  transition: all 0.2s ease;
   flex-shrink: 0;
+  padding: 0;
 }
 
-.ai-panel-input button:hover:not(:disabled) {
-  background: var(--color-primary-dark);
+.ai-panel-input button:hover:not(:disabled),
+.ai-send-btn:hover:not(:disabled) {
+  background: var(--color-primary);
+  transform: scale(1.05);
 }
 
-.ai-panel-input button:disabled {
-  opacity: 0.4;
+.ai-panel-input button:disabled,
+.ai-send-btn:disabled {
+  opacity: 0.25;
   cursor: not-allowed;
+  background: var(--color-gray-300);
+  transform: none;
 }
 
 /* Typing Indicator */

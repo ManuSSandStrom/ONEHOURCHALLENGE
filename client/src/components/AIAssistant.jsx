@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { FiMessageCircle, FiX, FiSend, FiUser, FiActivity } from 'react-icons/fi';
+import { FiMessageCircle, FiX, FiArrowUp, FiUser, FiActivity } from 'react-icons/fi';
 import { useUser, useClerk } from '@clerk/clerk-react';
 import toast from 'react-hot-toast';
 import API from '../utils/api';
@@ -230,9 +230,10 @@ export default function AIAssistant() {
                 <button
                   onClick={sendMessage}
                   disabled={loading || !input.trim()}
-                  className="btn btn-primary btn-sm"
+                  className="ai-send-btn"
+                  aria-label="Send message"
                 >
-                  <FiSend size={18} />
+                  <FiArrowUp size={20} strokeWidth={2.5} />
                 </button>
               </div>
             </div>
