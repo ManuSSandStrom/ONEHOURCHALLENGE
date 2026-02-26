@@ -413,6 +413,21 @@ textarea {
   width: 100%;
 }
 
+.navbar-link.active {
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.navbar-link.active::after {
+  width: 100%;
+  background: var(--color-primary);
+}
+
+.mobile-nav-link.active {
+  color: var(--color-primary) !important;
+  font-weight: 600;
+}
+
 .navbar-actions {
   display: flex;
   align-items: center;

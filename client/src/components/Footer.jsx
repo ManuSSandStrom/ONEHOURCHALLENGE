@@ -24,16 +24,16 @@ export default function Footer() {
 
           <div>
             <h4 className="footer-title">Programs</h4>
-            <a href="/#programs" className="footer-link">Fitness</a>
-            <a href="/#programs" className="footer-link">Zumba</a>
-            <a href="/#programs" className="footer-link">Yoga</a>
+            <Link to="/programs" className="footer-link">Fitness</Link>
+            <Link to="/programs" className="footer-link">Zumba</Link>
+            <Link to="/programs" className="footer-link">Yoga</Link>
           </div>
 
           <div>
             <h4 className="footer-title">Company</h4>
-            <a href="/#about" className="footer-link">About Us</a>
+            <Link to="/about" className="footer-link">About Us</Link>
             <Link to="/transformations" className="footer-link">Transformations</Link>
-            <a href="/#pricing" className="footer-link">Pricing</a>
+            <Link to="/pricing" className="footer-link">Pricing</Link>
             <Link to="/contact" className="footer-link">Contact</Link>
           </div>
 

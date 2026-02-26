@@ -4,6 +4,10 @@ import { Toaster } from 'react-hot-toast';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
+import About from './pages/About';
+import Programs from './pages/Programs';
+import Pricing from './pages/Pricing';
+import Trainers from './pages/Trainers';
 import Transformations from './pages/Transformations';
 import Contact from './pages/Contact';
 import Dashboard from './pages/Dashboard';
@@ -31,6 +35,10 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/programs" element={<Programs />} />
+        <Route path="/pricing" element={<Pricing />} />
+        <Route path="/trainers" element={<Trainers />} />
         <Route path="/transformations" element={<Transformations />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/how-it-works" element={<HowItWorks />} />
