@@ -1943,11 +1943,14 @@ textarea {
 }
 
 .transformation-quote {
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-style: italic;
-  color: var(--color-gray-200);
+  color: var(--color-gray-600);
   margin-bottom: 16px;
-  line-height: 1.6;
+  line-height: 1.7;
+  position: relative;
+  padding-left: 16px;
+  border-left: 3px solid var(--color-primary);
 }
 
 .transformation-name {
@@ -2604,10 +2607,12 @@ textarea {
 
 .transformation-quote {
   font-size: 0.9rem;
-  color: var(--color-gray-300);
+  color: var(--color-gray-600);
   font-style: italic;
-  line-height: 1.6;
+  line-height: 1.7;
   margin-bottom: 12px;
+  padding-left: 14px;
+  border-left: 3px solid var(--color-primary);
 }
 
 .transformation-name {
