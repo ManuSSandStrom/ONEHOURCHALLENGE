@@ -2,7 +2,7 @@ import { PLACEHOLDERS, getWhatsAppUrl } from '../utils/constants';
 import { FaWhatsapp } from 'react-icons/fa';
 
 const transformations = [
-  { image: PLACEHOLDERS.transformationImages[0], quote: 'Lost 12 kgs in 4 months. The structured approach and consistency made all the difference. OneHour Challenge changed my life!', name: 'Rajesh Patel' },
+  { image: PLACEHOLDERS.transformationImages[0], quote: 'Lost 12 kgs in 4 months. The structured approach and consistency made all the difference. OneHour Challenge changed my life!', name: 'Navami P' },
   { image: PLACEHOLDERS.transformationImages[1], quote: 'From barely running 1 km to completing a 10K. The progressive programming is what sets this apart from other programs.', name: 'Meera Iyer' },
   { image: PLACEHOLDERS.transformationImages[2], quote: 'Gained 5 kgs of lean muscle in 6 months. The trainers know exactly how to push you while keeping it safe.', name: 'Karthik Nair' },
   { image: PLACEHOLDERS.transformationImages[3], quote: 'My flexibility improved dramatically with yoga sessions. I feel 10 years younger!', name: 'Deepa Sharma' },
