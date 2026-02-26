@@ -29,7 +29,7 @@ export default function Transformations() {
             {transformations.map((t, i) => (
               <div className="transformation-card reveal" key={i}>
                 <div className="transformation-image">
-                  <span>{t.image}</span>
+                  <img src={t.image} alt={`${t.name} transformation`} loading="lazy" />
                 </div>
                 <div className="transformation-content">
                   <p className="transformation-quote">"{t.quote}"</p>

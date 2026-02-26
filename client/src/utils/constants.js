@@ -77,12 +77,12 @@ export const PLACEHOLDERS = {
     '[TRAINER IMAGE CLOUDINARY URL]',
   ],
   transformationImages: [
-    '[TRANSFORMATION IMAGE 1]',
-    '[TRANSFORMATION IMAGE 2]',
-    '[TRANSFORMATION IMAGE 3]',
-    '[TRANSFORMATION IMAGE 4]',
-    '[TRANSFORMATION IMAGE 5]',
-    '[TRANSFORMATION IMAGE 6]',
+    'https://res.cloudinary.com/dt37ji5yp/image/upload/v1772080466/img1_mmu5bz.png',
+    'https://res.cloudinary.com/dt37ji5yp/image/upload/v1772080466/img2_rwnkp6.png',
+    'https://res.cloudinary.com/dt37ji5yp/image/upload/v1772080466/img3_q6dg33.png',
+    'https://res.cloudinary.com/dt37ji5yp/image/upload/v1772080465/img4_ksgdcq.png',
+    'https://res.cloudinary.com/dt37ji5yp/image/upload/v1772080466/img5_qv8cnc.png',
+    'https://res.cloudinary.com/dt37ji5yp/image/upload/v1772080466/img6_g82dnf.png',
   ],
   reviewImages: [
     '[REVIEW IMAGE URL]',
