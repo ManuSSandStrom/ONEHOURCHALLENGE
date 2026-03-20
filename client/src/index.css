@@ -5966,6 +5966,84 @@ body {
   color: var(--color-primary);
 }
 
+.trainers-lock-corner {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 8px;
+}
+
+.trainers-lock-button {
+  width: 58px;
+  height: 58px;
+  display: grid;
+  place-items: center;
+  border: none;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #0d2219 0%, #17442f 100%);
+  color: #ffffff;
+  box-shadow: 0 20px 40px rgba(13, 34, 25, 0.22);
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.trainers-lock-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 24px 44px rgba(13, 34, 25, 0.28);
+}
+
+.trainers-lock-button svg {
+  font-size: 1.3rem;
+}
+
+.trainers-lock-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgba(7, 19, 14, 0.62);
+  backdrop-filter: blur(8px);
+}
+
+.trainers-lock-modal {
+  position: relative;
+  width: min(100%, 520px);
+  padding: 34px 30px 30px;
+  border-radius: 30px;
+  background: linear-gradient(180deg, rgba(9, 22, 17, 0.98) 0%, rgba(16, 42, 30, 0.98) 100%);
+  border: 1px solid rgba(145, 214, 177, 0.14);
+  box-shadow: 0 36px 100px rgba(0, 0, 0, 0.34);
+  color: #ffffff;
+}
+
+.trainers-lock-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border: none;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.trainers-lock-title {
+  font-size: clamp(1.8rem, 4vw, 2.4rem);
+  line-height: 1.08;
+  margin-bottom: 12px;
+}
+
+.trainers-lock-text {
+  color: rgba(218, 244, 231, 0.74);
+  line-height: 1.7;
+  margin-bottom: 10px;
+}
+
 .admin-portal-shell {
   min-height: 100vh;
   background:
@@ -6327,6 +6405,10 @@ body {
     align-items: flex-start;
   }
 
+  .trainers-lock-corner {
+    justify-content: center;
+  }
+
   .hero-stats-inner {
     flex-direction: column;
     gap: 18px;
@@ -6381,6 +6463,11 @@ body {
   .admin-login-panel {
     padding: 28px 22px;
     border-radius: 28px;
+  }
+
+  .trainers-lock-modal {
+    padding: 28px 22px 24px;
+    border-radius: 26px;
   }
 
   .admin-workspace {

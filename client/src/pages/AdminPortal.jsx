@@ -116,7 +116,7 @@ export default function AdminPortal() {
   const handleLogin = async (e) => {
     e.preventDefault();
     if (!credentials.username || !credentials.password) {
-      toast.error('Please enter admin username and password');
+      toast.error('Please enter username and password');
       return;
     }
 
@@ -125,7 +125,7 @@ export default function AdminPortal() {
       const res = await API.post('/admin/login', credentials);
       adminSession.setToken(res.data.token);
       setIsAuthenticated(true);
-      toast.success('Admin login successful');
+      toast.success('Login successful');
       setStatsLoading(true);
     } catch (error) {
       console.error('Admin login failed:', error);
@@ -144,7 +144,7 @@ export default function AdminPortal() {
     setStatsLoading(false);
     setLeadsLoading(false);
     setContactsLoading(false);
-    toast.success('Logged out from admin portal');
+      toast.success('Logged out successfully');
   };
 
   const updateLeadStatus = async (id, status) => {
@@ -159,7 +159,7 @@ export default function AdminPortal() {
   };
 
   const deleteLead = async (id) => {
-    const confirmed = window.confirm('Delete this enquiry from the admin portal?');
+    const confirmed = window.confirm('Delete this enquiry from the workspace?');
     if (!confirmed) return;
 
     try {
@@ -184,7 +184,7 @@ export default function AdminPortal() {
   };
 
   const deleteContact = async (id) => {
-    const confirmed = window.confirm('Delete this contact request from the admin portal?');
+    const confirmed = window.confirm('Delete this contact request from the workspace?');
     if (!confirmed) return;
 
     try {
@@ -287,15 +287,15 @@ export default function AdminPortal() {
               <span className="admin-login-kicker">Restricted Workspace</span>
             </div>
 
-            <h1>Admin Portal</h1>
-            <p>Secure access for authorized personnel only. Public navigation is intentionally hidden for this workspace.</p>
+            <h1>Secure Access</h1>
+            <p>Authorized team members can sign in here. This workspace remains hidden from the public website.</p>
 
             <form onSubmit={handleLogin} className="admin-auth-form">
               <label className="admin-auth-field">
                 <span>Username</span>
                 <input
                   className="form-input"
-                  placeholder="Enter admin username"
+                  placeholder="Enter username"
                   value={credentials.username}
                   onChange={(e) => setCredentials((prev) => ({ ...prev, username: e.target.value }))}
                 />
@@ -306,7 +306,7 @@ export default function AdminPortal() {
                 <input
                   className="form-input"
                   type="password"
-                  placeholder="Enter admin password"
+                  placeholder="Enter password"
                   value={credentials.password}
                   onChange={(e) => setCredentials((prev) => ({ ...prev, password: e.target.value }))}
                 />
@@ -317,9 +317,7 @@ export default function AdminPortal() {
               </button>
             </form>
 
-            <div className="admin-login-note">
-              This module is restricted. Unauthorized access is prohibited and monitored.
-            </div>
+            <div className="admin-login-note">This module is restricted. Unauthorized access is prohibited and monitored.</div>
           </div>
         </section>
       </div>
@@ -331,7 +329,7 @@ export default function AdminPortal() {
       <div className="admin-workspace">
         <aside className="admin-sidebar-panel">
           <div className="admin-sidebar-brand">
-            <span className="admin-sidebar-kicker">Admin Workspace</span>
+            <span className="admin-sidebar-kicker">Operations Workspace</span>
             <h2>OneHour Challenge</h2>
             <p>Website operations panel</p>
           </div>

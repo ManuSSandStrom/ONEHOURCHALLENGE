@@ -54,7 +54,7 @@ export default function RegistrationModal({ isOpen, onClose, context }) {
       });
 
       setSubmitted(true);
-      toast.success('Registration sent to admin portal');
+      toast.success('Registration submitted successfully');
     } catch (error) {
       console.error(error);
       toast.error(error.response?.data?.error || 'Failed to submit registration');
@@ -87,7 +87,7 @@ export default function RegistrationModal({ isOpen, onClose, context }) {
                   <span className="registration-source-pill">{context?.sourcePage || 'Website'}</span>
                 </div>
                 <h4>{context?.interestLabel || 'General Registration'}</h4>
-                <p>Your request will be saved in the admin portal for a direct follow-up.</p>
+                <p>Your request will be saved in the secure team workspace for a direct follow-up.</p>
               </div>
 
               <form onSubmit={handleSubmit} className="registration-form">

@@ -148,7 +148,7 @@ export default function About() {
           <h2 className="cta-title">
             Ready to <span style={{ color: 'var(--color-primary)' }}>start</span>?
           </h2>
-          <p className="cta-subtitle">Send a direct registration and let the team follow up from the admin portal.</p>
+          <p className="cta-subtitle">Send a direct registration and let the team follow up from the secure workspace.</p>
           <LeadCaptureButton
             className="btn btn-primary btn-lg"
             style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}

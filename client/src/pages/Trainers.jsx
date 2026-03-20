@@ -1,7 +1,10 @@
-import { FiAward, FiBriefcase, FiTrendingUp, FiUser, FiArrowRight } from 'react-icons/fi';
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { FiAward, FiBriefcase, FiTrendingUp, FiUser, FiArrowRight, FiLock, FiX } from 'react-icons/fi';
+import { Link, useNavigate } from 'react-router-dom';
 import PageHero from '../components/PageHero';
 import LeadCaptureButton from '../components/LeadCaptureButton';
+import API, { adminSession } from '../utils/api';
+import toast from 'react-hot-toast';
 
 const pillars = [
   {
@@ -22,6 +25,34 @@ const pillars = [
 ];
 
 export default function Trainers() {
+  const navigate = useNavigate();
+  const [showLockAccess, setShowLockAccess] = useState(false);
+  const [credentials, setCredentials] = useState({ username: '', password: '' });
+  const [loginLoading, setLoginLoading] = useState(false);
+
+  const handleSecureLogin = async (e) => {
+    e.preventDefault();
+    if (!credentials.username || !credentials.password) {
+      toast.error('Please enter username and password');
+      return;
+    }
+
+    try {
+      setLoginLoading(true);
+      const res = await API.post('/admin/login', credentials);
+      adminSession.setToken(res.data.token);
+      setShowLockAccess(false);
+      setCredentials({ username: '', password: '' });
+      toast.success('Access granted');
+      navigate('/admin');
+    } catch (error) {
+      console.error('Secure login failed:', error);
+      toast.error(error.response?.data?.error || 'Login failed');
+    } finally {
+      setLoginLoading(false);
+    }
+  };
+
   return (
     <div className="page-wrapper">
       <PageHero
@@ -120,15 +151,15 @@ export default function Trainers() {
 
       <section className="section section-darker">
         <div className="container">
-          <div className="trainers-admin-access reveal">
-            <div>
-              <div className="section-badge">Internal Access</div>
-              <h3>Authorized admin entry</h3>
-              <p>This login is intentionally kept off the public navigation. Use it only for internal website operations.</p>
-            </div>
-            <Link to="/admin" className="btn btn-secondary trainers-admin-link" style={{ textDecoration: 'none' }}>
-              Open Admin Portal <FiArrowRight />
-            </Link>
+          <div className="trainers-lock-corner reveal">
+            <button
+              type="button"
+              className="trainers-lock-button"
+              aria-label="Open secure access"
+              onClick={() => setShowLockAccess(true)}
+            >
+              <FiLock />
+            </button>
           </div>
         </div>
       </section>
@@ -151,6 +182,58 @@ export default function Trainers() {
           </div>
         </div>
       </section>
+
+      {showLockAccess ? (
+        <div className="trainers-lock-overlay" onClick={() => setShowLockAccess(false)}>
+          <div className="trainers-lock-modal" onClick={(e) => e.stopPropagation()}>
+            <button
+              type="button"
+              className="trainers-lock-close"
+              aria-label="Close secure access"
+              onClick={() => setShowLockAccess(false)}
+            >
+              <FiX />
+            </button>
+
+            <div className="admin-login-brand" style={{ marginBottom: '18px' }}>
+              <div className="admin-login-icon">
+                <FiLock />
+              </div>
+              <span className="admin-login-kicker">Secure Access</span>
+            </div>
+
+            <h3 className="trainers-lock-title">Restricted Sign In</h3>
+            <p className="trainers-lock-text">Authorized team members can continue into the secure workspace from here.</p>
+
+            <form onSubmit={handleSecureLogin} className="admin-auth-form">
+              <label className="admin-auth-field">
+                <span>Username</span>
+                <input
+                  className="form-input"
+                  placeholder="Enter username"
+                  value={credentials.username}
+                  onChange={(e) => setCredentials((prev) => ({ ...prev, username: e.target.value }))}
+                />
+              </label>
+
+              <label className="admin-auth-field">
+                <span>Password</span>
+                <input
+                  className="form-input"
+                  type="password"
+                  placeholder="Enter password"
+                  value={credentials.password}
+                  onChange={(e) => setCredentials((prev) => ({ ...prev, password: e.target.value }))}
+                />
+              </label>
+
+              <button type="submit" className="btn btn-primary btn-lg admin-auth-submit" disabled={loginLoading}>
+                {loginLoading ? 'Signing In...' : 'Continue'}
+              </button>
+            </form>
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 }

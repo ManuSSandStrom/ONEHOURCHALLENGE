@@ -15,7 +15,6 @@ export default function Contact() {
     message: '',
   });
   const [loading, setLoading] = useState(false);
-  const [sent, setSent] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -33,8 +32,7 @@ export default function Contact() {
         sourcePage: 'Contact',
         sourcePath: window.location.pathname,
       });
-      toast.success('Registration sent to admin portal');
-      setSent(true);
+      toast.success('Details submitted successfully');
       setFormData({ name: '', email: '', mobile: '', gender: '', age: '', message: '' });
     } catch (error) {
       console.error(error);
@@ -51,7 +49,7 @@ export default function Contact() {
         eyebrow="Direct communication page"
         title="Let's plan your"
         highlight="next step"
-        description="Share your details and goals. Your enquiry goes directly into the admin portal as a contact lead."
+        description="Share your details and goals. Your enquiry goes straight to the team for a clean internal follow-up."
         metrics={[
           { value: '1 form', label: 'Direct Lead Flow' },
           { value: 'Mon-Sat', label: 'Support Window' },
@@ -60,7 +58,7 @@ export default function Contact() {
         asideTitle="What happens next"
         asideText="This page is built to act like a proper enquiry hub. Members can reach out, submit goals, and expect a clean internal follow-up."
         asideItems={[
-          { label: 'Submission', value: 'Stored in admin portal' },
+          { label: 'Submission', value: 'Saved to the team workspace' },
           { label: 'Review', value: 'Handled by the coaching team' },
           { label: 'Response', value: 'Program or plan guidance' },
         ]}
@@ -133,62 +131,47 @@ export default function Contact() {
             </div>
 
             <div className="reveal">
-              {sent ? (
-                <div className="success-screen" style={{ padding: '60px 28px' }}>
-                  <div className="success-icon">
-                    <FiSend />
-                  </div>
-                  <h3 className="success-title">Lead Created</h3>
-                  <p className="success-message">
-                    Your contact details were saved successfully. The admin portal now has this enquiry under the Contact page.
-                  </p>
-                  <button className="btn btn-secondary" onClick={() => setSent(false)}>
-                    Add Another Lead
-                  </button>
-                </div>
-              ) : (
-                <form onSubmit={handleSubmit}>
-                  <div className="form-fields-grid" style={{ marginBottom: '12px' }}>
-                    <div className="form-group">
-                      <label className="form-label">Name</label>
-                      <input className="form-input" placeholder="Your full name" value={formData.name} onChange={(e) => setFormData((prev) => ({ ...prev, name: e.target.value }))} autoComplete="name" />
-                    </div>
-                    <div className="form-group">
-                      <label className="form-label">Email</label>
-                      <input className="form-input" type="email" placeholder="Your email address" value={formData.email} onChange={(e) => setFormData((prev) => ({ ...prev, email: e.target.value }))} autoComplete="email" />
-                    </div>
-                    <div className="form-group">
-                      <label className="form-label">Mobile Number</label>
-                      <input className="form-input" type="tel" placeholder="Your mobile number" value={formData.mobile} onChange={(e) => setFormData((prev) => ({ ...prev, mobile: e.target.value }))} autoComplete="tel" />
-                    </div>
-                    <div className="form-group">
-                      <label className="form-label">Gender</label>
-                      <select className="form-input" value={formData.gender} onChange={(e) => setFormData((prev) => ({ ...prev, gender: e.target.value }))}>
-                        <option value="">Select gender</option>
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
-                        <option value="Other">Other</option>
-                      </select>
-                    </div>
-                    <div className="form-group">
-                      <label className="form-label">Age</label>
-                      <input className="form-input" type="number" min="10" max="100" placeholder="Your age" value={formData.age} onChange={(e) => setFormData((prev) => ({ ...prev, age: e.target.value }))} />
-                    </div>
+              <form onSubmit={handleSubmit}>
+                <div className="form-fields-grid" style={{ marginBottom: '12px' }}>
+                  <div className="form-group">
+                    <label className="form-label">Name</label>
+                    <input className="form-input" placeholder="Your full name" value={formData.name} onChange={(e) => setFormData((prev) => ({ ...prev, name: e.target.value }))} autoComplete="name" />
                   </div>
                   <div className="form-group">
-                    <label className="form-label">What are you looking for?</label>
-                    <textarea className="form-textarea" placeholder="Tell us your goal, preferred program, or plan." value={formData.message} onChange={(e) => setFormData((prev) => ({ ...prev, message: e.target.value }))} />
+                    <label className="form-label">Email</label>
+                    <input className="form-input" type="email" placeholder="Your email address" value={formData.email} onChange={(e) => setFormData((prev) => ({ ...prev, email: e.target.value }))} autoComplete="email" />
                   </div>
-                  <button
-                    type="submit"
-                    className="btn btn-primary btn-lg"
-                    style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px' }}
-                    disabled={loading}
-                  >
-                    {loading ? 'Submitting...' : 'Submit Registration'} <FiSend />
-                  </button>
-                </form>
-              )}
+                  <div className="form-group">
+                    <label className="form-label">Mobile Number</label>
+                    <input className="form-input" type="tel" placeholder="Your mobile number" value={formData.mobile} onChange={(e) => setFormData((prev) => ({ ...prev, mobile: e.target.value }))} autoComplete="tel" />
+                  </div>
+                  <div className="form-group">
+                    <label className="form-label">Gender</label>
+                    <select className="form-input" value={formData.gender} onChange={(e) => setFormData((prev) => ({ ...prev, gender: e.target.value }))}>
+                      <option value="">Select gender</option>
+                      <option value="Male">Male</option>
+                      <option value="Female">Female</option>
+                      <option value="Other">Other</option>
+                    </select>
+                  </div>
+                  <div className="form-group">
+                    <label className="form-label">Age</label>
+                    <input className="form-input" type="number" min="10" max="100" placeholder="Your age" value={formData.age} onChange={(e) => setFormData((prev) => ({ ...prev, age: e.target.value }))} />
+                  </div>
+                </div>
+                <div className="form-group">
+                  <label className="form-label">What are you looking for?</label>
+                  <textarea className="form-textarea" placeholder="Tell us your goal, preferred program, or plan." value={formData.message} onChange={(e) => setFormData((prev) => ({ ...prev, message: e.target.value }))} />
+                </div>
+                <button
+                  type="submit"
+                  className="btn btn-primary btn-lg"
+                  style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px' }}
+                  disabled={loading}
+                >
+                  {loading ? 'Submitting...' : 'Submit Registration'} <FiSend />
+                </button>
+              </form>
             </div>
           </div>
         </div>

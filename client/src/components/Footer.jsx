@@ -33,7 +33,6 @@ export default function Footer() {
             <Link to="/transformations" className="footer-link">Transformations</Link>
             <Link to="/plans" className="footer-link">Plans</Link>
             <Link to="/contact" className="footer-link">Contact</Link>
-            <Link to="/admin" className="footer-link">Admin Portal</Link>
           </div>
 
           <div>
