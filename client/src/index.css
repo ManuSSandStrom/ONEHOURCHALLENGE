@@ -4155,6 +4155,33 @@ textarea {
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
+.ai-side-header-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.ai-side-close {
+  width: 42px;
+  height: 42px;
+  min-width: 42px;
+  border-radius: 14px;
+  border: 1px solid rgba(16, 33, 58, 0.08);
+  background: #ffffff;
+  color: var(--color-gray-700);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.ai-side-close:hover {
+  color: var(--color-primary);
+  border-color: rgba(0, 109, 60, 0.2);
+  background: #f7fbf8;
+}
+
 .ai-side-tabs {
   display: flex;
   gap: 8px;

@@ -78,11 +78,22 @@ export default function AIAssistant() {
 
       <aside className={`ai-side-panel ${open ? '' : 'closed'}`}>
         <div className="ai-side-header">
-          <div>
-            <h3 style={{ fontSize: '1.1rem', color: 'var(--color-gray-900)' }}>Quick Tools</h3>
-            <p style={{ color: 'var(--color-gray-600)', marginTop: '6px', fontSize: '0.9rem' }}>
-              Get instant guidance or calculate daily calorie targets.
-            </p>
+          <div className="ai-side-header-top">
+            <div>
+              <h3 style={{ fontSize: '1.1rem', color: 'var(--color-gray-900)' }}>Quick Tools</h3>
+              <p style={{ color: 'var(--color-gray-600)', marginTop: '6px', fontSize: '0.9rem' }}>
+                Get instant guidance or calculate daily calorie targets.
+              </p>
+            </div>
+
+            <button
+              type="button"
+              className="ai-side-close"
+              onClick={() => setOpen(false)}
+              aria-label="Close AI and calculator panel"
+            >
+              <FiX size={18} />
+            </button>
           </div>
 
           <div className="ai-side-tabs">
