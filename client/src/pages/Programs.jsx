@@ -33,16 +33,40 @@ const programs = [
 
 export default function Programs() {
   return (
-    <div className="page-wrapper">
+    <div className="page-wrapper page-programs">
       <PageHero
         badge="Programs"
+        eyebrow="Distinct training pathways"
         title="Professional coaching for"
         highlight="every goal"
         description="Choose from guided formats built for fat loss, strength, mobility, stamina, and long-term consistency."
+        metrics={[
+          { value: '5', label: 'Program Paths' },
+          { value: '1:1', label: 'Coaching Option' },
+          { value: '60 min', label: 'Session Length' },
+        ]}
+        asideTitle="How to choose"
+        asideText="Each program has a clear role inside the coaching ecosystem. Pick the style that matches your goal, then move into a plan that fits your schedule."
+        asideItems={[
+          { label: 'Goal Match', value: 'Fat loss, strength, mobility, cardio' },
+          { label: 'Delivery', value: 'Live coach-led sessions' },
+          { label: 'Next Step', value: 'Plan selection and registration' },
+        ]}
       />
 
       <section className="section section-darker">
         <div className="container">
+          <div className="programs-intro-band reveal">
+            <div>
+              <span>Program Architecture</span>
+              <h2>Each route here is a real destination, not a section preview.</h2>
+            </div>
+            <p>
+              This page now focuses only on programs, with clearer decision-making and stronger visual
+              separation from the rest of the website.
+            </p>
+          </div>
+
           <div className="programs-detail-grid reveal" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))' }}>
             {programs.map((program) => (
               <div className="program-detail-card" key={program.title}>
@@ -68,6 +92,24 @@ export default function Programs() {
                 />
               </div>
             ))}
+          </div>
+
+          <div className="programs-fit-grid reveal">
+            <div className="program-fit-card">
+              <span>Best for structure</span>
+              <h3>1-on-1 Training and Functional Training</h3>
+              <p>Ideal when members want clarity, progression, and close accountability.</p>
+            </div>
+            <div className="program-fit-card">
+              <span>Best for energy</span>
+              <h3>Zumba and HIIT</h3>
+              <p>Perfect for members who want momentum, sweat, and time-efficient conditioning.</p>
+            </div>
+            <div className="program-fit-card">
+              <span>Best for balance</span>
+              <h3>Yoga</h3>
+              <p>Useful for flexibility, recovery, posture support, and mental reset.</p>
+            </div>
           </div>
         </div>
       </section>

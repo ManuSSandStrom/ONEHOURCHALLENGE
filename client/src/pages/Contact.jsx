@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { FiMail, FiSend, FiMapPin } from 'react-icons/fi';
+import { FiMail, FiSend, FiMapPin, FiPhoneCall, FiClock } from 'react-icons/fi';
 import toast from 'react-hot-toast';
 import API from '../utils/api';
 import { ADMIN_EMAIL, ADMIN_PHONE } from '../utils/constants';
@@ -45,16 +45,53 @@ export default function Contact() {
   };
 
   return (
-    <div className="page-wrapper">
+    <div className="page-wrapper page-contact">
       <PageHero
         badge="Contact"
+        eyebrow="Direct communication page"
         title="Let's plan your"
         highlight="next step"
         description="Share your details and goals. Your enquiry goes directly into the admin portal as a contact lead."
+        metrics={[
+          { value: '1 form', label: 'Direct Lead Flow' },
+          { value: 'Mon-Sat', label: 'Support Window' },
+          { value: 'Online', label: 'Across India' },
+        ]}
+        asideTitle="What happens next"
+        asideText="This page is built to act like a proper enquiry hub. Members can reach out, submit goals, and expect a clean internal follow-up."
+        asideItems={[
+          { label: 'Submission', value: 'Stored in admin portal' },
+          { label: 'Review', value: 'Handled by the coaching team' },
+          { label: 'Response', value: 'Program or plan guidance' },
+        ]}
       />
 
       <section className="section section-darker">
         <div className="container">
+          <div className="contact-service-band reveal">
+            <div className="contact-service-card">
+              <FiMail />
+              <div>
+                <strong>Professional enquiries</strong>
+                <span>Clear registration and support handling without extra clutter.</span>
+              </div>
+            </div>
+            <div className="contact-service-card">
+              <FiClock />
+              <div>
+                <strong>Fast follow-up</strong>
+                <span>Form submissions are structured to reduce admin delays and manual sorting.</span>
+              </div>
+            </div>
+            <div className="contact-service-card">
+              <FiPhoneCall />
+              <div>
+                <strong>Direct contact options</strong>
+                <span>Email, phone, and enquiry form all stay available on the same page.</span>
+              </div>
+            </div>
+          </div>
+
           <div className="contact-grid">
             <div className="reveal">
               <div className="contact-info-card">

@@ -37,16 +37,47 @@ const secondaryPrograms = [
 
 export default function HowItWorks() {
   return (
-    <div className="page-wrapper">
+    <div className="page-wrapper page-how-it-works">
       <PageHero
         badge="How It Works"
+        eyebrow="From first click to steady training"
         title="A simple system with"
         highlight="real structure"
         description="Each session follows a clear format so members can train confidently, safely, and consistently."
+        metrics={[
+          { value: '3', label: 'Core Session Phases' },
+          { value: '60 min', label: 'Guided Format' },
+          { value: '5+', label: 'Training Specializations' },
+        ]}
+        asideTitle="Member flow"
+        asideText="The experience now moves like a proper digital product: discover, choose, register, and get guided follow-up."
+        asideItems={[
+          { label: 'Step 1', value: 'Explore programs and plans' },
+          { label: 'Step 2', value: 'Register interest or book a session' },
+          { label: 'Step 3', value: 'Coach follow-up and onboarding' },
+        ]}
       />
 
       <section className="section">
         <div className="container">
+          <div className="process-strip reveal">
+            <div className="process-strip-item">
+              <span>01</span>
+              <strong>Choose your training direction</strong>
+              <p>Programs and plans are separated into their own pages so members can decide with clarity.</p>
+            </div>
+            <div className="process-strip-item">
+              <span>02</span>
+              <strong>Send a clean registration</strong>
+              <p>Leads move directly into the admin portal with source tagging and better internal visibility.</p>
+            </div>
+            <div className="process-strip-item">
+              <span>03</span>
+              <strong>Start with guided consistency</strong>
+              <p>The coaching model is built around repeatable one-hour sessions instead of random workouts.</p>
+            </div>
+          </div>
+
           <div className="how-it-works-grid">
             <div className="session-structure-card reveal">
               <h2 className="card-title-lg">How Our Sessions Work</h2>

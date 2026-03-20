@@ -13,16 +13,45 @@ const transformations = [
 
 export default function Transformations() {
   return (
-    <div className="page-wrapper">
+    <div className="page-wrapper page-transformations">
       <PageHero
         badge="Real Results"
+        eyebrow="Proof through consistency"
         title="Transformation stories that feel"
         highlight="credible"
         description="Real member wins built on routine, guidance, and training that fits everyday life."
+        metrics={[
+          { value: '6', label: 'Featured Stories' },
+          { value: '4.8+', label: 'Community Rating' },
+          { value: '1 hour', label: 'Repeatable Routine' },
+        ]}
+        asideTitle="Why this page matters"
+        asideText="Results pages should build trust, not just show photos. This layout highlights consistency, member voice, and believable outcomes."
+        asideItems={[
+          { label: 'Focus', value: 'Routine over hype' },
+          { label: 'Format', value: 'Outcome-led storytelling' },
+          { label: 'Intent', value: 'Trust before registration' },
+        ]}
       />
 
       <section className="section section-darker">
         <div className="container">
+          <div className="results-overview reveal">
+            <div className="results-overview-copy">
+              <span className="section-badge">Transformation Lens</span>
+              <h2>Visible progress comes from a system people can actually stay with.</h2>
+              <p>
+                These stories represent the kind of outcomes members trust: fat loss, better stamina,
+                improved flexibility, stronger routines, and a training plan that fits around life.
+              </p>
+            </div>
+            <div className="results-overview-points">
+              <div>Weight-loss journeys with realistic timelines</div>
+              <div>Cardio and stamina gains built through regular sessions</div>
+              <div>Strength and mobility improvements without extreme routines</div>
+            </div>
+          </div>
+
           <div className="transformations-grid">
             {transformations.map((item) => (
               <div className="transformation-card reveal" key={item.name}>
