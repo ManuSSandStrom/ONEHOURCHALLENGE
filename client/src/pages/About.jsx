@@ -34,13 +34,6 @@ export default function About() {
           { value: '15+', label: 'Certified Trainers' },
           { value: '5', label: 'Core Disciplines' },
         ]}
-        asideTitle="What makes this page different"
-        asideText="This is not a generic gym website. The structure is designed around consistent one-hour sessions, coach-led accountability, and clear progression."
-        asideItems={[
-          { label: 'Session Format', value: 'Live and guided' },
-          { label: 'Coaching Style', value: 'Professional and personal' },
-          { label: 'Best For', value: 'Busy working adults' },
-        ]}
       />
 
       <section className="section section-dark">

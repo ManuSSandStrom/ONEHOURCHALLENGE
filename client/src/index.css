@@ -5966,12 +5966,6 @@ body {
   color: var(--color-primary);
 }
 
-.trainers-lock-corner {
-  display: flex;
-  justify-content: flex-end;
-  padding-top: 8px;
-}
-
 .trainers-lock-button {
   width: 58px;
   height: 58px;
@@ -6042,6 +6036,12 @@ body {
   color: rgba(218, 244, 231, 0.74);
   line-height: 1.7;
   margin-bottom: 10px;
+}
+
+.trainers-cta-utility {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 24px;
 }
 
 .admin-portal-shell {
@@ -6405,10 +6405,6 @@ body {
     align-items: flex-start;
   }
 
-  .trainers-lock-corner {
-    justify-content: center;
-  }
-
   .hero-stats-inner {
     flex-direction: column;
     gap: 18px;
@@ -6470,6 +6466,10 @@ body {
     border-radius: 26px;
   }
 
+  .trainers-cta-utility {
+    justify-content: center;
+  }
+
   .admin-workspace {
     padding: 16px;
   }
@@ -6487,11 +6487,6 @@ body {
 .page-hero-layout {
   display: grid;
   gap: 28px;
-}
-
-.page-hero-layout.has-aside {
-  grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.75fr);
-  align-items: stretch;
 }
 
 .page-hero-main {
@@ -6540,57 +6535,6 @@ body {
   color: #5e7083;
   font-size: 0.9rem;
   font-weight: 700;
-}
-
-.page-hero-aside {
-  display: grid;
-  align-content: start;
-  gap: 16px;
-  padding: 28px;
-  border-radius: 30px;
-  background: linear-gradient(180deg, rgba(13, 34, 25, 0.96) 0%, rgba(18, 54, 38, 0.98) 100%);
-  box-shadow: 0 24px 60px rgba(12, 30, 22, 0.16);
-  color: #ffffff;
-}
-
-.page-hero-aside h3 {
-  font-size: 1.35rem;
-  line-height: 1.2;
-}
-
-.page-hero-aside p {
-  color: rgba(224, 247, 233, 0.78);
-  line-height: 1.75;
-}
-
-.page-hero-aside-list {
-  display: grid;
-  gap: 12px;
-}
-
-.page-hero-aside-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 18px;
-  padding: 14px 16px;
-  border-radius: 18px;
-  background: rgba(255, 255, 255, 0.07);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.page-hero-aside-item span {
-  color: rgba(224, 247, 233, 0.7);
-  font-size: 0.86rem;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  font-weight: 700;
-}
-
-.page-hero-aside-item strong {
-  color: #ffffff;
-  text-align: right;
-  font-size: 0.94rem;
 }
 
 .about-story-grid {
@@ -6833,7 +6777,6 @@ body {
 }
 
 @media (max-width: 1100px) {
-  .page-hero-layout.has-aside,
   .about-story-grid,
   .results-overview {
     grid-template-columns: 1fr;
@@ -6855,7 +6798,6 @@ body {
     grid-template-columns: 1fr;
   }
 
-  .page-hero-aside,
   .about-editorial,
   .programs-intro-band,
   .results-overview-copy,

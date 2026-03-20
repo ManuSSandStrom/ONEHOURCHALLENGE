@@ -55,13 +55,6 @@ export default function Contact() {
           { value: 'Mon-Sat', label: 'Support Window' },
           { value: 'Online', label: 'Across India' },
         ]}
-        asideTitle="What happens next"
-        asideText="This page is built to act like a proper enquiry hub. Members can reach out, submit goals, and expect a clean internal follow-up."
-        asideItems={[
-          { label: 'Submission', value: 'Saved to the team workspace' },
-          { label: 'Review', value: 'Handled by the coaching team' },
-          { label: 'Response', value: 'Program or plan guidance' },
-        ]}
       />
 
       <section className="section section-darker">

@@ -45,13 +45,6 @@ export default function Programs() {
           { value: '1:1', label: 'Coaching Option' },
           { value: '60 min', label: 'Session Length' },
         ]}
-        asideTitle="How to choose"
-        asideText="Each program has a clear role inside the coaching ecosystem. Pick the style that matches your goal, then move into a plan that fits your schedule."
-        asideItems={[
-          { label: 'Goal Match', value: 'Fat loss, strength, mobility, cardio' },
-          { label: 'Delivery', value: 'Live coach-led sessions' },
-          { label: 'Next Step', value: 'Plan selection and registration' },
-        ]}
       />
 
       <section className="section section-darker">

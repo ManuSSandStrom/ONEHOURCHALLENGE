@@ -25,13 +25,6 @@ export default function Transformations() {
           { value: '4.8+', label: 'Community Rating' },
           { value: '1 hour', label: 'Repeatable Routine' },
         ]}
-        asideTitle="Why this page matters"
-        asideText="Results pages should build trust, not just show photos. This layout highlights consistency, member voice, and believable outcomes."
-        asideItems={[
-          { label: 'Focus', value: 'Routine over hype' },
-          { label: 'Format', value: 'Outcome-led storytelling' },
-          { label: 'Intent', value: 'Trust before registration' },
-        ]}
       />
 
       <section className="section section-darker">

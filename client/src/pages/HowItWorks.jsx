@@ -49,13 +49,6 @@ export default function HowItWorks() {
           { value: '60 min', label: 'Guided Format' },
           { value: '5+', label: 'Training Specializations' },
         ]}
-        asideTitle="Member flow"
-        asideText="The experience now moves like a proper digital product: discover, choose, register, and get guided follow-up."
-        asideItems={[
-          { label: 'Step 1', value: 'Explore programs and plans' },
-          { label: 'Step 2', value: 'Register interest or book a session' },
-          { label: 'Step 3', value: 'Coach follow-up and onboarding' },
-        ]}
       />
 
       <section className="section">

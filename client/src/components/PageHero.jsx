@@ -6,15 +6,12 @@ export default function PageHero({
   description,
   actions,
   metrics = [],
-  asideTitle,
-  asideText,
-  asideItems = [],
 }) {
   return (
     <section className="page-hero">
       <div className="container">
         <div className="page-hero-card reveal">
-          <div className={`page-hero-layout ${asideTitle || asideItems.length ? 'has-aside' : ''}`}>
+          <div className="page-hero-layout">
             <div className="page-hero-main">
               {badge ? <div className="section-badge">{badge}</div> : null}
               {eyebrow ? <div className="page-hero-eyebrow">{eyebrow}</div> : null}
@@ -34,23 +31,6 @@ export default function PageHero({
                 </div>
               ) : null}
             </div>
-
-            {asideTitle || asideText || asideItems.length ? (
-              <aside className="page-hero-aside">
-                {asideTitle ? <h3>{asideTitle}</h3> : null}
-                {asideText ? <p>{asideText}</p> : null}
-                {asideItems.length ? (
-                  <div className="page-hero-aside-list">
-                    {asideItems.map((item) => (
-                      <div className="page-hero-aside-item" key={item.label}>
-                        <span>{item.label}</span>
-                        <strong>{item.value}</strong>
-                      </div>
-                    ))}
-                  </div>
-                ) : null}
-              </aside>
-            ) : null}
           </div>
         </div>
       </div>

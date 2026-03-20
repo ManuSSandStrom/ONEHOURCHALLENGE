@@ -149,21 +149,6 @@ export default function Trainers() {
         </div>
       </section>
 
-      <section className="section section-darker">
-        <div className="container">
-          <div className="trainers-lock-corner reveal">
-            <button
-              type="button"
-              className="trainers-lock-button"
-              aria-label="Open secure access"
-              onClick={() => setShowLockAccess(true)}
-            >
-              <FiLock />
-            </button>
-          </div>
-        </div>
-      </section>
-
       <section className="cta-section">
         <div className="container reveal">
           <h2 className="cta-title">
@@ -179,6 +164,16 @@ export default function Trainers() {
               context={{ sourcePage: 'Trainers', interestType: 'team', interestLabel: 'Trainer Team Registration' }}
               label="Register Now"
             />
+          </div>
+          <div className="trainers-cta-utility">
+            <button
+              type="button"
+              className="trainers-lock-button"
+              aria-label="Open secure access"
+              onClick={() => setShowLockAccess(true)}
+            >
+              <FiLock />
+            </button>
           </div>
         </div>
       </section>
