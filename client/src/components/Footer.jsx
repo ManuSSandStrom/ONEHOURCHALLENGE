@@ -16,7 +16,7 @@ export default function Footer() {
               ONEHOUR <span>CHALLENGE</span>
             </div>
             <p className="footer-brand-desc">
-              Structured online fitness sessions designed for sustainable progress and a cleaner member experience.
+              Structured online fitness sessions designed for sustainable progress and a smooth member experience.
             </p>
           </div>
 

@@ -77,7 +77,7 @@ export default function Programs() {
           <h2 className="cta-title">
             Find Your <span style={{ color: 'var(--color-primary)' }}>Program</span>
           </h2>
-          <p className="cta-subtitle">Each registration is tagged by program so your admin portal gets cleaner leads.</p>
+          <p className="cta-subtitle">Each registration is tagged by program so the team can review enquiries more clearly.</p>
           <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap' }}>
             <Link to="/plans" className="btn btn-primary btn-lg" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
               View Plans <FiArrowRight />

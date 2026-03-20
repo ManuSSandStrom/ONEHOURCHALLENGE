@@ -50,8 +50,8 @@ const quickPoints = [
   },
   {
     icon: <FiShield />,
-    title: 'Professional Follow-Up',
-    description: 'Registrations and enquiries flow into an organized admin workspace for follow-up.',
+    title: 'Smooth Follow-Up',
+    description: 'Registrations and enquiries are organized clearly so the team can respond faster.',
   },
 ];
 
@@ -73,7 +73,7 @@ export default function Home() {
         <div className="hero-center-wrap">
           <div className="hero-top-label">
             <span className="hero-top-label-text">ONLINE FITNESS COACHING</span>
-            <span className="hero-top-label-tag">Professional Experience</span>
+            <span className="hero-top-label-tag">Structured Coaching</span>
           </div>
 
           <h1 className="hero-title">
@@ -82,7 +82,7 @@ export default function Home() {
             <span>Clearer journey.</span>
           </h1>
           <p className="hero-description">
-            A cleaner OneHour Challenge experience with a bright premium interface, clearer page structure, and faster access to the sections that matter.
+            OneHour Challenge brings structured coaching, clear page navigation, and a smoother path from discovery to registration.
           </p>
 
           <div className="hero-pills">
@@ -108,17 +108,17 @@ export default function Home() {
           <div className="hero-stats-inner">
             <div className="hero-stat-item">
               <div className="hero-stat-number">01</div>
-              <div className="hero-stat-label">Clear Navigation Flow</div>
+              <div className="hero-stat-label">Simple Navigation</div>
             </div>
             <div className="hero-stat-divider"></div>
             <div className="hero-stat-item">
               <div className="hero-stat-number">02</div>
-              <div className="hero-stat-label">Professional Page Structure</div>
+              <div className="hero-stat-label">Clear Page Flow</div>
             </div>
             <div className="hero-stat-divider"></div>
             <div className="hero-stat-item">
               <div className="hero-stat-number">03</div>
-              <div className="hero-stat-label">Direct Registration Journey</div>
+              <div className="hero-stat-label">Easy Registration</div>
             </div>
           </div>
         </div>
@@ -128,8 +128,8 @@ export default function Home() {
         <div className="container">
           <div className="section-header reveal">
             <div className="section-badge">Quick Overview</div>
-            <h2 className="section-title">A refined website with <span>better structure</span></h2>
-            <p className="section-subtitle">The homepage now introduces the brand cleanly while the inner pages carry the full experience in a more professional way.</p>
+            <h2 className="section-title">A stronger website with <span>better structure</span></h2>
+            <p className="section-subtitle">The homepage introduces the brand clearly, while each inner page focuses on one part of the experience.</p>
           </div>
 
           <div className="programs-detail-grid reveal" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))' }}>
@@ -204,9 +204,9 @@ export default function Home() {
         <div className="container reveal">
           <div className="section-badge">Get Started</div>
           <h2 className="cta-title">
-            Ready to begin?
+            Ready to start?
             <br />
-            <span style={{ color: 'var(--color-primary)' }}>We take it forward.</span>
+            <span style={{ color: 'var(--color-primary)' }}>We guide the next step.</span>
           </h2>
           <p className="cta-subtitle">Explore the full site, choose the program or plan that fits you, and send your registration when you are ready.</p>
           <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap' }}>
