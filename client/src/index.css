@@ -5274,6 +5274,83 @@ textarea {
   gap: 10px;
 }
 
+.admin-status-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.admin-status-btn {
+  min-height: 42px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(16, 33, 58, 0.08);
+  background: #f6f9fd;
+  color: var(--color-gray-700);
+  font-size: 0.84rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  transition: all 0.2s ease;
+}
+
+.admin-status-btn:hover {
+  transform: translateY(-1px);
+  border-color: rgba(0, 109, 60, 0.22);
+}
+
+.admin-status-btn.active {
+  box-shadow: 0 10px 24px rgba(16, 33, 58, 0.08);
+}
+
+.admin-status-new {
+  background: #eef6ff;
+  color: #1f5fbf;
+  border-color: rgba(31, 95, 191, 0.14);
+}
+
+.admin-status-new.active {
+  background: #1f5fbf;
+  color: #ffffff;
+  border-color: #1f5fbf;
+}
+
+.admin-status-contacted {
+  background: #fff6ea;
+  color: #f17a1a;
+  border-color: rgba(241, 122, 26, 0.16);
+}
+
+.admin-status-contacted.active {
+  background: #f17a1a;
+  color: #ffffff;
+  border-color: #f17a1a;
+}
+
+.admin-status-closed {
+  background: #eff3f8;
+  color: #4d627d;
+  border-color: rgba(77, 98, 125, 0.14);
+}
+
+.admin-status-closed.active {
+  background: #4d627d;
+  color: #ffffff;
+  border-color: #4d627d;
+}
+
+.admin-status-not-interested {
+  background: #fff1f0;
+  color: #c2342a;
+  border-color: rgba(194, 52, 42, 0.14);
+}
+
+.admin-status-not-interested.active {
+  background: #c2342a;
+  color: #ffffff;
+  border-color: #c2342a;
+}
+
 .admin-delete-btn {
   width: 46px;
   height: 46px;
@@ -5382,10 +5459,17 @@ textarea {
 
   .admin-lead-actions {
     width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .admin-status-actions {
+    justify-content: flex-start;
   }
 
   .admin-delete-btn {
     flex-shrink: 0;
+    width: 100%;
   }
 }
 

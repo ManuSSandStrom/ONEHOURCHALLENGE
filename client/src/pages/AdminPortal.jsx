@@ -10,6 +10,12 @@ const adminViews = [
   { id: 'plans', label: 'Plan Enquiries', icon: <FiLayers /> },
   { id: 'contacts', label: 'Contact Requests', icon: <FiPhoneCall /> },
 ];
+const statusButtonLabels = {
+  new: 'New',
+  contacted: 'Contacted',
+  closed: 'Closed',
+  'not-interested': 'Not Interested',
+};
 
 const formatStatusLabel = (status) => status.replace('-', ' ');
 
@@ -199,9 +205,18 @@ export default function AdminPortal() {
           <p>{lead.mobile}{lead.email ? ` | ${lead.email}` : ''}</p>
         </div>
         <div className="admin-lead-actions">
-          <select className="form-input admin-status-select" value={lead.status} onChange={(e) => updateLeadStatus(lead._id, e.target.value)}>
-            {statusOptions.map((status) => <option key={status} value={status}>{formatStatusLabel(status)}</option>)}
-          </select>
+          <div className="admin-status-actions">
+            {statusOptions.map((status) => (
+              <button
+                key={status}
+                type="button"
+                className={`admin-status-btn admin-status-${status} ${lead.status === status ? 'active' : ''}`}
+                onClick={() => updateLeadStatus(lead._id, status)}
+              >
+                {statusButtonLabels[status] || formatStatusLabel(status)}
+              </button>
+            ))}
+          </div>
           <button className="btn btn-secondary admin-delete-btn" onClick={() => deleteLead(lead._id)}>
             <FiTrash2 />
           </button>
@@ -227,9 +242,18 @@ export default function AdminPortal() {
           <p>{contact.mobile} | {contact.email}</p>
         </div>
         <div className="admin-lead-actions">
-          <select className="form-input admin-status-select" value={contact.status} onChange={(e) => updateContactStatus(contact._id, e.target.value)}>
-            {statusOptions.map((status) => <option key={status} value={status}>{formatStatusLabel(status)}</option>)}
-          </select>
+          <div className="admin-status-actions">
+            {statusOptions.map((status) => (
+              <button
+                key={status}
+                type="button"
+                className={`admin-status-btn admin-status-${status} ${contact.status === status ? 'active' : ''}`}
+                onClick={() => updateContactStatus(contact._id, status)}
+              >
+                {statusButtonLabels[status] || formatStatusLabel(status)}
+              </button>
+            ))}
+          </div>
           <button className="btn btn-secondary admin-delete-btn" onClick={() => deleteContact(contact._id)}>
             <FiTrash2 />
           </button>
