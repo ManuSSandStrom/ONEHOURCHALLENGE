@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { FiCheckCircle, FiX } from 'react-icons/fi';
-import { useUser } from '@clerk/clerk-react';
 import toast from 'react-hot-toast';
 import API from '../utils/api';
 
@@ -14,32 +13,17 @@ const initialFormState = {
 };
 
 export default function RegistrationModal({ isOpen, onClose, context }) {
-  const { user, isLoaded } = useUser();
   const [formData, setFormData] = useState(initialFormState);
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
   useEffect(() => {
-    if (isLoaded && user) {
-      setFormData((prev) => ({
-        ...prev,
-        name: user.fullName || prev.name,
-        email: user.primaryEmailAddress?.emailAddress || prev.email,
-      }));
-    }
-  }, [isLoaded, user]);
-
-  useEffect(() => {
     if (!isOpen) {
       setSubmitted(false);
       setSubmitting(false);
-      setFormData((prev) => ({
-        ...initialFormState,
-        name: prev.name && user ? prev.name : '',
-        email: prev.email && user ? prev.email : '',
-      }));
+      setFormData(initialFormState);
     }
-  }, [isOpen, user]);
+  }, [isOpen]);
 
   if (!isOpen) return null;
 

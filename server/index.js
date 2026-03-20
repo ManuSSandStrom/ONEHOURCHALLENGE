@@ -8,7 +8,6 @@ import bookingRoutes from './routes/bookingRoutes.js';
 import contactRoutes from './routes/contactRoutes.js';
 import aiRoutes from './routes/aiRoutes.js';
 import adminRoutes from './routes/adminRoutes.js';
-import profileRoutes from './routes/profileRoutes.js';
 import leadRoutes from './routes/leadRoutes.js';
 
 dotenv.config();
@@ -29,7 +28,6 @@ app.use('/api/bookings', bookingRoutes);
 app.use('/api/contact', contactRoutes);
 app.use('/api/ai', aiRoutes);
 app.use('/api/admin', adminRoutes);
-app.use('/api/profile', profileRoutes);
 app.use('/api/leads', leadRoutes);
 
 // Health check

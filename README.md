@@ -1,6 +1,6 @@
 # OneHour Challenge
 
-OneHour Challenge is a full-stack fitness platform with a React + Vite frontend and a Node.js + Express backend. The project is structured around clear page-based navigation, lead capture, contact handling, admin follow-up, and member account flows.
+OneHour Challenge is a full-stack fitness platform with a React + Vite frontend and a Node.js + Express backend. The project is structured around clear page-based navigation, lead capture, contact handling, and admin follow-up.
 
 This version of the project focuses on:
 
@@ -34,7 +34,6 @@ The website is designed as a professional multi-page fitness platform:
 
 - `/` is a dedicated homepage
 - `/about`, `/programs`, `/plans`, `/how-it-works`, `/transformations`, `/trainers`, and `/contact` are separate inner pages
-- `/dashboard` is for signed-in users
 - `/admin` is a standalone admin workspace
 
 Important UI behavior:
@@ -56,7 +55,6 @@ Important UI behavior:
 - Lead capture modal for registrations
 - WhatsApp trial-session links
 - Floating WhatsApp support button
-- Clerk-based user login for member dashboard
 
 ### Lead and Contact Management
 
@@ -76,14 +74,6 @@ Important UI behavior:
 - Delete actions
 - Responsive admin UI for desktop, tablet, and mobile
 
-### Member Dashboard
-
-- Clerk-authenticated dashboard access
-- Profile creation and editing
-- Fitness details and goal tracking
-- Booking visibility
-- WhatsApp booking actions
-
 ## 3. Tech Stack
 
 ### Frontend
@@ -91,7 +81,6 @@ Important UI behavior:
 - React 19
 - Vite
 - React Router
-- Clerk
 - Axios
 - React Icons
 - React Hot Toast
@@ -125,7 +114,6 @@ ONEHOURCHALLENGE/
 |   |   |   |-- About.jsx
 |   |   |   |-- AdminPortal.jsx
 |   |   |   |-- Contact.jsx
-|   |   |   |-- Dashboard.jsx
 |   |   |   |-- Home.jsx
 |   |   |   |-- HowItWorks.jsx
 |   |   |   |-- Pricing.jsx
@@ -181,13 +169,6 @@ ONEHOURCHALLENGE/
 4. Admin reviews registrations, plans, and contacts
 5. Admin updates status or deletes records as needed
 
-### D. Member Dashboard Flow
-
-1. User signs in with Clerk
-2. User opens `/dashboard`
-3. User updates profile data
-4. User checks bookings and related info
-
 ## 6. Environment Variables
 
 Create environment files before running the project.
@@ -213,7 +194,6 @@ CLIENT_URL=http://localhost:5173
 
 ```env
 VITE_API_URL=http://localhost:5000/api
-VITE_CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
 ```
 
 Notes:
@@ -288,16 +268,14 @@ npm run build
 - `/trainers`
 - `/contact`
 
-### Protected / Special Routes
+### Special Routes
 
-- `/dashboard`
 - `/admin`
 
 Notes:
 
 - `/plans` and `/pricing` both point to the plans page
 - `/admin` uses its own standalone layout
-- `/dashboard` is protected through Clerk sign-in state
 
 ## 10. Backend API Overview
 
@@ -319,18 +297,10 @@ Below is a high-level overview of the backend route groups used by the project.
 - `POST /api/contact`
 - `POST /api/leads`
 
-### Profile / Dashboard
-
-- `GET /api/profile/:clerkUserId`
-- `POST /api/profile`
-- `GET /api/bookings/user/:clerkUserId`
-
 ### Other Existing Route Groups
 
 - AI routes
 - Booking routes
-- Payment routes
-- UPI routes
 
 Check the files inside [server/routes](server/routes) and [server/controllers](server/controllers) for exact behavior.
 
@@ -381,7 +351,7 @@ ADMIN_PORTAL_PASSWORD=change_this_password
 
 - Set all required environment variables
 - Make sure MongoDB is reachable from the deployment environment
-- Ensure Clerk and email credentials are valid
+- Ensure email credentials and database access are valid
 
 ### Important Production Recommendations
 
@@ -436,14 +406,6 @@ Check:
 - backend route registration
 - browser network requests
 - backend console logs
-
-### Clerk dashboard login does not work
-
-Check:
-
-- `VITE_CLERK_PUBLISHABLE_KEY`
-- Clerk app configuration
-- allowed redirect URLs
 
 ## Git Workflow
 

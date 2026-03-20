@@ -1,6 +1,5 @@
 import { Suspense, lazy, useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
-import { SignedIn, SignedOut, RedirectToSignIn } from '@clerk/clerk-react';
 import { Toaster } from 'react-hot-toast';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -12,21 +11,9 @@ const Pricing = lazy(() => import('./pages/Pricing'));
 const Trainers = lazy(() => import('./pages/Trainers'));
 const Transformations = lazy(() => import('./pages/Transformations'));
 const Contact = lazy(() => import('./pages/Contact'));
-const Dashboard = lazy(() => import('./pages/Dashboard'));
 const HowItWorks = lazy(() => import('./pages/HowItWorks'));
 import WhatsAppButton from './components/WhatsAppButton';
 import ScrollReveal from './components/ScrollReveal';
-
-function ProtectedRoute({ children }) {
-  return (
-    <>
-      <SignedIn>{children}</SignedIn>
-      <SignedOut>
-        <RedirectToSignIn />
-      </SignedOut>
-    </>
-  );
-}
 
 function App() {
   const location = useLocation();
@@ -53,14 +40,6 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/how-it-works" element={<HowItWorks />} />
             <Route path="/admin" element={<AdminPortal />} />
-            <Route
-              path="/dashboard"
-              element={
-                <ProtectedRoute>
-                  <Dashboard />
-                </ProtectedRoute>
-              }
-            />
           </Routes>
         </Suspense>
       </main>
