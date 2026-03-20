@@ -4,6 +4,8 @@ import { Toaster } from 'react-hot-toast';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import AdminPortal from './pages/AdminPortal';
+import API from './utils/api';
+import AIAssistant from './components/AIAssistant';
 const Home = lazy(() => import('./pages/Home'));
 const About = lazy(() => import('./pages/About'));
 const Programs = lazy(() => import('./pages/Programs'));
@@ -22,6 +24,10 @@ function App() {
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
   }, [location.pathname]);
+
+  useEffect(() => {
+    API.get('/health').catch(() => {});
+  }, []);
 
   return (
     <>
@@ -44,6 +50,7 @@ function App() {
         </Suspense>
       </main>
       {!isAdminRoute ? <Footer /> : null}
+      {!isAdminRoute ? <AIAssistant /> : null}
       {!isAdminRoute ? <WhatsAppButton /> : null}
       <Toaster position="bottom-center" />
     </>

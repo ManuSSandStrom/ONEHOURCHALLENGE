@@ -275,11 +275,11 @@ export const submitLead = async (req, res) => {
 
     const lead = new Lead({ name, email, mobile, program });
     await lead.save();
-
-    const mailInfo = await sendLeadEmail(lead);
-    console.log('Lead email sent:', mailInfo?.messageId || 'Success');
-
-    return res.status(201).json({ success: true, leadId: lead._id });
+    res.status(201).json({ success: true, leadId: lead._id });
+    sendLeadEmail(lead)
+      .then(() => console.log('Lead email sent in background'))
+      .catch((error) => console.error('Lead email background error:', error));
+    return;
   } catch (error) {
     console.error('Lead submission error:', error);
     return res.status(500).json({ error: 'Failed to submit lead' });

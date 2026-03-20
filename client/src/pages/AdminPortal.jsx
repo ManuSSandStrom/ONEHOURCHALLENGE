@@ -17,7 +17,9 @@ export default function AdminPortal() {
   const [stats, setStats] = useState(null);
   const [leads, setLeads] = useState([]);
   const [contacts, setContacts] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [statsLoading, setStatsLoading] = useState(true);
+  const [leadsLoading, setLeadsLoading] = useState(false);
+  const [contactsLoading, setContactsLoading] = useState(false);
   const [activeView, setActiveView] = useState('overview');
   const [isAuthenticated, setIsAuthenticated] = useState(Boolean(adminSession.getToken()));
   const [loginLoading, setLoginLoading] = useState(false);
@@ -28,23 +30,16 @@ export default function AdminPortal() {
     [],
   );
 
-  const fetchAdminData = useCallback(async () => {
+  const fetchStats = useCallback(async () => {
     if (!isAuthenticated) {
-      setLoading(false);
+      setStatsLoading(false);
       return;
     }
 
     try {
-      setLoading(true);
-      const [statsRes, leadsRes, contactsRes] = await Promise.all([
-        API.get('/admin/stats'),
-        API.get('/admin/leads'),
-        API.get('/admin/contacts'),
-      ]);
-
+      setStatsLoading(true);
+      const statsRes = await API.get('/admin/stats');
       setStats(statsRes.data);
-      setLeads(leadsRes.data);
-      setContacts(contactsRes.data);
     } catch (error) {
       console.error('Admin portal error:', error);
       if (error.response?.status === 401) {
@@ -55,13 +50,52 @@ export default function AdminPortal() {
         toast.error('Unable to load admin data right now.');
       }
     } finally {
-      setLoading(false);
+      setStatsLoading(false);
     }
   }, [isAuthenticated]);
 
   useEffect(() => {
-    fetchAdminData();
-  }, [fetchAdminData]);
+    fetchStats();
+  }, [fetchStats]);
+
+  const fetchLeads = useCallback(async () => {
+    if (!isAuthenticated || leads.length > 0 || leadsLoading) return;
+
+    try {
+      setLeadsLoading(true);
+      const leadsRes = await API.get('/admin/leads');
+      setLeads(leadsRes.data);
+    } catch (error) {
+      console.error('Lead fetch error:', error);
+      toast.error('Unable to load registrations right now.');
+    } finally {
+      setLeadsLoading(false);
+    }
+  }, [isAuthenticated, leads.length, leadsLoading]);
+
+  const fetchContacts = useCallback(async () => {
+    if (!isAuthenticated || contacts.length > 0 || contactsLoading) return;
+
+    try {
+      setContactsLoading(true);
+      const contactsRes = await API.get('/admin/contacts');
+      setContacts(contactsRes.data);
+    } catch (error) {
+      console.error('Contact fetch error:', error);
+      toast.error('Unable to load contacts right now.');
+    } finally {
+      setContactsLoading(false);
+    }
+  }, [contacts.length, contactsLoading, isAuthenticated]);
+
+  useEffect(() => {
+    if (activeView === 'registrations' || activeView === 'plans') {
+      fetchLeads();
+    }
+    if (activeView === 'contacts') {
+      fetchContacts();
+    }
+  }, [activeView, fetchContacts, fetchLeads]);
 
   const registrations = useMemo(
     () => leads.filter((lead) => lead.source !== 'contact-form' && !(lead.interestType === 'plan' || lead.planType)),
@@ -86,6 +120,7 @@ export default function AdminPortal() {
       adminSession.setToken(res.data.token);
       setIsAuthenticated(true);
       toast.success('Admin login successful');
+      setStatsLoading(true);
     } catch (error) {
       console.error('Admin login failed:', error);
       toast.error(error.response?.data?.error || 'Login failed');
@@ -100,6 +135,9 @@ export default function AdminPortal() {
     setStats(null);
     setLeads([]);
     setContacts([]);
+    setStatsLoading(false);
+    setLeadsLoading(false);
+    setContactsLoading(false);
     toast.success('Logged out from admin portal');
   };
 
@@ -392,7 +430,7 @@ export default function AdminPortal() {
           {activeView === 'registrations' ? (
             <div className="admin-summary-card admin-lead-section">
               <h3>Registration Leads</h3>
-              {loading
+              {leadsLoading
                 ? <p className="section-subtitle" style={{ maxWidth: 'none' }}>Syncing registrations...</p>
                 : registrations.length
                   ? <div className="admin-lead-list">{registrations.map(renderLeadCard)}</div>
@@ -403,7 +441,7 @@ export default function AdminPortal() {
           {activeView === 'plans' ? (
             <div className="admin-summary-card admin-lead-section">
               <h3>Plan Enquiries</h3>
-              {loading
+              {leadsLoading
                 ? <p className="section-subtitle" style={{ maxWidth: 'none' }}>Syncing plan enquiries...</p>
                 : planEnquiries.length
                   ? <div className="admin-lead-list">{planEnquiries.map(renderLeadCard)}</div>
@@ -414,7 +452,7 @@ export default function AdminPortal() {
           {activeView === 'contacts' ? (
             <div className="admin-summary-card admin-lead-section">
               <h3>Contact Requests</h3>
-              {loading
+              {contactsLoading
                 ? <p className="section-subtitle" style={{ maxWidth: 'none' }}>Syncing contact requests...</p>
                 : contacts.length
                   ? <div className="admin-lead-list">{contacts.map(renderContactCard)}</div>
