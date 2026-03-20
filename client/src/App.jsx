@@ -1,9 +1,10 @@
-import { Suspense, lazy } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Suspense, lazy, useEffect } from 'react';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import { SignedIn, SignedOut, RedirectToSignIn } from '@clerk/clerk-react';
 import { Toaster } from 'react-hot-toast';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import AdminPortal from './pages/AdminPortal';
 const Home = lazy(() => import('./pages/Home'));
 const About = lazy(() => import('./pages/About'));
 const Programs = lazy(() => import('./pages/Programs'));
@@ -13,7 +14,6 @@ const Transformations = lazy(() => import('./pages/Transformations'));
 const Contact = lazy(() => import('./pages/Contact'));
 const Dashboard = lazy(() => import('./pages/Dashboard'));
 const HowItWorks = lazy(() => import('./pages/HowItWorks'));
-const AdminPortal = lazy(() => import('./pages/AdminPortal'));
 import WhatsAppButton from './components/WhatsAppButton';
 import ScrollReveal from './components/ScrollReveal';
 
@@ -29,10 +29,17 @@ function ProtectedRoute({ children }) {
 }
 
 function App() {
+  const location = useLocation();
+  const isAdminRoute = location.pathname.startsWith('/admin');
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+  }, [location.pathname]);
+
   return (
     <>
       <ScrollReveal />
-      <Navbar />
+      {!isAdminRoute ? <Navbar /> : null}
       <main className="app-shell">
         <Suspense fallback={<div className="page-loading">Loading page...</div>}>
           <Routes>
@@ -57,8 +64,8 @@ function App() {
           </Routes>
         </Suspense>
       </main>
-      <Footer />
-      <WhatsAppButton />
+      {!isAdminRoute ? <Footer /> : null}
+      {!isAdminRoute ? <WhatsAppButton /> : null}
       <Toaster position="bottom-center" />
     </>
   );

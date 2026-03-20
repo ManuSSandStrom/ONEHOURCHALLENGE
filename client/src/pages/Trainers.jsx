@@ -26,9 +26,9 @@ export default function Trainers() {
     <div className="page-wrapper">
       <PageHero
         badge="Coaching Team"
-        title="Expert support for"
-        highlight="your journey"
-        description="Train with a coordinated team that blends fitness coaching, nutrition support, and practical accountability."
+        title="Professional coaching for"
+        highlight="real progress"
+        description="Train with a coordinated support system that blends fitness coaching, nutrition guidance, and practical accountability."
       />
 
       <section className="section section-darker">
@@ -91,7 +91,7 @@ export default function Trainers() {
           </div>
 
           <p className="reveal" style={{ textAlign: 'center', color: 'var(--color-gray-500)', fontSize: '1rem', marginTop: '40px', maxWidth: '620px', marginLeft: 'auto', marginRight: 'auto', lineHeight: '1.7' }}>
-            Your support system is built around coaching clarity, professional guidance, and plans that fit your actual routine.
+            Your support system is built around coaching clarity, professional guidance, and plans that fit your real routine.
           </p>
         </div>
       </section>
@@ -101,7 +101,7 @@ export default function Trainers() {
           <div className="section-header reveal">
             <div className="section-badge">Why Our Team Works</div>
             <h2 className="section-title">Meet Your <span>Coaches</span></h2>
-            <p className="section-subtitle">A professional setup designed to help you stay on track.</p>
+            <p className="section-subtitle">A polished coaching setup designed to keep your training consistent and easy to follow.</p>
           </div>
 
           <div className="trainers-grid reveal">
@@ -118,12 +118,27 @@ export default function Trainers() {
         </div>
       </section>
 
+      <section className="section section-darker">
+        <div className="container">
+          <div className="trainers-admin-access reveal">
+            <div>
+              <div className="section-badge">Internal Access</div>
+              <h3>Authorized admin entry</h3>
+              <p>This login is intentionally kept off the public navigation. Use it only for internal website operations.</p>
+            </div>
+            <Link to="/admin" className="btn btn-secondary trainers-admin-link" style={{ textDecoration: 'none' }}>
+              Open Admin Portal <FiArrowRight />
+            </Link>
+          </div>
+        </div>
+      </section>
+
       <section className="cta-section">
         <div className="container reveal">
           <h2 className="cta-title">
             Train with the <span style={{ color: 'var(--color-primary)' }}>right team</span>
           </h2>
-          <p className="cta-subtitle">Register your interest and track team-related leads inside the admin portal.</p>
+          <p className="cta-subtitle">Register your interest and let the team guide you toward the right coaching path.</p>
           <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap' }}>
             <Link to="/plans" className="btn btn-primary btn-lg" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', textDecoration: 'none' }}>
               Find Your Team <FiArrowRight />

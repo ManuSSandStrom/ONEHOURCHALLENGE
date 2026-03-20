@@ -50,7 +50,8 @@ export default function Navbar() {
               className="navbar-logo-img"
             />
             <span className="navbar-logo-text">
-              ONEHOUR <span>CHALLENGE</span>
+              <strong>ONEHOUR</strong>
+              <span>CHALLENGE</span>
             </span>
           </Link>
 
@@ -63,7 +64,6 @@ export default function Navbar() {
             <Link to="/transformations" className={`navbar-link ${isActive('/transformations') ? 'active' : ''}`}>Transformations</Link>
             <Link to="/trainers" className={`navbar-link ${isActive('/trainers') ? 'active' : ''}`}>Trainers</Link>
             <Link to="/contact" className={`navbar-link ${isActive('/contact') ? 'active' : ''}`}>Contact</Link>
-            <Link to="/admin" className={`navbar-link ${isActive('/admin') ? 'active' : ''}`}>Admin</Link>
           </div>
 
           <div className="navbar-actions">
@@ -83,7 +83,7 @@ export default function Navbar() {
                 </SignInButton>
               </>
             )}
-            <Link to="/plans" className="btn btn-sm btn-primary" style={{ textDecoration: 'none' }}>Register</Link>
+            <Link to="/plans" className="btn btn-sm btn-primary" style={{ textDecoration: 'none' }}>Join Now</Link>
             <button className="mobile-menu-btn" onClick={() => setMobileOpen(true)}>
               <FiMenu />
             </button>
@@ -101,7 +101,8 @@ export default function Navbar() {
                 className="navbar-logo-img"
               />
               <span className="navbar-logo-text">
-                ONEHOUR <span>CHALLENGE</span>
+                <strong>ONEHOUR</strong>
+                <span>CHALLENGE</span>
               </span>
             </div>
             <button className="mobile-nav-close" onClick={() => setMobileOpen(false)}>
@@ -118,7 +119,6 @@ export default function Navbar() {
             <Link to="/transformations" className={`mobile-nav-link ${isActive('/transformations') ? 'active' : ''}`}>Transformations</Link>
             <Link to="/trainers" className={`mobile-nav-link ${isActive('/trainers') ? 'active' : ''}`}>Trainers</Link>
             <Link to="/contact" className={`mobile-nav-link ${isActive('/contact') ? 'active' : ''}`}>Contact</Link>
-            <Link to="/admin" className={`mobile-nav-link ${isActive('/admin') ? 'active' : ''}`}>Admin</Link>
             {isSignedIn ? (
               <Link to="/dashboard" className="mobile-nav-link mobile-nav-accent">Dashboard</Link>
             ) : (
@@ -127,7 +127,7 @@ export default function Navbar() {
               </SignInButton>
             )}
             <Link to="/plans" className="btn btn-primary btn-lg mobile-nav-cta" style={{ textDecoration: 'none', textAlign: 'center' }}>
-              Register
+              Join Now
             </Link>
           </div>
         </div>

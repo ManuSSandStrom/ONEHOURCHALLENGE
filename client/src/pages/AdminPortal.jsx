@@ -1,8 +1,7 @@
-﻿import { useCallback, useEffect, useMemo, useState } from 'react';
-import { FiInbox, FiLayers, FiLock, FiLogOut, FiPhoneCall, FiTrash2 } from 'react-icons/fi';
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import { FiArrowRight, FiInbox, FiLayers, FiLock, FiLogOut, FiPhoneCall, FiShield, FiTrash2 } from 'react-icons/fi';
 import toast from 'react-hot-toast';
 import API, { adminSession } from '../utils/api';
-import PageHero from '../components/PageHero';
 
 const statusOptions = ['new', 'contacted', 'closed', 'not-interested'];
 const adminViews = [
@@ -23,6 +22,11 @@ export default function AdminPortal() {
   const [isAuthenticated, setIsAuthenticated] = useState(Boolean(adminSession.getToken()));
   const [loginLoading, setLoginLoading] = useState(false);
   const [credentials, setCredentials] = useState({ username: '', password: '' });
+
+  const todayLabel = useMemo(
+    () => new Intl.DateTimeFormat('en-IN', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }).format(new Date()),
+    [],
+  );
 
   const fetchAdminData = useCallback(async () => {
     if (!isAuthenticated) {
@@ -47,6 +51,8 @@ export default function AdminPortal() {
         adminSession.clear();
         setIsAuthenticated(false);
         toast.error('Admin session expired. Please login again.');
+      } else {
+        toast.error('Unable to load admin data right now.');
       }
     } finally {
       setLoading(false);
@@ -200,31 +206,57 @@ export default function AdminPortal() {
     </div>
   );
 
+  const renderEmptyState = (message) => (
+    <div className="admin-empty-state">
+      <FiShield />
+      <p>{message}</p>
+    </div>
+  );
+
   if (!isAuthenticated) {
     return (
-      <div className="page-wrapper">
-        <PageHero
-          badge="Admin Portal"
-          title="Protected"
-          highlight="admin access"
-          description="Login with the admin credentials to view registrations, plan enquiries, and contact requests."
-        />
-
-        <section className="section section-darker">
-          <div className="container">
-            <div className="admin-login-card reveal">
-              <div className="registration-success-icon" style={{ marginBottom: '16px' }}>
+      <div className="admin-portal-shell">
+        <section className="admin-login-shell">
+          <div className="admin-login-panel">
+            <div className="admin-login-brand">
+              <div className="admin-login-icon">
                 <FiLock />
               </div>
-              <h2>Admin Login</h2>
-              <p>Use the admin credentials configured in the project setup.</p>
-              <form onSubmit={handleLogin} className="registration-form" style={{ marginTop: '20px' }}>
-                <input className="form-input" placeholder="Admin username" value={credentials.username} onChange={(e) => setCredentials((prev) => ({ ...prev, username: e.target.value }))} />
-                <input className="form-input" type="password" placeholder="Admin password" value={credentials.password} onChange={(e) => setCredentials((prev) => ({ ...prev, password: e.target.value }))} />
-                <button type="submit" className="btn btn-primary btn-lg" disabled={loginLoading}>
-                  {loginLoading ? 'Logging in...' : 'Login to Admin Portal'}
-                </button>
-              </form>
+              <span className="admin-login-kicker">Restricted Workspace</span>
+            </div>
+
+            <h1>Admin Portal</h1>
+            <p>Secure access for authorized personnel only. Public navigation is intentionally hidden for this workspace.</p>
+
+            <form onSubmit={handleLogin} className="admin-auth-form">
+              <label className="admin-auth-field">
+                <span>Username</span>
+                <input
+                  className="form-input"
+                  placeholder="Enter admin username"
+                  value={credentials.username}
+                  onChange={(e) => setCredentials((prev) => ({ ...prev, username: e.target.value }))}
+                />
+              </label>
+
+              <label className="admin-auth-field">
+                <span>Password</span>
+                <input
+                  className="form-input"
+                  type="password"
+                  placeholder="Enter admin password"
+                  value={credentials.password}
+                  onChange={(e) => setCredentials((prev) => ({ ...prev, password: e.target.value }))}
+                />
+              </label>
+
+              <button type="submit" className="btn btn-primary btn-lg admin-auth-submit" disabled={loginLoading}>
+                {loginLoading ? 'Signing In...' : <>Sign In Securely <FiArrowRight /></>}
+              </button>
+            </form>
+
+            <div className="admin-login-note">
+              This module is restricted. Unauthorized access is prohibited and monitored.
             </div>
           </div>
         </section>
@@ -233,33 +265,59 @@ export default function AdminPortal() {
   }
 
   return (
-    <div className="page-wrapper">
-      <PageHero
-        badge="Admin Portal"
-        title="Lead management with"
-        highlight="clear sections"
-        description="Track homepage registrations, plan enquiries, and contact form requests in separate views."
-      />
-
-      <section className="section section-darker">
-        <div className="container">
-          <div className="admin-toolbar reveal">
-            <div className="admin-view-tabs">
-              {adminViews.map((view) => (
-                <button key={view.id} className={`admin-view-tab ${activeView === view.id ? 'active' : ''}`} onClick={() => setActiveView(view.id)}>
-                  {view.icon} {view.label}
-                </button>
-              ))}
-            </div>
-            <button className="btn btn-secondary" onClick={handleLogout} style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
-              <FiLogOut /> Logout
-            </button>
+    <div className="admin-portal-shell">
+      <div className="admin-workspace">
+        <aside className="admin-sidebar-panel">
+          <div className="admin-sidebar-brand">
+            <span className="admin-sidebar-kicker">Admin Workspace</span>
+            <h2>OneHour Challenge</h2>
+            <p>Website operations panel</p>
           </div>
 
-          <div className="admin-stats-grid reveal">
-            <div className="admin-stat-card">
+          <div className="admin-sidebar-status">
+            <div className="admin-sidebar-status-icon">
+              <FiShield />
+            </div>
+            <div>
+              <strong>Authenticated session</strong>
+              <span>{todayLabel}</span>
+            </div>
+          </div>
+
+          <div className="admin-view-tabs admin-sidebar-tabs">
+            {adminViews.map((view) => (
+              <button key={view.id} className={`admin-view-tab ${activeView === view.id ? 'active' : ''}`} onClick={() => setActiveView(view.id)}>
+                {view.icon}
+                <span>{view.label}</span>
+              </button>
+            ))}
+          </div>
+
+          <button className="btn btn-secondary admin-signout-btn" onClick={handleLogout}>
+            <FiLogOut /> Sign Out
+          </button>
+        </aside>
+
+        <section className="admin-main-panel">
+          <div className="admin-topbar">
+            <div>
+              <span className="admin-topbar-kicker">Control Overview</span>
+              <h1>Website Operations Panel</h1>
+            </div>
+            <div className="admin-topbar-date">
+              <span>Today</span>
+              <strong>{todayLabel}</strong>
+            </div>
+          </div>
+
+          <div className="admin-stats-grid">
+            <div className="admin-stat-card admin-stat-card-primary">
               <span>Total Lead Records</span>
-              <strong>{stats?.totalLeads ?? 0}</strong>
+              <strong>{stats?.totalLeads ?? leads.length}</strong>
+            </div>
+            <div className="admin-stat-card">
+              <span>Registration Leads</span>
+              <strong>{registrations.length}</strong>
             </div>
             <div className="admin-stat-card">
               <span>Plan Enquiries</span>
@@ -269,76 +327,102 @@ export default function AdminPortal() {
               <span>Contact Requests</span>
               <strong>{stats?.totalContacts ?? contacts.length}</strong>
             </div>
-            <div className="admin-stat-card">
-              <span>Total Stored Enquiries</span>
-              <strong>{stats?.totalStoredEnquiries ?? (leads.length + contacts.length)}</strong>
-            </div>
           </div>
 
           {activeView === 'overview' ? (
             <>
-              <div className="admin-summary-grid reveal">
-                <div className="admin-summary-card">
-                  <h3>Leads by Page</h3>
-                  <div className="admin-chip-grid">
-                    {stats?.leadsByPage?.map((item) => (
-                      <div key={item._id} className="admin-chip">
-                        <span>{item._id}</span>
-                        <strong>{item.count}</strong>
-                      </div>
-                    ))}
-                  </div>
+              <div className="admin-summary-grid">
+                <div className="admin-summary-card admin-summary-card-primary">
+                  <h3>Dashboard Overview</h3>
+                  <p className="section-subtitle" style={{ maxWidth: 'none' }}>
+                    Monitor registrations, plan enquiries, and contact follow-ups from one organized workspace.
+                  </p>
+                  <strong className="admin-overview-count">
+                    {stats?.totalStoredEnquiries ?? (leads.length + contacts.length)}
+                  </strong>
                 </div>
+
                 <div className="admin-summary-card">
-                  <h3>Leads by Interest</h3>
-                  <div className="admin-chip-grid">
-                    {stats?.leadsByInterest?.map((item) => (
-                      <div key={item._id} className="admin-chip">
-                        <span>{item._id}</span>
-                        <strong>{item.count}</strong>
-                      </div>
-                    ))}
+                  <h3>At a Glance</h3>
+                  <div className="admin-quick-metrics">
+                    <div className="admin-quick-metric">
+                      <span>Total content flow</span>
+                      <strong>{stats?.totalStoredEnquiries ?? (leads.length + contacts.length)}</strong>
+                    </div>
+                    <div className="admin-quick-metric">
+                      <span>Pending follow-up pool</span>
+                      <strong>{[...leads, ...contacts].filter((item) => item.status === 'new').length}</strong>
+                    </div>
                   </div>
                 </div>
               </div>
 
-              <div className="admin-summary-grid reveal">
+              <div className="admin-summary-grid">
                 <div className="admin-summary-card">
-                  <h3>Registration Leads</h3>
-                  <p className="section-subtitle" style={{ maxWidth: 'none' }}>Homepage and page-level registrations collected across the website.</p>
-                  <strong className="admin-overview-count">{registrations.length}</strong>
+                  <h3>Leads by Page</h3>
+                  <div className="admin-chip-grid">
+                    {stats?.leadsByPage?.length
+                      ? stats.leadsByPage.map((item) => (
+                        <div key={item._id} className="admin-chip">
+                          <span>{item._id}</span>
+                          <strong>{item.count}</strong>
+                        </div>
+                      ))
+                      : renderEmptyState('No page-level lead data yet.')}
+                  </div>
                 </div>
+
                 <div className="admin-summary-card">
-                  <h3>Contact Form Requests</h3>
-                  <p className="section-subtitle" style={{ maxWidth: 'none' }}>Direct messages submitted from the contact page.</p>
-                  <strong className="admin-overview-count">{contacts.length}</strong>
+                  <h3>Leads by Interest</h3>
+                  <div className="admin-chip-grid">
+                    {stats?.leadsByInterest?.length
+                      ? stats.leadsByInterest.map((item) => (
+                        <div key={item._id} className="admin-chip">
+                          <span>{item._id}</span>
+                          <strong>{item.count}</strong>
+                        </div>
+                      ))
+                      : renderEmptyState('No interest categories available yet.')}
+                  </div>
                 </div>
               </div>
             </>
           ) : null}
 
           {activeView === 'registrations' ? (
-            <div className="admin-summary-card admin-lead-section reveal">
+            <div className="admin-summary-card admin-lead-section">
               <h3>Registration Leads</h3>
-              {loading ? <p className="section-subtitle" style={{ maxWidth: 'none' }}>Loading registrations...</p> : <div className="admin-lead-list">{registrations.map(renderLeadCard)}{registrations.length === 0 ? <p className="section-subtitle" style={{ maxWidth: 'none' }}>No registration leads found.</p> : null}</div>}
+              {loading
+                ? <p className="section-subtitle" style={{ maxWidth: 'none' }}>Syncing registrations...</p>
+                : registrations.length
+                  ? <div className="admin-lead-list">{registrations.map(renderLeadCard)}</div>
+                  : renderEmptyState('No registration leads found.')}
             </div>
           ) : null}
 
           {activeView === 'plans' ? (
-            <div className="admin-summary-card admin-lead-section reveal">
+            <div className="admin-summary-card admin-lead-section">
               <h3>Plan Enquiries</h3>
-              {loading ? <p className="section-subtitle" style={{ maxWidth: 'none' }}>Loading plan enquiries...</p> : <div className="admin-lead-list">{planEnquiries.map(renderLeadCard)}{planEnquiries.length === 0 ? <p className="section-subtitle" style={{ maxWidth: 'none' }}>No plan enquiries found.</p> : null}</div>}
+              {loading
+                ? <p className="section-subtitle" style={{ maxWidth: 'none' }}>Syncing plan enquiries...</p>
+                : planEnquiries.length
+                  ? <div className="admin-lead-list">{planEnquiries.map(renderLeadCard)}</div>
+                  : renderEmptyState('No plan enquiries found.')}
             </div>
           ) : null}
 
           {activeView === 'contacts' ? (
-            <div className="admin-summary-card admin-lead-section reveal">
+            <div className="admin-summary-card admin-lead-section">
               <h3>Contact Requests</h3>
-              {loading ? <p className="section-subtitle" style={{ maxWidth: 'none' }}>Loading contact requests...</p> : <div className="admin-lead-list">{contacts.map(renderContactCard)}{contacts.length === 0 ? <p className="section-subtitle" style={{ maxWidth: 'none' }}>No contact requests found.</p> : null}</div>}
+              {loading
+                ? <p className="section-subtitle" style={{ maxWidth: 'none' }}>Syncing contact requests...</p>
+                : contacts.length
+                  ? <div className="admin-lead-list">{contacts.map(renderContactCard)}</div>
+                  : renderEmptyState('No contact requests found.')}
             </div>
           ) : null}
-        </div>
-      </section>
+        </section>
+      </div>
     </div>
   );
 }

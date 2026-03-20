@@ -1,4 +1,4 @@
-﻿import { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FiCheckCircle, FiX } from 'react-icons/fi';
 import { useUser } from '@clerk/clerk-react';
 import toast from 'react-hot-toast';

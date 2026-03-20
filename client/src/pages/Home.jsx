@@ -7,32 +7,32 @@ import { getWhatsAppFreeSessionUrl } from '../utils/constants';
 const pageLinks = [
   {
     title: 'Programs',
-    description: 'See full training formats for yoga, fitness, zumba, HIIT, and functional coaching.',
+    description: 'Browse structured coaching tracks for yoga, strength, cardio, and lifestyle fitness.',
     to: '/programs',
   },
   {
     title: 'How It Works',
-    description: 'Understand session structure, training rhythm, and how the coaching model works.',
+    description: 'See how onboarding, scheduling, coaching support, and follow-up are handled.',
     to: '/how-it-works',
   },
   {
     title: 'Plans',
-    description: 'Compare PRO and ADVANCE plans and submit a clear registration enquiry.',
+    description: 'Compare plans clearly and choose the right level before you register.',
     to: '/plans',
   },
   {
     title: 'Transformations',
-    description: 'Review real member results and progress stories.',
+    description: 'Explore progress-focused stories and the kind of outcomes members work toward.',
     to: '/transformations',
   },
   {
     title: 'Trainers',
-    description: 'Meet the coaching team and understand the support system behind the program.',
+    description: 'Meet the coaching team and understand the support system behind your program.',
     to: '/trainers',
   },
   {
     title: 'Contact',
-    description: 'Send a direct message that goes to the admin portal for follow-up.',
+    description: 'Send a direct message and get a follow-up from the team without any confusion.',
     to: '/contact',
   },
 ];
@@ -40,18 +40,18 @@ const pageLinks = [
 const quickPoints = [
   {
     icon: <FiLayers />,
-    title: 'Minimal Home',
-    description: 'The home page now acts as a clean starting point instead of carrying every detail.',
+    title: 'Sharper Navigation',
+    description: 'A focused top-level experience that directs visitors to the right page quickly.',
   },
   {
     icon: <FiUsers />,
-    title: 'Separate Pages',
-    description: 'Every page in the menu has its own dedicated information and registration context.',
+    title: 'Dedicated Pages',
+    description: 'Programs, plans, trainers, and contact now each have their own clear space.',
   },
   {
     icon: <FiShield />,
-    title: 'Direct Follow-Up',
-    description: 'Registrations and contact requests go into the admin portal for professional follow-up.',
+    title: 'Professional Follow-Up',
+    description: 'Registrations and enquiries flow into an organized admin workspace for follow-up.',
   },
 ];
 
@@ -72,17 +72,17 @@ export default function Home() {
 
         <div className="hero-center-wrap">
           <div className="hero-top-label">
-            <span className="hero-top-label-text">ONLINE FITNESS PLATFORM</span>
-            <span className="hero-top-label-tag">Structured Coaching</span>
+            <span className="hero-top-label-text">ONLINE FITNESS COACHING</span>
+            <span className="hero-top-label-tag">Professional Experience</span>
           </div>
 
           <h1 className="hero-title">
-            Train with
+            Stronger coaching.
             <br />
-            <span>clarity.</span>
+            <span>Clearer journey.</span>
           </h1>
           <p className="hero-description">
-            A cleaner fitness website with separate pages for programs, plans, transformations, trainers, and contact.
+            A cleaner OneHour Challenge experience with a bright premium interface, clearer page structure, and faster access to the sections that matter.
           </p>
 
           <div className="hero-pills">
@@ -99,7 +99,7 @@ export default function Home() {
               className="hero-pill hero-pill-accent"
               context={{ sourcePage: 'Home', interestType: 'general', interestLabel: 'Homepage Registration' }}
             >
-              REGISTER NOW <FiArrowUpRight />
+              Register Now <FiArrowUpRight />
             </LeadCaptureButton>
           </div>
         </div>
@@ -107,18 +107,18 @@ export default function Home() {
         <div className="hero-stats-bar">
           <div className="hero-stats-inner">
             <div className="hero-stat-item">
-              <div className="hero-stat-number">500<span>+</span></div>
-              <div className="hero-stat-label">Active Members</div>
+              <div className="hero-stat-number">01</div>
+              <div className="hero-stat-label">Clear Navigation Flow</div>
             </div>
             <div className="hero-stat-divider"></div>
             <div className="hero-stat-item">
-              <div className="hero-stat-number">15<span>+</span></div>
-              <div className="hero-stat-label">Certified Trainers</div>
+              <div className="hero-stat-number">02</div>
+              <div className="hero-stat-label">Professional Page Structure</div>
             </div>
             <div className="hero-stat-divider"></div>
             <div className="hero-stat-item">
-              <div className="hero-stat-number">4.8<span>+</span></div>
-              <div className="hero-stat-label">Member Rating</div>
+              <div className="hero-stat-number">03</div>
+              <div className="hero-stat-label">Direct Registration Journey</div>
             </div>
           </div>
         </div>
@@ -128,8 +128,8 @@ export default function Home() {
         <div className="container">
           <div className="section-header reveal">
             <div className="section-badge">Quick Overview</div>
-            <h2 className="section-title">A cleaner website with <span>proper page structure</span></h2>
-            <p className="section-subtitle">Use the menu to explore full details inside each page instead of scrolling through everything on the homepage.</p>
+            <h2 className="section-title">A refined website with <span>better structure</span></h2>
+            <p className="section-subtitle">The homepage now introduces the brand cleanly while the inner pages carry the full experience in a more professional way.</p>
           </div>
 
           <div className="programs-detail-grid reveal" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))' }}>
@@ -150,7 +150,7 @@ export default function Home() {
         <div className="container">
           <div className="section-header reveal">
             <div className="section-badge">Explore Pages</div>
-            <h2 className="section-title">Find the right <span>page fast</span></h2>
+            <h2 className="section-title">Find the right <span>section fast</span></h2>
           </div>
 
           <div className="programs-detail-grid reveal" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))' }}>
@@ -171,7 +171,7 @@ export default function Home() {
         <div className="container">
           <div className="section-header reveal">
             <div className="section-badge">Free Trial Sessions</div>
-            <h2 className="section-title">Book a <span>trial first</span></h2>
+            <h2 className="section-title">Start with a <span>trial session</span></h2>
           </div>
 
           <div className="free-sessions-grid reveal">
@@ -204,11 +204,11 @@ export default function Home() {
         <div className="container reveal">
           <div className="section-badge">Get Started</div>
           <h2 className="cta-title">
-            Register once.
+            Ready to begin?
             <br />
-            <span style={{ color: 'var(--color-primary)' }}>We contact you.</span>
+            <span style={{ color: 'var(--color-primary)' }}>We take it forward.</span>
           </h2>
-          <p className="cta-subtitle">Use the detailed menu pages for full information, then submit your registration when you are ready.</p>
+          <p className="cta-subtitle">Explore the full site, choose the program or plan that fits you, and send your registration when you are ready.</p>
           <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap' }}>
             <LeadCaptureButton
               className="btn btn-primary btn-lg"
