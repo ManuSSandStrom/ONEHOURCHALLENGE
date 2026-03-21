@@ -22,6 +22,17 @@ export const getDashboardStats = async (req, res) => {
       ]),
     ]);
 
+    const [leadsByPage, leadsByInterest] = await Promise.all([
+      Lead.aggregate([
+        { $group: { _id: '$sourcePage', count: { $sum: 1 } } },
+        { $sort: { count: -1, _id: 1 } }
+      ]),
+      Lead.aggregate([
+        { $group: { _id: '$interestLabel', count: { $sum: 1 } } },
+        { $sort: { count: -1, _id: 1 } }
+      ]),
+    ]);
+
     res.json({
       totalBookings,
       totalLeads,

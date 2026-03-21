@@ -343,6 +343,14 @@ export default function Home() {
               </div>
             ))}
           </div>
+
+          <div style={{ textAlign: 'center', marginTop: '28px' }}>
+            <LeadCaptureButton
+              className="btn btn-primary btn-lg"
+              context={{ sourcePage: 'Home', interestType: 'team', interestLabel: 'Dedicated Team Registration' }}
+              label="Register for Coaching"
+            />
+          </div>
         </div>
       </section>
 
