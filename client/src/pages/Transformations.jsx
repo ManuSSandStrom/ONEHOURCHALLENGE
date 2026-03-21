@@ -1,39 +1,37 @@
-import { PLACEHOLDERS, getWhatsAppUrl } from '../utils/constants';
-import { FaWhatsapp } from 'react-icons/fa';
+import { PLACEHOLDERS } from '../utils/constants';
+import PageHero from '../components/PageHero';
+import LeadCaptureButton from '../components/LeadCaptureButton';
 
 const transformations = [
-  { image: PLACEHOLDERS.transformationImages[0], quote: 'Lost 12 kgs in 4 months. The structured approach and consistency made all the difference. OneHour Challenge changed my life!', name: 'Navami P' },
-  { image: PLACEHOLDERS.transformationImages[1], quote: 'From barely running 1 km to completing a 10K. The progressive programming is what sets this apart from other programs.', name: 'Meera Iyer' },
-  { image: PLACEHOLDERS.transformationImages[2], quote: 'Gained 5 kgs of lean muscle in 6 months. The trainers know exactly how to push you while keeping it safe.', name: 'Karthik Nair' },
-  { image: PLACEHOLDERS.transformationImages[3], quote: 'My flexibility improved dramatically with yoga sessions. I feel 10 years younger!', name: 'Deepa Sharma' },
-  { image: PLACEHOLDERS.transformationImages[4], quote: 'The Zumba sessions are addictive! Lost weight without even realizing it because I was having so much fun.', name: 'Ravi Kumar' },
-  { image: PLACEHOLDERS.transformationImages[5], quote: 'As a working mom, the online format is perfect. No commute, just results. Down 2 dress sizes in 3 months!', name: 'Anjali Reddy' },
+  { image: PLACEHOLDERS.transformationImages[0], quote: 'Lost 12 kgs in 4 months. The structure and consistency made the difference.', name: 'Navami P' },
+  { image: PLACEHOLDERS.transformationImages[1], quote: 'From barely running 1 km to completing a 10K. The progression was easy to trust.', name: 'Meera Iyer' },
+  { image: PLACEHOLDERS.transformationImages[2], quote: 'Lean muscle gain felt realistic because the coaching stayed clear and practical.', name: 'Karthik Nair' },
+  { image: PLACEHOLDERS.transformationImages[3], quote: 'Yoga improved my flexibility and energy more than I expected.', name: 'Deepa Sharma' },
+  { image: PLACEHOLDERS.transformationImages[4], quote: 'The zumba sessions kept me consistent because they were genuinely enjoyable.', name: 'Ravi Kumar' },
+  { image: PLACEHOLDERS.transformationImages[5], quote: 'The online format fit my schedule perfectly and still delivered results.', name: 'Anjali Reddy' },
 ];
 
 export default function Transformations() {
   return (
     <div className="page-wrapper">
-      <section className="section section-darker" style={{ flex: 1 }}>
-        <div className="container">
-          <div className="section-header reveal">
-            <div className="section-badge">Real Results</div>
-            <h1 className="section-title" style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)' }}>
-              Real <span>Transformations</span>
-            </h1>
-            <p className="section-subtitle">
-              Our members don't just lose weight — they transform their lives. Here are their inspiring stories.
-            </p>
-          </div>
+      <PageHero
+        badge="Real Results"
+        title="Transformation stories that feel"
+        highlight="credible"
+        description="Real member wins built on routine, guidance, and training that fits everyday life."
+      />
 
+      <section className="section section-darker">
+        <div className="container">
           <div className="transformations-grid">
-            {transformations.map((t, i) => (
-              <div className="transformation-card reveal" key={i}>
+            {transformations.map((item) => (
+              <div className="transformation-card reveal" key={item.name}>
                 <div className="transformation-image">
-                  <img src={t.image} alt={`${t.name} transformation`} loading="lazy" />
+                  <img src={item.image} alt={`${item.name} transformation`} loading="lazy" />
                 </div>
                 <div className="transformation-content">
-                  <p className="transformation-quote">"{t.quote}"</p>
-                  <p className="transformation-name">{t.name}</p>
+                  <p className="transformation-quote">"{item.quote}"</p>
+                  <p className="transformation-name">{item.name}</p>
                 </div>
               </div>
             ))}
@@ -41,20 +39,18 @@ export default function Transformations() {
         </div>
       </section>
 
-      {/* CTA */}
       <section className="cta-section">
         <div className="container reveal">
           <h2 className="cta-title">
-            Your Transformation is <span style={{ color: 'var(--color-primary)' }}>Next</span>
+            Your transformation is <span style={{ color: 'var(--color-primary)' }}>next</span>
           </h2>
-          <p className="cta-subtitle">Join the community that's changing lives, one hour at a time.</p>
-          <button 
-            className="btn btn-primary btn-lg" 
-            onClick={() => window.open(getWhatsAppUrl('I am inspired by the transformations! I want to start my own transformation journey.'), '_blank')}
+          <p className="cta-subtitle">Turn inspiration into a real lead with a clean registration flow.</p>
+          <LeadCaptureButton
+            className="btn btn-primary btn-lg"
             style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}
-          >
-            Start Your Journey <FaWhatsapp />
-          </button>
+            context={{ sourcePage: 'Transformations', interestType: 'general', interestLabel: 'Transformation Inspired Lead' }}
+            label="Start Your Journey"
+          />
         </div>
       </section>
     </div>

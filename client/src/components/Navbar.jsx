@@ -58,6 +58,7 @@ export default function Navbar() {
             <Link to="/transformations" className={`navbar-link ${isActive('/transformations') ? 'active' : ''}`}>Transformations</Link>
             <Link to="/trainers" className={`navbar-link ${isActive('/trainers') ? 'active' : ''}`}>Trainers</Link>
             <Link to="/contact" className={`navbar-link ${isActive('/contact') ? 'active' : ''}`}>Contact</Link>
+            <Link to="/admin" className={`navbar-link ${isActive('/admin') ? 'active' : ''}`}>Admin</Link>
           </div>
 
           <div className="navbar-actions">
@@ -112,6 +113,7 @@ export default function Navbar() {
           <Link to="/transformations" className={`mobile-nav-link ${isActive('/transformations') ? 'active' : ''}`}>Transformations</Link>
           <Link to="/trainers" className={`mobile-nav-link ${isActive('/trainers') ? 'active' : ''}`}>Trainers</Link>
           <Link to="/contact" className={`mobile-nav-link ${isActive('/contact') ? 'active' : ''}`}>Contact</Link>
+          <Link to="/admin" className={`mobile-nav-link ${isActive('/admin') ? 'active' : ''}`}>Admin</Link>
           {isSignedIn ? (
             <Link to="/dashboard" className="mobile-nav-link" style={{ color: 'var(--color-primary)' }}>Dashboard</Link>
           ) : (

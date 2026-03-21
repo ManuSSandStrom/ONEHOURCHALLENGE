@@ -18,25 +18,28 @@ export const getDashboardStats = async (req, res) => {
       { $group: { _id: null, total: { $sum: '$amount' } } }
     ]);
 
+    const [leadsByPage, leadsByInterest] = await Promise.all([
+      Lead.aggregate([
+        { $group: { _id: '$sourcePage', count: { $sum: 1 } } },
+        { $sort: { count: -1, _id: 1 } }
+      ]),
+      Lead.aggregate([
+        { $group: { _id: '$interestLabel', count: { $sum: 1 } } },
+        { $sort: { count: -1, _id: 1 } }
+      ]),
+    ]);
+
     res.json({
       totalBookings,
       totalPayments,
       totalLeads,
       totalContacts,
       totalRevenue: revenue[0]?.total || 0,
+      leadsByPage,
+      leadsByInterest,
     });
   } catch (error) {
     res.status(500).json({ error: 'Failed to fetch stats' });
-  }
-};
-
-// Get all leads
-export const getLeads = async (req, res) => {
-  try {
-    const leads = await Lead.find().sort({ createdAt: -1 });
-    res.json(leads);
-  } catch (error) {
-    res.status(500).json({ error: 'Failed to fetch leads' });
   }
 };
 
