@@ -33,3 +33,46 @@ export const submitContact = async (req, res) => {
     res.status(500).json({ error: 'Failed to send message' });
   }
 };
+
+export const getAllContacts = async (req, res) => {
+  try {
+    const contacts = await Contact.find().sort({ createdAt: -1 });
+    res.json(contacts);
+  } catch (error) {
+    console.error('Get contacts error:', error);
+    res.status(500).json({ error: 'Failed to fetch contacts' });
+  }
+};
+
+export const updateContactStatus = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { status } = req.body;
+
+    const contact = await Contact.findByIdAndUpdate(id, { status }, { new: true });
+    if (!contact) {
+      return res.status(404).json({ error: 'Contact not found' });
+    }
+
+    res.json({ success: true, contact });
+  } catch (error) {
+    console.error('Update contact status error:', error);
+    res.status(500).json({ error: 'Failed to update contact status' });
+  }
+};
+
+export const deleteContact = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const contact = await Contact.findByIdAndDelete(id);
+
+    if (!contact) {
+      return res.status(404).json({ error: 'Contact not found' });
+    }
+
+    res.json({ success: true });
+  } catch (error) {
+    console.error('Delete contact error:', error);
+    res.status(500).json({ error: 'Failed to delete contact' });
+  }
+};

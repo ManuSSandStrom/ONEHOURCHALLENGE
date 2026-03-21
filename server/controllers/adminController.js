@@ -1,4 +1,4 @@
-import Booking from '../models/Booking.js';
+﻿import Booking from '../models/Booking.js';
 import Lead from '../models/Lead.js';
 import Contact from '../models/Contact.js';
 
@@ -11,7 +11,7 @@ export const getDashboardStats = async (req, res) => {
       Contact.countDocuments(),
     ]);
 
-    const [leadsByPage, leadsByInterest] = await Promise.all([
+    const [leadsByPage, leadsByInterest, leadsBySource, planEnquiries] = await Promise.all([
       Lead.aggregate([
         { $group: { _id: '$sourcePage', count: { $sum: 1 } } },
         { $sort: { count: -1, _id: 1 } }
@@ -20,25 +20,22 @@ export const getDashboardStats = async (req, res) => {
         { $group: { _id: '$interestLabel', count: { $sum: 1 } } },
         { $sort: { count: -1, _id: 1 } }
       ]),
-    ]);
-
-    const [leadsByPage, leadsByInterest] = await Promise.all([
       Lead.aggregate([
-        { $group: { _id: '$sourcePage', count: { $sum: 1 } } },
+        { $group: { _id: '$source', count: { $sum: 1 } } },
         { $sort: { count: -1, _id: 1 } }
       ]),
-      Lead.aggregate([
-        { $group: { _id: '$interestLabel', count: { $sum: 1 } } },
-        { $sort: { count: -1, _id: 1 } }
-      ]),
+      Lead.countDocuments({ $or: [{ interestType: 'plan' }, { planType: { $ne: null } }] }),
     ]);
 
     res.json({
       totalBookings,
       totalLeads,
       totalContacts,
+      totalStoredEnquiries: totalLeads + totalContacts,
+      planEnquiries,
       leadsByPage,
       leadsByInterest,
+      leadsBySource,
     });
   } catch (error) {
     res.status(500).json({ error: 'Failed to fetch stats' });

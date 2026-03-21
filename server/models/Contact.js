@@ -5,7 +5,7 @@ const contactSchema = new mongoose.Schema({
   email: { type: String, required: true },
   mobile: { type: String, required: true },
   message: { type: String, required: true },
-  status: { type: String, enum: ['new', 'read', 'replied'], default: 'new' },
+  status: { type: String, enum: ['new', 'contacted', 'closed', 'not-interested'], default: 'new' },
 }, { timestamps: true });
 
 export default mongoose.model('Contact', contactSchema);

@@ -1,77 +1,67 @@
-import {
-  FiUsers,
-  FiAward,
-  FiTarget,
-  FiArrowRight,
-  FiArrowUpRight,
-  FiPlay,
-  FiHeart,
-  FiZap,
-  FiCalendar,
-  FiUser,
-  FiBriefcase,
-  FiTrendingUp,
-  FiCheckCircle,
-} from 'react-icons/fi';
+import { FiArrowRight, FiArrowUpRight, FiCalendar, FiCheckCircle, FiLayers, FiShield, FiUsers } from 'react-icons/fi';
 import { FaWhatsapp } from 'react-icons/fa';
-import { getWhatsAppFreeSessionUrl } from '../utils/constants';
 import { Link } from 'react-router-dom';
 import LeadCaptureButton from '../components/LeadCaptureButton';
+import { getWhatsAppFreeSessionUrl } from '../utils/constants';
 
-const FREE_SESSIONS = [
-  { type: 'Yoga', date: 'Wellness and Flow', desc: 'Flexibility, mindfulness, and stress relief.' },
-  { type: 'Fitness', date: 'Power Hour', desc: 'Muscle toning, stamina, and core work.' },
-  { type: 'Zumba', date: 'Rhythm and Sweat', desc: 'High-energy cardio dance training.' },
+const pageLinks = [
+  {
+    title: 'Programs',
+    description: 'See full training formats for yoga, fitness, zumba, HIIT, and functional coaching.',
+    to: '/programs',
+  },
+  {
+    title: 'How It Works',
+    description: 'Understand session structure, training rhythm, and how the coaching model works.',
+    to: '/how-it-works',
+  },
+  {
+    title: 'Plans',
+    description: 'Compare PRO and ADVANCE plans and submit a clear registration enquiry.',
+    to: '/plans',
+  },
+  {
+    title: 'Transformations',
+    description: 'Review real member results and progress stories.',
+    to: '/transformations',
+  },
+  {
+    title: 'Trainers',
+    description: 'Meet the coaching team and understand the support system behind the program.',
+    to: '/trainers',
+  },
+  {
+    title: 'Contact',
+    description: 'Send a direct message that goes to the admin portal for follow-up.',
+    to: '/contact',
+  },
 ];
 
-const PROGRAMS = [
+const quickPoints = [
   {
-    title: 'Yoga',
-    image: 'https://res.cloudinary.com/dt37ji5yp/image/upload/v1771512244/yoga_part4_mnslxd.png',
-    desc: 'Mobility, flexibility, breath, and calm structure.',
+    icon: <FiLayers />,
+    title: 'Minimal Home',
+    description: 'The home page now acts as a clean starting point instead of carrying every detail.',
   },
   {
-    title: 'Zumba',
-    image: 'https://res.cloudinary.com/dt37ji5yp/image/upload/v1771512247/Zomba_Training_kws7pi.png',
-    desc: 'High-energy guided cardio for consistency and fun.',
+    icon: <FiUsers />,
+    title: 'Separate Pages',
+    description: 'Every page in the menu has its own dedicated information and registration context.',
   },
   {
-    title: 'Functional Training',
-    image: 'https://res.cloudinary.com/dt37ji5yp/image/upload/v1771512241/ST_2_xhbjg9.png',
-    desc: 'Strength and conditioning that supports daily life.',
+    icon: <FiShield />,
+    title: 'Direct Follow-Up',
+    description: 'Registrations and contact requests go into the admin portal for professional follow-up.',
   },
 ];
 
-const SUCCESS_IMAGES = [
-  'https://res.cloudinary.com/dt37ji5yp/image/upload/v1771512752/S6_qhxtvk.png',
-  'https://res.cloudinary.com/dt37ji5yp/image/upload/v1771512751/S4_lfr57x.png',
-  'https://res.cloudinary.com/dt37ji5yp/image/upload/v1771512748/S2_oxkfxm.png',
-];
-
-const TEAM_PILLARS = [
-  {
-    icon: <FiAward size={40} style={{ color: 'var(--color-primary)' }} />,
-    title: 'Certified Coaches',
-    desc: 'Programs guided by experienced trainers with structured delivery.',
-  },
-  {
-    icon: <FiBriefcase size={40} style={{ color: 'var(--color-primary)' }} />,
-    title: 'Busy-Life Friendly',
-    desc: 'Built for working professionals who need clarity and consistency.',
-  },
-  {
-    icon: <FiTrendingUp size={40} style={{ color: 'var(--color-primary)' }} />,
-    title: 'Measured Progress',
-    desc: 'Registration-led onboarding helps the team guide each lead properly.',
-  },
+const freeSessions = [
+  { type: 'Yoga', label: 'Wellness and Flow' },
+  { type: 'Fitness', label: 'Power Hour' },
+  { type: 'Zumba', label: 'Rhythm and Sweat' },
 ];
 
 export default function Home() {
-  const scrollToSection = (id) => {
-    const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
-  };
-
   return (
     <>
       <section className="hero" id="hero">
@@ -83,7 +73,7 @@ export default function Home() {
         <div className="hero-center-wrap">
           <div className="hero-top-label">
             <span className="hero-top-label-text">ONLINE FITNESS PLATFORM</span>
-            <span className="hero-top-label-tag"><FiPlay size={10} /> Live Sessions</span>
+            <span className="hero-top-label-tag">Structured Coaching</span>
           </div>
 
           <h1 className="hero-title">
@@ -92,22 +82,22 @@ export default function Home() {
             <span>clarity.</span>
           </h1>
           <p className="hero-description">
-            Structured online coaching for people who want a clean routine, clear support, and sustainable progress.
+            A cleaner fitness website with separate pages for programs, plans, transformations, trainers, and contact.
           </p>
 
           <div className="hero-pills">
-            <button className="hero-pill" onClick={() => scrollToSection('programs')}>
+            <Link to="/programs" className="hero-pill">
               PROGRAMS <FiArrowUpRight />
-            </button>
-            <button className="hero-pill" onClick={() => scrollToSection('plans')}>
+            </Link>
+            <Link to="/plans" className="hero-pill">
               PLANS <FiArrowUpRight />
-            </button>
-            <button className="hero-pill" onClick={() => scrollToSection('free-sessions')}>
-              FREE TRIALS <FiArrowUpRight />
-            </button>
+            </Link>
+            <Link to="/contact" className="hero-pill">
+              CONTACT <FiArrowUpRight />
+            </Link>
             <LeadCaptureButton
               className="hero-pill hero-pill-accent"
-              context={{ sourcePage: 'Home', interestType: 'general', interestLabel: 'Hero Registration' }}
+              context={{ sourcePage: 'Home', interestType: 'general', interestLabel: 'Homepage Registration' }}
             >
               REGISTER NOW <FiArrowUpRight />
             </LeadCaptureButton>
@@ -134,103 +124,65 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section section-dark" id="about">
-        <div className="container">
-          <div className="about-grid">
-            <div className="about-image-container reveal">
-              <img
-                src="https://res.cloudinary.com/dt37ji5yp/image/upload/v1771512247/Zomba_part3_v3i9y0.png"
-                alt="OneHour Challenge training session"
-                loading="lazy"
-                style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 'var(--radius-lg)' }}
-              />
-            </div>
-
-            <div className="about-content reveal">
-              <div className="section-badge">About Us</div>
-              <h2 className="section-title">
-                Built for <span>discipline</span>.
-                <br />
-                Designed for <span>results</span>.
-              </h2>
-              <p className="about-text">
-                OneHour Challenge is now focused on clean registrations and direct human follow-up. No payment clutter,
-                no confusing flow, just clear interest capture and coach-led onboarding.
-              </p>
-
-              <div className="value-cards">
-                <div className="value-card">
-                  <div className="value-card-icon"><FiTarget /></div>
-                  <div>
-                    <div className="value-card-title">Structured Programs</div>
-                    <div className="value-card-desc">Clear formats for yoga, cardio, strength, and mobility.</div>
-                  </div>
-                </div>
-                <div className="value-card">
-                  <div className="value-card-icon"><FiUsers /></div>
-                  <div>
-                    <div className="value-card-title">Personal Follow-Up</div>
-                    <div className="value-card-desc">Leads go to the admin portal so your team can respond properly.</div>
-                  </div>
-                </div>
-                <div className="value-card">
-                  <div className="value-card-icon"><FiAward /></div>
-                  <div>
-                    <div className="value-card-title">Professional Coaching</div>
-                    <div className="value-card-desc">Certified guidance with a cleaner and more modern experience.</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="section section-darker" id="programs">
+      <section className="section section-dark">
         <div className="container">
           <div className="section-header reveal">
-            <div className="section-badge">Programs</div>
-            <h2 className="section-title">Training that fits <span>real life</span></h2>
+            <div className="section-badge">Quick Overview</div>
+            <h2 className="section-title">A cleaner website with <span>proper page structure</span></h2>
+            <p className="section-subtitle">Use the menu to explore full details inside each page instead of scrolling through everything on the homepage.</p>
           </div>
 
-          <div className="programs-detail-grid reveal" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))' }}>
-            {PROGRAMS.map((program) => (
-              <div className="program-detail-card" key={program.title}>
-                <div className="about-image-container" style={{ aspectRatio: '16/11', marginBottom: '20px' }}>
-                  <img src={program.image} alt={program.title} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '16px' }} />
+          <div className="programs-detail-grid reveal" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))' }}>
+            {quickPoints.map((point) => (
+              <div className="program-detail-card" key={point.title}>
+                <div className="expertise-icon-wrapper" style={{ width: '60px', height: '60px', display: 'grid', placeItems: 'center', borderRadius: '18px', background: 'rgba(0, 109, 60, 0.08)', color: 'var(--color-primary)', fontSize: '1.5rem', marginBottom: '18px' }}>
+                  {point.icon}
                 </div>
-                <h3>{program.title}</h3>
-                <p>{program.desc}</p>
-                <LeadCaptureButton
-                  className="btn btn-secondary btn-sm"
-                  style={{ marginTop: '14px' }}
-                  context={{ sourcePage: 'Home', interestType: 'program', interestLabel: program.title }}
-                  label="Register Interest"
-                />
+                <h3>{point.title}</h3>
+                <p>{point.description}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="section section-dark" id="free-sessions">
+      <section className="section section-darker">
+        <div className="container">
+          <div className="section-header reveal">
+            <div className="section-badge">Explore Pages</div>
+            <h2 className="section-title">Find the right <span>page fast</span></h2>
+          </div>
+
+          <div className="programs-detail-grid reveal" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))' }}>
+            {pageLinks.map((item) => (
+              <Link key={item.title} to={item.to} className="program-detail-card" style={{ textDecoration: 'none' }}>
+                <h3 style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px' }}>
+                  {item.title}
+                  <FiArrowRight style={{ color: 'var(--color-primary)' }} />
+                </h3>
+                <p>{item.description}</p>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section section-dark">
         <div className="container">
           <div className="section-header reveal">
             <div className="section-badge">Free Trial Sessions</div>
-            <h2 className="section-title">Try a session before you <span>commit</span></h2>
+            <h2 className="section-title">Book a <span>trial first</span></h2>
           </div>
 
           <div className="free-sessions-grid reveal">
-            {FREE_SESSIONS.map((session, index) => (
-              <div className={`free-session-card ${index === 1 ? 'highlighted' : ''}`} key={session.type}>
+            {freeSessions.map((session) => (
+              <div className="free-session-card" key={session.type}>
                 <span className="free-session-tag">FREE</span>
-                <h4 className="free-session-card-title" style={{ fontSize: '1.2rem', marginBottom: '8px' }}>
-                  {session.type}
-                </h4>
-                <p className="free-session-card-desc" style={{ marginBottom: '16px', color: 'var(--color-gray-500)' }}>{session.desc}</p>
-                <div className="free-session-meta" style={{ marginBottom: '20px' }}>
+                <h4 className="free-session-card-title" style={{ fontSize: '1.18rem', marginBottom: '8px' }}>{session.type}</h4>
+                <p className="free-session-card-desc" style={{ marginBottom: '16px', color: 'var(--color-gray-500)' }}>{session.label}</p>
+                <div className="free-session-meta" style={{ marginBottom: '18px' }}>
                   <span style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--color-gray-600)' }}>
-                    <FiCalendar size={14} style={{ color: 'var(--color-primary)' }} /> {session.date}
+                    <FiCalendar size={14} style={{ color: 'var(--color-primary)' }} /> WhatsApp booking supported
                   </span>
                 </div>
                 <a
@@ -238,19 +190,7 @@ export default function Home() {
                   href={getWhatsAppFreeSessionUrl(session.type)}
                   target="_blank"
                   rel="noreferrer"
-                  style={{
-                    width: '100%',
-                    justifyContent: 'center',
-                    background: 'rgba(0, 109, 60, 0.08)',
-                    padding: '12px',
-                    borderRadius: 'var(--radius-md)',
-                    color: 'var(--color-gray-800)',
-                    border: '1px solid rgba(0, 109, 60, 0.1)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '8px',
-                    cursor: 'pointer',
-                  }}
+                  style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}
                 >
                   <FaWhatsapp /> Register via WhatsApp
                 </a>
@@ -260,101 +200,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section section-darker" id="plans">
-        <div className="container">
-          <div className="section-header reveal">
-            <div className="section-badge">Plans</div>
-            <h2 className="section-title">Choose your <span>training style</span></h2>
-            <p className="section-subtitle">Register your interest and the team will contact you. No payment flow is used on the website.</p>
-          </div>
-
-          <div className="programs-secondary-grid reveal">
-            <div className="program-detail-card horizontal">
-              <div>
-                <h3>PRO Plan</h3>
-                <p>Steady weekly structure with a balanced rhythm for professionals and beginners.</p>
-                <div className="program-tags">
-                  <span className="program-tag">3 days / week</span>
-                  <span className="program-tag">Structured support</span>
-                  <span className="program-tag">Coach callback</span>
-                </div>
-              </div>
-              <LeadCaptureButton
-                className="btn btn-primary"
-                context={{ sourcePage: 'Home', interestType: 'plan', interestLabel: 'PRO Plan', planType: 'PRO' }}
-                label="Register for PRO"
-              />
-            </div>
-
-            <div className="program-detail-card horizontal">
-              <div>
-                <h3>ADVANCE Plan</h3>
-                <p>More frequent weekly sessions for members who want extra accountability and momentum.</p>
-                <div className="program-tags">
-                  <span className="program-tag">5 days / week</span>
-                  <span className="program-tag">Higher touch support</span>
-                  <span className="program-tag">Coach callback</span>
-                </div>
-              </div>
-              <LeadCaptureButton
-                className="btn btn-primary"
-                context={{ sourcePage: 'Home', interestType: 'plan', interestLabel: 'ADVANCE Plan', planType: 'ADVANCE' }}
-                label="Register for ADVANCE"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="section section-dark" id="results">
-        <div className="container">
-          <div className="section-header reveal">
-            <div className="section-badge">Results</div>
-            <h2 className="section-title">Progress that feels <span>real</span></h2>
-          </div>
-
-          <div className="programs-detail-grid reveal" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))' }}>
-            {SUCCESS_IMAGES.map((image, index) => (
-              <div className="program-detail-card" key={image}>
-                <div className="about-image-container" style={{ aspectRatio: '4/5' }}>
-                  <img src={image} alt={`Member result ${index + 1}`} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '16px' }} />
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section section-darker" id="team">
-        <div className="container">
-          <div className="section-header reveal">
-            <div className="section-badge">Coaching Team</div>
-            <h2 className="section-title">Support that stays <span>professional</span></h2>
-          </div>
-
-          <div className="trainers-grid reveal">
-            {TEAM_PILLARS.map((item) => (
-              <div className="trainer-card" key={item.title} style={{ textAlign: 'center', padding: '40px 28px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '20px' }}>
-                <div className="expertise-icon-wrapper" style={{ padding: '20px', background: 'rgba(0, 109, 60, 0.05)', borderRadius: '20px', marginBottom: '10px' }}>
-                  {item.icon}
-                </div>
-                <h4 className="trainer-name" style={{ margin: 0 }}>{item.title}</h4>
-                <p className="trainer-cert" style={{ margin: 0, opacity: 0.8 }}>{item.desc}</p>
-              </div>
-            ))}
-          </div>
-
-          <div style={{ textAlign: 'center', marginTop: '28px' }}>
-            <LeadCaptureButton
-              className="btn btn-primary btn-lg"
-              context={{ sourcePage: 'Home', interestType: 'team', interestLabel: 'Dedicated Team Registration' }}
-              label="Register for Coaching"
-            />
-          </div>
-        </div>
-      </section>
-
-      <section className="cta-section" id="cta">
+      <section className="cta-section">
         <div className="container reveal">
           <div className="section-badge">Get Started</div>
           <h2 className="cta-title">
@@ -362,12 +208,12 @@ export default function Home() {
             <br />
             <span style={{ color: 'var(--color-primary)' }}>We contact you.</span>
           </h2>
-          <p className="cta-subtitle">A simpler and more professional way to turn interest into qualified leads.</p>
+          <p className="cta-subtitle">Use the detailed menu pages for full information, then submit your registration when you are ready.</p>
           <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap' }}>
             <LeadCaptureButton
               className="btn btn-primary btn-lg"
               style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}
-              context={{ sourcePage: 'Home', interestType: 'general', interestLabel: 'Start Registration' }}
+              context={{ sourcePage: 'Home', interestType: 'general', interestLabel: 'Homepage CTA Registration' }}
             >
               Register Now <FiArrowRight />
             </LeadCaptureButton>

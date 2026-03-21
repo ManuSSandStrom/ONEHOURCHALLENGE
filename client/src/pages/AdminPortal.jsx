@@ -1,17 +1,25 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
-import { FiLock, FiLogOut, FiTrash2 } from 'react-icons/fi';
+﻿import { useCallback, useEffect, useMemo, useState } from 'react';
+import { FiInbox, FiLayers, FiLock, FiLogOut, FiPhoneCall, FiTrash2 } from 'react-icons/fi';
 import toast from 'react-hot-toast';
 import API, { adminSession } from '../utils/api';
 import PageHero from '../components/PageHero';
 
 const statusOptions = ['new', 'contacted', 'closed', 'not-interested'];
+const adminViews = [
+  { id: 'overview', label: 'Overview', icon: <FiLayers /> },
+  { id: 'registrations', label: 'Registrations', icon: <FiInbox /> },
+  { id: 'plans', label: 'Plan Enquiries', icon: <FiLayers /> },
+  { id: 'contacts', label: 'Contact Requests', icon: <FiPhoneCall /> },
+];
+
 const formatStatusLabel = (status) => status.replace('-', ' ');
 
 export default function AdminPortal() {
   const [stats, setStats] = useState(null);
   const [leads, setLeads] = useState([]);
-  const [filters, setFilters] = useState({ page: 'all', interestType: 'all', status: 'all' });
+  const [contacts, setContacts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [activeView, setActiveView] = useState('overview');
   const [isAuthenticated, setIsAuthenticated] = useState(Boolean(adminSession.getToken()));
   const [loginLoading, setLoginLoading] = useState(false);
   const [credentials, setCredentials] = useState({ username: '', password: '' });
@@ -24,18 +32,15 @@ export default function AdminPortal() {
 
     try {
       setLoading(true);
-      const params = {};
-      if (filters.page !== 'all') params.page = filters.page;
-      if (filters.interestType !== 'all') params.interestType = filters.interestType;
-      if (filters.status !== 'all') params.status = filters.status;
-
-      const [statsRes, leadsRes] = await Promise.all([
+      const [statsRes, leadsRes, contactsRes] = await Promise.all([
         API.get('/admin/stats'),
-        API.get('/admin/leads', { params }),
+        API.get('/admin/leads'),
+        API.get('/admin/contacts'),
       ]);
 
       setStats(statsRes.data);
       setLeads(leadsRes.data);
+      setContacts(contactsRes.data);
     } catch (error) {
       console.error('Admin portal error:', error);
       if (error.response?.status === 401) {
@@ -46,20 +51,21 @@ export default function AdminPortal() {
     } finally {
       setLoading(false);
     }
-  }, [filters.page, filters.interestType, filters.status, isAuthenticated]);
+  }, [isAuthenticated]);
 
   useEffect(() => {
     fetchAdminData();
   }, [fetchAdminData]);
 
-  const pageOptions = useMemo(() => {
-    if (!stats?.leadsByPage) return [];
-    return stats.leadsByPage.map((item) => item._id).filter(Boolean);
-  }, [stats]);
+  const registrations = useMemo(
+    () => leads.filter((lead) => lead.source !== 'contact-form' && !(lead.interestType === 'plan' || lead.planType)),
+    [leads],
+  );
 
-  const interestOptions = useMemo(() => {
-    return Array.from(new Set(leads.map((lead) => lead.interestType).filter(Boolean)));
-  }, [leads]);
+  const planEnquiries = useMemo(
+    () => leads.filter((lead) => lead.interestType === 'plan' || lead.planType),
+    [leads],
+  );
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -87,6 +93,7 @@ export default function AdminPortal() {
     setIsAuthenticated(false);
     setStats(null);
     setLeads([]);
+    setContacts([]);
     toast.success('Logged out from admin portal');
   };
 
@@ -102,7 +109,7 @@ export default function AdminPortal() {
   };
 
   const deleteLead = async (id) => {
-    const confirmed = window.confirm('Delete this lead from the admin portal?');
+    const confirmed = window.confirm('Delete this enquiry from the admin portal?');
     if (!confirmed) return;
 
     try {
@@ -115,6 +122,84 @@ export default function AdminPortal() {
     }
   };
 
+  const updateContactStatus = async (id, status) => {
+    try {
+      await API.patch(`/admin/contacts/${id}/status`, { status });
+      setContacts((prev) => prev.map((contact) => (contact._id === id ? { ...contact, status } : contact)));
+      toast.success('Contact status updated');
+    } catch (error) {
+      console.error('Update contact status failed:', error);
+      toast.error('Failed to update contact status');
+    }
+  };
+
+  const deleteContact = async (id) => {
+    const confirmed = window.confirm('Delete this contact request from the admin portal?');
+    if (!confirmed) return;
+
+    try {
+      await API.delete(`/admin/contacts/${id}`);
+      setContacts((prev) => prev.filter((contact) => contact._id !== id));
+      toast.success('Contact request deleted');
+    } catch (error) {
+      console.error('Delete contact failed:', error);
+      toast.error('Failed to delete contact request');
+    }
+  };
+
+  const renderLeadCard = (lead) => (
+    <div className="admin-lead-card" key={lead._id}>
+      <div className="admin-lead-head">
+        <div>
+          <h4>{lead.name}</h4>
+          <p>{lead.mobile}{lead.email ? ` | ${lead.email}` : ''}</p>
+        </div>
+        <div className="admin-lead-actions">
+          <select className="form-input admin-status-select" value={lead.status} onChange={(e) => updateLeadStatus(lead._id, e.target.value)}>
+            {statusOptions.map((status) => <option key={status} value={status}>{formatStatusLabel(status)}</option>)}
+          </select>
+          <button className="btn btn-secondary admin-delete-btn" onClick={() => deleteLead(lead._id)}>
+            <FiTrash2 />
+          </button>
+        </div>
+      </div>
+      <div className="admin-lead-meta">
+        <span>{lead.sourcePage}</span>
+        <span>{lead.interestLabel}</span>
+        {lead.planType ? <span>{lead.planType}</span> : null}
+        {lead.duration ? <span>{lead.duration}</span> : null}
+        <span>{lead.gender}, {lead.age}</span>
+      </div>
+      {lead.message ? <p className="admin-lead-note">{lead.message}</p> : null}
+      <p className="admin-lead-date">{new Date(lead.createdAt).toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' })}</p>
+    </div>
+  );
+
+  const renderContactCard = (contact) => (
+    <div className="admin-lead-card" key={contact._id}>
+      <div className="admin-lead-head">
+        <div>
+          <h4>{contact.name}</h4>
+          <p>{contact.mobile} | {contact.email}</p>
+        </div>
+        <div className="admin-lead-actions">
+          <select className="form-input admin-status-select" value={contact.status} onChange={(e) => updateContactStatus(contact._id, e.target.value)}>
+            {statusOptions.map((status) => <option key={status} value={status}>{formatStatusLabel(status)}</option>)}
+          </select>
+          <button className="btn btn-secondary admin-delete-btn" onClick={() => deleteContact(contact._id)}>
+            <FiTrash2 />
+          </button>
+        </div>
+      </div>
+      <div className="admin-lead-meta">
+        <span>Contact Page</span>
+        <span>Direct Message</span>
+      </div>
+      <p className="admin-lead-note">{contact.message}</p>
+      <p className="admin-lead-date">{new Date(contact.createdAt).toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' })}</p>
+    </div>
+  );
+
   if (!isAuthenticated) {
     return (
       <div className="page-wrapper">
@@ -122,7 +207,7 @@ export default function AdminPortal() {
           badge="Admin Portal"
           title="Protected"
           highlight="admin access"
-          description="Login with the admin credentials to view and manage leads."
+          description="Login with the admin credentials to view registrations, plan enquiries, and contact requests."
         />
 
         <section className="section section-darker">
@@ -134,19 +219,8 @@ export default function AdminPortal() {
               <h2>Admin Login</h2>
               <p>Use the admin credentials configured in the project setup.</p>
               <form onSubmit={handleLogin} className="registration-form" style={{ marginTop: '20px' }}>
-                <input
-                  className="form-input"
-                  placeholder="Admin username"
-                  value={credentials.username}
-                  onChange={(e) => setCredentials((prev) => ({ ...prev, username: e.target.value }))}
-                />
-                <input
-                  className="form-input"
-                  type="password"
-                  placeholder="Admin password"
-                  value={credentials.password}
-                  onChange={(e) => setCredentials((prev) => ({ ...prev, password: e.target.value }))}
-                />
+                <input className="form-input" placeholder="Admin username" value={credentials.username} onChange={(e) => setCredentials((prev) => ({ ...prev, username: e.target.value }))} />
+                <input className="form-input" type="password" placeholder="Admin password" value={credentials.password} onChange={(e) => setCredentials((prev) => ({ ...prev, password: e.target.value }))} />
                 <button type="submit" className="btn btn-primary btn-lg" disabled={loginLoading}>
                   {loginLoading ? 'Logging in...' : 'Login to Admin Portal'}
                 </button>
@@ -162,27 +236,20 @@ export default function AdminPortal() {
     <div className="page-wrapper">
       <PageHero
         badge="Admin Portal"
-        title="Lead tracking with"
-        highlight="real control"
-        description="View new registrations, mark them contacted, close them, or remove unneeded leads in one clean dashboard."
+        title="Lead management with"
+        highlight="clear sections"
+        description="Track homepage registrations, plan enquiries, and contact form requests in separate views."
       />
 
       <section className="section section-darker">
         <div className="container">
           <div className="admin-toolbar reveal">
-            <div className="admin-filter-group">
-              <select className="form-input" value={filters.page} onChange={(e) => setFilters((prev) => ({ ...prev, page: e.target.value }))}>
-                <option value="all">All Pages</option>
-                {pageOptions.map((page) => <option key={page} value={page}>{page}</option>)}
-              </select>
-              <select className="form-input" value={filters.interestType} onChange={(e) => setFilters((prev) => ({ ...prev, interestType: e.target.value }))}>
-                <option value="all">All Interest Types</option>
-                {interestOptions.map((interest) => <option key={interest} value={interest}>{interest}</option>)}
-              </select>
-              <select className="form-input" value={filters.status} onChange={(e) => setFilters((prev) => ({ ...prev, status: e.target.value }))}>
-                <option value="all">All Statuses</option>
-                {statusOptions.map((status) => <option key={status} value={status}>{formatStatusLabel(status)}</option>)}
-              </select>
+            <div className="admin-view-tabs">
+              {adminViews.map((view) => (
+                <button key={view.id} className={`admin-view-tab ${activeView === view.id ? 'active' : ''}`} onClick={() => setActiveView(view.id)}>
+                  {view.icon} {view.label}
+                </button>
+              ))}
             </div>
             <button className="btn btn-secondary" onClick={handleLogout} style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
               <FiLogOut /> Logout
@@ -191,88 +258,85 @@ export default function AdminPortal() {
 
           <div className="admin-stats-grid reveal">
             <div className="admin-stat-card">
-              <span>Total Leads</span>
+              <span>Total Lead Records</span>
               <strong>{stats?.totalLeads ?? 0}</strong>
             </div>
             <div className="admin-stat-card">
+              <span>Plan Enquiries</span>
+              <strong>{stats?.planEnquiries ?? planEnquiries.length}</strong>
+            </div>
+            <div className="admin-stat-card">
               <span>Contact Requests</span>
-              <strong>{stats?.totalContacts ?? 0}</strong>
+              <strong>{stats?.totalContacts ?? contacts.length}</strong>
             </div>
             <div className="admin-stat-card">
-              <span>Stored Contacts</span>
-              <strong>{(stats?.totalLeads ?? 0) + (stats?.totalContacts ?? 0)}</strong>
-            </div>
-            <div className="admin-stat-card">
-              <span>Visible Leads</span>
-              <strong>{leads.length}</strong>
+              <span>Total Stored Enquiries</span>
+              <strong>{stats?.totalStoredEnquiries ?? (leads.length + contacts.length)}</strong>
             </div>
           </div>
 
-          <div className="admin-summary-grid reveal">
-            <div className="admin-summary-card">
-              <h3>Leads by Page</h3>
-              <div className="admin-chip-grid">
-                {stats?.leadsByPage?.map((item) => (
-                  <div key={item._id} className="admin-chip">
-                    <span>{item._id}</span>
-                    <strong>{item.count}</strong>
+          {activeView === 'overview' ? (
+            <>
+              <div className="admin-summary-grid reveal">
+                <div className="admin-summary-card">
+                  <h3>Leads by Page</h3>
+                  <div className="admin-chip-grid">
+                    {stats?.leadsByPage?.map((item) => (
+                      <div key={item._id} className="admin-chip">
+                        <span>{item._id}</span>
+                        <strong>{item.count}</strong>
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </div>
-            </div>
-            <div className="admin-summary-card">
-              <h3>Leads by Interest</h3>
-              <div className="admin-chip-grid">
-                {stats?.leadsByInterest?.map((item) => (
-                  <div key={item._id} className="admin-chip">
-                    <span>{item._id}</span>
-                    <strong>{item.count}</strong>
+                </div>
+                <div className="admin-summary-card">
+                  <h3>Leads by Interest</h3>
+                  <div className="admin-chip-grid">
+                    {stats?.leadsByInterest?.map((item) => (
+                      <div key={item._id} className="admin-chip">
+                        <span>{item._id}</span>
+                        <strong>{item.count}</strong>
+                      </div>
+                    ))}
                   </div>
-                ))}
+                </div>
               </div>
-            </div>
-          </div>
 
-          <div className="admin-summary-card admin-lead-section reveal">
-            <h3>Lead Inbox</h3>
-            {loading ? (
-              <p className="section-subtitle" style={{ maxWidth: 'none' }}>Loading leads...</p>
-            ) : (
-              <div className="admin-lead-list">
-                {leads.map((lead) => (
-                  <div className="admin-lead-card" key={lead._id}>
-                    <div className="admin-lead-head">
-                      <div>
-                        <h4>{lead.name}</h4>
-                        <p>{lead.mobile}{lead.email ? ` | ${lead.email}` : ''}</p>
-                      </div>
-                      <div className="admin-lead-actions">
-                        <select className="form-input admin-status-select" value={lead.status} onChange={(e) => updateLeadStatus(lead._id, e.target.value)}>
-                          {statusOptions.map((status) => <option key={status} value={status}>{formatStatusLabel(status)}</option>)}
-                        </select>
-                        <button className="btn btn-secondary admin-delete-btn" onClick={() => deleteLead(lead._id)}>
-                          <FiTrash2 />
-                        </button>
-                      </div>
-                    </div>
-                    <div className="admin-lead-meta">
-                      <span>{lead.source}</span>
-                      <span>{lead.sourcePage}</span>
-                      <span>{lead.interestLabel}</span>
-                      {lead.planType ? <span>{lead.planType}</span> : null}
-                      {lead.duration ? <span>{lead.duration}</span> : null}
-                      <span>{lead.gender}, {lead.age}</span>
-                    </div>
-                    {lead.message ? <p className="admin-lead-note">{lead.message}</p> : null}
-                    <p className="admin-lead-date">
-                      {new Date(lead.createdAt).toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' })}
-                    </p>
-                  </div>
-                ))}
-                {leads.length === 0 ? <p className="section-subtitle" style={{ maxWidth: 'none' }}>No leads found for the selected filters.</p> : null}
+              <div className="admin-summary-grid reveal">
+                <div className="admin-summary-card">
+                  <h3>Registration Leads</h3>
+                  <p className="section-subtitle" style={{ maxWidth: 'none' }}>Homepage and page-level registrations collected across the website.</p>
+                  <strong className="admin-overview-count">{registrations.length}</strong>
+                </div>
+                <div className="admin-summary-card">
+                  <h3>Contact Form Requests</h3>
+                  <p className="section-subtitle" style={{ maxWidth: 'none' }}>Direct messages submitted from the contact page.</p>
+                  <strong className="admin-overview-count">{contacts.length}</strong>
+                </div>
               </div>
-            )}
-          </div>
+            </>
+          ) : null}
+
+          {activeView === 'registrations' ? (
+            <div className="admin-summary-card admin-lead-section reveal">
+              <h3>Registration Leads</h3>
+              {loading ? <p className="section-subtitle" style={{ maxWidth: 'none' }}>Loading registrations...</p> : <div className="admin-lead-list">{registrations.map(renderLeadCard)}{registrations.length === 0 ? <p className="section-subtitle" style={{ maxWidth: 'none' }}>No registration leads found.</p> : null}</div>}
+            </div>
+          ) : null}
+
+          {activeView === 'plans' ? (
+            <div className="admin-summary-card admin-lead-section reveal">
+              <h3>Plan Enquiries</h3>
+              {loading ? <p className="section-subtitle" style={{ maxWidth: 'none' }}>Loading plan enquiries...</p> : <div className="admin-lead-list">{planEnquiries.map(renderLeadCard)}{planEnquiries.length === 0 ? <p className="section-subtitle" style={{ maxWidth: 'none' }}>No plan enquiries found.</p> : null}</div>}
+            </div>
+          ) : null}
+
+          {activeView === 'contacts' ? (
+            <div className="admin-summary-card admin-lead-section reveal">
+              <h3>Contact Requests</h3>
+              {loading ? <p className="section-subtitle" style={{ maxWidth: 'none' }}>Loading contact requests...</p> : <div className="admin-lead-list">{contacts.map(renderContactCard)}{contacts.length === 0 ? <p className="section-subtitle" style={{ maxWidth: 'none' }}>No contact requests found.</p> : null}</div>}
+            </div>
+          ) : null}
         </div>
       </section>
     </div>

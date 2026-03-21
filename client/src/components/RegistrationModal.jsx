@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+﻿import { useEffect, useState } from 'react';
 import { FiCheckCircle, FiX } from 'react-icons/fi';
 import { useUser } from '@clerk/clerk-react';
 import toast from 'react-hot-toast';
@@ -88,25 +88,33 @@ export default function RegistrationModal({ isOpen, onClose, context }) {
 
         {!submitted ? (
           <>
-            <div className="modal-header" style={{ paddingBottom: '12px' }}>
-              <h3 className="modal-title">Registration Form</h3>
+            <div className="modal-header registration-modal-header">
+              <div>
+                <p className="registration-kicker">Register Interest</p>
+                <h3 className="modal-title">Registration Form</h3>
+                <p className="registration-subtitle">Share your details and our team will contact you directly.</p>
+              </div>
             </div>
-            <div className="modal-body" style={{ paddingTop: 0 }}>
+
+            <div className="modal-body registration-modal-body">
               <div className="registration-context-card">
-                <p className="registration-context-label">Selected Interest</p>
+                <div className="registration-context-topline">
+                  <p className="registration-context-label">Selected Interest</p>
+                  <span className="registration-source-pill">{context?.sourcePage || 'Website'}</span>
+                </div>
                 <h4>{context?.interestLabel || 'General Registration'}</h4>
-                <p>{context?.sourcePage || 'Website'} lead will be added directly to the admin portal.</p>
+                <p>Your request will be saved in the admin portal for a direct follow-up.</p>
               </div>
 
               <form onSubmit={handleSubmit} className="registration-form">
                 <div className="form-fields-grid">
                   <div className="form-field">
                     <label htmlFor="lead-name">Name</label>
-                    <input id="lead-name" className="form-input" value={formData.name} onChange={(e) => handleChange('name', e.target.value)} placeholder="Full name" />
+                    <input id="lead-name" className="form-input" value={formData.name} onChange={(e) => handleChange('name', e.target.value)} placeholder="Your full name" />
                   </div>
                   <div className="form-field">
                     <label htmlFor="lead-mobile">Mobile Number</label>
-                    <input id="lead-mobile" className="form-input" value={formData.mobile} onChange={(e) => handleChange('mobile', e.target.value)} placeholder="10-digit mobile number" />
+                    <input id="lead-mobile" className="form-input" inputMode="numeric" value={formData.mobile} onChange={(e) => handleChange('mobile', e.target.value)} placeholder="10-digit mobile number" />
                   </div>
                   <div className="form-field">
                     <label htmlFor="lead-gender">Gender</label>
@@ -119,7 +127,7 @@ export default function RegistrationModal({ isOpen, onClose, context }) {
                   </div>
                   <div className="form-field">
                     <label htmlFor="lead-age">Age</label>
-                    <input id="lead-age" type="number" min="10" max="100" className="form-input" value={formData.age} onChange={(e) => handleChange('age', e.target.value)} placeholder="Age" />
+                    <input id="lead-age" type="number" min="10" max="100" className="form-input" value={formData.age} onChange={(e) => handleChange('age', e.target.value)} placeholder="Your age" />
                   </div>
                   <div className="form-field">
                     <label htmlFor="lead-email">Email</label>
@@ -127,13 +135,16 @@ export default function RegistrationModal({ isOpen, onClose, context }) {
                   </div>
                   <div className="form-field" style={{ gridColumn: '1 / -1' }}>
                     <label htmlFor="lead-message">Notes</label>
-                    <textarea id="lead-message" className="form-input" rows={3} value={formData.message} onChange={(e) => handleChange('message', e.target.value)} placeholder="What are you looking for?" style={{ minHeight: '100px', resize: 'vertical' }} />
+                    <textarea id="lead-message" className="form-input registration-notes" rows={3} value={formData.message} onChange={(e) => handleChange('message', e.target.value)} placeholder="What are you looking for?" />
                   </div>
                 </div>
 
-                <button type="submit" className="btn btn-primary btn-lg" disabled={submitting} style={{ width: '100%' }}>
-                  {submitting ? 'Submitting...' : 'Submit Registration'}
-                </button>
+                <div className="registration-actions">
+                  <p className="registration-actions-note">We review every enquiry personally before contacting you.</p>
+                  <button type="submit" className="btn btn-primary btn-lg registration-submit" disabled={submitting}>
+                    {submitting ? 'Submitting...' : 'Submit Registration'}
+                  </button>
+                </div>
               </form>
             </div>
           </>

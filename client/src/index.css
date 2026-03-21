@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap");
+﻿@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap");
 
 :root {
   /* Colors - Premium Light Green Theme */
@@ -533,7 +533,7 @@ textarea {
   border-left-color: var(--color-primary);
 }
 
-/* ===================== HERO — Full-screen centered ===================== */
+/* ===================== HERO â€” Full-screen centered ===================== */
 .hero {
   position: relative;
   min-height: 100vh;
@@ -569,7 +569,7 @@ textarea {
   z-index: 1;
 }
 
-/* Center wrapper — full width centered text */
+/* Center wrapper â€” full width centered text */
 .hero-center-wrap {
   position: relative;
   z-index: 2;
@@ -638,7 +638,7 @@ textarea {
   animation: fadeInUp 0.8s ease 0.3s both;
 }
 
-/* Program pill buttons — centered */
+/* Program pill buttons â€” centered */
 .hero-pills {
   display: flex;
   flex-wrap: wrap;
@@ -684,7 +684,7 @@ textarea {
   box-shadow: var(--shadow-red);
 }
 
-/* Stats bar — full width at bottom of hero */
+/* Stats bar â€” full width at bottom of hero */
 .hero-stats-bar {
   position: absolute;
   bottom: 0;
@@ -907,7 +907,7 @@ textarea {
   letter-spacing: 0.5px;
 }
 
-/* ===================== PROGRAMS — Bento Grid ===================== */
+/* ===================== PROGRAMS â€” Bento Grid ===================== */
 .bento-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -1007,7 +1007,7 @@ textarea {
   height: 200px;
 }
 
-/* ===================== HOW IT WORKS — Horizontal Steps ===================== */
+/* ===================== HOW IT WORKS â€” Horizontal Steps ===================== */
 .steps-flow {
   display: flex;
   justify-content: space-between;
@@ -2628,7 +2628,7 @@ textarea {
   color: var(--color-gray-900);
 }
 
-/* Dashboard Profile Card — overflow protection */
+/* Dashboard Profile Card â€” overflow protection */
 .dashboard-profile-header {
   display: flex;
   align-items: center;
@@ -4349,7 +4349,7 @@ textarea {
 }
 
 
-/* ===================== SPOTLIGHT TOUR SYSTEM — MINIMAL ===================== */
+/* ===================== SPOTLIGHT TOUR SYSTEM â€” MINIMAL ===================== */
 .tour-overlay {
   position: fixed;
   top: 0;
@@ -4694,14 +4694,58 @@ textarea {
 
 .registration-modal {
   max-width: 720px;
+  display: flex;
+  flex-direction: column;
+  max-height: min(860px, calc(100vh - 40px));
+  max-height: min(860px, calc(100dvh - 40px));
+  overflow: hidden;
+  box-shadow: 0 24px 70px rgba(15, 23, 42, 0.22);
+}
+
+.registration-modal-header {
+  padding: 26px 28px 14px;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(12px);
+}
+
+.registration-kicker {
+  font-size: 0.76rem;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.registration-subtitle {
+  color: var(--color-gray-500);
+  font-size: 0.94rem;
+  line-height: 1.6;
+  margin-top: 8px;
+}
+
+.registration-modal-body {
+  padding-top: 8px;
+  overflow-y: auto;
 }
 
 .registration-context-card {
   background: linear-gradient(135deg, rgba(0, 109, 60, 0.08), rgba(0, 109, 60, 0.02));
   border: 1px solid rgba(0, 109, 60, 0.14);
-  border-radius: 18px;
-  padding: 18px;
-  margin-bottom: 24px;
+  border-radius: 22px;
+  padding: 18px 20px;
+  margin-bottom: 22px;
+}
+
+.registration-context-topline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
 }
 
 .registration-context-label {
@@ -4709,23 +4753,58 @@ textarea {
   letter-spacing: 1px;
   text-transform: uppercase;
   color: var(--color-gray-500);
-  margin-bottom: 8px;
+  margin-bottom: 0;
+}
+
+.registration-source-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 7px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(0, 109, 60, 0.1);
+  color: var(--color-primary);
+  font-size: 0.78rem;
+  font-weight: 700;
 }
 
 .registration-context-card h4 {
   color: var(--color-gray-900);
-  font-size: 1.15rem;
-  margin-bottom: 6px;
+  font-size: 1.1rem;
+  line-height: 1.35;
+  margin-bottom: 8px;
 }
 
 .registration-context-card p {
   color: var(--color-gray-600);
-  font-size: 0.92rem;
+  font-size: 0.9rem;
+  line-height: 1.6;
 }
 
 .registration-form {
   display: grid;
-  gap: 20px;
+  gap: 18px;
+}
+
+.registration-notes {
+  min-height: 88px;
+  resize: vertical;
+}
+
+.registration-actions {
+  display: grid;
+  gap: 14px;
+  padding-top: 6px;
+}
+
+.registration-actions-note {
+  font-size: 0.82rem;
+  color: var(--color-gray-500);
+  line-height: 1.5;
+}
+
+.registration-submit {
+  width: 100%;
 }
 
 .registration-success {
@@ -4937,6 +5016,24 @@ textarea {
 }
 
 @media (max-width: 768px) {
+  .modal-overlay {
+    align-items: flex-end;
+    padding: 0;
+  }
+
+  .modal-content {
+    max-height: min(92vh, 92dvh);
+    border-radius: 26px 26px 0 0;
+  }
+
+  .modal-header {
+    padding: 22px 20px 14px;
+  }
+
+  .modal-body {
+    padding: 22px 20px 24px;
+  }
+
   .admin-toolbar {
     flex-direction: column;
     align-items: stretch;
@@ -4956,6 +5053,48 @@ textarea {
 
   .admin-status-select {
     width: 100%;
+  }
+
+  .registration-modal {
+    max-width: none;
+    width: 100%;
+    max-height: min(92vh, 92dvh);
+    border-radius: 28px 28px 0 0;
+  }
+
+  .registration-modal-header {
+    padding: 20px 20px 12px;
+  }
+
+  .registration-subtitle {
+    font-size: 0.88rem;
+  }
+
+  .registration-context-card {
+    padding: 16px;
+    border-radius: 18px;
+    margin-bottom: 18px;
+  }
+
+  .registration-context-topline {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .registration-source-pill {
+    font-size: 0.74rem;
+  }
+
+  .registration-form {
+    gap: 16px;
+  }
+
+  .registration-actions {
+    position: sticky;
+    bottom: 0;
+    background: linear-gradient(180deg, rgba(255,255,255,0.86) 0%, #ffffff 26%);
+    padding-top: 14px;
   }
 }
 
@@ -5231,6 +5370,37 @@ textarea {
 }
 
 @media (max-width: 480px) {
+  .modal-close {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    background: rgba(15, 23, 42, 0.04);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    z-index: 3;
+  }
+
+  .registration-modal-header {
+    padding-right: 68px;
+  }
+
+  .registration-kicker {
+    font-size: 0.7rem;
+    letter-spacing: 1.5px;
+  }
+
+  .registration-context-card h4 {
+    font-size: 1rem;
+  }
+
+  .registration-actions-note {
+    font-size: 0.78rem;
+  }
+
   .container {
     padding: 0 18px;
   }
@@ -5262,5 +5432,73 @@ textarea {
 
   .admin-lead-meta span {
     font-size: 0.76rem;
+  }
+}
+
+.admin-view-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.admin-view-tab {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 16px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  color: var(--color-gray-700);
+  font-size: 0.9rem;
+  font-weight: 700;
+  transition: all 0.25s ease;
+}
+
+.admin-view-tab.active {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: #ffffff;
+  box-shadow: 0 10px 24px rgba(0, 109, 60, 0.18);
+}
+
+.admin-overview-count {
+  display: block;
+  margin-top: 18px;
+  color: var(--color-gray-900);
+  font-size: 2rem;
+  font-family: var(--font-heading);
+}
+
+.mobile-nav-body {
+  padding: 18px;
+  gap: 8px;
+}
+
+.mobile-nav-link {
+  font-size: 0.88rem;
+  letter-spacing: 0.8px;
+  padding: 12px 14px;
+  border-radius: 12px;
+}
+
+.mobile-nav-cta {
+  margin-top: 12px;
+}
+
+@media (max-width: 768px) {
+  .admin-view-tabs {
+    width: 100%;
+  }
+
+  .admin-view-tab {
+    flex: 1 1 calc(50% - 10px);
+  }
+}
+
+@media (max-width: 480px) {
+  .admin-view-tab {
+    flex-basis: 100%;
   }
 }
