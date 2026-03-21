@@ -1,42 +1,36 @@
 import Booking from '../models/Booking.js';
-import Payment from '../models/Payment.js';
 import Lead from '../models/Lead.js';
 import Contact from '../models/Contact.js';
 
 // Dashboard stats
 export const getDashboardStats = async (req, res) => {
   try {
-    const [totalBookings, totalPayments, totalLeads, totalContacts] = await Promise.all([
+    const [totalBookings, totalLeads, totalContacts] = await Promise.all([
       Booking.countDocuments(),
-      Payment.countDocuments({ status: 'completed' }),
       Lead.countDocuments(),
       Contact.countDocuments(),
     ]);
 
-    const revenue = await Payment.aggregate([
-      { $match: { status: 'completed' } },
-      { $group: { _id: null, total: { $sum: '$amount' } } }
+    const [leadsByPage, leadsByInterest] = await Promise.all([
+      Lead.aggregate([
+        { $group: { _id: '$sourcePage', count: { $sum: 1 } } },
+        { $sort: { count: -1, _id: 1 } }
+      ]),
+      Lead.aggregate([
+        { $group: { _id: '$interestLabel', count: { $sum: 1 } } },
+        { $sort: { count: -1, _id: 1 } }
+      ]),
     ]);
 
     res.json({
       totalBookings,
-      totalPayments,
       totalLeads,
       totalContacts,
-      totalRevenue: revenue[0]?.total || 0,
+      leadsByPage,
+      leadsByInterest,
     });
   } catch (error) {
     res.status(500).json({ error: 'Failed to fetch stats' });
-  }
-};
-
-// Get all leads
-export const getLeads = async (req, res) => {
-  try {
-    const leads = await Lead.find().sort({ createdAt: -1 });
-    res.json(leads);
-  } catch (error) {
-    res.status(500).json({ error: 'Failed to fetch leads' });
   }
 };
 

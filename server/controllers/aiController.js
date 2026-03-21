@@ -11,23 +11,26 @@ const getOpenAI = () => {
     openai = new OpenAI({
       apiKey: process.env.OPENAI_API_KEY,
       baseURL: isOpenRouter ? 'https://openrouter.ai/api/v1' : undefined,
-      defaultHeaders: isOpenRouter ? {
-        'HTTP-Referer': process.env.CLIENT_URL,
-        'X-Title': 'OneHour Challenge',
-      } : undefined,
+      defaultHeaders: isOpenRouter
+        ? {
+            'HTTP-Referer': process.env.CLIENT_URL,
+            'X-Title': 'OneHour Challenge',
+          }
+        : undefined,
     });
   } else if (!openai) {
-      console.log('--- OPENAI CLIENT FAILED TO INITIALIZE: NO API KEY FOUND ---');
+    console.log('--- OPENAI CLIENT FAILED TO INITIALIZE: NO API KEY FOUND ---');
   }
+
   return openai;
 };
 
-const SYSTEM_PROMPT = `You are the AI Assistant for OneHour Challenge — a premium online fitness platform offering 1-hour structured live sessions.
+const SYSTEM_PROMPT = `You are the AI Assistant for OneHour Challenge, a premium online fitness platform offering 1-hour structured live sessions.
 
 YOUR ROLE:
 - You help users understand fitness programs (Fitness, Zumba, Yoga)
 - You explain membership plans (PRO: 3 days/week, ADVANCE: 5 days/week)
-- You guide users through the booking process
+- You guide users through the registration process
 - You answer fitness-related questions professionally
 
 PROGRAMS:
@@ -35,15 +38,12 @@ PROGRAMS:
 2. Zumba: Burn calories, high energy, reduce stress, improve coordination
 3. Yoga: Flexibility, mobility, recovery, mental clarity, posture correction
 
-PLANS (Current Production Prices):
-- PRO (3 Days/Week): ₹1,499/mo, ₹2,999/3mo, ₹5,999/6mo, ₹7,999/yr
-- ADVANCE (5 Days/Week): ₹2,999/mo, ₹5,999/3mo, ₹7,999/6mo, ₹9,999/yr
+REGISTRATION FLOW:
+- The website does not collect payments
+- Members register interest and the team contacts them directly
+- Free trial sessions can still be requested through WhatsApp
 
-BOOKING RULES:
-- PRO: 3 Sessions/week, max 4 bookings/week
-- ADVANCE: 5 Sessions/week, max 6 bookings/week
-
-HOW SESSIONS WORK:
+SESSION FORMAT:
 - All sessions are 1 hour long
 - Live online sessions with certified trainers
 - Sessions run at: 6-9 AM and 5-9 PM
@@ -54,151 +54,144 @@ RULES:
 - Keep responses concise and structured (use bullet points where helpful)
 - NEVER answer questions unrelated to fitness, health, wellness, or OneHour Challenge
 - If asked off-topic questions (politics, coding, general knowledge, etc.), respond: "I appreciate your curiosity! However, I specialize in fitness and wellness guidance for OneHour Challenge. For other queries, please visit our contact page or call us at 9515022680."
-- Always encourage users to take action (book a session, choose a plan)
-- You may discuss general fitness tips, nutrition basics, workout advice — as long as it relates to health and fitness`;
+- Always encourage users to take action (register interest, choose a plan, or request a free trial)
+- You may discuss general fitness tips, nutrition basics, and workout advice as long as it relates to health and fitness`;
 
-// Built-in smart responses when AI service is unavailable
 const FALLBACK_RESPONSES = {
-  fat: `Great goal! Fat loss requires a combination of **structured workouts** and **consistent effort**. Here's what we recommend:
+  fat: `Great goal! Fat loss works best with consistent training and a sustainable routine.
 
-• **Fitness** — Builds lean muscle, boosts metabolism, burns fat even at rest
-• **Zumba** — High-energy cardio that burns 500-800 calories per session
-• **Yoga** — Reduces cortisol (stress hormone) which contributes to fat storage
+- **Fitness** builds lean muscle and supports calorie burn
+- **Zumba** adds high-energy cardio and keeps workouts engaging
+- **Yoga** supports recovery, flexibility, and stress control
 
-Our **ADVANCE plan (5 days/week)** is ideal for fat loss goals. Starting at just ₹1,499/month.
+Our **ADVANCE plan** is a strong fit when you want more accountability through the week.
 
-Would you like to know more about any specific program, or shall I help you choose a plan?`,
+Would you like help choosing the right program for fat loss?`,
 
-  weight: `For weight management, we recommend a combination approach:
+  weight: `For weight management, we usually recommend a combination approach:
 
-• **Fitness** — Build muscle to increase your resting metabolic rate
-• **Zumba** — Fun cardio sessions that burn significant calories
-• **Yoga** — Aids recovery and reduces stress-related weight gain
+- **Fitness** for strength and metabolic support
+- **Zumba** for cardio and energy
+- **Yoga** for recovery and consistency
 
-Our structured 1-hour sessions are designed for progressive results. The **ADVANCE plan** (5 days/week) gives you maximum results.
+Our structured 1-hour sessions are designed for steady progress. The **ADVANCE plan** gives you more weekly momentum.
 
-Would you like to explore our plans?`,
+Would you like help comparing PRO and ADVANCE?`,
 
-  yoga: `Our **Yoga program** is excellent! Here's what it covers:
+  yoga: `Our **Yoga program** is a great choice for:
 
-• **Flexibility** — Improve range of motion gradually
-• **Mobility** — Better joint health & movement
-• **Recovery** — Perfect complement to strength training
-• **Mental clarity** — Mindfulness and stress relief
-• **Posture correction** — Ideal for desk workers
+- **Flexibility** and better range of motion
+- **Mobility** and joint-friendly movement
+- **Recovery** between harder sessions
+- **Mental clarity** and stress relief
+- **Posture correction** for desk-based lifestyles
 
-Sessions are 1 hour, led by our certified Yoga Alliance RYT-500 instructor.
+Sessions are 1 hour and led by a certified instructor.
 
-Available in both **PRO (3 days/week)** and **ADVANCE (5 days/week)** plans. Would you like pricing details?`,
+Would you like help choosing the best plan for yoga?`,
 
-  zumba: `Our **Zumba sessions** are incredibly popular! Here's why:
+  zumba: `Our **Zumba sessions** are popular because they combine:
 
-• **Burn calories** — 500-800 calories per session
-• **High energy** — Fun dance movements that don't feel like exercise
-• **Reduce stress** — Release endorphins naturally
-• **Improve coordination** — Better body awareness
+- **Calorie-burning cardio**
+- **High-energy guided movement**
+- **Stress relief**
+- **Better coordination**
 
-Led by our Zumba Licensed Instructor with 6+ years of experience.
+They are available within both plan options.
 
-Available in both plans. Starting at ₹999/month for PRO. Would you like to book a session?`,
+Would you like to register your interest or request a free trial session?`,
 
-  strength: `Our **Fitness** program is designed for real results:
+  strength: `Our **Fitness** program is designed for real, measurable progress:
 
-• **Weight reduction** — Build lean muscle, burn more fat
-• **Muscle toning** — Progressive overload approach
-• **Core strengthening** — Foundation for all movements
-• **Improved stamina** — Better endurance over time
-• **Progressive programming** — No random workouts
+- **Weight reduction**
+- **Muscle toning**
+- **Core strengthening**
+- **Improved stamina**
+- **Progressive programming**
 
-Our ACE-certified trainer with 8+ years experience leads every session.
+Every session is guided by an experienced coach.
 
-Would you like to know about our PRO or ADVANCE plans?`,
+Would you like to know whether PRO or ADVANCE fits your goal better?`,
 
   plan: `Here are our membership plans:
 
 **PRO Plan (3 Days/Week)**
-• ₹999/month
-• ₹2,499/3 months
-• ₹4,499/6 months
-• ₹7,999/yearly
+- Steady weekly structure
+- Best for balanced schedules
+- Coach follow-up after registration
 
 **ADVANCE Plan (5 Days/Week)**
-• ₹1,499/month
-• ₹3,999/3 months ⭐ Most Popular
-• ₹6,999/6 months
-• ₹11,999/yearly
+- More frequent sessions
+- Higher accountability
+- Best for faster momentum
 
-Both plans include access to all programs (Strength, Zumba, Yoga), certified trainers, and progress tracking.
+Both plans include access to guided coaching and program support.
 
-The **3-month plan** is our most popular choice! Would you like to get started?`,
+Would you like help choosing the best plan for your goal?`,
 
-  price: `Here are our membership plans:
+  price: `The website now uses a clean registration-first flow instead of online payment.
 
-**PRO Plan (3 Days/Week)**
-• ₹999/month | ₹2,499/3 months | ₹4,499/6 months | ₹7,999/yearly
+You can choose between:
+- **PRO** - 3 days per week
+- **ADVANCE** - 5 days per week
 
-**ADVANCE Plan (5 Days/Week)**
-• ₹1,499/month | ₹3,999/3 months | ₹6,999/6 months | ₹11,999/yearly
+Register your interest and the team will contact you directly.
 
-The 3-month ADVANCE plan at ₹3,999 is our most popular! Would you like to proceed with booking?`,
+Would you like help deciding between PRO and ADVANCE?`,
 
-  session: `Here's how our sessions work:
+  session: `Here is how our sessions work:
 
-• **Duration** — 1 hour per session
-• **Format** — Live online with certified trainers
-• **Morning slots** — 6 AM, 7 AM, 8 AM
-• **Evening slots** — 5 PM, 6 PM, 7 PM, 8 PM
-• **Group size** — Limited for personal attention
+- **Duration** - 1 hour per session
+- **Format** - Live online with certified trainers
+- **Morning slots** - 6 AM, 7 AM, 8 AM
+- **Evening slots** - 5 PM, 6 PM, 7 PM, 8 PM
+- **Group size** - Limited for personal attention
 
-You can book sessions based on your plan:
-• PRO — 3 sessions/week (max 4 bookings)
-• ADVANCE — 5 sessions/week (max 6 bookings)
+Ready to register or request a free trial session?`,
 
-Ready to book your first session?`,
+  book: `To get started:
 
-  book: `To book a session, simply:
-
-1. Click **"Join Now"** on our website
+1. Click **Register** on the website
 2. Fill in your details
-3. Choose **PRO** or **ADVANCE** plan
-4. Select your preferred days and time slot
-5. Complete the payment
+3. Choose **PRO** or **ADVANCE**
+4. Share your preferred interest or goal
+5. Submit your registration request
 
-You can also book a **free trial session** by clicking "Book Free Session" on our homepage!
+You can also request a **free trial session** through WhatsApp.
 
 Would you like to proceed?`,
 
-  trainer: `Our certified trainers:
+  trainer: `Our certified trainers include specialists in:
 
-💪 **Coach Vikram** — ACE Certified, 8+ years, Strength & Conditioning specialist
-💃 **Coach Ananya** — Zumba Licensed Instructor, 6+ years, Dance Fitness expert
-🧘 **Coach Deepak** — Yoga Alliance RYT-500, 10+ years, Yoga & Mindfulness
+- **Strength and conditioning**
+- **Dance fitness**
+- **Yoga and mindfulness**
 
-All trainers are internationally certified and experienced in online coaching. Would you like to join a session?`,
+The coaching approach is designed to be professional, supportive, and results-focused.
 
-  default: `Thank you for your interest! I can help you with:
+Would you like to join a session or register your interest?`,
 
-• **Programs** — Fitness, Zumba, Yoga
-• **Plans & Pricing** — PRO and ADVANCE memberships
-• **Sessions** — How our live sessions work
-• **Booking** — How to get started
-• **Trainers** — Our certified coaches
+  default: `I can help you with:
 
-What would you like to know more about?`
+- **Programs** - Fitness, Zumba, Yoga
+- **Plans** - PRO and ADVANCE memberships
+- **Sessions** - How live sessions work
+- **Registration** - How to get started
+- **Trainers** - Our coaching team
+
+What would you like to know more about?`,
 };
 
 const getSmartResponse = (userMessage) => {
   const msg = userMessage.toLowerCase();
-  
-  // Off-topic detection
+
   const offTopicKeywords = ['politics', 'movie', 'cricket', 'code', 'programming', 'javascript', 'python', 'weather', 'news', 'recipe', 'cook'];
-  if (offTopicKeywords.some(k => msg.includes(k))) {
+  if (offTopicKeywords.some((keyword) => msg.includes(keyword))) {
     return `I appreciate your curiosity! However, I specialize in fitness and wellness guidance for OneHour Challenge. For other queries, our team will contact you shortly or please visit our contact page.
 
 How can I help you with your fitness goals today?`;
   }
-  
-  // Match keywords
+
   if (msg.includes('fat') || msg.includes('fat loss') || msg.includes('belly')) return FALLBACK_RESPONSES.fat;
   if (msg.includes('weight') || msg.includes('slim') || msg.includes('lean')) return FALLBACK_RESPONSES.weight;
   if (msg.includes('yoga') || msg.includes('meditation') || msg.includes('flexibility')) return FALLBACK_RESPONSES.yoga;
@@ -210,29 +203,28 @@ How can I help you with your fitness goals today?`;
   if (msg.includes('book') || msg.includes('join') || msg.includes('start') || msg.includes('register') || msg.includes('sign up')) return FALLBACK_RESPONSES.book;
   if (msg.includes('trainer') || msg.includes('coach') || msg.includes('instructor')) return FALLBACK_RESPONSES.trainer;
   if (msg.includes('program') || msg.includes('workout') || msg.includes('exercise') || msg.includes('fitness')) return FALLBACK_RESPONSES.default;
-  if (msg.includes('hi') || msg.includes('hello') || msg.includes('hey')) return `Hello! Welcome to OneHour Challenge. 👋\n\nI'm here to help you with fitness programs, plans, and booking. What are you looking for today?`;
-  
+  if (msg.includes('hi') || msg.includes('hello') || msg.includes('hey')) {
+    return `Hello! Welcome to OneHour Challenge.
+
+I am here to help with fitness programs, plans, and registration. What are you looking for today?`;
+  }
+
   return FALLBACK_RESPONSES.default;
 };
 
 export const chatWithAI = async (req, res) => {
   console.log('--- AI CHAT REQUEST RECEIVED ---');
+
   try {
     const { messages, leadId } = req.body;
     const lastUserMessage = messages[messages.length - 1]?.content || '';
 
-    // Try AI first
     const ai = getOpenAI();
     if (ai) {
       try {
         const completion = await ai.chat.completions.create({
-          model: process.env.OPENAI_API_KEY.startsWith('sk-or-')
-            ? 'openai/gpt-3.5-turbo'
-            : 'gpt-3.5-turbo',
-          messages: [
-            { role: 'system', content: SYSTEM_PROMPT },
-            ...messages,
-          ],
+          model: process.env.OPENAI_API_KEY.startsWith('sk-or-') ? 'openai/gpt-3.5-turbo' : 'gpt-3.5-turbo',
+          messages: [{ role: 'system', content: SYSTEM_PROMPT }, ...messages],
           max_tokens: 500,
           temperature: 0.7,
         });
@@ -240,14 +232,13 @@ export const chatWithAI = async (req, res) => {
         const assistantMessage = completion.choices[0].message.content;
 
         if (leadId) {
-          // TODO: Add validation to ensure leadId is a valid ObjectId
           await Lead.findByIdAndUpdate(leadId, {
             $push: {
               messages: [
                 { role: 'user', content: lastUserMessage },
                 { role: 'assistant', content: assistantMessage },
-              ]
-            }
+              ],
+            },
           }).catch(() => {});
         }
 
@@ -257,7 +248,6 @@ export const chatWithAI = async (req, res) => {
       }
     }
 
-    // No AI available or AI API failed, use fallback
     const fallbackMessage = getSmartResponse(lastUserMessage);
     if (leadId) {
       await Lead.findByIdAndUpdate(leadId, {
@@ -265,33 +255,33 @@ export const chatWithAI = async (req, res) => {
           messages: [
             { role: 'user', content: lastUserMessage },
             { role: 'assistant', content: fallbackMessage },
-          ]
-        }
+          ],
+        },
       }).catch(() => {});
     }
+
     return res.json({ success: true, message: fallbackMessage });
   } catch (error) {
     console.error('Chat AI Controller Error:', error);
-    res.status(500).json({ success: false, message: 'Internal server error' });
+    return res.status(500).json({ success: false, message: 'Internal server error' });
   }
 };
 
 export const submitLead = async (req, res) => {
   console.log('--- LEAD SUBMISSION RECEIVED ---', req.body.email);
+
   try {
     const { name, email, mobile, program } = req.body;
-    
-    // Create lead
+
     const lead = new Lead({ name, email, mobile, program });
     await lead.save();
-    
-    // Send notification email
+
     const mailInfo = await sendLeadEmail(lead);
     console.log('Lead email sent:', mailInfo?.messageId || 'Success');
-    
-    res.status(201).json({ success: true, leadId: lead._id });
+
+    return res.status(201).json({ success: true, leadId: lead._id });
   } catch (error) {
     console.error('Lead submission error:', error);
-    res.status(500).json({ error: 'Failed to submit lead' });
+    return res.status(500).json({ error: 'Failed to submit lead' });
   }
 };

@@ -32,7 +32,12 @@ export default function Navbar() {
   }, [location]);
 
   // Check if a link is active
-  const isActive = (path) => location.pathname === path;
+  const isActive = (path) => {
+    if (path === '/plans') {
+      return location.pathname === '/plans' || location.pathname === '/pricing';
+    }
+    return location.pathname === path;
+  };
 
   return (
     <>
@@ -54,10 +59,11 @@ export default function Navbar() {
             <Link to="/about" className={`navbar-link ${isActive('/about') ? 'active' : ''}`}>About</Link>
             <Link to="/programs" className={`navbar-link ${isActive('/programs') ? 'active' : ''}`}>Programs</Link>
             <Link to="/how-it-works" className={`navbar-link ${isActive('/how-it-works') ? 'active' : ''}`}>How It Works</Link>
-            <Link to="/pricing" className={`navbar-link ${isActive('/pricing') ? 'active' : ''}`}>Pricing</Link>
+            <Link to="/plans" className={`navbar-link ${isActive('/plans') ? 'active' : ''}`}>Plans</Link>
             <Link to="/transformations" className={`navbar-link ${isActive('/transformations') ? 'active' : ''}`}>Transformations</Link>
             <Link to="/trainers" className={`navbar-link ${isActive('/trainers') ? 'active' : ''}`}>Trainers</Link>
             <Link to="/contact" className={`navbar-link ${isActive('/contact') ? 'active' : ''}`}>Contact</Link>
+            <Link to="/admin" className={`navbar-link ${isActive('/admin') ? 'active' : ''}`}>Admin</Link>
           </div>
 
           <div className="navbar-actions">
@@ -77,7 +83,7 @@ export default function Navbar() {
                 </SignInButton>
               </>
             )}
-            <Link to="/pricing" className="btn btn-sm btn-primary" style={{ textDecoration: 'none' }}>Join Now</Link>
+            <Link to="/plans" className="btn btn-sm btn-primary" style={{ textDecoration: 'none' }}>Register</Link>
             <button className="mobile-menu-btn" onClick={() => setMobileOpen(true)}>
               <FiMenu />
             </button>
@@ -85,41 +91,45 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* Mobile Nav Overlay */}
-      <div className={`mobile-nav ${mobileOpen ? 'open' : ''}`}>
-        <div className="mobile-nav-header">
-          <div className="navbar-logo">
-            <img
-              src="https://res.cloudinary.com/dt37ji5yp/image/upload/v1771514832/Onehour_2__page-0001_zy1elu.jpg"
-              alt="OneHour Challenge"
-              className="navbar-logo-img"
-            />
-            <span className="navbar-logo-text">
-              ONEHOUR <span>CHALLENGE</span>
-            </span>
+      <div className={`mobile-nav-backdrop ${mobileOpen ? 'open' : ''}`} onClick={() => setMobileOpen(false)}>
+        <div className={`mobile-nav ${mobileOpen ? 'open' : ''}`} onClick={(e) => e.stopPropagation()}>
+          <div className="mobile-nav-header">
+            <div className="navbar-logo">
+              <img
+                src="https://res.cloudinary.com/dt37ji5yp/image/upload/v1771514832/Onehour_2__page-0001_zy1elu.jpg"
+                alt="OneHour Challenge"
+                className="navbar-logo-img"
+              />
+              <span className="navbar-logo-text">
+                ONEHOUR <span>CHALLENGE</span>
+              </span>
+            </div>
+            <button className="mobile-nav-close" onClick={() => setMobileOpen(false)}>
+              <FiX size={24} />
+            </button>
           </div>
-          <button className="mobile-nav-close" onClick={() => setMobileOpen(false)}>
-            <FiX size={24} />
-          </button>
-        </div>
 
-        <div className="mobile-nav-body">
-          <Link to="/" className={`mobile-nav-link ${isActive('/') ? 'active' : ''}`}>Home</Link>
-          <Link to="/about" className={`mobile-nav-link ${isActive('/about') ? 'active' : ''}`}>About</Link>
-          <Link to="/programs" className={`mobile-nav-link ${isActive('/programs') ? 'active' : ''}`}>Programs</Link>
-          <Link to="/how-it-works" className={`mobile-nav-link ${isActive('/how-it-works') ? 'active' : ''}`}>How It Works</Link>
-          <Link to="/pricing" className={`mobile-nav-link ${isActive('/pricing') ? 'active' : ''}`}>Pricing</Link>
-          <Link to="/transformations" className={`mobile-nav-link ${isActive('/transformations') ? 'active' : ''}`}>Transformations</Link>
-          <Link to="/trainers" className={`mobile-nav-link ${isActive('/trainers') ? 'active' : ''}`}>Trainers</Link>
-          <Link to="/contact" className={`mobile-nav-link ${isActive('/contact') ? 'active' : ''}`}>Contact</Link>
-          {isSignedIn ? (
-            <Link to="/dashboard" className="mobile-nav-link" style={{ color: 'var(--color-primary)' }}>Dashboard</Link>
-          ) : (
-            <SignInButton mode="modal" forceRedirectUrl="/">
-              <button className="mobile-nav-link" style={{ color: 'var(--color-primary)' }}>Login</button>
-            </SignInButton>
-          )}
-          <Link to="/pricing" className="btn btn-primary btn-lg" style={{ width: '100%', marginTop: 'auto', textDecoration: 'none', textAlign: 'center' }}>Join Now</Link>
+          <div className="mobile-nav-body">
+            <Link to="/" className={`mobile-nav-link ${isActive('/') ? 'active' : ''}`}>Home</Link>
+            <Link to="/about" className={`mobile-nav-link ${isActive('/about') ? 'active' : ''}`}>About</Link>
+            <Link to="/programs" className={`mobile-nav-link ${isActive('/programs') ? 'active' : ''}`}>Programs</Link>
+            <Link to="/how-it-works" className={`mobile-nav-link ${isActive('/how-it-works') ? 'active' : ''}`}>How It Works</Link>
+            <Link to="/plans" className={`mobile-nav-link ${isActive('/plans') ? 'active' : ''}`}>Plans</Link>
+            <Link to="/transformations" className={`mobile-nav-link ${isActive('/transformations') ? 'active' : ''}`}>Transformations</Link>
+            <Link to="/trainers" className={`mobile-nav-link ${isActive('/trainers') ? 'active' : ''}`}>Trainers</Link>
+            <Link to="/contact" className={`mobile-nav-link ${isActive('/contact') ? 'active' : ''}`}>Contact</Link>
+            <Link to="/admin" className={`mobile-nav-link ${isActive('/admin') ? 'active' : ''}`}>Admin</Link>
+            {isSignedIn ? (
+              <Link to="/dashboard" className="mobile-nav-link mobile-nav-accent">Dashboard</Link>
+            ) : (
+              <SignInButton mode="modal" forceRedirectUrl="/">
+                <button className="mobile-nav-link mobile-nav-accent">Login</button>
+              </SignInButton>
+            )}
+            <Link to="/plans" className="btn btn-primary btn-lg mobile-nav-cta" style={{ textDecoration: 'none', textAlign: 'center' }}>
+              Register
+            </Link>
+          </div>
         </div>
       </div>
     </>

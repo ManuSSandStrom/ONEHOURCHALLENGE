@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import { FiInstagram, FiYoutube, FiMail } from 'react-icons/fi';
-import { FaWhatsapp } from 'react-icons/fa';
 
 export default function Footer() {
   return (
@@ -9,16 +8,15 @@ export default function Footer() {
         <div className="footer-grid">
           <div>
             <div className="footer-brand-name">
-              <img 
-                src="https://res.cloudinary.com/dt37ji5yp/image/upload/v1771514832/Onehour_2__page-0001_zy1elu.jpg" 
-                alt="OneHour Challenge" 
+              <img
+                src="https://res.cloudinary.com/dt37ji5yp/image/upload/v1771514832/Onehour_2__page-0001_zy1elu.jpg"
+                alt="OneHour Challenge"
                 className="footer-brand-img"
               />
               ONEHOUR <span>CHALLENGE</span>
             </div>
             <p className="footer-brand-desc">
-              Structured online fitness platform offering 1-hour live group sessions 
-              designed for real, sustainable results.
+              Structured online fitness sessions designed for sustainable progress and a cleaner member experience.
             </p>
           </div>
 
@@ -33,8 +31,9 @@ export default function Footer() {
             <h4 className="footer-title">Company</h4>
             <Link to="/about" className="footer-link">About Us</Link>
             <Link to="/transformations" className="footer-link">Transformations</Link>
-            <Link to="/pricing" className="footer-link">Pricing</Link>
+            <Link to="/plans" className="footer-link">Plans</Link>
             <Link to="/contact" className="footer-link">Contact</Link>
+            <Link to="/admin" className="footer-link">Admin Portal</Link>
           </div>
 
           <div>
@@ -42,20 +41,15 @@ export default function Footer() {
             <a href="mailto:manoharbasappagari18@gmail.com" className="footer-link">
               manoharbasappagari18@gmail.com
             </a>
-            <a href="https://wa.me/919515022680" className="footer-link" target="_blank" rel="noopener noreferrer" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <FaWhatsapp style={{ color: '#25D366' }} /> +91 95150 22680
-            </a>
+            <span className="footer-link">+91 95150 22680</span>
           </div>
         </div>
 
         <div className="footer-bottom">
           <p className="footer-copy">
-            © {new Date().getFullYear()} OneHour Challenge. All rights reserved.
+            Copyright {new Date().getFullYear()} OneHour Challenge. All rights reserved.
           </p>
           <div className="footer-socials">
-            <a href="https://wa.me/919515022680" className="footer-social" aria-label="WhatsApp" target="_blank" rel="noopener noreferrer">
-              <FaWhatsapp />
-            </a>
             <a href="#" className="footer-social" aria-label="Instagram">
               <FiInstagram />
             </a>

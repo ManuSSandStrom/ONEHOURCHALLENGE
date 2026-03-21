@@ -489,7 +489,7 @@ export default function Dashboard() {
                               {booking.planType}
                             </span>
                             <span style={{ color: booking.paymentStatus === 'completed' ? '#10b981' : '#f59e0b', fontSize: '0.75rem', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '4px', flexShrink: 0 }}>
-                              {booking.paymentStatus === 'completed' ? <><FiCheck size={13} /> Paid</> : '⏳ Pending'}
+                              {booking.paymentStatus === 'completed' ? <><FiCheck size={13} /> Confirmed</> : 'Awaiting Callback'}
                             </span>
                           </div>
                           <p style={{ color: 'var(--color-gray-700)', fontSize: '0.85rem', marginBottom: '8px', fontWeight: 500 }}>
