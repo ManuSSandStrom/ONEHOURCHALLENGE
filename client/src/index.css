@@ -1179,6 +1179,41 @@ textarea {
   color: var(--color-gray-900);
 }
 
+.plans-intro-band {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 30px;
+  padding: 28px 30px;
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(16, 33, 58, 0.08);
+  box-shadow: var(--shadow-card);
+}
+
+.plans-intro-band span {
+  display: inline-block;
+  margin-bottom: 10px;
+  color: #5d9071;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.plans-intro-band h2 {
+  font-size: clamp(1.7rem, 3vw, 2.5rem);
+  line-height: 1.06;
+  color: #10213a;
+}
+
+.plans-intro-band p {
+  max-width: 460px;
+  color: #5e7083;
+  line-height: 1.75;
+}
+
 .pricing-toggle {
   display: flex;
   justify-content: center;
@@ -1218,11 +1253,11 @@ textarea {
   background: var(--color-white);
   border: 1px solid rgba(0, 0, 0, 0.05);
   border-radius: var(--radius-lg);
-  padding: 32px 28px;
+  padding: 30px 26px;
   position: relative;
   transition: var(--transition-smooth);
   box-shadow: var(--shadow-card);
-  text-align: center;
+  text-align: left;
 }
 
 .pricing-card:hover {
@@ -1271,24 +1306,27 @@ textarea {
 
 .pricing-duration {
   font-family: var(--font-heading);
-  font-size: 1rem;
+  font-size: 1.2rem;
   font-weight: 700;
   color: var(--color-gray-900);
-  margin-bottom: 4px;
+  margin-bottom: 6px;
 }
 
 .pricing-period {
-  font-size: 0.8rem;
-  color: var(--color-gray-500);
+  font-size: 0.82rem;
+  color: #5d9071;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
   margin-bottom: 24px;
 }
 
 .pricing-amount {
   font-family: var(--font-heading);
-  font-size: 2.5rem;
+  font-size: 2.2rem;
   font-weight: 900;
-  color: var(--color-gray-900);
-  margin-bottom: 4px;
+  color: #10213a;
+  margin-bottom: 12px;
 }
 
 .pricing-amount .currency {
@@ -1298,9 +1336,10 @@ textarea {
 }
 
 .pricing-per {
-  font-size: 0.8rem;
-  color: var(--color-gray-500);
-  margin-bottom: 28px;
+  font-size: 0.94rem;
+  color: #5e7083;
+  margin-bottom: 24px;
+  line-height: 1.75;
 }
 
 .pricing-features {
@@ -1320,6 +1359,51 @@ textarea {
 .pricing-feature-check {
   color: var(--color-primary);
   font-size: 0.8rem;
+}
+
+.pricing-card-top {
+  min-height: 78px;
+}
+
+.plan-type-meta {
+  display: grid;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.plan-type-meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #5e7083;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.plan-type-meta svg {
+  color: var(--color-primary);
+}
+
+.plans-selection-note {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  margin: 24px 0 28px;
+  padding: 18px 22px;
+  border-radius: 22px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.96) 0%, rgba(238, 246, 241, 0.94) 100%);
+  border: 1px solid rgba(16, 33, 58, 0.08);
+}
+
+.plans-selection-note strong {
+  color: #10213a;
+  font-size: 1rem;
+}
+
+.plans-selection-note span {
+  color: #5e7083;
+  line-height: 1.7;
 }
 
 /* ===================== FREE SESSIONS ===================== */
@@ -6822,7 +6906,9 @@ body {
     grid-template-columns: 1fr;
   }
 
-  .programs-intro-band {
+  .programs-intro-band,
+  .plans-intro-band,
+  .plans-selection-note {
     display: grid;
   }
 }
@@ -6834,6 +6920,7 @@ body {
 
   .about-editorial,
   .programs-intro-band,
+  .plans-intro-band,
   .results-overview-copy,
   .results-overview-points,
   .contact-service-card,

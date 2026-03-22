@@ -1,11 +1,33 @@
 import { useState } from 'react';
-import { FiCheckCircle, FiUsers, FiAward, FiArrowRight } from 'react-icons/fi';
+import { FiCheckCircle, FiUsers, FiAward, FiArrowRight, FiClock, FiZap } from 'react-icons/fi';
 import { PLAN_FEATURES } from '../utils/constants';
 import PageHero from '../components/PageHero';
 import LeadCaptureButton from '../components/LeadCaptureButton';
 import FreeSessionShowcase from '../components/FreeSessionShowcase';
 
-const durations = ['Starter', '3 Months', '6 Months', 'Long Term'];
+const durations = [
+  {
+    label: 'Starter',
+    note: 'Best for first-time members',
+    summary: 'A simple way to begin, understand the coaching style, and build your first routine.',
+  },
+  {
+    label: '3 Months',
+    note: 'Most chosen',
+    summary: 'A focused phase for building momentum, visible discipline, and measurable progress.',
+    featured: true,
+  },
+  {
+    label: '6 Months',
+    note: 'Best for stronger transformation',
+    summary: 'Ideal for members who want enough time to improve stamina, strength, and overall fitness.',
+  },
+  {
+    label: 'Long Term',
+    note: 'Best for lifestyle change',
+    summary: 'Built for long-term consistency when fitness becomes part of your everyday routine.',
+  },
+];
 
 export default function Pricing() {
   const [activePlanTab, setActivePlanTab] = useState('PRO');
@@ -33,38 +55,66 @@ export default function Pricing() {
         <div className="container">
           <div className="section-header reveal">
             <div className="section-badge">Coaching Plans</div>
-            <h2 className="section-title">Two ways to <span>train</span></h2>
-            <p className="section-subtitle">Pick the coaching rhythm you want, submit your interest, and the team will follow up personally.</p>
+            <h2 className="section-title">Choose how often you want to <span>train</span></h2>
+            <p className="section-subtitle">Select the coaching rhythm that fits your time, energy, and goals. The team will help you finalize the best option.</p>
+          </div>
+
+          <div className="plans-intro-band reveal">
+            <div>
+              <span>Membership Direction</span>
+              <h2>Simple plan selection with clear coaching paths.</h2>
+            </div>
+            <p>
+              Start with a balanced weekly routine or choose a more intensive training schedule when
+              you want faster accountability and stronger momentum.
+            </p>
           </div>
 
           <div className="plan-type-grid reveal">
             <div className={`plan-type-card ${activePlanTab === 'PRO' ? 'active' : ''}`} onClick={() => setActivePlanTab('PRO')}>
-              <span className="plan-type-badge">BALANCED</span>
+              <span className="plan-type-badge">Balanced Coaching</span>
               <div className="plan-type-icon"><FiUsers /></div>
               <h3 className="plan-type-title">PRO Plan</h3>
               <p className="plan-type-desc">A steady weekly routine for most working professionals.</p>
-              <span className="plan-type-link">3 days each week</span>
+              <div className="plan-type-meta">
+                <span><FiClock /> 3 days each week</span>
+                <span><FiZap /> Sustainable pace</span>
+              </div>
             </div>
 
             <div className={`plan-type-card ${activePlanTab === 'ADVANCE' ? 'active' : ''}`} onClick={() => setActivePlanTab('ADVANCE')}>
-              <span className="plan-type-badge premium">INTENSIVE</span>
+              <span className="plan-type-badge premium">Intensive Coaching</span>
               <div className="plan-type-icon"><FiAward /></div>
               <h3 className="plan-type-title">ADVANCE Plan</h3>
               <p className="plan-type-desc">A higher-frequency routine for faster momentum and support.</p>
-              <span className="plan-type-link">5 days each week</span>
+              <div className="plan-type-meta">
+                <span><FiClock /> 5 days each week</span>
+                <span><FiZap /> Higher accountability</span>
+              </div>
             </div>
           </div>
 
+          <div className="plans-selection-note reveal">
+            <strong>{activePlanTab === 'PRO' ? 'PRO Plan' : 'ADVANCE Plan'}</strong>
+            <span>
+              {activePlanTab === 'PRO'
+                ? 'A balanced weekly plan for members who want consistency without overload.'
+                : 'A more intensive weekly plan for members aiming for faster rhythm and closer support.'}
+            </span>
+          </div>
+
           <div className="pricing-grid reveal">
-            {durations.map((duration, index) => (
-              <div className={`pricing-card ${index === 1 ? 'popular' : ''}`} key={duration}>
-                {index === 1 ? <div className="pricing-badge">Recommended</div> : null}
-                <div className="pricing-duration">{duration}</div>
-                <div className="pricing-period">{activePlanTab} Registration</div>
-                <div className="pricing-amount" style={{ fontSize: '1.45rem' }}>
-                  Coach Callback
+            {durations.map((duration) => (
+              <div className={`pricing-card ${duration.featured ? 'popular' : ''}`} key={duration.label}>
+                {duration.featured ? <div className="pricing-badge">Recommended</div> : null}
+                <div className="pricing-card-top">
+                  <div className="pricing-duration">{duration.label}</div>
+                  <div className="pricing-period">{duration.note}</div>
                 </div>
-                <div className="pricing-per">Share your interest and our team will contact you directly</div>
+                <div className="pricing-amount" style={{ fontSize: '1.45rem' }}>
+                  {activePlanTab}
+                </div>
+                <div className="pricing-per">{duration.summary}</div>
 
                 <div className="pricing-features">
                   {PLAN_FEATURES[activePlanTab].features.map((feature) => (
@@ -81,11 +131,11 @@ export default function Pricing() {
                   context={{
                     sourcePage: 'Plans',
                     interestType: 'plan',
-                    interestLabel: `${activePlanTab} ${duration}`,
+                    interestLabel: `${activePlanTab} ${duration.label}`,
                     planType: activePlanTab,
-                    duration,
+                    duration: duration.label,
                   }}
-                  label="Register Interest"
+                  label="Send Enquiry"
                 />
               </div>
             ))}
