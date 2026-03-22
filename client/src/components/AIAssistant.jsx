@@ -74,6 +74,7 @@ export default function AIAssistant() {
         aria-label={open ? 'Close tools panel' : 'Open AI and calculator tools'}
       >
         {open ? <FiX size={22} /> : <FiMessageSquare size={22} />}
+        <span>{open ? 'Close' : 'AI Assistant'}</span>
       </button>
 
       <aside className={`ai-side-panel ${open ? '' : 'closed'}`}>

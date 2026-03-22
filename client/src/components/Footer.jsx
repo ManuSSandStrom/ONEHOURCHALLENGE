@@ -1,10 +1,50 @@
 import { Link } from 'react-router-dom';
-import { FiInstagram, FiYoutube, FiMail } from 'react-icons/fi';
+import { FiArrowUpRight, FiInstagram, FiMail, FiYoutube } from 'react-icons/fi';
+import { getWhatsAppUrl } from '../utils/constants';
+
+const footerLinks = {
+  Programs: [
+    { label: 'Fitness', to: '/programs' },
+    { label: 'Yoga', to: '/programs' },
+    { label: 'Zumba', to: '/programs' },
+  ],
+  Company: [
+    { label: 'About Us', to: '/about' },
+    { label: 'Transformations', to: '/transformations' },
+    { label: 'Plans', to: '/plans' },
+    { label: 'Contact', to: '/contact' },
+  ],
+};
 
 export default function Footer() {
   return (
     <footer className="footer" id="footer">
       <div className="container">
+        <div className="footer-cta-band reveal">
+          <div>
+            <span className="footer-kicker">OneHour Challenge</span>
+            <h2>Professional online coaching with a more engaging digital experience.</h2>
+            <p>
+              Smooth motion, clearer actions, and stronger page flow now support the same trusted
+              green brand identity.
+            </p>
+          </div>
+
+          <div className="footer-cta-actions">
+            <Link to="/plans" className="btn btn-primary">
+              View Plans <FiArrowUpRight />
+            </Link>
+            <a
+              href={getWhatsAppUrl('Hi OneHour Challenge, I would like to book a free session.')}
+              target="_blank"
+              rel="noreferrer"
+              className="btn btn-secondary"
+            >
+              WhatsApp Us <FiArrowUpRight />
+            </a>
+          </div>
+        </div>
+
         <div className="footer-grid">
           <div>
             <div className="footer-brand-name">
@@ -16,24 +56,21 @@ export default function Footer() {
               ONEHOUR <span>CHALLENGE</span>
             </div>
             <p className="footer-brand-desc">
-              Structured online fitness sessions designed for sustainable progress and a smooth member experience.
+              Structured online fitness sessions designed for sustainable progress, visible energy,
+              and a smoother member journey.
             </p>
           </div>
 
-          <div>
-            <h4 className="footer-title">Programs</h4>
-            <Link to="/programs" className="footer-link">Fitness</Link>
-            <Link to="/programs" className="footer-link">Zumba</Link>
-            <Link to="/programs" className="footer-link">Yoga</Link>
-          </div>
-
-          <div>
-            <h4 className="footer-title">Company</h4>
-            <Link to="/about" className="footer-link">About Us</Link>
-            <Link to="/transformations" className="footer-link">Transformations</Link>
-            <Link to="/plans" className="footer-link">Plans</Link>
-            <Link to="/contact" className="footer-link">Contact</Link>
-          </div>
+          {Object.entries(footerLinks).map(([title, links]) => (
+            <div key={title}>
+              <h4 className="footer-title">{title}</h4>
+              {links.map((link) => (
+                <Link key={link.label} to={link.to} className="footer-link">
+                  {link.label}
+                </Link>
+              ))}
+            </div>
+          ))}
 
           <div>
             <h4 className="footer-title">Contact</h4>
@@ -41,6 +78,7 @@ export default function Footer() {
               manoharbasappagari18@gmail.com
             </a>
             <span className="footer-link">+91 95150 22680</span>
+            <span className="footer-contact-note">Open for online coaching enquiries across India.</span>
           </div>
         </div>
 

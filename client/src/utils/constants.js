@@ -27,6 +27,39 @@ export const PLAN_FEATURES = {
   },
 };
 
+export const FREE_SESSION_OPTIONS = [
+  {
+    type: 'Yoga',
+    label: 'Wellness and Flow',
+    desc: 'Gentle strength, flexibility work, and a calmer reset for busy schedules.',
+    day: 'Tuesday and Saturday',
+    time: '7:00 PM',
+    seats: 6,
+    featured: false,
+    isNew: true,
+  },
+  {
+    type: 'Fitness',
+    label: 'Power Hour',
+    desc: 'High-energy coaching focused on fat loss, stamina, and full-body momentum.',
+    day: 'Monday and Thursday',
+    time: '6:30 AM',
+    seats: 4,
+    featured: true,
+    isNew: true,
+  },
+  {
+    type: 'Zumba',
+    label: 'Rhythm and Sweat',
+    desc: 'Cardio dance sessions that keep motivation high and movement fun.',
+    day: 'Wednesday and Friday',
+    time: '7:30 PM',
+    seats: 5,
+    featured: false,
+    isNew: true,
+  },
+];
+
 export const PLACEHOLDERS = {
   heroVideo: '[HERO VIDEO CLOUDINARY URL]',
   aboutImage: '[ABOUT IMAGE PLACEHOLDER]',

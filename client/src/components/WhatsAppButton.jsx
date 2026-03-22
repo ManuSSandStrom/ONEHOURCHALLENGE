@@ -12,6 +12,7 @@ export default function WhatsAppButton() {
       title="Chat with us on WhatsApp"
     >
       <FaWhatsapp size={32} />
+      <span>WhatsApp</span>
     </a>
   );
 }

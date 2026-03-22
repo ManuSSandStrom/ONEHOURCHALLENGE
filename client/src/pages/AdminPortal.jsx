@@ -23,7 +23,7 @@ export default function AdminPortal() {
   const [stats, setStats] = useState(null);
   const [leads, setLeads] = useState([]);
   const [contacts, setContacts] = useState([]);
-  const [statsLoading, setStatsLoading] = useState(true);
+  const [_statsLoading, setStatsLoading] = useState(true);
   const [leadsLoading, setLeadsLoading] = useState(false);
   const [contactsLoading, setContactsLoading] = useState(false);
   const [activeView, setActiveView] = useState('overview');

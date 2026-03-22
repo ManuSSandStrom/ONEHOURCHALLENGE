@@ -1,15 +1,9 @@
 import { useState } from 'react';
-import { FiCheckCircle, FiUsers, FiAward, FiCalendar, FiArrowRight } from 'react-icons/fi';
-import { FaWhatsapp } from 'react-icons/fa';
-import { PLAN_FEATURES, getWhatsAppFreeSessionUrl } from '../utils/constants';
+import { FiCheckCircle, FiUsers, FiAward, FiArrowRight } from 'react-icons/fi';
+import { PLAN_FEATURES } from '../utils/constants';
 import PageHero from '../components/PageHero';
 import LeadCaptureButton from '../components/LeadCaptureButton';
-
-const FREE_SESSIONS = [
-  { type: 'Yoga', date: 'Wellness and Flow', desc: 'Flexibility, mindfulness, and stress relief.' },
-  { type: 'Fitness', date: 'Power Hour', desc: 'Muscle toning, stamina, and core work.' },
-  { type: 'Zumba', date: 'Rhythm and Sweat', desc: 'High-energy cardio dance training.' },
-];
+import FreeSessionShowcase from '../components/FreeSessionShowcase';
 
 const durations = ['Starter', '3 Months', '6 Months', 'Long Term'];
 
@@ -22,55 +16,16 @@ export default function Pricing() {
         badge="Plans"
         title="Choose the"
         highlight="right fit"
-        description="This website is now registration-first. Pick a plan style, send your lead, and the team will contact you directly."
+        description="Compare coaching rhythms, start with a free session if you want, and let the team guide you toward the plan that fits your goals."
       />
 
       <section className="section section-dark">
         <div className="container">
-          <div className="section-header reveal">
-            <div className="section-badge">Free Trial Sessions</div>
-            <h2 className="section-title">Try a <span>free session</span> first</h2>
-          </div>
-
-          <div className="free-sessions-grid reveal">
-            {FREE_SESSIONS.map((session, index) => (
-              <div className={`free-session-card ${index === 1 ? 'highlighted' : ''}`} key={session.type}>
-                <span className="free-session-tag">FREE</span>
-                <h4 className="free-session-card-title" style={{ fontSize: '1.2rem', marginBottom: '8px' }}>
-                  {session.type}
-                </h4>
-                <p className="free-session-card-desc" style={{ marginBottom: '16px', color: 'var(--color-gray-500)' }}>
-                  {session.desc}
-                </p>
-                <div className="free-session-meta" style={{ marginBottom: '20px' }}>
-                  <span style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--color-gray-600)' }}>
-                    <FiCalendar size={14} style={{ color: 'var(--color-primary)' }} /> {session.date}
-                  </span>
-                </div>
-                <a
-                  className="free-session-register"
-                  href={getWhatsAppFreeSessionUrl(session.type)}
-                  target="_blank"
-                  rel="noreferrer"
-                  style={{
-                    width: '100%',
-                    justifyContent: 'center',
-                    background: 'rgba(0, 109, 60, 0.08)',
-                    padding: '12px',
-                    borderRadius: 'var(--radius-md)',
-                    color: 'var(--color-gray-800)',
-                    border: '1px solid rgba(0, 109, 60, 0.1)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '8px',
-                    cursor: 'pointer',
-                  }}
-                >
-                  <FaWhatsapp /> Register via WhatsApp
-                </a>
-              </div>
-            ))}
-          </div>
+          <FreeSessionShowcase
+            title="Try a"
+            highlight="free session"
+            subtitle="Visitors who are not ready to choose a full plan yet can still take an easy first step with a polished WhatsApp booking flow."
+          />
         </div>
       </section>
 
@@ -79,7 +34,7 @@ export default function Pricing() {
           <div className="section-header reveal">
             <div className="section-badge">Coaching Plans</div>
             <h2 className="section-title">Two ways to <span>train</span></h2>
-            <p className="section-subtitle">No payment flow here. Register your interest and the team will contact you personally.</p>
+            <p className="section-subtitle">Pick the coaching rhythm you want, submit your interest, and the team will follow up personally.</p>
           </div>
 
           <div className="plan-type-grid reveal">

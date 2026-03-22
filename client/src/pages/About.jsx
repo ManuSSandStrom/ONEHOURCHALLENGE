@@ -18,7 +18,7 @@ export default function About() {
         eyebrow="OneHour Challenge Method"
         title="Built for"
         highlight="Discipline"
-        description="OneHour Challenge helps busy people train with structure, accountability, and clear progression."
+        description="OneHour Challenge helps busy people train with structure, accountability, and a coaching rhythm that fits real life."
         actions={(
           <>
             <Link to="/programs" className="btn btn-primary btn-lg" style={{ textDecoration: 'none' }}>
@@ -59,9 +59,9 @@ export default function About() {
                 training system that helps members stay consistent instead of restarting every month.
               </p>
               <p className="about-text">
-                That balance is what makes the platform feel more professional. Every page, program,
-                and registration flow now connects back to a clear coaching journey rather than a
-                single scrolling homepage.
+                The experience is designed to feel premium without becoming complicated. Members
+                should understand the value quickly, trust the process, and know exactly where to go
+                next when they are ready to start.
               </p>
 
               <div className="about-editorial-points">

@@ -55,8 +55,8 @@ export default function Programs() {
               <h2>Each route here is a real destination, not a section preview.</h2>
             </div>
             <p>
-              This page now focuses only on programs, with clearer decision-making and stronger visual
-              separation from the rest of the website.
+              Explore each training direction with stronger visuals, better contrast, and clearer
+              decision-making so visitors understand the difference at a glance.
             </p>
           </div>
 

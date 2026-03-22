@@ -1,3 +1,5 @@
+import { motion as Motion } from 'framer-motion';
+
 export default function PageHero({
   badge,
   eyebrow,
@@ -7,10 +9,20 @@ export default function PageHero({
   actions,
   metrics = [],
 }) {
+  const previewMetrics = metrics.slice(0, 3);
+
   return (
     <section className="page-hero">
+      <div className="page-hero-aurora page-hero-aurora-left"></div>
+      <div className="page-hero-aurora page-hero-aurora-right"></div>
       <div className="container">
-        <div className="page-hero-card reveal">
+        <Motion.div
+          className="page-hero-card reveal"
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+        >
           <div className="page-hero-layout">
             <div className="page-hero-main">
               {badge ? <div className="section-badge">{badge}</div> : null}
@@ -20,9 +32,9 @@ export default function PageHero({
               </h1>
               {description ? <p className="page-hero-description">{description}</p> : null}
               {actions ? <div className="page-hero-actions">{actions}</div> : null}
-              {metrics.length ? (
+              {previewMetrics.length ? (
                 <div className="page-hero-metrics">
-                  {metrics.map((metric) => (
+                  {previewMetrics.map((metric) => (
                     <div className="page-hero-metric" key={metric.label}>
                       <strong>{metric.value}</strong>
                       <span>{metric.label}</span>
@@ -31,8 +43,34 @@ export default function PageHero({
                 </div>
               ) : null}
             </div>
+
+            <div className="page-hero-side">
+              <div className="page-hero-side-card page-hero-side-card-primary">
+                <span className="page-hero-side-kicker">Premium Online Coaching</span>
+                <strong>Move with clarity</strong>
+                <p>Live sessions, fast registration, and a cleaner path from interest to action.</p>
+              </div>
+
+              <div className="page-hero-side-card">
+                <span className="page-hero-side-kicker">Why it feels better</span>
+                <div className="page-hero-side-list">
+                  <div>
+                    <strong>Smooth interactions</strong>
+                    <span>Animated entry, layered depth, and clearer section hierarchy.</span>
+                  </div>
+                  <div>
+                    <strong>Focused decisions</strong>
+                    <span>Every page leads visitors toward one clean next step.</span>
+                  </div>
+                  <div>
+                    <strong>Faster follow-up</strong>
+                    <span>WhatsApp and AI access stay visible without interrupting browsing.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
+        </Motion.div>
       </div>
     </section>
   );
