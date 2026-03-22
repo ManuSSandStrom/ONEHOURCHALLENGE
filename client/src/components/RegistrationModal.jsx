@@ -87,7 +87,7 @@ export default function RegistrationModal({ isOpen, onClose, context }) {
                   <span className="registration-source-pill">{context?.sourcePage || 'Website'}</span>
                 </div>
                 <h4>{context?.interestLabel || 'General Registration'}</h4>
-                <p>Your request will be saved in the secure team workspace for a direct follow-up.</p>
+                <p>Share your details and the OneHour Challenge team will reach out to help with the right next step.</p>
               </div>
 
               <form onSubmit={handleSubmit} className="registration-form">
@@ -124,7 +124,7 @@ export default function RegistrationModal({ isOpen, onClose, context }) {
                 </div>
 
                 <div className="registration-actions">
-                  <p className="registration-actions-note">We review every enquiry personally before contacting you.</p>
+                  <p className="registration-actions-note">Every registration is reviewed personally by the OneHour Challenge team.</p>
                   <button type="submit" className="btn btn-primary btn-lg registration-submit" disabled={submitting}>
                     {submitting ? 'Submitting...' : 'Submit Registration'}
                   </button>
@@ -137,10 +137,10 @@ export default function RegistrationModal({ isOpen, onClose, context }) {
             <div className="registration-success-icon">
               <FiCheckCircle />
             </div>
-            <h3>Lead Added Successfully</h3>
+            <h3>Registration Received</h3>
             <p>
-              This registration was saved under <strong>{context?.sourcePage || 'General'}</strong> for
-              <strong> {context?.interestLabel || 'General Registration'}</strong>.
+              Your request for <strong>{context?.interestLabel || 'General Registration'}</strong> has been
+              received. The OneHour Challenge team will contact you soon.
             </p>
             <button className="btn btn-primary" onClick={onClose}>Close</button>
           </div>

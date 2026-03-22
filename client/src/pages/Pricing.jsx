@@ -24,7 +24,7 @@ export default function Pricing() {
           <FreeSessionShowcase
             title="Try a"
             highlight="free session"
-            subtitle="Visitors who are not ready to choose a full plan yet can still take an easy first step with a polished WhatsApp booking flow."
+            subtitle="If you want to experience the coaching style first, book a free session and see which plan feels right for you."
           />
         </div>
       </section>
@@ -42,7 +42,7 @@ export default function Pricing() {
               <span className="plan-type-badge">BALANCED</span>
               <div className="plan-type-icon"><FiUsers /></div>
               <h3 className="plan-type-title">PRO Plan</h3>
-              <p className="plan-type-desc">A steady weekly structure for most working professionals.</p>
+              <p className="plan-type-desc">A steady weekly routine for most working professionals.</p>
               <span className="plan-type-link">3 days each week</span>
             </div>
 
@@ -50,7 +50,7 @@ export default function Pricing() {
               <span className="plan-type-badge premium">INTENSIVE</span>
               <div className="plan-type-icon"><FiAward /></div>
               <h3 className="plan-type-title">ADVANCE Plan</h3>
-              <p className="plan-type-desc">A higher-frequency structure for faster accountability.</p>
+              <p className="plan-type-desc">A higher-frequency routine for faster momentum and support.</p>
               <span className="plan-type-link">5 days each week</span>
             </div>
           </div>
@@ -64,7 +64,7 @@ export default function Pricing() {
                 <div className="pricing-amount" style={{ fontSize: '1.45rem' }}>
                   Coach Callback
                 </div>
-                <div className="pricing-per">We review your lead and contact you directly</div>
+                <div className="pricing-per">Share your interest and our team will contact you directly</div>
 
                 <div className="pricing-features">
                   {PLAN_FEATURES[activePlanTab].features.map((feature) => (

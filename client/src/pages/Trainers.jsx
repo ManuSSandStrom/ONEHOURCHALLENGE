@@ -132,7 +132,7 @@ export default function Trainers() {
           <div className="section-header reveal">
             <div className="section-badge">Why Our Team Works</div>
             <h2 className="section-title">Meet Your <span>Coaches</span></h2>
-            <p className="section-subtitle">A polished coaching setup designed to keep your training consistent and easy to follow.</p>
+            <p className="section-subtitle">A dedicated coaching team designed to keep your training consistent, motivating, and easy to follow.</p>
           </div>
 
           <div className="trainers-grid reveal">
@@ -198,7 +198,7 @@ export default function Trainers() {
             </div>
 
             <h3 className="trainers-lock-title">Restricted Sign In</h3>
-            <p className="trainers-lock-text">Authorized team members can continue into the secure workspace from here.</p>
+            <p className="trainers-lock-text">Authorized team members can continue through secure sign-in from here.</p>
 
             <form onSubmit={handleSecureLogin} className="admin-auth-form">
               <label className="admin-auth-field">

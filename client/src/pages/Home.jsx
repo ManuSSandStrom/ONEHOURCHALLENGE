@@ -51,23 +51,23 @@ const pageLinks = [
 const quickPoints = [
   {
     icon: <FiLayers />,
-    title: 'Cinematic First Impression',
-    description: 'Layered visuals, premium depth, and a cleaner hierarchy make the brand feel more serious and memorable.',
+    title: 'Live Guided Sessions',
+    description: 'Every class is coach-led, time-focused, and built to help members train with clarity and confidence.',
   },
   {
     icon: <FiTrendingUp />,
-    title: 'Stronger Conversion Flow',
-    description: 'Free sessions, plans, WhatsApp, and registration now guide visitors forward without confusion.',
+    title: 'Free Sessions to Start',
+    description: 'Try yoga, fitness, or zumba before choosing a full plan and experience the OneHour Challenge style live.',
   },
   {
     icon: <FiUsers />,
-    title: 'Member-Focused Journey',
-    description: 'Each page supports trust, discovery, and action so the website feels helpful instead of flat.',
+    title: 'Programs for Every Goal',
+    description: 'From fat loss and stamina to mobility and strength, there is a guided path for every member.',
   },
   {
     icon: <FiShield />,
-    title: 'Professional Finish',
-    description: 'Smoother animation, better spacing, and polished floating tools make the whole site feel client-ready.',
+    title: 'Support That Keeps You Going',
+    description: 'Plans, trainers, WhatsApp support, and easy registration help members stay consistent week after week.',
   },
 ];
 
@@ -113,13 +113,13 @@ export default function Home() {
             </div>
 
             <h1 className="hero-title">
-              One hour of training.
+              One hour of coaching.
               <br />
-              <span>A website that finally feels alive.</span>
+              <span>Real results for real schedules.</span>
             </h1>
             <p className="hero-description">
-              OneHour Challenge now feels sharper, smoother, and more professional from the very first
-              scroll, while keeping the same trusted coaching, color story, and core content.
+              Join live online sessions in fitness, yoga, zumba, HIIT, and personal coaching built
+              for busy people who want energy, discipline, and steady progress.
             </p>
 
             <div className="hero-pills">
@@ -161,8 +161,8 @@ export default function Home() {
 
             <h3>{spotlightSession.type}</h3>
             <p>
-              <strong>{spotlightSession.label}</strong> with a smoother booking path and stronger urgency so
-              visitors notice the offer immediately.
+              <strong>{spotlightSession.label}</strong> is a free guided class that lets you experience the
+              OneHour Challenge energy before choosing your full plan.
             </p>
 
             <div className="hero-live-stats">
@@ -220,7 +220,7 @@ export default function Home() {
           <FreeSessionShowcase
             title="Start with a"
             highlight="free session"
-            subtitle="The free-session offer now appears earlier on the homepage, with brighter urgency and a cleaner WhatsApp path to help more visitors act fast."
+            subtitle="Choose a free yoga, fitness, or zumba session and experience the coaching style, energy, and pace before you join."
           />
         </div>
       </section>
@@ -228,12 +228,13 @@ export default function Home() {
       <section className="section section-darker">
         <div className="container">
           <div className="section-header reveal">
-            <div className="section-badge">Explore the Experience</div>
+            <div className="section-badge">Explore OneHour Challenge</div>
             <h2 className="section-title">
-              Every page now feels more <span>intentional</span>
+              Everything you need is <span>in one place</span>
             </h2>
             <p className="section-subtitle">
-              Visitors can move through the website faster, understand the offer better, and reach the right action without dead space or dull sections.
+              Explore programs, compare plans, meet the trainers, view real transformations, and
+              contact the team with confidence.
             </p>
           </div>
 
@@ -254,12 +255,13 @@ export default function Home() {
       <section className="section section-dark">
         <div className="container">
           <div className="section-header reveal">
-            <div className="section-badge">Why It Feels Better</div>
+            <div className="section-badge">Why Members Choose Us</div>
             <h2 className="section-title">
-              A stronger UI and UX with <span>real purpose</span>
+              OneHour Challenge helps you <span>stay consistent</span>
             </h2>
             <p className="section-subtitle">
-              The redesign keeps the same green identity and content foundation, but presents it with more motion, urgency, and professional polish.
+              Members join for guided sessions, free trial access, expert support, and programs that
+              fit real routines instead of unrealistic schedules.
             </p>
           </div>
 
@@ -279,10 +281,10 @@ export default function Home() {
         <div className="container reveal">
           <div className="section-badge">Get Started</div>
           <h2 className="cta-title">
-            Ready to turn a better look into <span style={{ color: 'var(--color-primary)' }}>more action</span>?
+            Ready to begin your <span style={{ color: 'var(--color-primary)' }}>OneHour Challenge</span>?
           </h2>
           <p className="cta-subtitle">
-            Visitors can now explore, trust, and register with less friction from the home page onward.
+            Book a free session, choose your plan, and let the team guide you toward the right next step.
           </p>
           <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap' }}>
             <LeadCaptureButton

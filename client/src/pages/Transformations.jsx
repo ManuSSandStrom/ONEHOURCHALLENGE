@@ -66,7 +66,7 @@ export default function Transformations() {
           <h2 className="cta-title">
             Your transformation is <span style={{ color: 'var(--color-primary)' }}>next</span>
           </h2>
-          <p className="cta-subtitle">Turn inspiration into a real lead with a clean registration flow.</p>
+          <p className="cta-subtitle">Take inspiration from real results and begin your own OneHour Challenge journey today.</p>
           <LeadCaptureButton
             className="btn btn-primary btn-lg"
             style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}

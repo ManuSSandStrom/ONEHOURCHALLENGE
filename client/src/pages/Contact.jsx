@@ -49,7 +49,7 @@ export default function Contact() {
         eyebrow="Direct communication page"
         title="Let's plan your"
         highlight="next step"
-        description="Share your details and goals. Your enquiry goes straight to the team for a clean internal follow-up."
+        description="Share your details and goals. The OneHour Challenge team will contact you and help you choose the right next step."
         metrics={[
           { value: '1 form', label: 'Direct Lead Flow' },
           { value: 'Mon-Sat', label: 'Support Window' },
@@ -63,15 +63,15 @@ export default function Contact() {
             <div className="contact-service-card">
               <FiMail />
               <div>
-                <strong>Professional enquiries</strong>
-                <span>Clear registration and support handling without extra clutter.</span>
+                <strong>Program guidance</strong>
+                <span>Ask about training styles, free sessions, or the right plan for your goal.</span>
               </div>
             </div>
             <div className="contact-service-card">
               <FiClock />
               <div>
-                <strong>Fast follow-up</strong>
-                <span>Form submissions are structured to reduce admin delays and manual sorting.</span>
+                <strong>Fast response</strong>
+                <span>Our team follows up quickly to help you begin without confusion or delay.</span>
               </div>
             </div>
             <div className="contact-service-card">

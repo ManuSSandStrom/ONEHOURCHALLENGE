@@ -18,6 +18,7 @@ import HowItWorks from './pages/HowItWorks';
 import WhatsAppButton from './components/WhatsAppButton';
 import ScrollReveal from './components/ScrollReveal';
 import PageProgressBar from './components/PageProgressBar';
+import SEO from './components/SEO';
 
 function App() {
   const location = useLocation();
@@ -33,6 +34,7 @@ function App() {
 
   return (
     <>
+      <SEO />
       <ScrollReveal />
       {!isAdminRoute ? <PageProgressBar /> : null}
       {!isAdminRoute ? <Navbar /> : null}

@@ -59,9 +59,9 @@ export default function About() {
                 training system that helps members stay consistent instead of restarting every month.
               </p>
               <p className="about-text">
-                The experience is designed to feel premium without becoming complicated. Members
-                should understand the value quickly, trust the process, and know exactly where to go
-                next when they are ready to start.
+                OneHour Challenge is built for people who want clear guidance, motivating sessions,
+                and a routine they can actually sustain. The goal is simple: help members feel
+                stronger, healthier, and more confident with every week of training.
               </p>
 
               <div className="about-editorial-points">
@@ -71,11 +71,11 @@ export default function About() {
                 </div>
                 <div>
                   <span>Better accountability</span>
-                  <strong>Each enquiry and registration connects into a real follow-up workflow.</strong>
+                  <strong>Members stay on track with guided coaching, clear plans, and regular support.</strong>
                 </div>
                 <div>
-                  <span>Professional identity</span>
-                  <strong>The experience now feels like a complete coaching website, not a landing page.</strong>
+                  <span>Supportive community</span>
+                  <strong>Every member gets a welcoming fitness space with energy, structure, and encouragement.</strong>
                 </div>
               </div>
             </div>
@@ -141,7 +141,7 @@ export default function About() {
           <h2 className="cta-title">
             Ready to <span style={{ color: 'var(--color-primary)' }}>start</span>?
           </h2>
-          <p className="cta-subtitle">Send a direct registration and let the team follow up from the secure workspace.</p>
+          <p className="cta-subtitle">Send your registration and let the OneHour Challenge team help you begin with confidence.</p>
           <LeadCaptureButton
             className="btn btn-primary btn-lg"
             style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}

@@ -46,25 +46,25 @@ export default function PageHero({
 
             <div className="page-hero-side">
               <div className="page-hero-side-card page-hero-side-card-primary">
-                <span className="page-hero-side-kicker">Premium Online Coaching</span>
-                <strong>Move with clarity</strong>
-                <p>Live sessions, fast registration, and a cleaner path from interest to action.</p>
+                <span className="page-hero-side-kicker">OneHour Challenge</span>
+                <strong>Train with focus</strong>
+                <p>Live 1-hour sessions designed to help members stay consistent, energetic, and goal-driven.</p>
               </div>
 
               <div className="page-hero-side-card">
-                <span className="page-hero-side-kicker">Why it feels better</span>
+                <span className="page-hero-side-kicker">What members get</span>
                 <div className="page-hero-side-list">
                   <div>
-                    <strong>Smooth interactions</strong>
-                    <span>Animated entry, layered depth, and clearer section hierarchy.</span>
+                    <strong>Expert-led sessions</strong>
+                    <span>Certified coaches guide every workout with clear pacing and practical support.</span>
                   </div>
                   <div>
-                    <strong>Focused decisions</strong>
-                    <span>Every page leads visitors toward one clean next step.</span>
+                    <strong>Programs for every goal</strong>
+                    <span>Build strength, improve stamina, increase flexibility, or enjoy high-energy cardio.</span>
                   </div>
                   <div>
-                    <strong>Faster follow-up</strong>
-                    <span>WhatsApp and AI access stay visible without interrupting browsing.</span>
+                    <strong>Simple next steps</strong>
+                    <span>Book a free session, explore plans, or register your interest in just a few clicks.</span>
                   </div>
                 </div>
               </div>

@@ -51,12 +51,12 @@ export default function Programs() {
         <div className="container">
           <div className="programs-intro-band reveal">
             <div>
-              <span>Program Architecture</span>
-              <h2>Each route here is a real destination, not a section preview.</h2>
+              <span>Choose Your Training Style</span>
+              <h2>Find the program that matches your goal, energy, and schedule.</h2>
             </div>
             <p>
-              Explore each training direction with stronger visuals, better contrast, and clearer
-              decision-making so visitors understand the difference at a glance.
+              Whether you want fat loss, strength, flexibility, endurance, or guided personal
+              coaching, OneHour Challenge has a path built for you.
             </p>
           </div>
 
@@ -112,7 +112,7 @@ export default function Programs() {
           <h2 className="cta-title">
             Find Your <span style={{ color: 'var(--color-primary)' }}>Program</span>
           </h2>
-          <p className="cta-subtitle">Each registration is tagged by program so the team can review enquiries more clearly.</p>
+          <p className="cta-subtitle">Choose the program that suits you best and let the team guide your first step.</p>
           <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap' }}>
             <Link to="/plans" className="btn btn-primary btn-lg" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
               View Plans <FiArrowRight />

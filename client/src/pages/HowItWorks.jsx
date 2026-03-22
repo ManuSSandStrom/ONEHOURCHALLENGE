@@ -61,8 +61,8 @@ export default function HowItWorks() {
             </div>
             <div className="process-strip-item">
               <span>02</span>
-              <strong>Send a clean registration</strong>
-              <p>Leads move directly into the secure workspace with source tagging and better internal visibility.</p>
+              <strong>Send your registration</strong>
+              <p>Share your details, preferred plan, or session choice and the team will contact you directly.</p>
             </div>
             <div className="process-strip-item">
               <span>03</span>

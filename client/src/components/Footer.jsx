@@ -23,10 +23,10 @@ export default function Footer() {
         <div className="footer-cta-band reveal">
           <div>
             <span className="footer-kicker">OneHour Challenge</span>
-            <h2>Professional online coaching with a more engaging digital experience.</h2>
+            <h2>Live online coaching for strength, energy, flexibility and long-term consistency.</h2>
             <p>
-              Smooth motion, clearer actions, and stronger page flow now support the same trusted
-              green brand identity.
+              Join guided 1-hour sessions, explore plans that fit your routine, and start building
+              results with OneHour Challenge from anywhere in India.
             </p>
           </div>
 
@@ -56,8 +56,8 @@ export default function Footer() {
               ONEHOUR <span>CHALLENGE</span>
             </div>
             <p className="footer-brand-desc">
-              Structured online fitness sessions designed for sustainable progress, visible energy,
-              and a smoother member journey.
+              Guided online fitness sessions designed for sustainable progress, visible energy, and
+              support that helps members stay consistent.
             </p>
           </div>
 

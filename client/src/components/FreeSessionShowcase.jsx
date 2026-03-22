@@ -25,7 +25,7 @@ export default function FreeSessionShowcase({
             New
           </span>
           <strong>Limited seats available for free</strong>
-          <p>WhatsApp booking closes as soon as the live slots for this week are filled.</p>
+          <p>Reserve through WhatsApp before this week&apos;s live slots are filled.</p>
         </div>
       </div>
 
