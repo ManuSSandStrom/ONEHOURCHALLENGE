@@ -7745,8 +7745,22 @@ body {
     border-radius: 22px;
   }
 
+  .hero.home-hero {
+    min-height: auto;
+    padding-bottom: 54px;
+  }
+
   .hero-home-shell {
     padding-top: 152px;
+  }
+
+  .hero-stats-bar {
+    position: static;
+    margin: 28px 24px 0;
+    border-radius: 26px;
+    left: auto;
+    right: auto;
+    bottom: auto;
   }
 
   .hero-live-stats {
@@ -7755,10 +7769,6 @@ body {
 }
 
 @media (max-width: 768px) {
-  .hero.home-hero {
-    padding-bottom: 220px;
-  }
-
   .hero-copy-column {
     justify-items: stretch;
   }
@@ -7816,6 +7826,11 @@ body {
   .whatsapp-float {
     bottom: 86px;
   }
+
+  .hero-stats-bar {
+    margin: 24px 16px 0;
+    padding: 22px 0;
+  }
 }
 
 @media (max-width: 580px) {
@@ -7830,6 +7845,13 @@ body {
   .hero-live-action,
   .free-session-register {
     min-height: 52px;
+  }
+
+  .hero-live-action,
+  .free-session-register,
+  .hero-alert-strip {
+    padding-left: 16px;
+    padding-right: 16px;
   }
 
   .page-hero-actions {
@@ -7855,5 +7877,95 @@ body {
 
   .ai-side-panel {
     width: 100%;
+  }
+
+  .free-session-card-head,
+  .hero-live-card-head {
+    align-items: flex-start;
+  }
+
+  .free-session-register,
+  .hero-live-action {
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .hero-stats-bar {
+    border-radius: 22px;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    padding: 12px 0;
+  }
+
+  .navbar .container {
+    padding: 12px 14px;
+    border-radius: 20px;
+  }
+
+  .hero-home-shell {
+    gap: 24px;
+    padding-top: 122px;
+  }
+
+  .hero-top-label,
+  .hero-alert-strip,
+  .hero-trust-strip {
+    width: 100%;
+  }
+
+  .hero-trust-strip span {
+    justify-content: center;
+    flex: 1 1 calc(50% - 12px);
+    min-width: 130px;
+  }
+
+  .hero-live-card,
+  .page-hero-card,
+  .free-session-spotlight,
+  .footer-cta-band,
+  .free-session-card,
+  .home-page-link-card,
+  .home-benefit-card {
+    padding: 20px;
+    border-radius: 22px;
+  }
+
+  .page-hero-side-card,
+  .hero-live-stats div,
+  .page-hero-metric {
+    padding: 16px;
+    border-radius: 18px;
+  }
+
+  .hero-stats-bar {
+    margin: 20px 12px 0;
+  }
+
+  .hero-stat-label {
+    letter-spacing: 0.02em;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .reveal,
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
   }
 }
