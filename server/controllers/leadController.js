@@ -8,6 +8,7 @@ export const createLead = async (req, res) => {
       mobile,
       gender,
       age,
+      location,
       source = 'registration',
       sourcePage,
       sourcePath,
@@ -18,16 +19,17 @@ export const createLead = async (req, res) => {
       message = null,
     } = req.body;
 
-    if (!name || !mobile || !gender || !age || !sourcePage) {
-      return res.status(400).json({ error: 'Name, mobile, gender, age, and source page are required' });
+    if (!name || !mobile || !age || !sourcePage) {
+      return res.status(400).json({ error: 'Name, mobile, age, and source page are required' });
     }
 
     const lead = await Lead.create({
       name,
       email: email || null,
       mobile,
-      gender,
+      gender: gender || null,
       age: Number(age),
+      location: location || null,
       source,
       sourcePage,
       sourcePath: sourcePath || null,

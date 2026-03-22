@@ -227,7 +227,9 @@ export default function AdminPortal() {
         <span>{lead.interestLabel}</span>
         {lead.planType ? <span>{lead.planType}</span> : null}
         {lead.duration ? <span>{lead.duration}</span> : null}
-        <span>{lead.gender}, {lead.age}</span>
+        <span>{lead.age} years</span>
+        {lead.location ? <span>{lead.location}</span> : null}
+        {lead.gender ? <span>{lead.gender}</span> : null}
       </div>
       {lead.message ? <p className="admin-lead-note">{lead.message}</p> : null}
       <p className="admin-lead-date">{new Date(lead.createdAt).toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' })}</p>
