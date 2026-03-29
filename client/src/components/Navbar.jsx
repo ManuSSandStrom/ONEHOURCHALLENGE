@@ -9,6 +9,7 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
+    handleScroll();
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -17,6 +18,14 @@ export default function Navbar() {
     setMobileOpen(false);
     window.scrollTo(0, 0);
   }, [location]);
+
+  useEffect(() => {
+    document.body.style.overflow = mobileOpen ? 'hidden' : '';
+
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [mobileOpen]);
 
   const isActive = (path) => {
     if (path === '/plans') {
@@ -54,7 +63,12 @@ export default function Navbar() {
 
           <div className="navbar-actions">
             <Link to="/plans" className="btn btn-sm btn-primary" style={{ textDecoration: 'none' }}>Join Now</Link>
-            <button className="mobile-menu-btn" onClick={() => setMobileOpen(true)}>
+            <button
+              className="mobile-menu-btn"
+              type="button"
+              aria-label="Open menu"
+              onClick={() => setMobileOpen(true)}
+            >
               <FiMenu />
             </button>
           </div>
@@ -75,7 +89,12 @@ export default function Navbar() {
                 <span>CHALLENGE</span>
               </span>
             </div>
-            <button className="mobile-nav-close" onClick={() => setMobileOpen(false)}>
+            <button
+              className="mobile-nav-close"
+              type="button"
+              aria-label="Close menu"
+              onClick={() => setMobileOpen(false)}
+            >
               <FiX size={24} />
             </button>
           </div>

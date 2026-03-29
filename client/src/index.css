@@ -8768,3 +8768,747 @@ body {
     transform: none;
   }
 }
+
+/* ===================== FINAL EXPERIENCE POLISH ===================== */
+.navbar {
+  padding: 14px 0;
+}
+
+.navbar .container {
+  padding: 14px 18px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(16, 33, 58, 0.08);
+  box-shadow: 0 18px 40px rgba(16, 33, 58, 0.08);
+  backdrop-filter: blur(18px);
+}
+
+.navbar.scrolled .container {
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 20px 44px rgba(16, 33, 58, 0.12);
+}
+
+.navbar-logo {
+  min-width: 0;
+}
+
+.navbar-link {
+  color: #315169;
+}
+
+.navbar-link:hover,
+.navbar.scrolled .navbar-link:hover {
+  color: #10213a;
+}
+
+.navbar-actions {
+  gap: 10px;
+}
+
+.navbar-actions .btn {
+  min-height: 46px;
+}
+
+.mobile-menu-btn {
+  width: 46px;
+  height: 46px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.84);
+  border: 1px solid rgba(16, 33, 58, 0.08);
+  color: #10213a;
+}
+
+.mobile-nav-body {
+  gap: 8px;
+}
+
+.mobile-nav-link {
+  border-radius: 18px;
+  border-bottom: none;
+  padding: 14px 16px;
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.mobile-nav-link:hover {
+  padding-left: 18px;
+}
+
+.mobile-nav-cta {
+  margin-top: 12px;
+}
+
+.footer-grid {
+  align-items: start;
+}
+
+.footer-link,
+.footer-copy,
+.footer-contact-note {
+  overflow-wrap: anywhere;
+}
+
+.footer-bottom {
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.fitness-home-hero {
+  position: relative;
+  overflow: hidden;
+  padding: 160px 0 72px;
+  background:
+    radial-gradient(circle at top left, rgba(16, 185, 129, 0.18), transparent 28%),
+    radial-gradient(circle at 88% 18%, rgba(0, 109, 60, 0.14), transparent 24%),
+    linear-gradient(180deg, #fcfffd 0%, #edf5f0 100%);
+}
+
+.fitness-home-hero::before,
+.fitness-home-hero::after {
+  content: "";
+  position: absolute;
+  border-radius: 999px;
+  pointer-events: none;
+}
+
+.fitness-home-hero::before {
+  top: 92px;
+  right: -120px;
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.16), transparent 70%);
+}
+
+.fitness-home-hero::after {
+  bottom: -140px;
+  left: -80px;
+  width: 280px;
+  height: 280px;
+  background: radial-gradient(circle, rgba(0, 109, 60, 0.14), transparent 72%);
+}
+
+.fitness-hero-layout {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(340px, 0.85fr);
+  gap: 28px;
+  align-items: center;
+}
+
+.fitness-home-kicker,
+.fitness-flow-kicker,
+.fitness-trainer-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: rgba(0, 109, 60, 0.1);
+  color: var(--color-primary);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.fitness-home-title {
+  margin-top: 18px;
+  max-width: 760px;
+  color: #10213a;
+  font-family: var(--font-heading);
+  font-size: clamp(2.8rem, 6vw, 5rem);
+  line-height: 0.98;
+}
+
+.fitness-home-title span {
+  color: var(--color-primary);
+}
+
+.fitness-home-summary {
+  max-width: 700px;
+  margin-top: 20px;
+  color: #54697b;
+  font-size: 1.06rem;
+  line-height: 1.8;
+}
+
+.fitness-home-actions,
+.fitness-close-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 30px;
+}
+
+.fitness-home-actions .btn,
+.fitness-close-actions .btn {
+  text-decoration: none;
+}
+
+.fitness-home-mini-points {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.fitness-home-mini-points span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.86);
+  border: 1px solid rgba(16, 33, 58, 0.08);
+  color: #365164;
+  font-size: 0.88rem;
+  font-weight: 700;
+  box-shadow: 0 18px 44px rgba(16, 33, 58, 0.05);
+}
+
+.fitness-home-mini-points svg {
+  color: var(--color-primary);
+}
+
+.fitness-hero-panel,
+.fitness-program-card,
+.fitness-experience-copy,
+.fitness-flow-panel,
+.fitness-link-card,
+.fitness-trainer-card,
+.fitness-review-card,
+.fitness-contact-card,
+.fitness-close-band {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(16, 33, 58, 0.08);
+  border-radius: 30px;
+  box-shadow: 0 24px 60px rgba(16, 33, 58, 0.08);
+}
+
+.fitness-hero-panel {
+  padding: 30px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(240, 247, 244, 0.96) 100%);
+}
+
+.fitness-hero-panel::before,
+.fitness-close-band::before {
+  content: "";
+  position: absolute;
+  inset: auto -16% -42% 42%;
+  height: 220px;
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.2), transparent 70%);
+}
+
+.fitness-hero-panel-head {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.fitness-hero-panel-badge,
+.fitness-hero-panel-note {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.fitness-hero-panel-badge {
+  background: #edf8f1;
+  color: #1c6b44;
+}
+
+.fitness-hero-panel-note {
+  background: rgba(16, 33, 58, 0.06);
+  color: #10213a;
+}
+
+.fitness-hero-panel-grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 14px;
+  margin-top: 22px;
+}
+
+.fitness-hero-surface {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 14px;
+  align-items: start;
+  padding: 18px;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.86);
+  border: 1px solid rgba(16, 33, 58, 0.08);
+  animation: floatingCard 6s ease-in-out infinite;
+}
+
+.fitness-hero-surface:nth-child(2) {
+  animation-delay: 0.8s;
+}
+
+.fitness-hero-surface:nth-child(3) {
+  animation-delay: 1.6s;
+}
+
+.fitness-hero-surface-icon,
+.fitness-program-icon,
+.fitness-contact-icon,
+.fitness-review-initial {
+  display: grid;
+  place-items: center;
+  width: 54px;
+  height: 54px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, rgba(0, 109, 60, 0.14), rgba(16, 185, 129, 0.08));
+  color: var(--color-primary);
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+.fitness-hero-surface h2,
+.fitness-program-card h3,
+.fitness-experience-point h3,
+.fitness-flow-card h3,
+.fitness-link-card h3,
+.fitness-trainer-card h3,
+.fitness-review-card h3,
+.fitness-contact-card h3 {
+  color: #10213a;
+}
+
+.fitness-hero-surface h2 {
+  font-size: 1.02rem;
+}
+
+.fitness-hero-surface p,
+.fitness-program-card p,
+.fitness-experience-point p,
+.fitness-flow-card p,
+.fitness-link-card p,
+.fitness-trainer-card p,
+.fitness-review-card p,
+.fitness-contact-card p,
+.fitness-close-band p {
+  margin-top: 6px;
+  color: #5d7485;
+  line-height: 1.72;
+}
+
+.fitness-hero-panel-footer {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 14px;
+  margin-top: 22px;
+  padding: 18px;
+  border-radius: 22px;
+  background: linear-gradient(135deg, rgba(16, 33, 58, 0.98) 0%, rgba(22, 52, 93, 0.98) 100%);
+  color: #ffffff;
+}
+
+.fitness-hero-panel-footer strong {
+  display: block;
+  line-height: 1.4;
+}
+
+.fitness-hero-panel-footer p {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.fitness-hero-panel-action {
+  min-height: 52px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 0 18px;
+  width: fit-content;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #006d3c 0%, #10b981 100%);
+  color: #ffffff;
+  font-weight: 800;
+  box-shadow: 0 16px 36px rgba(0, 109, 60, 0.22);
+}
+
+.fitness-hero-panel-action:hover {
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+.fitness-home-statbar {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 30px;
+}
+
+.fitness-home-stat {
+  padding: 24px 20px;
+  border-radius: 26px;
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(16, 33, 58, 0.08);
+  box-shadow: 0 20px 48px rgba(16, 33, 58, 0.06);
+}
+
+.fitness-home-stat strong {
+  display: block;
+  margin-bottom: 10px;
+  color: #10213a;
+  font-family: var(--font-heading);
+  font-size: 1.72rem;
+  line-height: 1;
+}
+
+.fitness-home-stat span {
+  color: #5e7083;
+  font-size: 0.9rem;
+  line-height: 1.65;
+}
+
+.fitness-program-grid,
+.fitness-link-grid,
+.fitness-trainer-grid,
+.fitness-review-grid,
+.fitness-contact-grid {
+  display: grid;
+  gap: 20px;
+}
+
+.fitness-program-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.fitness-program-card {
+  padding: 26px;
+  background: rgba(255, 255, 255, 0.94);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.fitness-program-card:hover,
+.fitness-link-card:hover,
+.fitness-contact-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(0, 109, 60, 0.22);
+  box-shadow: 0 30px 70px rgba(16, 33, 58, 0.12);
+}
+
+.fitness-program-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.fitness-inline-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--color-primary);
+  font-size: 0.88rem;
+  font-weight: 800;
+}
+
+.fitness-program-points {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.fitness-program-points span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 0 12px;
+  border-radius: 999px;
+  background: rgba(0, 109, 60, 0.08);
+  color: #224f38;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.fitness-experience-grid,
+.fitness-trust-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.06fr) minmax(0, 0.94fr);
+  gap: 24px;
+  align-items: start;
+}
+
+.fitness-experience-copy,
+.fitness-flow-panel {
+  padding: 30px;
+  background: rgba(255, 255, 255, 0.94);
+}
+
+.fitness-experience-points,
+.fitness-flow-grid {
+  display: grid;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.fitness-experience-point,
+.fitness-flow-card {
+  padding: 18px;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(16, 33, 58, 0.08);
+}
+
+.fitness-flow-kicker {
+  background: rgba(16, 33, 58, 0.08);
+  color: #10213a;
+}
+
+.fitness-flow-card span {
+  display: inline-flex;
+  margin-bottom: 10px;
+  color: var(--color-primary);
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+}
+
+.fitness-link-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.fitness-link-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 24px 26px;
+  background: rgba(255, 255, 255, 0.94);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.fitness-link-card svg {
+  flex-shrink: 0;
+  font-size: 1.3rem;
+  color: var(--color-primary);
+}
+
+.fitness-trainer-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 24px;
+}
+
+.fitness-trainer-card,
+.fitness-review-card,
+.fitness-contact-card,
+.fitness-close-band {
+  padding: 24px;
+  background: rgba(255, 255, 255, 0.94);
+}
+
+.fitness-trainer-chip {
+  margin-bottom: 16px;
+  background: rgba(16, 33, 58, 0.06);
+  color: #10213a;
+}
+
+.fitness-trainer-card strong,
+.fitness-contact-card strong {
+  display: block;
+  margin-top: 10px;
+  color: var(--color-primary);
+  line-height: 1.6;
+}
+
+.fitness-review-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.fitness-review-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.fitness-review-head span {
+  color: #6d8292;
+  font-size: 0.84rem;
+  font-weight: 700;
+}
+
+.fitness-contact-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.fitness-contact-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.fitness-close-band {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  margin-top: 28px;
+}
+
+.fitness-close-band h2 {
+  position: relative;
+  z-index: 1;
+  color: #10213a;
+  font-family: var(--font-heading);
+  font-size: clamp(1.9rem, 3vw, 2.8rem);
+  line-height: 1.08;
+}
+
+.fitness-close-band p,
+.fitness-close-actions {
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 1200px) {
+  .fitness-program-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .fitness-home-statbar,
+  .fitness-trainer-grid,
+  .fitness-contact-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .fitness-experience-grid,
+  .fitness-trust-layout,
+  .fitness-hero-layout,
+  .fitness-close-band {
+    grid-template-columns: 1fr;
+  }
+
+  .fitness-close-band {
+    display: grid;
+  }
+}
+
+@media (max-width: 1100px) {
+  .navbar-links,
+  .navbar-actions > .btn {
+    display: none;
+  }
+
+  .mobile-menu-btn {
+    display: inline-flex;
+  }
+}
+
+@media (max-width: 992px) {
+  .fitness-home-hero {
+    padding-top: 140px;
+  }
+
+  .footer-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .fitness-home-actions,
+  .fitness-close-actions {
+    display: grid;
+  }
+
+  .fitness-home-actions .btn,
+  .fitness-close-actions .btn,
+  .fitness-hero-panel-action {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .fitness-home-statbar,
+  .fitness-program-grid,
+  .fitness-link-grid,
+  .fitness-trainer-grid,
+  .fitness-review-grid,
+  .fitness-contact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .fitness-hero-panel,
+  .fitness-program-card,
+  .fitness-experience-copy,
+  .fitness-flow-panel,
+  .fitness-link-card,
+  .fitness-trainer-card,
+  .fitness-review-card,
+  .fitness-contact-card,
+  .fitness-close-band {
+    padding: 24px;
+    border-radius: 24px;
+  }
+
+  .footer-grid,
+  .footer-bottom {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 580px) {
+  .navbar {
+    padding: 10px 0;
+  }
+
+  .navbar .container {
+    padding: 12px 14px;
+    border-radius: 20px;
+  }
+
+  .navbar-logo-text {
+    font-size: 1.02rem;
+  }
+
+  .fitness-home-hero {
+    padding-top: 126px;
+    padding-bottom: 58px;
+  }
+
+  .fitness-home-title {
+    font-size: clamp(2.3rem, 12vw, 3.4rem);
+  }
+
+  .fitness-home-mini-points {
+    display: grid;
+  }
+
+  .fitness-home-mini-points span,
+  .fitness-link-card,
+  .fitness-contact-card {
+    width: 100%;
+  }
+
+  .mobile-nav {
+    width: 100%;
+  }
+}

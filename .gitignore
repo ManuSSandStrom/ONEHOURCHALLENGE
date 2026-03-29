@@ -3,6 +3,8 @@ node_modules/
 
 # Environment
 .env
+server/.env
+client/.env
 
 # Build
 dist/

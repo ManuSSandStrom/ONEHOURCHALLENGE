@@ -23,10 +23,10 @@ export default function Footer() {
         <div className="footer-cta-band reveal">
           <div>
             <span className="footer-kicker">OneHour Challenge</span>
-            <h2>Live online coaching for strength, energy, flexibility and long-term consistency.</h2>
+            <h2>Online coaching for gym-style fitness, yoga, zumba, and a stronger daily routine.</h2>
             <p>
-              Join guided 1-hour sessions, explore plans that fit your routine, and start building
-              results with OneHour Challenge from anywhere in India.
+              Explore guided one-hour sessions, choose a plan that fits your week, and start with a
+              professional fitness experience that feels easy to follow from any device.
             </p>
           </div>
 
@@ -56,8 +56,8 @@ export default function Footer() {
               ONEHOUR <span>CHALLENGE</span>
             </div>
             <p className="footer-brand-desc">
-              Guided online fitness sessions designed for sustainable progress, visible energy, and
-              support that helps members stay consistent.
+              Guided online coaching for fitness, yoga, zumba, and structured routines that help
+              members stay consistent with more confidence.
             </p>
           </div>
 
@@ -77,7 +77,9 @@ export default function Footer() {
             <a href="mailto:manoharbasappagari18@gmail.com" className="footer-link">
               manoharbasappagari18@gmail.com
             </a>
-            <span className="footer-link">+91 95150 22680</span>
+            <a href="tel:+919515022680" className="footer-link">
+              +91 95150 22680
+            </a>
             <span className="footer-contact-note">Open for online coaching enquiries across India.</span>
           </div>
         </div>
