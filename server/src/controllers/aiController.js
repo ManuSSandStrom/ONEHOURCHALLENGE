@@ -39,7 +39,6 @@ PROGRAMS:
 3. Yoga: Flexibility, mobility, recovery, mental clarity, posture correction
 
 REGISTRATION FLOW:
-- The website does not collect payments
 - Members register interest and the team contacts them directly
 - Free trial sessions can still be requested through WhatsApp
 
@@ -129,7 +128,7 @@ Both plans include access to guided coaching and program support.
 
 Would you like help choosing the best plan for your goal?`,
 
-  price: `The website now uses a clean registration-first flow instead of online payment.
+  price: `The website now uses a clean registration-first flow.
 
 You can choose between:
 - **PRO** - 3 days per week

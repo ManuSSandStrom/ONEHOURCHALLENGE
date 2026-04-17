@@ -47,9 +47,9 @@ export const exportBookingsCSV = async (req, res) => {
   try {
     const bookings = await Booking.find().sort({ createdAt: -1 });
     
-    const headers = 'Name,Email,Mobile,Plan,Duration,Days,Time Slot,Payment Status,Date\n';
+    const headers = 'Name,Email,Mobile,Plan,Duration,Days,Time Slot,Date\n';
     const csv = bookings.map(b => 
-      `"${b.name}","${b.email}","${b.mobile}","${b.planType}","${b.duration}","${b.preferredDays.join('; ')}","${b.preferredTimeSlot}","${b.paymentStatus}","${b.createdAt.toISOString()}"`
+      `"${b.name}","${b.email}","${b.mobile}","${b.planType}","${b.duration}","${b.preferredDays.join('; ')}","${b.preferredTimeSlot}","${b.createdAt.toISOString()}"`
     ).join('\n');
 
     res.setHeader('Content-Type', 'text/csv');

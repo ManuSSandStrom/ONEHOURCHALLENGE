@@ -11,8 +11,6 @@ const bookingSchema = new mongoose.Schema({
   preferredTimeSlot: { type: String, required: true },
   bookingsPerWeek: { type: Number, required: true },
   maxBookingsAllowed: { type: Number, required: true },
-  paymentId: { type: String, default: null },
-  paymentStatus: { type: String, enum: ['pending', 'completed', 'failed'], default: 'pending' },
   status: { type: String, enum: ['active', 'inactive', 'expired'], default: 'active' },
 }, { timestamps: true });
 
