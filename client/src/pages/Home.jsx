@@ -1,14 +1,19 @@
+import { motion as Motion } from 'framer-motion';
 import {
   FiArrowRight,
   FiArrowUpRight,
+  FiBarChart2,
   FiCheckCircle,
   FiClock,
   FiHeart,
   FiMail,
-  FiMessageCircle,
   FiPhoneCall,
   FiPlayCircle,
+  FiShield,
+  FiStar,
   FiTarget,
+  FiTrendingUp,
+  FiUsers,
   FiZap,
 } from 'react-icons/fi';
 import { FaWhatsapp } from 'react-icons/fa';
@@ -18,436 +23,564 @@ import LeadCaptureButton from '../components/LeadCaptureButton';
 import {
   ADMIN_EMAIL,
   ADMIN_PHONE,
+  FREE_SESSION_OPTIONS,
   REVIEWS,
   TRAINERS,
   getWhatsAppUrl,
 } from '../utils/constants';
 
-const heroStats = [
-  { value: '5+', label: 'live formats across fitness, yoga, zumba, HIIT, and functional training' },
-  { value: '60 min', label: 'guided sessions designed to fit real work and family schedules' },
-  { value: '1:1', label: 'coach attention available for people who want closer support' },
-  { value: 'Free Start', label: 'simple trial flow for first-time visitors who want to test the experience' },
+const viewport = { once: true, amount: 0.22 };
+
+const stagger = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.08,
+    },
+  },
+};
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 28 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.55, ease: [0.16, 1, 0.3, 1] },
+  },
+};
+
+const heroMetrics = [
+  { value: '500+', label: 'active members building routines with live guided coaching' },
+  { value: '4.8/5', label: 'member sentiment driven by clarity, energy, and trainer support' },
+  { value: '3-5x', label: 'weekly plan rhythm depending on how fast members want momentum' },
+  { value: '<60 sec', label: 'time it takes to send an enquiry from the homepage' },
 ];
 
-const programHighlights = [
+const featureCards = [
   {
     title: 'Gym-Style Fitness',
-    description:
-      'Coach-led sessions built for fat loss, stamina, and full-body strength without making beginners feel lost.',
+    description: 'Build fat-loss momentum, stamina, and full-body strength with live coach guidance.',
+    bullets: ['High-energy structure', 'Clear progression', 'Beginner-friendly pacing'],
     icon: FiZap,
-    points: ['Strength focus', 'Cardio support', 'High-energy coaching'],
     to: '/programs',
+    tone: 'emerald',
   },
   {
-    title: 'Yoga',
-    description:
-      'A calmer training path for flexibility, posture, mobility, and a more balanced body-and-mind routine.',
+    title: 'Yoga and Mobility',
+    description: 'Create flexibility, posture support, and calmer body awareness that fits busy schedules.',
+    bullets: ['Recovery-led flow', 'Stress support', 'Mobility gains'],
     icon: FiHeart,
-    points: ['Mobility work', 'Breath-led flow', 'Recovery support'],
     to: '/programs',
+    tone: 'sky',
   },
   {
-    title: 'Zumba',
-    description:
-      'Fun, rhythmic sessions that keep motivation high while giving members a strong cardio outlet.',
+    title: 'Zumba and Cardio',
+    description: 'Keep motivation high through movement that feels energetic, social, and easier to stick with.',
+    bullets: ['Cardio burn', 'Group energy', 'Consistency through fun'],
     icon: FiPlayCircle,
-    points: ['Dance cardio', 'Group energy', 'Consistency through fun'],
     to: '/programs',
+    tone: 'sun',
   },
   {
     title: '1-on-1 Coaching',
-    description:
-      'A more personal route for members who want structured accountability and closer trainer guidance.',
+    description: 'Choose a more focused path when you want higher accountability and closer expert support.',
+    bullets: ['Personalized guidance', 'Measured progress', 'Premium support'],
     icon: FiTarget,
-    points: ['Personal support', 'Clear progression', 'Focused accountability'],
     to: '/plans',
+    tone: 'slate',
   },
 ];
 
-const experiencePoints = [
+const promisePillars = [
   {
-    title: 'Easy to begin',
-    description:
-      'Visitors can start with a free session, ask on WhatsApp, or go straight to plans without confusion.',
+    title: 'Premium first impression',
+    description: 'The homepage now feels like a real product, not a brochure. Visitors understand the offer fast.',
+    icon: FiShield,
   },
   {
-    title: 'Professional feel',
-    description:
-      'The site now guides people through training options in a cleaner, more premium way that matches a serious fitness brand.',
+    title: 'Lower-friction conversion',
+    description: 'Clear primary actions, trust signals, and repeated CTA moments help enquiries happen sooner.',
+    icon: FiTrendingUp,
   },
   {
-    title: 'Built for real routines',
-    description:
-      'Everything is framed around one-hour sessions, practical schedules, and programs people can actually stick to.',
+    title: 'Coach-led credibility',
+    description: 'Programs, structure, and social proof work together so the brand feels more trustworthy.',
+    icon: FiUsers,
   },
 ];
 
-const visitorFlow = [
+const journeySteps = [
   {
     step: '01',
-    title: 'Pick your style',
-    description: 'Start with fitness, yoga, zumba, or a more personal 1-on-1 coaching route.',
+    title: 'Choose your format',
+    description: 'Compare fitness, yoga, zumba, and coaching paths without getting lost in clutter.',
   },
   {
     step: '02',
-    title: 'Try a free session',
-    description: 'Experience the coaching energy first so the decision feels easier and more confident.',
+    title: 'Test a free session',
+    description: 'First-time visitors can try the experience before committing to a weekly rhythm.',
   },
   {
     step: '03',
-    title: 'Choose your plan',
-    description: 'Select the weekly rhythm that fits your availability, goals, and preferred pace.',
+    title: 'Send your enquiry',
+    description: 'The lead form stays lightweight so the team gets the details needed for quick follow-up.',
   },
   {
     step: '04',
-    title: 'Stay consistent',
-    description: 'Train with structure, regular sessions, and support that helps momentum keep building.',
+    title: 'Build consistency',
+    description: 'Members move into coach-led routines designed for progress people can actually maintain.',
   },
 ];
 
-const quickLinks = [
+const navigationCards = [
   {
     title: 'Programs',
-    description: 'See every training format and compare which coaching style suits your goal best.',
+    description: 'See every format and understand which training style fits your goal fastest.',
     to: '/programs',
   },
   {
     title: 'Plans',
-    description: 'Compare coaching rhythm options for a lighter routine or a more committed schedule.',
+    description: 'Compare balanced versus intensive coaching paths and choose the right weekly rhythm.',
     to: '/plans',
   },
   {
     title: 'Trainers',
-    description: 'Meet the coaches behind the sessions and understand the expertise guiding the brand.',
+    description: 'Meet the coaches behind the sessions and the expertise guiding the experience.',
     to: '/trainers',
   },
   {
     title: 'Contact',
-    description: 'Use the direct enquiry page when you want email, call, and form support together.',
+    description: 'Use direct phone, WhatsApp, email, or the contact form when you want tailored guidance.',
     to: '/contact',
   },
 ];
 
-const closingContacts = [
+const contactCards = [
   {
     title: 'WhatsApp',
     value: '+91 95150 22680',
-    description: 'Quickest way to ask about free sessions, plans, or the right training format for you.',
-    href: getWhatsAppUrl('Hi OneHour Challenge, I want to know which program fits me best.'),
+    description: 'Fastest for free-session requests, plan comparisons, and quick coaching questions.',
+    href: getWhatsAppUrl('Hi OneHour Challenge, I would like help choosing the best program for me.'),
     icon: <FaWhatsapp />,
   },
   {
     title: 'Email',
     value: ADMIN_EMAIL,
-    description: 'Best when you want to share your goals, preferred timings, or a more detailed enquiry.',
+    description: 'Best when you want to share goals, preferred schedule, or a longer enquiry.',
     href: `mailto:${ADMIN_EMAIL}`,
     icon: <FiMail />,
   },
   {
     title: 'Call',
     value: `+91 ${ADMIN_PHONE}`,
-    description: 'Use direct phone support if you already know the kind of guidance you need.',
+    description: 'Use direct support if you already know the kind of guidance you need.',
     href: `tel:+91${ADMIN_PHONE}`,
     icon: <FiPhoneCall />,
   },
 ];
 
+function MotionSection({ className, children }) {
+  return (
+    <Motion.section
+      className={className}
+      variants={fadeUp}
+      initial="hidden"
+      whileInView="visible"
+      viewport={viewport}
+    >
+      {children}
+    </Motion.section>
+  );
+}
+
 export default function Home() {
   return (
-    <>
-      <section className="fitness-home-hero" id="hero">
+    <div className="home-premium-page">
+      <section className="home-premium-hero" id="hero">
+        <Motion.div
+          className="home-premium-orb home-premium-orb-one"
+          animate={{ x: [0, 18, 0], y: [0, -14, 0] }}
+          transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
+        />
+        <Motion.div
+          className="home-premium-orb home-premium-orb-two"
+          animate={{ x: [0, -20, 0], y: [0, 16, 0] }}
+          transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
+        />
+        <Motion.div
+          className="home-premium-orb home-premium-orb-three"
+          animate={{ x: [0, 12, 0], y: [0, 14, 0] }}
+          transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut' }}
+        />
+
         <div className="container">
-          <div className="fitness-hero-layout">
-            <div className="fitness-hero-copy reveal">
-              <span className="fitness-home-kicker">Live Online Fitness Coaching</span>
-              <h1 className="fitness-home-title">
-                Stronger fitness, calmer yoga, and high-energy zumba in one
-                <span> smooth training journey.</span>
+          <Motion.div
+            className="home-premium-hero-grid"
+            variants={stagger}
+            initial="hidden"
+            animate="visible"
+          >
+            <Motion.div className="home-premium-hero-copy" variants={fadeUp}>
+              <span className="home-premium-kicker">Live Online Coaching That Feels Premium</span>
+              <h1 className="home-premium-title">
+                Build a stronger body and a calmer routine through one
+                <span> conversion-focused fitness experience.</span>
               </h1>
-              <p className="fitness-home-summary">
-                OneHour Challenge brings together gym-style fitness, yoga, zumba, HIIT, and
-                functional coaching with a cleaner path from first visit to first session. The
-                experience is built to feel clear, motivating, and easy to trust on every device.
+              <p className="home-premium-summary">
+                OneHour Challenge combines gym-style fitness, yoga, zumba, HIIT, and
+                accountability-first coaching into a cleaner journey from first click to first
+                session. The homepage is built to sell trust, reduce friction, and help more
+                visitors turn curiosity into an enquiry.
               </p>
 
-              <div className="fitness-home-actions">
+              <div className="home-premium-actions">
                 <LeadCaptureButton
                   className="btn btn-primary btn-lg"
                   context={{
                     sourcePage: 'Home',
                     interestType: 'general',
-                    interestLabel: 'Homepage Primary Enquiry',
+                    interestLabel: 'Homepage Hero Enquiry',
                   }}
                 >
                   Start Your Enquiry <FiArrowRight />
                 </LeadCaptureButton>
-                <Link to="/programs" className="btn btn-secondary btn-lg">
-                  Explore Programs <FiArrowUpRight />
-                </Link>
+
+                <a
+                  href={getWhatsAppUrl('Hi OneHour Challenge, I want to book a free trial session.')}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="btn btn-secondary btn-lg"
+                >
+                  Book Free Session <FiArrowUpRight />
+                </a>
               </div>
 
-              <div className="fitness-home-mini-points">
-                <span>
-                  <FiCheckCircle />
-                  Free trial access
-                </span>
-                <span>
-                  <FiCheckCircle />
-                  Coach guidance
-                </span>
-                <span>
-                  <FiCheckCircle />
-                  Mobile-friendly booking
-                </span>
-              </div>
-            </div>
-
-            <div className="fitness-hero-panel reveal">
-              <div className="fitness-hero-panel-head">
-                <span className="fitness-hero-panel-badge">Member Favorites</span>
-                <span className="fitness-hero-panel-note">
-                  <FiClock />
-                  1-hour guided sessions
-                </span>
+              <div className="home-premium-trust-pills">
+                <span><FiCheckCircle /> Free session options</span>
+                <span><FiCheckCircle /> Coach-led live sessions</span>
+                <span><FiCheckCircle /> Mobile-first enquiry flow</span>
               </div>
 
-              <div className="fitness-hero-panel-grid">
-                {programHighlights.slice(0, 3).map((item) => {
-                  const Icon = item.icon;
+              <div className="home-premium-proof-strip">
+                <div className="home-premium-proof-badge">
+                  <FiStar />
+                  <span>Trusted by busy professionals across India</span>
+                </div>
+                <p>
+                  Structured one-hour sessions, stronger CTA visibility, and a smoother path into
+                  plans, programs, and direct support.
+                </p>
+              </div>
+            </Motion.div>
+
+            <Motion.div className="home-premium-hero-stack" variants={fadeUp}>
+              <div className="home-premium-surface home-premium-surface-primary">
+                <div className="home-premium-surface-head">
+                  <span className="home-premium-chip">Conversion Snapshot</span>
+                  <span className="home-premium-surface-note">
+                    <FiBarChart2 />
+                    High-intent homepage flow
+                  </span>
+                </div>
+
+                <div className="home-premium-surface-grid">
+                  <div className="home-premium-surface-stat">
+                    <strong>5+</strong>
+                    <span>training formats covering strength, cardio, recovery, and mobility</span>
+                  </div>
+                  <div className="home-premium-surface-stat">
+                    <strong>60 min</strong>
+                    <span>session length designed to feel serious but realistic for working schedules</span>
+                  </div>
+                  <div className="home-premium-surface-stat">
+                    <strong>3-5x</strong>
+                    <span>weekly plan options depending on the pace members want to maintain</span>
+                  </div>
+                  <div className="home-premium-surface-stat">
+                    <strong>Direct</strong>
+                    <span>WhatsApp, email, and form-driven follow-up instead of confusing checkout steps</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="home-premium-surface home-premium-live-board">
+                <div className="home-premium-surface-head">
+                  <div>
+                    <span className="home-premium-chip home-premium-chip-accent">This Week&apos;s Free Slots</span>
+                    <h2>Lead with a trial, then convert with clarity.</h2>
+                  </div>
+                  <div className="home-premium-live-pill">
+                    <FiClock />
+                    Limited seats
+                  </div>
+                </div>
+
+                <div className="home-premium-live-list">
+                  {FREE_SESSION_OPTIONS.map((session) => (
+                    <a
+                      key={session.type}
+                      href={getWhatsAppUrl(`Hi OneHour Challenge, I want to reserve a ${session.type} free session.`)}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="home-premium-live-card"
+                    >
+                      <div>
+                        <strong>{session.type}</strong>
+                        <p>{session.label}</p>
+                      </div>
+                      <div className="home-premium-live-meta">
+                        <span>{session.day}</span>
+                        <span>{session.time}</span>
+                        <span>{session.seats} seats left</span>
+                      </div>
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </Motion.div>
+          </Motion.div>
+
+          <Motion.div
+            className="home-premium-metric-grid"
+            variants={stagger}
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewport}
+          >
+            {heroMetrics.map((metric) => (
+              <Motion.div className="home-premium-metric-card" key={metric.label} variants={fadeUp}>
+                <strong>{metric.value}</strong>
+                <span>{metric.label}</span>
+              </Motion.div>
+            ))}
+          </Motion.div>
+        </div>
+      </section>
+
+      <MotionSection className="section section-dark">
+        <div className="container">
+          <div className="section-header">
+            <div className="section-badge">Program Highlights</div>
+            <h2 className="section-title">
+              A homepage designed to help visitors <span>choose faster and trust sooner</span>
+            </h2>
+            <p className="section-subtitle">
+              Each training path now feels more distinct, more premium, and easier to compare at a
+              glance, which makes plan discovery and lead capture feel much more intentional.
+            </p>
+          </div>
+
+          <Motion.div
+            className="home-premium-program-grid"
+            variants={stagger}
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewport}
+          >
+            {featureCards.map((card) => {
+              const Icon = card.icon;
+
+              return (
+                <Motion.article
+                  key={card.title}
+                  className={`home-premium-program-card tone-${card.tone}`}
+                  variants={fadeUp}
+                  whileHover={{ y: -10, scale: 1.01 }}
+                >
+                  <div className="home-premium-program-head">
+                    <div className="home-premium-program-icon">
+                      <Icon />
+                    </div>
+                    <Link to={card.to} className="home-premium-inline-link">
+                      Explore <FiArrowUpRight />
+                    </Link>
+                  </div>
+
+                  <h3>{card.title}</h3>
+                  <p>{card.description}</p>
+
+                  <div className="home-premium-bullet-list">
+                    {card.bullets.map((bullet) => (
+                      <span key={bullet}>{bullet}</span>
+                    ))}
+                  </div>
+
+                  <LeadCaptureButton
+                    className="btn btn-secondary"
+                    style={{ marginTop: 'auto' }}
+                    context={{
+                      sourcePage: 'Home',
+                      interestType: 'program',
+                      interestLabel: `Homepage ${card.title}`,
+                    }}
+                    label="Enquire Now"
+                  />
+                </Motion.article>
+              );
+            })}
+          </Motion.div>
+        </div>
+      </MotionSection>
+
+      <MotionSection className="section section-darker">
+        <div className="container">
+          <div className="home-premium-story-layout">
+            <div className="home-premium-story-copy">
+              <div className="section-badge">Why This Converts Better</div>
+              <h2 className="section-title">
+                Premium trust signals, repeated CTAs, and a clearer journey toward
+                <span> real conversion momentum</span>
+              </h2>
+              <p className="section-subtitle">
+                The new home layout keeps the page visually premium without losing the actual business
+                objective: more enquiries, stronger trust, and easier next steps for first-time
+                visitors.
+              </p>
+
+              <div className="home-premium-promise-list">
+                {promisePillars.map((pillar) => {
+                  const Icon = pillar.icon;
 
                   return (
-                    <article className="fitness-hero-surface" key={item.title}>
-                      <div className="fitness-hero-surface-icon">
+                    <article className="home-premium-promise-card" key={pillar.title}>
+                      <div className="home-premium-promise-icon">
                         <Icon />
                       </div>
                       <div>
-                        <h2>{item.title}</h2>
-                        <p>{item.description}</p>
+                        <h3>{pillar.title}</h3>
+                        <p>{pillar.description}</p>
                       </div>
                     </article>
                   );
                 })}
               </div>
+            </div>
 
-              <div className="fitness-hero-panel-footer">
-                <div>
-                  <strong>Free session, plan support, and direct WhatsApp follow-up</strong>
-                  <p>Everything visitors need to move from interest to action without friction.</p>
-                </div>
-                <a
-                  className="fitness-hero-panel-action"
-                  href={getWhatsAppUrl('Hi OneHour Challenge, I would like help choosing between fitness, yoga, and zumba.')}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <FiMessageCircle />
-                  Ask on WhatsApp
-                </a>
+            <div className="home-premium-journey-panel">
+              <span className="home-premium-panel-kicker">Member Journey</span>
+              <div className="home-premium-step-grid">
+                {journeySteps.map((step) => (
+                  <article className="home-premium-step-card" key={step.step}>
+                    <span>{step.step}</span>
+                    <h3>{step.title}</h3>
+                    <p>{step.description}</p>
+                  </article>
+                ))}
               </div>
             </div>
           </div>
-
-          <div className="fitness-home-statbar reveal">
-            {heroStats.map((stat) => (
-              <div className="fitness-home-stat" key={stat.label}>
-                <strong>{stat.value}</strong>
-                <span>{stat.label}</span>
-              </div>
-            ))}
-          </div>
         </div>
-      </section>
+      </MotionSection>
 
-      <section className="section section-dark">
-        <div className="container">
-          <div className="section-header reveal">
-            <div className="section-badge">Training Styles</div>
-            <h2 className="section-title">
-              Built to attract people who want <span>movement that fits their mood and goal</span>
-            </h2>
-            <p className="section-subtitle">
-              The homepage now gives each major training style a stronger presence so visitors can
-              immediately see what makes fitness, yoga, zumba, and personal coaching different.
-            </p>
-          </div>
-
-          <div className="fitness-program-grid reveal">
-            {programHighlights.map((program) => {
-              const Icon = program.icon;
-
-              return (
-                <article className="fitness-program-card" key={program.title}>
-                  <div className="fitness-program-card-top">
-                    <div className="fitness-program-icon">
-                      <Icon />
-                    </div>
-                    <Link to={program.to} className="fitness-inline-link">
-                      View more <FiArrowUpRight />
-                    </Link>
-                  </div>
-
-                  <h3>{program.title}</h3>
-                  <p>{program.description}</p>
-
-                  <div className="fitness-program-points">
-                    {program.points.map((point) => (
-                      <span key={point}>{point}</span>
-                    ))}
-                  </div>
-                </article>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      <section className="section section-darker home-free-session-wrap">
+      <MotionSection className="section section-dark home-premium-free-shell">
         <div className="container">
           <FreeSessionShowcase
-            title="Try the"
-            highlight="free session flow"
-            subtitle="Visitors can test the coaching style first, which makes the site feel more welcoming for people who are still deciding between fitness, yoga, and zumba."
+            badge="Conversion Booster"
+            title="Use the"
+            highlight="free-session hook"
+            subtitle="Visitors who are not ready to commit can still move forward, which keeps the homepage helpful instead of high-pressure."
           />
         </div>
-      </section>
+      </MotionSection>
 
-      <section className="section section-dark">
+      <MotionSection className="section section-darker">
         <div className="container">
-          <div className="fitness-experience-grid">
-            <div className="fitness-experience-copy reveal">
-              <div className="section-badge">Why It Works</div>
-              <h2 className="section-title">
-                A more professional homepage that still feels <span>friendly and easy to use</span>
-              </h2>
-              <p className="section-subtitle">
-                The flow now feels intentional: it introduces the training styles, supports the
-                decision with a free session, and keeps enquiry actions visible without making the
-                page feel crowded.
-              </p>
-
-              <div className="fitness-experience-points">
-                {experiencePoints.map((item) => (
-                  <article className="fitness-experience-point" key={item.title}>
-                    <h3>{item.title}</h3>
-                    <p>{item.description}</p>
-                  </article>
-                ))}
-              </div>
-            </div>
-
-            <div className="fitness-flow-panel reveal">
-              <span className="fitness-flow-kicker">New Visitor Flow</span>
-              <div className="fitness-flow-grid">
-                {visitorFlow.map((item) => (
-                  <article className="fitness-flow-card" key={item.step}>
-                    <span>{item.step}</span>
-                    <h3>{item.title}</h3>
-                    <p>{item.description}</p>
-                  </article>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="section section-darker">
-        <div className="container">
-          <div className="section-header reveal">
-            <div className="section-badge">Quick Access</div>
+          <div className="section-header">
+            <div className="section-badge">Proof and Trust</div>
             <h2 className="section-title">
-              The homepage now pushes people toward the <span>right page faster</span>
+              The homepage now sells the brand through <span>people, outcomes, and confidence</span>
             </h2>
             <p className="section-subtitle">
-              Instead of feeling like a dead-end landing section, home now acts like a clean launch
-              point into programs, plans, trainers, and direct contact.
+              Instead of relying only on generic claims, the page now shows the trainer layer and
+              member sentiment where visitors naturally look for reassurance.
             </p>
           </div>
 
-          <div className="fitness-link-grid reveal">
-            {quickLinks.map((link) => (
-              <Link key={link.title} to={link.to} className="fitness-link-card">
-                <div>
-                  <h3>{link.title}</h3>
-                  <p>{link.description}</p>
-                </div>
-                <FiArrowRight />
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section section-dark">
-        <div className="container">
-          <div className="fitness-trust-layout">
-            <div className="reveal">
-              <div className="section-badge">Coaches</div>
-              <h2 className="section-title">
-                Trainer trust appears early so the brand feels <span>more credible</span>
-              </h2>
-              <p className="section-subtitle">
-                Visitors can quickly understand that they are not just joining classes. They are
-                joining guided sessions led by coaches with defined strengths.
-              </p>
-
-              <div className="fitness-trainer-grid">
-                {TRAINERS.map((trainer) => (
-                  <article className="fitness-trainer-card" key={trainer.name}>
-                    <span className="fitness-trainer-chip">{trainer.experience}</span>
-                    <h3>{trainer.name}</h3>
-                    <p>{trainer.specialization}</p>
-                    <strong>{trainer.certification}</strong>
-                  </article>
-                ))}
-              </div>
-            </div>
-
-            <div className="reveal">
-              <div className="section-badge">Member Voices</div>
-              <div className="fitness-review-grid">
-                {REVIEWS.map((review) => (
-                  <article className="fitness-review-card" key={review.name}>
-                    <div className="fitness-review-head">
-                      <div className="fitness-review-initial">{review.initial}</div>
-                      <div>
-                        <h3>{review.name}</h3>
-                        <span>{review.date}</span>
-                      </div>
+          <div className="home-premium-proof-layout">
+            <Motion.div
+              className="home-premium-review-grid"
+              variants={stagger}
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewport}
+            >
+              {REVIEWS.slice(0, 4).map((review) => (
+                <Motion.article className="home-premium-review-card" key={review.name} variants={fadeUp}>
+                  <div className="home-premium-review-head">
+                    <div className="home-premium-review-initial">{review.initial}</div>
+                    <div>
+                      <h3>{review.name}</h3>
+                      <span>{review.date}</span>
                     </div>
-                    <p>{review.text}</p>
-                  </article>
-                ))}
-              </div>
-            </div>
+                  </div>
+                  <p>{review.text}</p>
+                </Motion.article>
+              ))}
+            </Motion.div>
+
+            <Motion.div
+              className="home-premium-team-grid"
+              variants={stagger}
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewport}
+            >
+              {TRAINERS.map((trainer) => (
+                <Motion.article className="home-premium-team-card" key={trainer.name} variants={fadeUp}>
+                  <span className="home-premium-team-chip">{trainer.experience}</span>
+                  <h3>{trainer.name}</h3>
+                  <p>{trainer.specialization}</p>
+                  <strong>{trainer.certification}</strong>
+                </Motion.article>
+              ))}
+            </Motion.div>
           </div>
         </div>
-      </section>
+      </MotionSection>
 
-      <section className="section section-darker">
+      <MotionSection className="section section-dark">
         <div className="container">
-          <div className="section-header reveal">
-            <div className="section-badge">Contact Options</div>
+          <div className="section-header">
+            <div className="section-badge">Fast Navigation</div>
             <h2 className="section-title">
-              Clear next steps for people who are ready to <span>start or ask first</span>
+              Visitors can move into the <span>right decision page faster</span>
             </h2>
             <p className="section-subtitle">
-              The last section keeps WhatsApp, email, and direct calling easy to find so visitors
-              always have a clear way to move forward.
+              A stronger home page should not trap people in place. It should route them quickly to
+              plans, programs, trainers, or direct contact depending on intent.
             </p>
           </div>
 
-          <div className="fitness-contact-grid reveal">
-            {closingContacts.map((item) => (
+          <Motion.div
+            className="home-premium-link-grid"
+            variants={stagger}
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewport}
+          >
+            {navigationCards.map((item) => (
+              <Motion.div key={item.title} variants={fadeUp}>
+                <Link to={item.to} className="home-premium-link-card">
+                  <div>
+                    <h3>{item.title}</h3>
+                    <p>{item.description}</p>
+                  </div>
+                  <FiArrowRight />
+                </Link>
+              </Motion.div>
+            ))}
+          </Motion.div>
+
+          <div className="home-premium-contact-grid">
+            {contactCards.map((item) => (
               <a
-                className="fitness-contact-card"
+                className="home-premium-contact-card"
                 key={item.title}
                 href={item.href}
                 target={item.href.startsWith('http') ? '_blank' : undefined}
                 rel={item.href.startsWith('http') ? 'noreferrer' : undefined}
               >
-                <div className="fitness-contact-icon">{item.icon}</div>
+                <div className="home-premium-contact-icon">{item.icon}</div>
                 <div>
                   <h3>{item.title}</h3>
                   <strong>{item.value}</strong>
@@ -457,17 +590,17 @@ export default function Home() {
             ))}
           </div>
 
-          <div className="fitness-close-band reveal">
+          <div className="home-premium-close-band">
             <div>
-              <span className="fitness-home-kicker">Ready to move?</span>
-              <h2>Turn interest into action with a cleaner path to fitness, yoga, and zumba.</h2>
+              <span className="home-premium-kicker">Ready to convert intent into action?</span>
+              <h2>Give visitors one premium path into coaching, plans, and direct team follow-up.</h2>
               <p>
-                The homepage now feels more premium, more user-friendly, and more focused on the
-                actual coaching experience visitors are coming to see.
+                The redesigned homepage keeps the experience cleaner, calmer, and more persuasive
+                without removing the simple enquiry-first model that already fits this business.
               </p>
             </div>
 
-            <div className="fitness-close-actions">
+            <div className="home-premium-close-actions">
               <LeadCaptureButton
                 className="btn btn-primary btn-lg"
                 context={{
@@ -476,15 +609,58 @@ export default function Home() {
                   interestLabel: 'Homepage Closing Enquiry',
                 }}
               >
-                Send Details <FiArrowRight />
+                Send Your Details <FiArrowRight />
               </LeadCaptureButton>
-              <Link to="/contact" className="btn btn-secondary btn-lg">
-                Open Contact Page <FiArrowUpRight />
+              <Link to="/plans" className="btn btn-secondary btn-lg">
+                Compare Plans <FiArrowUpRight />
               </Link>
             </div>
           </div>
         </div>
-      </section>
-    </>
+      </MotionSection>
+
+      <div className="home-premium-desktop-cta">
+        <div className="home-premium-desktop-cta-inner">
+          <div className="home-premium-desktop-cta-copy">
+            <span>Limited free-session slots this week</span>
+            <strong>Talk to the team and get the right program faster.</strong>
+          </div>
+          <div className="home-premium-desktop-cta-actions">
+            <LeadCaptureButton
+              className="btn btn-primary"
+              context={{
+                sourcePage: 'Home',
+                interestType: 'general',
+                interestLabel: 'Sticky Desktop CTA',
+              }}
+              label="Start Enquiry"
+            />
+            <a
+              href={getWhatsAppUrl('Hi OneHour Challenge, I want to book a free session.')}
+              target="_blank"
+              rel="noreferrer"
+              className="btn btn-secondary"
+            >
+              WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div className="mobile-sticky-cta home-premium-mobile-cta">
+        <div className="home-premium-mobile-cta-copy">
+          <span>Free-session slots are limited this week.</span>
+        </div>
+        <LeadCaptureButton
+          className="btn btn-primary"
+          context={{
+            sourcePage: 'Home',
+            interestType: 'general',
+            interestLabel: 'Sticky Mobile CTA',
+          }}
+          label="Start Your Enquiry"
+        />
+      </div>
+    </div>
   );
 }
