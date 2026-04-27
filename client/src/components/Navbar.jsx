@@ -52,12 +52,10 @@ export default function Navbar() {
 
           <div className="navbar-links">
             <Link to="/" className={`navbar-link ${isActive('/') ? 'active' : ''}`}>Home</Link>
-            <Link to="/about" className={`navbar-link ${isActive('/about') ? 'active' : ''}`}>About</Link>
             <Link to="/programs" className={`navbar-link ${isActive('/programs') ? 'active' : ''}`}>Programs</Link>
-            <Link to="/how-it-works" className={`navbar-link ${isActive('/how-it-works') ? 'active' : ''}`}>How It Works</Link>
             <Link to="/plans" className={`navbar-link ${isActive('/plans') ? 'active' : ''}`}>Plans</Link>
-            <Link to="/transformations" className={`navbar-link ${isActive('/transformations') ? 'active' : ''}`}>Transformations</Link>
-            <Link to="/trainers" className={`navbar-link ${isActive('/trainers') ? 'active' : ''}`}>Trainers</Link>
+            <Link to="/how-it-works" className={`navbar-link ${isActive('/how-it-works') ? 'active' : ''}`}>Process</Link>
+            <Link to="/transformations" className={`navbar-link ${isActive('/transformations') ? 'active' : ''}`}>Results</Link>
             <Link to="/contact" className={`navbar-link ${isActive('/contact') ? 'active' : ''}`}>Contact</Link>
           </div>
 
@@ -103,9 +101,9 @@ export default function Navbar() {
             <Link to="/" className={`mobile-nav-link ${isActive('/') ? 'active' : ''}`}>Home</Link>
             <Link to="/about" className={`mobile-nav-link ${isActive('/about') ? 'active' : ''}`}>About</Link>
             <Link to="/programs" className={`mobile-nav-link ${isActive('/programs') ? 'active' : ''}`}>Programs</Link>
-            <Link to="/how-it-works" className={`mobile-nav-link ${isActive('/how-it-works') ? 'active' : ''}`}>How It Works</Link>
             <Link to="/plans" className={`mobile-nav-link ${isActive('/plans') ? 'active' : ''}`}>Plans</Link>
-            <Link to="/transformations" className={`mobile-nav-link ${isActive('/transformations') ? 'active' : ''}`}>Transformations</Link>
+            <Link to="/how-it-works" className={`mobile-nav-link ${isActive('/how-it-works') ? 'active' : ''}`}>Process</Link>
+            <Link to="/transformations" className={`mobile-nav-link ${isActive('/transformations') ? 'active' : ''}`}>Results</Link>
             <Link to="/trainers" className={`mobile-nav-link ${isActive('/trainers') ? 'active' : ''}`}>Trainers</Link>
             <Link to="/contact" className={`mobile-nav-link ${isActive('/contact') ? 'active' : ''}`}>Contact</Link>
             <Link to="/plans" className="btn btn-primary btn-lg mobile-nav-cta" style={{ textDecoration: 'none', textAlign: 'center' }}>
