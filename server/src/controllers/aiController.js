@@ -215,15 +215,19 @@ export const chatWithAI = async (req, res) => {
   console.log('--- AI CHAT REQUEST RECEIVED ---');
 
   try {
-    const { messages, leadId } = req.body;
-    const lastUserMessage = messages[messages.length - 1]?.content || '';
+    const { message, history = [], messages: legacyMessages, leadId } = req.body;
+    const normalizedMessages = legacyMessages || [
+      ...history,
+      ...(message ? [{ role: 'user', content: message }] : []),
+    ];
+    const lastUserMessage = normalizedMessages[normalizedMessages.length - 1]?.content || '';
 
     const ai = getOpenAI();
     if (ai) {
       try {
         const completion = await ai.chat.completions.create({
           model: process.env.OPENAI_API_KEY.startsWith('sk-or-') ? 'openai/gpt-3.5-turbo' : 'gpt-3.5-turbo',
-          messages: [{ role: 'system', content: SYSTEM_PROMPT }, ...messages],
+          messages: [{ role: 'system', content: SYSTEM_PROMPT }, ...normalizedMessages],
           max_tokens: 500,
           temperature: 0.7,
         });
@@ -241,7 +245,7 @@ export const chatWithAI = async (req, res) => {
           }).catch(() => {});
         }
 
-        return res.json({ success: true, message: assistantMessage });
+        return res.json({ success: true, data: { reply: assistantMessage }, reply: assistantMessage, message: assistantMessage });
       } catch (aiError) {
         console.error('AI API error, using fallback:', aiError?.message);
       }
@@ -259,7 +263,7 @@ export const chatWithAI = async (req, res) => {
       }).catch(() => {});
     }
 
-    return res.json({ success: true, message: fallbackMessage });
+    return res.json({ success: true, data: { reply: fallbackMessage }, reply: fallbackMessage, message: fallbackMessage });
   } catch (error) {
     console.error('Chat AI Controller Error:', error);
     return res.status(500).json({ success: false, message: 'Internal server error' });

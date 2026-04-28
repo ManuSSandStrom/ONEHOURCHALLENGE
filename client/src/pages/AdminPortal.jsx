@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { FiArrowRight, FiInbox, FiLayers, FiLock, FiLogOut, FiPhoneCall, FiShield, FiTrash2 } from 'react-icons/fi';
+import { FiArrowRight, FiImage, FiInbox, FiLayers, FiLock, FiLogOut, FiPhoneCall, FiShield, FiTrash2, FiUpload } from 'react-icons/fi';
 import toast from 'react-hot-toast';
 import API, { adminSession } from '../utils/api';
 
@@ -9,6 +9,7 @@ const adminViews = [
   { id: 'registrations', label: 'Registrations', icon: <FiInbox /> },
   { id: 'plans', label: 'Plan Enquiries', icon: <FiLayers /> },
   { id: 'contacts', label: 'Contact Requests', icon: <FiPhoneCall /> },
+  { id: 'media', label: 'Transformations', icon: <FiImage /> },
 ];
 const statusButtonLabels = {
   new: 'New',
@@ -26,6 +27,11 @@ export default function AdminPortal() {
   const [_statsLoading, setStatsLoading] = useState(true);
   const [leadsLoading, setLeadsLoading] = useState(false);
   const [contactsLoading, setContactsLoading] = useState(false);
+  const [media, setMedia] = useState([]);
+  const [mediaLoading, setMediaLoading] = useState(false);
+  const [uploading, setUploading] = useState(false);
+  const [mediaForm, setMediaForm] = useState({ file: null, caption: '', displayOrder: 0 });
+  const [mediaTab, setMediaTab] = useState('image');
   const [activeView, setActiveView] = useState('overview');
   const [isAuthenticated, setIsAuthenticated] = useState(Boolean(adminSession.getToken()));
   const [loginLoading, setLoginLoading] = useState(false);
@@ -45,7 +51,7 @@ export default function AdminPortal() {
     try {
       setStatsLoading(true);
       const statsRes = await API.get('/admin/stats');
-      setStats(statsRes.data);
+      setStats(statsRes.data?.data || statsRes.data);
     } catch (error) {
       console.error('Admin portal error:', error);
       if (error.response?.status === 401) {
@@ -70,7 +76,7 @@ export default function AdminPortal() {
     try {
       setLeadsLoading(true);
       const leadsRes = await API.get('/admin/leads');
-      setLeads(leadsRes.data);
+      setLeads(leadsRes.data?.data || leadsRes.data?.leads || leadsRes.data);
     } catch (error) {
       console.error('Lead fetch error:', error);
       toast.error('Unable to load registrations right now.');
@@ -85,7 +91,7 @@ export default function AdminPortal() {
     try {
       setContactsLoading(true);
       const contactsRes = await API.get('/admin/contacts');
-      setContacts(contactsRes.data);
+      setContacts(contactsRes.data?.data || contactsRes.data?.contacts || contactsRes.data);
     } catch (error) {
       console.error('Contact fetch error:', error);
       toast.error('Unable to load contacts right now.');
@@ -94,6 +100,21 @@ export default function AdminPortal() {
     }
   }, [contacts.length, contactsLoading, isAuthenticated]);
 
+  const fetchMedia = useCallback(async () => {
+    if (!isAuthenticated) return;
+
+    try {
+      setMediaLoading(true);
+      const mediaRes = await API.get('/admin/media');
+      setMedia(mediaRes.data?.data || mediaRes.data?.media || []);
+    } catch (error) {
+      console.error('Media fetch error:', error);
+      toast.error('Unable to load transformation media right now.');
+    } finally {
+      setMediaLoading(false);
+    }
+  }, [isAuthenticated]);
+
   useEffect(() => {
     if (activeView === 'registrations' || activeView === 'plans') {
       fetchLeads();
@@ -101,7 +122,10 @@ export default function AdminPortal() {
     if (activeView === 'contacts') {
       fetchContacts();
     }
-  }, [activeView, fetchContacts, fetchLeads]);
+    if (activeView === 'media') {
+      fetchMedia();
+    }
+  }, [activeView, fetchContacts, fetchLeads, fetchMedia]);
 
   const registrations = useMemo(
     () => leads.filter((lead) => lead.source !== 'contact-form' && !(lead.interestType === 'plan' || lead.planType)),
@@ -129,7 +153,7 @@ export default function AdminPortal() {
       setStatsLoading(true);
     } catch (error) {
       console.error('Admin login failed:', error);
-      toast.error(error.response?.data?.error || 'Login failed');
+      toast.error(error.response?.data?.message || error.response?.data?.error || 'Login failed');
     } finally {
       setLoginLoading(false);
     }
@@ -194,6 +218,61 @@ export default function AdminPortal() {
     } catch (error) {
       console.error('Delete contact failed:', error);
       toast.error('Failed to delete contact request');
+    }
+  };
+
+  const uploadMedia = async (event) => {
+    event.preventDefault();
+    if (!mediaForm.file) {
+      toast.error('Please choose an image or video first');
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('file', mediaForm.file);
+    formData.append('caption', mediaForm.caption);
+    formData.append('displayOrder', mediaForm.displayOrder);
+
+    try {
+      setUploading(true);
+      const res = await API.post('/admin/media/upload', formData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      });
+      const uploaded = res.data?.data || res.data?.media;
+      setMedia((prev) => [...prev, uploaded].filter(Boolean).sort((a, b) => a.displayOrder - b.displayOrder));
+      setMediaForm({ file: null, caption: '', displayOrder: 0 });
+      toast.success('Media uploaded');
+    } catch (error) {
+      console.error('Upload media failed:', error);
+      toast.error(error.response?.data?.message || 'Failed to upload media');
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  const updateMediaOrder = async (id, displayOrder) => {
+    try {
+      const res = await API.patch(`/admin/media/${id}/order`, { displayOrder: Number(displayOrder) });
+      const updated = res.data?.data || res.data?.media;
+      setMedia((prev) => prev.map((item) => (item._id === id ? updated : item)).sort((a, b) => a.displayOrder - b.displayOrder));
+      toast.success('Display order updated');
+    } catch (error) {
+      console.error('Update media order failed:', error);
+      toast.error('Failed to update media order');
+    }
+  };
+
+  const deleteMedia = async (id) => {
+    const confirmed = window.confirm('Delete this media from Cloudinary and the gallery?');
+    if (!confirmed) return;
+
+    try {
+      await API.delete(`/admin/media/${id}`);
+      setMedia((prev) => prev.filter((item) => item._id !== id));
+      toast.success('Media deleted');
+    } catch (error) {
+      console.error('Delete media failed:', error);
+      toast.error('Failed to delete media');
     }
   };
 
@@ -481,6 +560,75 @@ export default function AdminPortal() {
                 : contacts.length
                   ? <div className="admin-lead-list">{contacts.map(renderContactCard)}</div>
                   : renderEmptyState('No contact requests found.')}
+            </div>
+          ) : null}
+
+          {activeView === 'media' ? (
+            <div className="admin-summary-card admin-lead-section">
+              <h3>Transformation Media Manager</h3>
+              <p className="section-subtitle" style={{ maxWidth: 'none', margin: '8px 0 20px' }}>
+                Images and videos uploaded here will appear live on the Transformations page in the order you specify.
+              </p>
+
+              <form className="admin-media-upload" onSubmit={uploadMedia}>
+                <label className="admin-auth-field">
+                  <span>Upload image or video</span>
+                  <input
+                    className="form-input"
+                    type="file"
+                    accept="image/jpeg,image/png,image/webp,video/mp4,video/quicktime"
+                    onChange={(event) => setMediaForm((prev) => ({ ...prev, file: event.target.files?.[0] || null }))}
+                  />
+                </label>
+                <label className="admin-auth-field">
+                  <span>Caption</span>
+                  <input className="form-input" value={mediaForm.caption} onChange={(event) => setMediaForm((prev) => ({ ...prev, caption: event.target.value }))} />
+                </label>
+                <label className="admin-auth-field">
+                  <span>Display Order</span>
+                  <input className="form-input" type="number" value={mediaForm.displayOrder} onChange={(event) => setMediaForm((prev) => ({ ...prev, displayOrder: event.target.value }))} />
+                </label>
+                <button className="btn btn-primary btn-lg" type="submit" disabled={uploading}>
+                  <FiUpload /> {uploading ? 'Uploading...' : 'Upload Media'}
+                </button>
+              </form>
+
+              <div className="ai-side-tabs admin-media-tabs">
+                <button type="button" className={`ai-tab-btn ${mediaTab === 'image' ? 'active' : ''}`} onClick={() => setMediaTab('image')}>Images</button>
+                <button type="button" className={`ai-tab-btn ${mediaTab === 'video' ? 'active' : ''}`} onClick={() => setMediaTab('video')}>Videos</button>
+              </div>
+
+              {mediaLoading ? (
+                <p className="section-subtitle" style={{ maxWidth: 'none' }}>Loading media...</p>
+              ) : (
+                <div className="admin-media-grid">
+                  {media.filter((item) => item.type === mediaTab).map((item) => (
+                    <article className="admin-media-card" key={item._id}>
+                      {item.type === 'image' ? (
+                        <img src={item.url} alt={item.caption || 'Transformation upload'} loading="lazy" />
+                      ) : (
+                        <video src={item.url} poster={item.thumbnailUrl || undefined} controls preload="metadata"></video>
+                      )}
+                      <div className="admin-media-card-body">
+                        <strong>{item.caption || 'Untitled media'}</strong>
+                        <label className="admin-auth-field">
+                          <span>Order</span>
+                          <input
+                            className="form-input"
+                            type="number"
+                            defaultValue={item.displayOrder}
+                            onBlur={(event) => updateMediaOrder(item._id, event.target.value)}
+                          />
+                        </label>
+                        <button className="btn btn-secondary" type="button" onClick={() => deleteMedia(item._id)}>
+                          <FiTrash2 /> Delete
+                        </button>
+                      </div>
+                    </article>
+                  ))}
+                  {!media.filter((item) => item.type === mediaTab).length ? renderEmptyState(`No ${mediaTab}s uploaded yet.`) : null}
+                </div>
+              )}
             </div>
           ) : null}
         </section>

@@ -1,156 +1,1142 @@
 # OneHour Challenge
 
-OneHour Challenge is a full-stack fitness platform built with a React + Vite frontend and a Node.js + Express backend. The product is designed around a premium public website, guided lead capture, direct contact intake, an AI-assisted support layer, and a hidden admin workspace for follow-up operations.
+OneHour Challenge is a full-stack online fitness coaching website built with a React + Vite frontend and a Node.js + Express backend. The current product is an enquiry-first coaching platform for live 1-hour fitness, yoga, zumba, HIIT, functional training, and 1-on-1 coaching sessions.
 
-This repository currently contains:
-
-- A multi-page public website for fitness, yoga, zumba, HIIT, functional training, and 1-on-1 coaching
-- Registration and plan enquiry capture from multiple pages
-- A dedicated contact form with backend persistence and email notification
-- A floating AI assistant for fitness/program guidance
-- A hidden admin portal with login, status updates, and enquiry management
-- MongoDB-backed lead and contact storage
-- Cloudinary-hosted media used across the public website
+The website does not currently sell plans through an online checkout. Visitors explore programs and plans, submit their details through lead forms, contact the team, or reserve free trial seats through WhatsApp. The backend stores leads and contacts in MongoDB and exposes a hidden admin workspace for follow-up.
 
 ## Table of Contents
 
-1. Product Overview
-2. Current Website Experience
-3. Current Features
-4. Tech Stack
-5. Current Architecture
-6. Project Structure
-7. Frontend Routes
-8. Backend API
-9. Data Flow
-10. Environment Variables
-11. Local Setup
-12. Run Commands
-13. Admin Portal
-14. AI Assistant
-15. Current Status and Known Notes
-16. Roadmap
-17. Deployment Notes
-18. Troubleshooting
+1. Product Summary
+2. Current Website Content
+3. Routes and Navigation
+4. Hero Background URLs
+5. Image and Media URLs
+6. Current Colors and Theme
+7. Pricing and Plans
+8. Free Trial Sessions
+9. Contact Details
+10. Lead Capture Content
+11. Admin Portal
+12. Tech Stack
+13. Project Structure
+14. Backend API
+15. Environment Variables
+16. Local Setup
+17. Run Commands
+18. Deployment Notes
+19. Known Notes
 
-## 1. Product Overview
+## 1. Product Summary
 
-The platform presents OneHour Challenge as a modern online coaching brand with a cleaner, page-based experience instead of a long single-scroll landing page.
+OneHour Challenge presents a simple coaching promise:
 
-The current product strategy is:
+> One focused hour to build a stronger, healthier routine.
 
-- Use the public website to explain the brand, programs, plans, and coaching structure
-- Capture registrations and plan interest through reusable enquiry flows
-- Let visitors contact the team directly using the form, email, phone, or WhatsApp
-- Give the internal team a private admin workspace to review and manage incoming enquiries
+The current site focuses on:
 
-The website is currently enquiry-first, not payment-first. Visitors submit their details, and the team follows up directly.
+- Live online fitness coaching across India
+- 60-minute guided sessions
+- Fitness, yoga, zumba, HIIT, functional training, and 1-on-1 coaching
+- Free trial session booking through WhatsApp
+- Plan enquiry and registration lead capture
+- Trainer credibility and transformation proof
+- Hidden admin workflow for managing registrations, plan enquiries, and contact requests
 
-## 2. Current Website Experience
+The primary audience is busy people who want structured online coaching without a complicated booking or payment flow.
 
-### Public Pages
+## 2. Current Website Content
 
-The public website currently includes:
+### Homepage
 
-- `/` Home
-- `/about`
-- `/programs`
+Route: `/`
+
+Hero badge:
+
+- `Live Online Fitness Coaching`
+
+Hero title:
+
+- `One focused hour to build a stronger, healthier routine.`
+
+Hero summary:
+
+- `Join live coach-led sessions for fitness, yoga, zumba, HIIT, and personal training. Start with a free trial, choose a plan, and train from anywhere with clear guidance.`
+
+Primary CTAs:
+
+- `Book Free Trial`
+- `Explore Programs`
+
+Trust row:
+
+- Certified trainers
+- Beginner friendly
+- Online across India
+
+Homepage stats:
+
+- `500+` members coached
+- `60 min` live guided sessions
+- `4.8/5` member rating
+- `5+` training formats
+
+Hero side panel:
+
+- Today's Focus: `Simple, guided, consistent.`
+- Morning and evening live batches
+- Small-group energy with trainer attention
+- Safe progressions for every fitness level
+- WhatsApp CTA: `Talk on WhatsApp`
+
+Homepage program cards:
+
+- `Fitness and HIIT`: Build stamina, strength, and fat-loss momentum with coach-led full-body sessions.
+- `Yoga and Mobility`: Improve flexibility, posture, breathing, and recovery with calm guided practice.
+- `Zumba Cardio`: Stay consistent with high-energy dance cardio that feels fun and approachable.
+- `1-on-1 Coaching`: Get a focused path with closer support, accountability, and personal guidance.
+
+Homepage process section:
+
+- Choose a direction: Pick fitness, yoga, zumba, functional training, or personal coaching.
+- Try a free session: Experience the trainer, pace, and format before selecting a plan.
+- Follow a weekly rhythm: Train 3 to 5 days a week with structured one-hour sessions.
+
+Homepage closing CTA:
+
+- `Ready to choose your first session?`
+- `Send your details and the team will help you choose a program, batch timing, and plan that fits your week.`
+
+### About Page
+
+Route: `/about`
+
+Hero badge:
+
+- `About Us`
+
+Hero eyebrow:
+
+- `OneHour Challenge Method`
+
+Hero title:
+
+- `Built for Discipline`
+
+Hero description:
+
+- `OneHour Challenge helps busy people train with structure, accountability, and a coaching rhythm that fits real life.`
+
+Hero metrics:
+
+- `500+` Active Members
+- `15+` Certified Trainers
+- `5` Core Disciplines
+
+About content:
+
+- The brand is designed for results, but built around real schedules.
+- The method is simple: one focused hour, a coach who leads with clarity, and a training system that helps members stay consistent instead of restarting every month.
+- The goal is to help members feel stronger, healthier, and more confident with every week of training.
+
+Why people choose OneHour Challenge:
+
+- Focused delivery: Sessions are paced so members can follow without confusion.
+- Better accountability: Members stay on track with guided coaching, clear plans, and regular support.
+- Supportive community: Every member gets a welcoming fitness space with energy, structure, and encouragement.
+
+Operating principles:
+
+- Structured Programming: Every session fits into a clear training system with a purpose.
+- Personal Attention: Supportive coaching without making members feel lost in a crowd.
+- Certified Team: Experienced coaches with a professional, safety-first mindset.
+
+About stats:
+
+- `500+` Active Members
+- `15+` Certified Trainers
+- `4.8+` Member Rating
+- `5+` Programs
+
+### Programs Page
+
+Route: `/programs`
+
+Hero badge:
+
+- `Programs`
+
+Hero eyebrow:
+
+- `Distinct training pathways`
+
+Hero title:
+
+- `Professional coaching for every goal`
+
+Hero description:
+
+- `Choose from guided formats built for fat loss, strength, mobility, stamina, and long-term consistency.`
+
+Hero metrics:
+
+- `5` Program Paths
+- `1:1` Coaching Option
+- `60 min` Session Length
+
+Program cards:
+
+- `1-on-1 Training`
+  - Dedicated coach support
+  - Clear progression
+  - Focused accountability
+
+- `Zumba`
+  - High-energy cardio
+  - Fun guided sessions
+  - Group motivation
+
+- `Yoga`
+  - Flexibility work
+  - Mobility support
+  - Mind-body balance
+
+- `HIIT`
+  - Efficient fat burn
+  - Conditioning focus
+  - Fast-paced coaching
+
+- `Functional Training`
+  - Strength for daily life
+  - Better movement
+  - Joint-friendly programming
+
+Program fit messaging:
+
+- Best for structure: 1-on-1 Training and Functional Training
+- Best for energy: Zumba and HIIT
+- Best for balance: Yoga
+
+### Plans / Pricing Page
+
+Routes:
+
 - `/plans`
-- `/pricing` which points to the same plans page
-- `/how-it-works`
-- `/transformations`
-- `/trainers`
-- `/contact`
+- `/pricing`
 
-### Public Experience Design
+Both routes render the same `Pricing` page.
 
-The public-facing site currently provides:
+Hero badge:
 
-- A dedicated homepage with premium hero, program discovery, free-session messaging, trust sections, reviews, and contact CTAs
-- Standalone inner pages instead of mixing all sections into one screen
-- Route-based page transitions with Framer Motion
-- Scroll-to-top behavior on route changes
-- Floating WhatsApp support access
-- Floating AI assistant access
-- Reusable registration modal from multiple CTA locations
+- `Plans`
 
-### Hidden Admin Access
+Hero title:
 
-The admin portal is intentionally hidden from the public navbar and footer.
+- `Choose the right fit`
 
-Current access model:
+Hero description:
 
-- Admin route exists at `/admin`
-- Hidden secure-entry UI is surfaced from the trainers page
-- Admin login is also available directly on `/admin`
+- `Compare coaching rhythms, start with a free session if you want, and let the team guide you toward the plan that fits your goals.`
 
-## 3. Current Features
+Main section badge:
 
-### Public Website
+- `Coaching Plans`
 
-- Premium homepage with structured content blocks
-- Separate About, Programs, Plans, Trainers, Transformations, Contact, and How It Works pages
-- CTA-driven lead capture across pages
-- Free-session and WhatsApp support messaging
-- Cloudinary-hosted imagery across major sections
+Main section title:
 
-### Lead Capture
+- `Choose how often you want to train`
 
-- Reusable registration modal launched from CTA buttons
-- Captures:
-  - name
-  - mobile
-  - age
-  - location
-  - optional email
-  - optional message
-- Stores lead metadata such as:
-  - source page
-  - source path
-  - interest type
-  - interest label
-  - selected plan
-  - selected duration
+Important pricing note:
 
-### Contact Intake
+- The current website shows plan names and coaching frequency, not rupee pricing.
+- No actual money amount is currently hardcoded in the pricing page.
+- Each pricing card displays the active plan name, such as `PRO` or `ADVANCE`, instead of a rupee price.
+- Plan enquiries are submitted through the lead modal using `Send Enquiry`.
 
-- Dedicated contact page with full form
-- Contact form stores a `Contact` record
-- Contact form also creates a linked `Lead`-style record for admin visibility
-- Sends an admin notification email through Nodemailer
+### How It Works Page
 
-### Admin Workspace
+Route: `/how-it-works`
 
-- Login-protected workspace
+Hero badge:
+
+- `How It Works`
+
+Hero eyebrow:
+
+- `From first click to steady training`
+
+Hero title:
+
+- `A simple system with real structure`
+
+Hero description:
+
+- `Each session follows a clear format so members can train confidently, safely, and consistently.`
+
+Hero metrics:
+
+- `3` Core Session Phases
+- `60 min` Guided Format
+- `5+` Training Specializations
+
+Process steps:
+
+- `01` Choose your training direction
+- `02` Send your registration
+- `03` Start with guided consistency
+
+60-minute session structure:
+
+- `10 Minutes - Mobility and Warm-Up`
+- `40 Minutes - Main Workout`
+- `10 Minutes - Cool Down and Recovery`
+
+Why members stay consistent:
+
+- Certified Trainers
+- Structured Programming
+- Safe and Progressive
+- Community Sessions
+
+Core specializations:
+
+- Fitness Program
+- Muscle Building
+- Posture and Mobility
+- Yoga and Flexibility
+- Zumba and Cardio Dance
+
+### Trainers Page
+
+Route: `/trainers`
+
+Hero badge:
+
+- `Coaching Team`
+
+Hero eyebrow:
+
+- `Professional support`
+
+Hero title:
+
+- `Train with coaches who keep progress simple`
+
+Hero description:
+
+- `OneHour Challenge combines certified fitness, yoga, zumba, and conditioning support into a clear online coaching experience.`
+
+Hero metrics:
+
+- `15+` Coach network
+- `5+` Specializations
+- `1 hour` Session structure
+
+Current trainer cards:
+
+- Coach Vikram
+  - Experience: `8+ Years`
+  - Specialization: Strength and Conditioning
+  - Certification: ACE Certified Personal Trainer
+
+- Coach Ananya
+  - Experience: `6+ Years`
+  - Specialization: Zumba and Dance Fitness
+  - Certification: Zumba Licensed Instructor
+
+- Coach Deepak
+  - Experience: `10+ Years`
+  - Specialization: Yoga and Mindfulness
+  - Certification: Yoga Alliance RYT-500
+
+Trainer page pillars:
+
+- Certified guidance
+- Structured programming
+- Supportive accountability
+
+Hidden admin access:
+
+- The trainers page includes a lock button.
+- Clicking the lock opens a restricted sign-in modal.
+- Successful login navigates to `/admin`.
+
+### Transformations Page
+
+Route: `/transformations`
+
+Hero badge:
+
+- `Real Results`
+
+Hero eyebrow:
+
+- `Proof through consistency`
+
+Hero title:
+
+- `Transformation stories that feel credible`
+
+Hero description:
+
+- `Real member wins built on routine, guidance, and training that fits everyday life.`
+
+Hero metrics:
+
+- `6` Featured Stories
+- `4.8+` Community Rating
+- `1 hour` Repeatable Routine
+
+Transformation stories:
+
+- Navami P: Lost 12 kgs in 4 months. The structure and consistency made the difference.
+- Meera Iyer: From barely running 1 km to completing a 10K. The progression was easy to trust.
+- Karthik Nair: Lean muscle gain felt realistic because the coaching stayed clear and practical.
+- Deepa Sharma: Yoga improved my flexibility and energy more than I expected.
+- Ravi Kumar: The zumba sessions kept me consistent because they were genuinely enjoyable.
+- Anjali Reddy: The online format fit my schedule perfectly and still delivered results.
+
+Transformation overview points:
+
+- Weight-loss journeys with realistic timelines
+- Cardio and stamina gains built through regular sessions
+- Strength and mobility improvements without extreme routines
+
+### Contact Page
+
+Route: `/contact`
+
+Hero badge:
+
+- `Contact`
+
+Hero eyebrow:
+
+- `Direct communication page`
+
+Hero title:
+
+- `Let's plan your next step`
+
+Hero description:
+
+- `Share your details and goals. The OneHour Challenge team will contact you and help you choose the right next step.`
+
+Hero metrics:
+
+- `1 form` Direct Lead Flow
+- `Mon-Sat` Support Window
+- `Online` Across India
+
+Contact service cards:
+
+- Program guidance
+- Fast response
+- Direct contact options
+
+Contact form fields:
+
+- Name
+- Email
+- Mobile Number
+- Gender
+- Age
+- What are you looking for?
+
+Working hours shown on page:
+
+- Live sessions: 6 AM to 9 AM and 5 PM to 9 PM
+- Support: Monday to Saturday, 9 AM to 6 PM
+- Sunday: Closed
+
+### Footer Content
+
+Footer CTA:
+
+- `Online coaching for gym-style fitness, yoga, zumba, and a stronger daily routine.`
+- `Explore guided one-hour sessions, choose a plan that fits your week, and start with a professional fitness experience that feels easy to follow from any device.`
+
+Footer program links:
+
+- Fitness
+- Yoga
+- Zumba
+
+Footer company links:
+
+- About Us
+- Transformations
+- Plans
+- Contact
+
+Footer contact:
+
+- Email: `manoharbasappagari18@gmail.com`
+- Phone: `+91 95150 22680`
+- Note: `Open for online coaching enquiries across India.`
+
+## 3. Routes and Navigation
+
+### Public Routes
+
+- `/` - Home
+- `/about` - About page
+- `/programs` - Program overview
+- `/plans` - Plan selection page
+- `/pricing` - Alias of plans page
+- `/how-it-works` - Process and session structure
+- `/transformations` - Result stories and transformation gallery
+- `/trainers` - Coaching team and hidden secure entry
+- `/contact` - Contact form and direct contact details
+
+### Admin Route
+
+- `/admin` - Private admin workspace
+
+### Desktop Navbar Links
+
+- Home
+- Programs
+- Plans
+- Process
+- Results
+- Contact
+- Join Now
+
+### Mobile Navbar Links
+
+- Home
+- About
+- Programs
+- Plans
+- Process
+- Results
+- Trainers
+- Contact
+- Join Now
+
+## 4. Hero Background URLs
+
+The site currently uses two CSS hero background images.
+
+### Home Hero Background
+
+Used by `.home-hero`.
+
+```text
+https://res.cloudinary.com/dt37ji5yp/image/upload/v1771512241/ST_2_xhbjg9.png
+```
+
+CSS usage:
+
+```css
+background:
+  linear-gradient(rgba(20, 32, 27, 0.5), rgba(20, 32, 27, 0.56)),
+  url("https://res.cloudinary.com/dt37ji5yp/image/upload/v1771512241/ST_2_xhbjg9.png") center/cover;
+```
+
+### Inner Page Hero Background
+
+Used by `.page-hero` on About, Programs, Plans, How It Works, Trainers, Transformations, and Contact.
+
+```text
+https://res.cloudinary.com/dt37ji5yp/image/upload/v1771512247/Zomba_part3_v3i9y0.png
+```
+
+CSS usage:
+
+```css
+background:
+  linear-gradient(rgba(20, 32, 27, 0.52), rgba(20, 32, 27, 0.62)),
+  url("https://res.cloudinary.com/dt37ji5yp/image/upload/v1771512247/Zomba_part3_v3i9y0.png") center/cover;
+```
+
+## 5. Image and Media URLs
+
+### Logo / Open Graph Image
+
+Used in navbar, mobile nav, footer, and SEO default Open Graph image.
+
+```text
+https://res.cloudinary.com/dt37ji5yp/image/upload/v1771514832/Onehour_2__page-0001_zy1elu.jpg
+```
+
+### About Page Image
+
+Used in the about story section.
+
+```text
+https://res.cloudinary.com/dt37ji5yp/image/upload/v1771512247/Zomba_part3_v3i9y0.png
+```
+
+### Program Images
+
+1-on-1 Training:
+
+```text
+https://res.cloudinary.com/dt37ji5yp/image/upload/v1771782797/Gemini_Generated_Image_s8xw7ls8xw7ls8xw_1_z96yp5.png
+```
+
+Zumba:
+
+```text
+https://res.cloudinary.com/dt37ji5yp/image/upload/v1771512247/Zomba_Training_kws7pi.png
+```
+
+Yoga:
+
+```text
+https://res.cloudinary.com/dt37ji5yp/image/upload/v1771512244/yoga_part4_mnslxd.png
+```
+
+HIIT:
+
+```text
+https://res.cloudinary.com/dt37ji5yp/image/upload/v1771512241/Strength_part2_tzrm1t.png
+```
+
+Functional Training:
+
+```text
+https://res.cloudinary.com/dt37ji5yp/image/upload/v1771512241/ST_2_xhbjg9.png
+```
+
+### Transformation Images
+
+Transformation 1:
+
+```text
+https://res.cloudinary.com/dt37ji5yp/image/upload/v1772080466/img1_mmu5bz.png
+```
+
+Transformation 2:
+
+```text
+https://res.cloudinary.com/dt37ji5yp/image/upload/v1772080466/img2_rwnkp6.png
+```
+
+Transformation 3:
+
+```text
+https://res.cloudinary.com/dt37ji5yp/image/upload/v1772080466/img3_q6dg33.png
+```
+
+Transformation 4:
+
+```text
+https://res.cloudinary.com/dt37ji5yp/image/upload/v1772080465/img4_ksgdcq.png
+```
+
+Transformation 5:
+
+```text
+https://res.cloudinary.com/dt37ji5yp/image/upload/v1772080466/img5_qv8cnc.png
+```
+
+Transformation 6:
+
+```text
+https://res.cloudinary.com/dt37ji5yp/image/upload/v1772080466/img6_g82dnf.png
+```
+
+### Fonts URL
+
+Loaded in `client/src/index.css`.
+
+```text
+https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap
+```
+
+### Website and API URLs
+
+SEO site URL:
+
+```text
+https://onehourchallenge.com
+```
+
+Production API fallback:
+
+```text
+https://onehourchallenge.onrender.com/api
+```
+
+Sitemap:
+
+```text
+https://onehourchallenge.com/sitemap.xml
+```
+
+### WhatsApp URLs
+
+The app dynamically generates WhatsApp links with encoded messages.
+
+Base number:
+
+```text
+919515022680
+```
+
+Generated URL format:
+
+```text
+https://wa.me/919515022680?text=<encoded-message>
+```
+
+Default WhatsApp message:
+
+```text
+I would like to book a free session for OneHour Challenge.
+```
+
+## 6. Current Colors and Theme
+
+The current UI uses a light fitness/wellness palette with green as the primary brand color, dark green ink, soft off-white backgrounds, and a warm gold accent.
+
+### CSS Theme Tokens
+
+Defined in `client/src/index.css`.
+
+| Token | Value | Current Usage |
+| --- | --- | --- |
+| `--color-bg` | `#f6f7f4` | Main page background |
+| `--color-surface` | `#ffffff` | Cards, buttons, panels |
+| `--color-surface-soft` | `#eef3ed` | Muted sections and soft surfaces |
+| `--color-ink` | `#14201b` | Main text and dark footer/admin background |
+| `--color-muted` | `#62706a` | Paragraphs and secondary text |
+| `--color-soft` | `#8b9892` | Softer text |
+| `--color-line` | `#dfe7e1` | Borders |
+| `--color-primary` | `#0c7a43` | Main green CTA and highlights |
+| `--color-primary-dark` | `#075e33` | Dark green hover and strong accents |
+| `--color-primary-soft` | `#e2f3ea` | Green-tinted badges and icon backgrounds |
+| `--color-accent` | `#d8942c` | Review star/accent color |
+
+### Hardcoded Colors Also Used
+
+| Value | Usage |
+| --- | --- |
+| `#ffffff` | White text, surfaces, CTA text |
+| `#14201b` | Footer background and admin sidebar background |
+| `#128c4a` | Floating WhatsApp button |
+| `#bdf0cf` | Highlight text inside page hero titles |
+| `rgba(20, 32, 27, 0.5)` | Home hero overlay |
+| `rgba(20, 32, 27, 0.56)` | Home hero overlay |
+| `rgba(20, 32, 27, 0.52)` | Inner page hero overlay |
+| `rgba(20, 32, 27, 0.62)` | Inner page hero overlay |
+| `rgba(246, 247, 244, 0.92)` | Scrolled navbar background |
+| `rgba(12, 122, 67, 0.08)` | Active nav/link green tint |
+| `rgba(12, 122, 67, 0.18)` | Badge border |
+| `rgba(12, 122, 67, 0.2)` | Primary button shadow |
+| `rgba(12, 122, 67, 0.34)` | Secondary button hover border |
+| `rgba(12, 122, 67, 0.42)` | Active/popular card border |
+| `rgba(12, 122, 67, 0.12)` | Form focus ring |
+| `rgba(255, 255, 255, 0.06)` | Footer CTA band background |
+| `rgba(255, 255, 255, 0.08)` | Footer/admin subtle surfaces |
+| `rgba(255, 255, 255, 0.1)` | Hero metric/nav active surfaces |
+| `rgba(255, 255, 255, 0.12)` | Footer borders |
+| `rgba(255, 255, 255, 0.16)` | Page hero badge background |
+| `rgba(255, 255, 255, 0.22)` | Hero trust and badge borders |
+| `rgba(255, 255, 255, 0.66)` | Footer secondary text |
+| `rgba(255, 255, 255, 0.72)` | Footer links and admin nav |
+| `rgba(255, 255, 255, 0.74)` | Hero metric text |
+| `rgba(255, 255, 255, 0.76)` | Hero eyebrow |
+| `rgba(255, 255, 255, 0.84)` | Hero description text |
+| `rgba(255, 255, 255, 0.9)` | Hero trust text |
+| `rgba(20, 32, 27, 0.38)` | Mobile nav backdrop |
+| `rgba(20, 32, 27, 0.48)` | Modal/panel overlay |
+| `rgba(20, 32, 27, 0.06)` | Soft shadow |
+| `rgba(20, 32, 27, 0.08)` | Card/navbar shadow |
+| `rgba(20, 32, 27, 0.18)` | Mobile nav and AI panel shadow |
+| `rgba(20, 32, 27, 0.24)` | Modal shadow |
+
+### Typography
+
+Font import:
+
+- Heading font: `Sora`
+- Body font: `Inter`
+
+CSS tokens:
+
+```css
+--font-heading: "Sora", "Inter", sans-serif;
+--font-body: "Inter", system-ui, sans-serif;
+```
+
+### Layout Tokens
+
+```css
+--container-width: 1180px;
+--container-padding: 0 24px;
+--section-padding: 88px 0;
+--radius-sm: 8px;
+--radius-md: 10px;
+--radius-lg: 14px;
+--shadow-card: 0 18px 50px rgba(20, 32, 27, 0.08);
+--shadow-soft: 0 8px 24px rgba(20, 32, 27, 0.06);
+--transition-fast: 0.18s ease;
+--transition-smooth: 0.28s ease;
+```
+
+### Color Note
+
+The contact page currently references these CSS variables inline:
+
+- `--color-white`
+- `--color-gray-900`
+- `--color-gray-600`
+
+Those variables are not defined in the current `:root` theme. Browsers will ignore those specific inline color/background values unless fallback values are added.
+
+## 7. Pricing and Plans
+
+The current pricing page is a plan-selection and enquiry page. It does not show fixed rupee amounts.
+
+### Current Plan Types
+
+#### PRO Plan
+
+Positioning:
+
+- Balanced Coaching
+- A steady weekly routine for most working professionals.
+- A balanced weekly plan for members who want consistency without overload.
+
+Frequency:
+
+- `3 Days/Week`
+- 3 days each week
+
+Configured max bookings:
+
+- `4`
+
+Features:
+
+- 3 live sessions per week
+- Max 4 bookings per week
+- Access to all programs
+- Progress tracking
+- Community access
+
+#### ADVANCE Plan
+
+Positioning:
+
+- Intensive Coaching
+- A higher-frequency routine for faster momentum and support.
+- A more intensive weekly plan for members aiming for faster rhythm and closer support.
+
+Frequency:
+
+- `5 Days/Week`
+- 5 days each week
+
+Configured max bookings:
+
+- `6`
+
+Features:
+
+- 5 live sessions per week
+- Max 6 bookings per week
+- Access to all programs
+- Progress tracking
+- Priority support
+- Community access
+- Personalized guidance
+
+### Current Duration Cards
+
+These duration cards are shown for whichever plan tab is active.
+
+#### Starter
+
+Note:
+
+- Best for first-time members
+
+Summary:
+
+- `A simple way to begin, understand the coaching style, and build your first routine.`
+
+#### 3 Months
+
+Note:
+
+- Most chosen
+
+Summary:
+
+- `A focused phase for building momentum, visible discipline, and measurable progress.`
+
+Badge:
+
+- `Recommended`
+
+#### 6 Months
+
+Note:
+
+- Best for stronger transformation
+
+Summary:
+
+- `Ideal for members who want enough time to improve stamina, strength, and overall fitness.`
+
+#### Long Term
+
+Note:
+
+- Best for lifestyle change
+
+Summary:
+
+- `Built for long-term consistency when fitness becomes part of your everyday routine.`
+
+### Plan Enquiry Behavior
+
+Each pricing card opens the lead capture modal with:
+
+- `sourcePage: Plans`
+- `interestType: plan`
+- `interestLabel: <active plan> <duration>`
+- `planType: PRO` or `ADVANCE`
+- `duration: Starter`, `3 Months`, `6 Months`, or `Long Term`
+
+CTA label:
+
+- `Send Enquiry`
+
+General plan CTA:
+
+- `Talk to the Team`
+
+## 8. Free Trial Sessions
+
+Free trial sessions are used on the homepage and plans page through `FreeSessionShowcase`.
+
+### Free Trial Messaging
+
+Default badge:
+
+- `Free Trial Sessions`
+
+Default title:
+
+- `Reserve a free seat`
+
+Default subtitle:
+
+- `Limited seats are released each week for first-time members who want to experience the coaching style before joining.`
+
+Urgency card:
+
+- `Limited seats available for free`
+- `Reserve through WhatsApp before this week's live slots are filled.`
+
+### Free Session Options
+
+#### Yoga
+
+Label:
+
+- `Wellness and Flow`
+
+Description:
+
+- `Gentle strength, flexibility work, and a calmer reset for busy schedules.`
+
+Schedule:
+
+- Tuesday and Saturday
+- 7:00 PM
+
+Seats:
+
+- 6 seats left
+
+#### Fitness
+
+Label:
+
+- `Power Hour`
+
+Description:
+
+- `High-energy coaching focused on fat loss, stamina, and full-body momentum.`
+
+Schedule:
+
+- Monday and Thursday
+- 6:30 AM
+
+Seats:
+
+- 4 seats left
+
+Status:
+
+- Featured/highlighted
+
+#### Zumba
+
+Label:
+
+- `Rhythm and Sweat`
+
+Description:
+
+- `Cardio dance sessions that keep motivation high and movement fun.`
+
+Schedule:
+
+- Wednesday and Friday
+- 7:30 PM
+
+Seats:
+
+- 5 seats left
+
+### Free Session WhatsApp Message Format
+
+```text
+Hi, I am interested in a free <sessionType> session at OneHour Challenge.
+
+Name: <name or N/A>
+Email: <email or N/A>
+
+Please confirm my free session. Thank you.
+```
+
+Generated URL:
+
+```text
+https://wa.me/919515022680?text=<encoded-message>
+```
+
+## 9. Contact Details
+
+Current constants:
+
+```text
+Email: manoharbasappagari18@gmail.com
+Phone: 9515022680
+Display Phone: +91 95150 22680
+WhatsApp Number: 919515022680
+```
+
+Contact channels shown on the homepage:
+
+- WhatsApp: `+91 95150 22680`
+- Call: `+91 9515022680`
+- Email: `manoharbasappagari18@gmail.com`
+
+Contact page availability:
+
+- Online coaching across India
+
+## 10. Lead Capture Content
+
+The reusable registration modal is opened from CTA buttons across the site.
+
+### Required Fields
+
+- Full name
+- Phone number
+- Age
+
+### Optional Fields
+
+- Location
+- Email address
+- Message
+
+### Modal Kicker Logic
+
+- `program` interest type: `Program Enquiry`
+- `plan` interest type: `Plan Enquiry`
+- `team` interest type: `Trainer Enquiry`
+- Home source page: `Free Session Enquiry`
+- Default: `Register Interest`
+
+### Modal Subtitle
+
+```text
+Share your details and we will contact you directly on call or WhatsApp.
+```
+
+### Success Message
+
+```text
+We received your details
+Our team will contact you soon regarding <interest label>.
+```
+
+### Stored Lead Metadata
+
+Lead submissions include:
+
+- name
+- email
+- mobile
+- age
+- location
+- message
+- source
+- sourcePage
+- sourcePath
+- interestType
+- interestLabel
+- planType
+- duration
+- gender
+
+## 11. Admin Portal
+
+Admin route:
+
+```text
+/admin
+```
+
+Hidden secure entry:
+
+- Trainers page lock button
+
+Admin capabilities:
+
+- Login gate
 - Overview dashboard
-- Registration leads view
-- Plan enquiries view
-- Contact requests view
-- Status changes:
-  - `new`
-  - `contacted`
-  - `closed`
-  - `not-interested`
-- Delete actions for leads and contacts
-- Page-level and interest-level lead summaries
+- Registration lead list
+- Plan enquiry list
+- Contact request list
+- Booking-related admin routes still exist in backend
+- Status updates
+- Delete actions
+- Lead summaries by page and interest
 
-### AI Assistant
+Current status values:
 
-- Floating side panel on the public site
-- AI chat tab
-- Calorie calculator tab
-- Supports OpenAI-compatible usage through `OPENAI_API_KEY`
-- Detects OpenRouter-style keys starting with `sk-or-`
-- Falls back to rule-based fitness replies if the AI provider is unavailable
+- `new`
+- `contacted`
+- `closed`
+- `not-interested`
 
-### Backend Integrations
+Current auth model:
 
-- MongoDB for persistence
-- Nodemailer for contact and lead emails
-- OpenAI/OpenRouter-compatible assistant integration
-- Cloudinary assets currently used for delivery of images in the UI
+- Username and password come from environment variables.
+- Login returns a lightweight token.
+- Frontend stores the token in local storage.
+- Admin API requests send `Authorization: Bearer <token>`.
 
-## 4. Tech Stack
+Environment variables:
+
+```env
+ADMIN_PORTAL_USERNAME=admin
+ADMIN_PORTAL_PASSWORD=change_this_password
+```
+
+## 12. Tech Stack
 
 ### Frontend
 
@@ -172,48 +1158,23 @@ Current access model:
 - Nodemailer
 - OpenAI SDK
 
-### Installed but Not Yet Fully Productized
+### Media
 
-- Cloudinary SDK is present in the backend dependency list
-- Multer is installed
+- Cloudinary-hosted URLs are used directly in frontend code and CSS.
+- Cloudinary SDK is present in backend dependencies, but a complete upload/media-management workflow is not currently productized.
 
-These are ready for deeper upload/media workflows in a later phase, but the current public website mainly uses hosted Cloudinary URLs directly in the frontend.
-
-## 5. Current Architecture
-
-### Frontend
-
-The frontend now uses a cleaner structure:
-
-- `src/app` for app-level wiring
-- `src/layouts` for route shells
-- `src/pages` for page-level screens
-- `src/components` for reusable UI blocks
-- `src/utils` for API and content helpers
-
-Current frontend layout strategy:
-
-- `PublicLayout` wraps public routes with navbar, footer, page progress, AI assistant, scroll reveal, and WhatsApp button
-- `AdminWorkspaceLayout` isolates the admin experience from the public shell
-
-### Backend
-
-The backend now uses a `src`-based structure:
-
-- `src/server.js` starts the app
-- `src/app.js` composes middleware and routes
-- `src/config` holds env, database, CORS, and logging helpers
-- `src/routes` groups route modules
-- `src/controllers` contains request handlers
-- `src/models` contains Mongoose schemas
-- `src/middleware` contains auth and error utilities
-
-## 6. Project Structure
+## 13. Project Structure
 
 ```text
-ONEHOURCHALLENGE/
+ONEHOURCHALLENGE-main/
 |-- client/
 |   |-- public/
+|   |   |-- _headers
+|   |   |-- _redirects
+|   |   |-- favicon.svg
+|   |   |-- robots.txt
+|   |   |-- sitemap.xml
+|   |   `-- vite.svg
 |   |-- src/
 |   |   |-- app/
 |   |   |   |-- App.jsx
@@ -221,13 +1182,16 @@ ONEHOURCHALLENGE/
 |   |   |-- assets/
 |   |   |-- components/
 |   |   |   |-- AIAssistant.jsx
+|   |   |   |-- CalorieCalculator.jsx
 |   |   |   |-- Footer.jsx
+|   |   |   |-- FreeSessionShowcase.jsx
 |   |   |   |-- LeadCaptureButton.jsx
 |   |   |   |-- Navbar.jsx
 |   |   |   |-- PageHero.jsx
 |   |   |   |-- PageProgressBar.jsx
 |   |   |   |-- RegistrationModal.jsx
 |   |   |   |-- ScrollReveal.jsx
+|   |   |   |-- SEO.jsx
 |   |   |   `-- WhatsAppButton.jsx
 |   |   |-- layouts/
 |   |   |   |-- AdminWorkspaceLayout.jsx
@@ -249,7 +1213,7 @@ ONEHOURCHALLENGE/
 |   |   |-- App.jsx
 |   |   |-- index.css
 |   |   `-- main.jsx
-|   |-- .env.example
+|   |-- index.html
 |   |-- package.json
 |   `-- vite.config.js
 |-- server/
@@ -286,32 +1250,13 @@ ONEHOURCHALLENGE/
 |   |   |   `-- mailer.js
 |   |   |-- app.js
 |   |   `-- server.js
-|   |-- .env.example
 |   |-- index.js
 |   `-- package.json
 |-- .gitignore
 `-- README.md
 ```
 
-## 7. Frontend Routes
-
-### Public Routes
-
-- `/` Home page
-- `/about` Brand and method page
-- `/programs` Program overview page
-- `/plans` Plan selection page
-- `/pricing` Alias of the plans page
-- `/how-it-works` Session structure and process page
-- `/transformations` Social proof and result stories
-- `/trainers` Coach trust page plus hidden secure access entry
-- `/contact` Direct enquiry page
-
-### Admin Route
-
-- `/admin` Private admin workspace
-
-## 8. Backend API
+## 14. Backend API
 
 ### Health
 
@@ -345,55 +1290,13 @@ ONEHOURCHALLENGE/
 - `POST /api/ai/chat`
 - `POST /api/ai/lead`
 
-### Booking
+### Bookings
 
 - `POST /api/bookings`
 - `GET /api/bookings/user/:userId`
 - `GET /api/bookings/all`
 
-## 9. Data Flow
-
-### Registration CTA Flow
-
-1. User clicks a CTA that uses `LeadCaptureButton`
-2. `RegistrationModal` opens
-3. User submits enquiry details
-4. Frontend sends `POST /api/leads`
-5. Backend stores the lead in MongoDB
-6. Admin sees the record under Registrations or Plan Enquiries
-
-### Contact Flow
-
-1. User opens `/contact`
-2. User submits the contact form
-3. Frontend sends `POST /api/contact`
-4. Backend stores:
-   - a `Contact` record
-   - a `Lead` record with `interestType: contact`
-5. Backend triggers contact email notification in the background
-6. Admin sees the request in Contact Requests
-
-### Admin Flow
-
-1. Internal user visits `/admin` or enters from the trainers page
-2. Admin submits credentials
-3. Backend verifies credentials from environment variables
-4. Frontend stores the returned admin token in local storage
-5. Subsequent admin API requests send `Authorization: Bearer <token>`
-6. Admin manages statuses and deletes records as needed
-
-### AI Flow
-
-1. User opens the AI assistant panel
-2. User sends a chat message
-3. Frontend sends `POST /api/ai/chat`
-4. Backend tries OpenAI/OpenRouter
-5. If unavailable, backend returns fallback fitness guidance
-6. Optional lead conversation history can be appended to a lead record
-
-## 10. Environment Variables
-
-Create local environment files before running the project.
+## 15. Environment Variables
 
 ### Server: `server/.env`
 
@@ -424,264 +1327,97 @@ ADMIN_PORTAL_PASSWORD=change_this_password
 VITE_API_URL=http://localhost:5000/api
 ```
 
-### Important Notes
+Notes:
 
-- Do not commit real secrets
-- Keep `server/.env` and `client/.env` local only
-- `server/.env.example` and `client/.env.example` are the tracked templates
-- For local development, prefer:
-  - `NODE_ENV=development`
-  - `CLIENT_URL=http://localhost:5173`
+- Do not commit real secrets.
+- Keep local `.env` files untracked.
+- The frontend falls back to `https://onehourchallenge.onrender.com/api` if `VITE_API_URL` is not set.
 
-## 11. Local Setup
+## 16. Local Setup
 
-### 1. Clone the repository
-
-```bash
-git clone https://github.com/ManuSSandStrom/ONEHOURCHALLENGE.git
-cd ONEHOURCHALLENGE
-```
-
-### 2. Install frontend dependencies
+Install frontend dependencies:
 
 ```bash
 cd client
 npm install
 ```
 
-### 3. Install backend dependencies
+Install backend dependencies:
 
 ```bash
-cd ../server
+cd server
 npm install
 ```
 
-### 4. Add environment files
+Create local environment files:
 
-- Create `server/.env`
-- Create `client/.env`
-- Copy values from the example files and replace placeholders
+- `client/.env`
+- `server/.env`
 
-## 12. Run Commands
+## 17. Run Commands
 
-### Start the backend
+Start backend:
 
 ```bash
 cd server
 npm run dev
 ```
 
-### Start the frontend
+Start frontend:
 
 ```bash
 cd client
 npm run dev
 ```
 
-### Frontend production build
+Build frontend:
 
 ```bash
 cd client
 npm run build
 ```
 
-### Windows PowerShell note
-
-If `npm.ps1` execution is blocked, use:
+Windows PowerShell build fallback:
 
 ```bash
 npm.cmd run build
 ```
 
-## 13. Admin Portal
-
-### Access
-
-- Primary route: `/admin`
-- Hidden secure launcher: trainers page lock icon
-
-### Current Capabilities
-
-- Login gate
-- Overview summary cards
-- Lead counts by page
-- Lead counts by interest
-- Registration lead list
-- Plan enquiry list
-- Contact request list
-- Status actions
-- Delete actions
-- Responsive admin layout
-
-### Current Auth Model
-
-The current implementation uses a lightweight environment-driven token flow:
-
-- credentials are compared against `ADMIN_PORTAL_USERNAME` and `ADMIN_PORTAL_PASSWORD`
-- token is a base64 value derived from username and password
-- token is stored in browser local storage
-
-This works for the current internal-only workflow, but it is not the final target architecture.
-
-## 14. AI Assistant
-
-The public site includes a floating tools panel with:
-
-- AI assistant chat
-- Calorie calculator
-
-The assistant is intended to answer:
-
-- program questions
-- plan questions
-- session format questions
-- trainer questions
-- registration flow questions
-
-Behavior notes:
-
-- If `OPENAI_API_KEY` is present, the backend attempts real AI completion
-- If the key starts with `sk-or-`, the backend treats it as an OpenRouter-style key
-- If AI fails, the system still replies using structured fallback responses
-- Off-topic prompts are intentionally redirected back to fitness and brand support
-
-## 15. Current Status and Known Notes
-
-### What Is Already Working
-
-- Multi-page public website
-- Lead capture modal
-- Plan enquiry flow
-- Contact form persistence
-- Admin login and admin workspace
-- Lead and contact status updates
-- Lead and contact deletion
-- AI assistant with fallback logic
-- MongoDB persistence
-- Nodemailer contact notifications
-
-### Current Implementation Notes
-
-- The backend still includes booking routes and booking-related admin stats
-- The public website currently centers on enquiries rather than a visible booking checkout flow
-- Cloudinary is actively used for hosted media URLs in the frontend, but a dedicated upload workflow is not yet wired into the public/admin product
-- Admin auth is currently custom and lightweight, not JWT-based yet
-- API responses are not yet fully standardized across every controller
-- Validation and security hardening are still lighter than final production target
-
-### Recommended Current Reading for Contributors
-
-Start here if you are modifying the app:
-
-- Frontend shell: [client/src/app/AppRoutes.jsx](/c:/Users/Nandeesh%20kumar/OneDrive/Documents/ONEHOURCHALLENGE-main/client/src/app/AppRoutes.jsx)
-- Public layout: [client/src/layouts/PublicLayout.jsx](/c:/Users/Nandeesh%20kumar/OneDrive/Documents/ONEHOURCHALLENGE-main/client/src/layouts/PublicLayout.jsx)
-- Admin portal: [client/src/pages/AdminPortal.jsx](/c:/Users/Nandeesh%20kumar/OneDrive/Documents/ONEHOURCHALLENGE-main/client/src/pages/AdminPortal.jsx)
-- Lead modal: [client/src/components/RegistrationModal.jsx](/c:/Users/Nandeesh%20kumar/OneDrive/Documents/ONEHOURCHALLENGE-main/client/src/components/RegistrationModal.jsx)
-- Backend app: [server/src/app.js](/c:/Users/Nandeesh%20kumar/OneDrive/Documents/ONEHOURCHALLENGE-main/server/src/app.js)
-- Route map: [server/src/routes/index.js](/c:/Users/Nandeesh%20kumar/OneDrive/Documents/ONEHOURCHALLENGE-main/server/src/routes/index.js)
-
-## 16. Roadmap
-
-This is the current upgrade direction for the project.
-
-### Phase 1: Backend Hardening
-
-- Move admin auth to JWT
-- Hash admin passwords
-- Add request validation
-- Standardize API response format
-- Add rate limiting
-- Add Helmet and tighter CORS rules
-- Improve logging and central error handling
-
-### Phase 2: SaaS-Level Admin Workspace
-
-- Add search, filters, and pagination
-- Add richer dashboard analytics
-- Add source-based reporting
-- Add notes/history per lead
-- Add role-ready auth structure
-
-### Phase 3: Cloudinary Media Workflow
-
-- Add signed uploads for admin-managed images and videos
-- Store media metadata in MongoDB
-- Replace placeholder/static media handling with managed asset workflows
-
-### Phase 4: Frontend System Upgrade
-
-- Introduce a more scalable design system
-- Add loading, empty, and error states across all data views
-- Improve accessibility and keyboard behavior
-- Add lazy loading and better code splitting
-
-### Phase 5: Quality and Deployment
-
-- Add backend API tests
-- Add frontend component and flow tests
-- Add deployment docs for Vercel/Render or AWS
-- Add CI-friendly verification steps
-
-## 17. Deployment Notes
+## 18. Deployment Notes
 
 ### Frontend
 
-- Build the client with `npm run build`
-- Deploy the generated output to a static host such as Netlify or Vercel
-- Keep SPA rewrites enabled
+- Build from `client`.
+- Deploy the generated Vite output to Netlify, Vercel, or another static host.
+- Keep SPA rewrites enabled. The repo includes `client/public/_redirects`.
 
 ### Backend
 
-- Deploy the Express server to a Node-compatible host such as Render, Railway, or AWS
-- Configure all required environment variables
-- Ensure MongoDB network access is configured
-- Ensure email provider credentials are valid
+- Deploy the Express server to a Node host such as Render, Railway, or AWS.
+- Set all required environment variables.
+- Make sure MongoDB network access allows the deployed backend.
+- Confirm email provider credentials before enabling contact notifications.
 
-### Production Checklist
+### SEO Files
 
-- Use strong admin credentials
-- Set `CLIENT_URL` to the real frontend domain
-- Restrict CORS to the production frontend domain
-- Use HTTPS only
-- Rotate exposed or old keys if they were ever shared publicly
+Public SEO files:
 
-## 18. Troubleshooting
+- `client/public/robots.txt`
+- `client/public/sitemap.xml`
 
-### Admin page does not load data
+Canonical site URL:
 
-Check:
-
-- backend server is running
-- `VITE_API_URL` is correct
-- admin credentials are set in `server/.env`
-- browser local storage still holds a valid admin token
-
-### Contact submissions are not arriving
-
-Check:
-
-- MongoDB connection
-- `EMAIL_USER`, `EMAIL_PASS`, and `ADMIN_EMAIL`
-- backend logs for Nodemailer errors
-
-### AI assistant is not responding correctly
-
-Check:
-
-- `OPENAI_API_KEY`
-- whether the key is OpenAI or OpenRouter style
-- backend console output for AI fallback messages
-
-### Frontend build issues on Windows PowerShell
-
-Use:
-
-```bash
-npm.cmd run build
+```text
+https://onehourchallenge.com
 ```
 
-instead of:
+## 19. Known Notes
 
-```bash
-npm run build
-```
+- The current site is enquiry-first and does not show actual rupee pricing.
+- `/pricing` and `/plans` point to the same page.
+- Trainer images are currently not used; trainer cards use icons and text.
+- Some placeholder constants still exist for future media, including hero video, dashboard video, trainer images, and review images.
+- Booking routes still exist in the backend, but the public website currently focuses on lead/contact enquiries rather than a visible booking checkout flow.
+- Admin authentication is lightweight and environment-driven, not a full JWT/password-hash system yet.
+- Contact page inline styles reference a few undefined color variables: `--color-white`, `--color-gray-900`, and `--color-gray-600`.
+- Cloudinary URLs are hardcoded in frontend/CSS rather than managed through a media admin workflow.

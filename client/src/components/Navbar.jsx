@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { FiMenu, FiX } from 'react-icons/fi';
+import LeadCaptureButton from './LeadCaptureButton';
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -60,7 +61,11 @@ export default function Navbar() {
           </div>
 
           <div className="navbar-actions">
-            <Link to="/plans" className="btn btn-sm btn-primary" style={{ textDecoration: 'none' }}>Join Now</Link>
+            <LeadCaptureButton
+              className="btn btn-sm btn-primary"
+              context={{ sourcePage: 'Navbar', interestType: 'general', interestLabel: 'Navbar Join Now' }}
+              label="Join Now"
+            />
             <button
               className="mobile-menu-btn"
               type="button"
@@ -106,9 +111,11 @@ export default function Navbar() {
             <Link to="/transformations" className={`mobile-nav-link ${isActive('/transformations') ? 'active' : ''}`}>Results</Link>
             <Link to="/trainers" className={`mobile-nav-link ${isActive('/trainers') ? 'active' : ''}`}>Trainers</Link>
             <Link to="/contact" className={`mobile-nav-link ${isActive('/contact') ? 'active' : ''}`}>Contact</Link>
-            <Link to="/plans" className="btn btn-primary btn-lg mobile-nav-cta" style={{ textDecoration: 'none', textAlign: 'center' }}>
-              Join Now
-            </Link>
+            <LeadCaptureButton
+              className="btn btn-primary btn-lg mobile-nav-cta"
+              context={{ sourcePage: 'Mobile Navigation', interestType: 'general', interestLabel: 'Mobile Join Now' }}
+              label="Join Now"
+            />
           </div>
         </div>
       </div>

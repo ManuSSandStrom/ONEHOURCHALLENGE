@@ -2,34 +2,13 @@ import { FiArrowRight, FiCheckCircle } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 import PageHero from '../components/PageHero';
 import LeadCaptureButton from '../components/LeadCaptureButton';
+import { PROGRAMS } from '../utils/constants';
 
-const programs = [
-  {
-    title: '1-on-1 Training',
-    image: 'https://res.cloudinary.com/dt37ji5yp/image/upload/v1771782797/Gemini_Generated_Image_s8xw7ls8xw7ls8xw_1_z96yp5.png',
-    points: ['Dedicated coach support', 'Clear progression', 'Focused accountability'],
-  },
-  {
-    title: 'Zumba',
-    image: 'https://res.cloudinary.com/dt37ji5yp/image/upload/v1771512247/Zomba_Training_kws7pi.png',
-    points: ['High-energy cardio', 'Fun guided sessions', 'Group motivation'],
-  },
-  {
-    title: 'Yoga',
-    image: 'https://res.cloudinary.com/dt37ji5yp/image/upload/v1771512244/yoga_part4_mnslxd.png',
-    points: ['Flexibility work', 'Mobility support', 'Mind-body balance'],
-  },
-  {
-    title: 'HIIT',
-    image: 'https://res.cloudinary.com/dt37ji5yp/image/upload/v1771512241/Strength_part2_tzrm1t.png',
-    points: ['Efficient fat burn', 'Conditioning focus', 'Fast-paced coaching'],
-  },
-  {
-    title: 'Functional Training',
-    image: 'https://res.cloudinary.com/dt37ji5yp/image/upload/v1771512241/ST_2_xhbjg9.png',
-    points: ['Strength for daily life', 'Better movement', 'Joint-friendly programming'],
-  },
-];
+const programs = PROGRAMS.map((program) => ({
+  title: program.name,
+  image: program.image,
+  points: program.features,
+}));
 
 export default function Programs() {
   return (

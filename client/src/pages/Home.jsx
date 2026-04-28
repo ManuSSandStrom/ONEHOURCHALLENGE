@@ -22,6 +22,7 @@ import LeadCaptureButton from '../components/LeadCaptureButton';
 import {
   ADMIN_EMAIL,
   ADMIN_PHONE,
+  PROGRAMS,
   REVIEWS,
   TRAINERS,
   getWhatsAppUrl,
@@ -50,28 +51,7 @@ const stats = [
   { value: '5+', label: 'training formats' },
 ];
 
-const programs = [
-  {
-    title: 'Fitness and HIIT',
-    description: 'Build stamina, strength, and fat-loss momentum with coach-led full-body sessions.',
-    icon: FiZap,
-  },
-  {
-    title: 'Yoga and Mobility',
-    description: 'Improve flexibility, posture, breathing, and recovery with calm guided practice.',
-    icon: FiHeart,
-  },
-  {
-    title: 'Zumba Cardio',
-    description: 'Stay consistent with high-energy dance cardio that feels fun and approachable.',
-    icon: FiPlayCircle,
-  },
-  {
-    title: '1-on-1 Coaching',
-    description: 'Get a focused path with closer support, accountability, and personal guidance.',
-    icon: FiTarget,
-  },
-];
+const programs = PROGRAMS;
 
 const steps = [
   {
@@ -140,7 +120,7 @@ export default function Home() {
             <Motion.div className="home-hero-copy" variants={fadeUp}>
               <span className="section-badge">Live Online Fitness Coaching</span>
               <h1 className="home-title">
-                One focused hour to build a stronger, healthier routine.
+                One focused hour to build a <span>stronger</span>, healthier routine.
               </h1>
               <p className="home-summary">
                 Join live coach-led sessions for fitness, yoga, zumba, HIIT, and personal training.
@@ -148,16 +128,14 @@ export default function Home() {
               </p>
 
               <div className="hero-actions">
-                <LeadCaptureButton
+                <a
                   className="btn btn-primary btn-lg"
-                  context={{
-                    sourcePage: 'Home',
-                    interestType: 'general',
-                    interestLabel: 'Homepage Trial Enquiry',
-                  }}
+                  href={getWhatsAppUrl('I would like to book a free session for OneHour Challenge.')}
+                  target="_blank"
+                  rel="noreferrer"
                 >
                   Book Free Trial <FiArrowRight />
-                </LeadCaptureButton>
+                </a>
                 <Link to="/programs" className="btn btn-secondary btn-lg">
                   Explore Programs <FiArrowUpRight />
                 </Link>
@@ -190,7 +168,7 @@ export default function Home() {
                 </div>
               </div>
               <a
-                href={getWhatsAppUrl('Hi OneHour Challenge, I want help choosing a program.')}
+                href={getWhatsAppUrl('I would like to know more about OneHour Challenge.')}
                 target="_blank"
                 rel="noreferrer"
                 className="hero-whatsapp-link"
@@ -234,29 +212,32 @@ export default function Home() {
             whileInView="visible"
             viewport={viewport}
           >
-            {programs.map((program) => {
-              const Icon = program.icon;
-
-              return (
-                <Motion.article className="program-summary-card" key={program.title} variants={fadeUp}>
-                  <div className="card-icon">
-                    <Icon />
+            {programs.map((program) => (
+                <Motion.article
+                  className="program-summary-card program-image-card"
+                  key={program.name}
+                  variants={fadeUp}
+                  style={{ '--program-image': `url(${program.image})` }}
+                >
+                  <div className="program-image-card-content">
+                    <h3>{program.name}</h3>
+                    <p>{program.label}</p>
+                    <ul className="program-image-features">
+                      {program.features.slice(0, 3).map((feature) => <li key={feature}>{feature}</li>)}
+                    </ul>
                   </div>
-                  <h3>{program.title}</h3>
-                  <p>{program.description}</p>
                   <LeadCaptureButton
                     className="text-link"
                     context={{
                       sourcePage: 'Home',
                       interestType: 'program',
-                      interestLabel: program.title,
+                      interestLabel: program.name,
                     }}
                   >
                     Enquire now <FiArrowRight />
                   </LeadCaptureButton>
                 </Motion.article>
-              );
-            })}
+              ))}
           </Motion.div>
         </div>
       </MotionSection>

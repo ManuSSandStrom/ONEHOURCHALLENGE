@@ -27,6 +27,79 @@ export const PLAN_FEATURES = {
   },
 };
 
+export const WHATSAPP_NUMBER = '919515022680';
+export const WHATSAPP_BASE = `https://wa.me/${WHATSAPP_NUMBER}`;
+export const CONTACT_EMAIL = 'manoharbasappagari18@gmail.com';
+export const CONTACT_PHONE = '+91 95150 22680';
+export const API_BASE = import.meta.env.VITE_API_URL || 'https://onehourchallenge.onrender.com/api';
+
+export const PROGRAMS = [
+  {
+    id: 'hiit',
+    name: 'Fitness & HIIT',
+    title: 'Fitness & HIIT',
+    label: 'Build stamina, strength, and fat-loss momentum with coach-led full-body sessions.',
+    features: ['Build stamina', 'Fat-loss momentum', 'Full-body sessions'],
+    image: 'https://res.cloudinary.com/dt37ji5yp/image/upload/v1771512241/Strength_part2_tzrm1t.png',
+  },
+  {
+    id: 'yoga',
+    name: 'Yoga & Mobility',
+    title: 'Yoga & Mobility',
+    label: 'Improve flexibility, posture, breathing, and recovery with calm guided practice.',
+    features: ['Flexibility work', 'Posture improvement', 'Mind-body balance'],
+    image: 'https://res.cloudinary.com/dt37ji5yp/image/upload/v1771512244/yoga_part4_mnslxd.png',
+  },
+  {
+    id: 'zumba',
+    name: 'Zumba Cardio',
+    title: 'Zumba Cardio',
+    label: 'Stay consistent with high-energy dance cardio that feels fun and approachable.',
+    features: ['High-energy cardio', 'Fun guided sessions', 'Group motivation'],
+    image: 'https://res.cloudinary.com/dt37ji5yp/image/upload/v1771512247/Zomba_Training_kws7pi.png',
+  },
+  {
+    id: 'one-on-one',
+    name: '1-on-1 Coaching',
+    title: '1-on-1 Coaching',
+    label: 'Get a focused path with closer support, accountability, and personal guidance.',
+    features: ['Dedicated coach support', 'Clear progression', 'Focused accountability'],
+    image: 'https://res.cloudinary.com/dt37ji5yp/image/upload/v1771782797/Gemini_Generated_Image_s8xw7ls8xw7ls8xw_1_z96yp5.png',
+  },
+  {
+    id: 'functional',
+    name: 'Functional Training',
+    title: 'Functional Training',
+    label: 'Train for real-life strength with joint-friendly, progressive programming.',
+    features: ['Strength for daily life', 'Better movement', 'Joint-friendly'],
+    image: 'https://res.cloudinary.com/dt37ji5yp/image/upload/v1771512241/ST_2_xhbjg9.png',
+  },
+];
+
+export const PLANS = {
+  PRO: {
+    name: 'PRO',
+    subtitle: 'Balanced Coaching',
+    frequency: '3 Days/Week',
+    maxBookings: 4,
+    features: PLAN_FEATURES.PRO.features,
+  },
+  ADVANCE: {
+    name: 'ADVANCE',
+    subtitle: 'Intensive Coaching',
+    frequency: '5 Days/Week',
+    maxBookings: 6,
+    features: PLAN_FEATURES.ADVANCE.features,
+  },
+};
+
+export const DURATIONS = [
+  { key: 'Starter', label: 'Starter', note: 'Best for first-time members', summary: 'A simple way to begin, understand the coaching style, and build your first routine.', recommended: false },
+  { key: '3 Months', label: '3 Months', note: 'Most chosen', summary: 'A focused phase for building momentum, visible discipline, and measurable progress.', recommended: true },
+  { key: '6 Months', label: '6 Months', note: 'Best for stronger transformation', summary: 'Ideal for members who want enough time to improve stamina, strength, and overall fitness.', recommended: false },
+  { key: 'Long Term', label: 'Long Term', note: 'Best for lifestyle change', summary: 'Built for long-term consistency when fitness becomes part of your everyday routine.', recommended: false },
+];
+
 export const FREE_SESSION_OPTIONS = [
   {
     type: 'Yoga',
@@ -88,7 +161,6 @@ export const PLACEHOLDERS = {
   ],
 };
 
-export const WHATSAPP_NUMBER = '919515022680';
 export const WHATSAPP_MESSAGE = 'I would like to book a free session for OneHour Challenge.';
 
 export const getWhatsAppUrl = (customMessage) => {
@@ -109,7 +181,7 @@ export const getWhatsAppFreeSessionUrl = (sessionType, userName, userEmail) => {
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
 };
 
-export const ADMIN_EMAIL = 'manoharbasappagari18@gmail.com';
+export const ADMIN_EMAIL = CONTACT_EMAIL;
 export const ADMIN_PHONE = '9515022680';
 
 export const REVIEWS = [

@@ -1,6 +1,8 @@
+import { useEffect, useState } from 'react';
 import { PLACEHOLDERS } from '../utils/constants';
 import PageHero from '../components/PageHero';
 import LeadCaptureButton from '../components/LeadCaptureButton';
+import API from '../utils/api';
 
 const transformations = [
   { image: PLACEHOLDERS.transformationImages[0], quote: 'Lost 12 kgs in 4 months. The structure and consistency made the difference.', name: 'Navami P' },
@@ -12,6 +14,26 @@ const transformations = [
 ];
 
 export default function Transformations() {
+  const [adminImages, setAdminImages] = useState([]);
+  const [adminVideos, setAdminVideos] = useState([]);
+
+  useEffect(() => {
+    const fetchMedia = async () => {
+      try {
+        const [imagesRes, videosRes] = await Promise.all([
+          API.get('/media?type=image'),
+          API.get('/media?type=video'),
+        ]);
+        setAdminImages(imagesRes.data?.data || imagesRes.data?.media || []);
+        setAdminVideos(videosRes.data?.data || videosRes.data?.media || []);
+      } catch (error) {
+        console.error('Transformation media fetch failed:', error);
+      }
+    };
+
+    fetchMedia();
+  }, []);
+
   return (
     <div className="page-wrapper page-transformations">
       <PageHero
@@ -58,6 +80,39 @@ export default function Transformations() {
               </div>
             ))}
           </div>
+
+          {(adminImages.length || adminVideos.length) ? (
+            <div className="admin-media-public-section reveal">
+              <div className="section-header">
+                <div className="section-badge">Latest Uploads</div>
+                <h2 className="section-title">Fresh transformation media from the team.</h2>
+              </div>
+
+              {adminImages.length ? (
+                <div className="transformations-grid">
+                  {adminImages.map((item) => (
+                    <div className="transformation-card transformation-upload-card" key={item._id}>
+                      <div className="transformation-image">
+                        <img src={item.url} alt={item.caption || 'OneHour Challenge transformation'} loading="lazy" />
+                      </div>
+                      {item.caption ? <div className="transformation-content"><p className="transformation-name">{item.caption}</p></div> : null}
+                    </div>
+                  ))}
+                </div>
+              ) : null}
+
+              {adminVideos.length ? (
+                <div className="admin-video-grid">
+                  {adminVideos.map((item) => (
+                    <article className="transformation-card" key={item._id}>
+                      <video src={item.url} poster={item.thumbnailUrl || undefined} controls preload="metadata"></video>
+                      {item.caption ? <div className="transformation-content"><p className="transformation-name">{item.caption}</p></div> : null}
+                    </article>
+                  ))}
+                </div>
+              ) : null}
+            </div>
+          ) : null}
         </div>
       </section>
 

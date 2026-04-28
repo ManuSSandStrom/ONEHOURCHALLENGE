@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { FiMail, FiSend, FiMapPin, FiPhoneCall, FiClock } from 'react-icons/fi';
 import toast from 'react-hot-toast';
 import API from '../utils/api';
-import { ADMIN_EMAIL, ADMIN_PHONE } from '../utils/constants';
+import { ADMIN_EMAIL, ADMIN_PHONE, getWhatsAppUrl } from '../utils/constants';
 import PageHero from '../components/PageHero';
 
 export default function Contact() {
@@ -36,7 +36,7 @@ export default function Contact() {
       setFormData({ name: '', email: '', mobile: '', gender: '', age: '', message: '' });
     } catch (error) {
       console.error(error);
-      toast.error('Failed to process. Please try again.');
+      toast.error(error.response?.data?.message || 'Failed to process. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -100,6 +100,16 @@ export default function Contact() {
                   <div className="contact-info-value">+91 {ADMIN_PHONE}</div>
                 </div>
               </div>
+
+              <a
+                className="btn btn-primary btn-lg"
+                href={getWhatsAppUrl('I would like to know more about OneHour Challenge.')}
+                target="_blank"
+                rel="noreferrer"
+                style={{ width: '100%', marginTop: '18px' }}
+              >
+                Chat on WhatsApp
+              </a>
 
               <div className="contact-info-card">
                 <div className="contact-info-icon"><FiMapPin /></div>

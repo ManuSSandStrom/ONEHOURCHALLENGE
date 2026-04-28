@@ -1,26 +1,29 @@
-const getAdminCredentials = () => ({
-  username: process.env.ADMIN_PORTAL_USERNAME || 'admin',
-  password: process.env.ADMIN_PORTAL_PASSWORD || 'OHCAdmin@2026',
-});
+import jwt from 'jsonwebtoken';
+import { env } from '../config/env.js';
 
-export const createAdminToken = (username, password) => {
-  return Buffer.from(`${username}:${password}`).toString('base64');
+export const createAdminToken = (username) => {
+  return jwt.sign({ username, role: 'admin' }, env.jwtSecret, { expiresIn: '24h' });
 };
 
-export const verifyAdminToken = (token) => {
-  const { username, password } = getAdminCredentials();
-  return token === createAdminToken(username, password);
-};
+export const verifyAdminToken = (token) => jwt.verify(token, env.jwtSecret);
 
 export const adminAuth = (req, res, next) => {
   const authHeader = req.headers.authorization || '';
   const token = authHeader.startsWith('Bearer ') ? authHeader.slice(7) : '';
 
-  if (!token || !verifyAdminToken(token)) {
-    return res.status(401).json({ error: 'Unauthorized admin access' });
-  }
+  try {
+    if (!token) {
+      return res.status(401).json({ success: false, message: 'Unauthorized admin access' });
+    }
 
-  next();
+    req.admin = verifyAdminToken(token);
+    next();
+  } catch (_error) {
+    return res.status(401).json({ success: false, message: 'Unauthorized admin access' });
+  }
 };
 
-export const getAdminCredentialsForLogin = () => getAdminCredentials();
+export const getAdminCredentialsForLogin = () => ({
+  username: env.adminUsername,
+  password: env.adminPassword,
+});

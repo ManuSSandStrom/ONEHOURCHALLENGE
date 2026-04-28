@@ -37,7 +37,8 @@ export default function AIAssistant() {
 
     try {
       const response = await API.post('/ai/chat', {
-        messages: nextMessages.map(({ role, content }) => ({ role, content })),
+        message: trimmed,
+        history: messages.map(({ role, content }) => ({ role, content })),
       });
 
       setMessages((prev) => [
@@ -45,7 +46,7 @@ export default function AIAssistant() {
         {
           id: `assistant-${Date.now()}`,
           role: 'assistant',
-          content: response.data?.message || 'I can help with programs, plans, and registration.',
+          content: response.data?.reply || response.data?.data?.reply || response.data?.message || 'I can help with programs, plans, and registration.',
         },
       ]);
     } catch (error) {

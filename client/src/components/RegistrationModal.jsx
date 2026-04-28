@@ -45,8 +45,15 @@ export default function RegistrationModal({ isOpen, onClose, context }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    const cleanMobile = formData.mobile.replace(/\D/g, '');
+
     if (!formData.name || !formData.mobile || !formData.age) {
       toast.error('Please fill in full name, phone number, and age');
+      return;
+    }
+
+    if (cleanMobile.length !== 10) {
+      toast.error('Please enter a valid 10 digit phone number');
       return;
     }
 
@@ -65,11 +72,13 @@ export default function RegistrationModal({ isOpen, onClose, context }) {
         gender: null,
       });
 
+      const topic = context?.interestLabel || 'your enquiry';
       setSubmitted(true);
-      toast.success('Registration submitted successfully');
+      toast.success(`We received your details. Our team will contact you soon regarding ${topic}.`);
+      window.setTimeout(onClose, 900);
     } catch (error) {
       console.error(error);
-      toast.error(error.response?.data?.error || 'Failed to submit registration');
+      toast.error(error.response?.data?.message || error.response?.data?.error || 'Failed to submit registration');
     } finally {
       setSubmitting(false);
     }

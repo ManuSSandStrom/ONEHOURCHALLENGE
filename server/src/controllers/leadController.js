@@ -20,7 +20,11 @@ export const createLead = async (req, res) => {
     } = req.body;
 
     if (!name || !mobile || !age || !sourcePage) {
-      return res.status(400).json({ error: 'Name, mobile, age, and source page are required' });
+      return res.status(400).json({ success: false, message: 'Name, mobile, age, and source page are required' });
+    }
+
+    if (!/^\d{10}$/.test(String(mobile).replace(/\D/g, '').slice(-10))) {
+      return res.status(400).json({ success: false, message: 'Please enter a valid 10 digit phone number' });
     }
 
     const lead = await Lead.create({
@@ -40,27 +44,35 @@ export const createLead = async (req, res) => {
       message,
     });
 
-    res.status(201).json({ success: true, lead });
+    res.status(201).json({ success: true, data: lead, lead, message: 'Lead created' });
   } catch (error) {
     console.error('Create lead error:', error);
-    res.status(500).json({ error: 'Failed to create lead' });
+    res.status(500).json({ success: false, message: 'Failed to create lead' });
   }
 };
 
 export const getAllLeads = async (req, res) => {
   try {
-    const { page, interestType, status } = req.query;
+    const { page, interestType, status, planType, duration, search } = req.query;
     const filter = {};
 
     if (page) filter.sourcePage = page;
     if (interestType) filter.interestType = interestType;
     if (status) filter.status = status;
+    if (planType) filter.planType = planType;
+    if (duration) filter.duration = duration;
+    if (search) {
+      filter.$or = [
+        { name: { $regex: search, $options: 'i' } },
+        { mobile: { $regex: search, $options: 'i' } },
+      ];
+    }
 
     const leads = await Lead.find(filter).sort({ createdAt: -1 });
-    res.json(leads);
+    res.json({ success: true, data: leads, leads });
   } catch (error) {
     console.error('Get leads error:', error);
-    res.status(500).json({ error: 'Failed to fetch leads' });
+    res.status(500).json({ success: false, message: 'Failed to fetch leads' });
   }
 };
 
@@ -71,13 +83,13 @@ export const updateLeadStatus = async (req, res) => {
 
     const lead = await Lead.findByIdAndUpdate(id, { status }, { new: true });
     if (!lead) {
-      return res.status(404).json({ error: 'Lead not found' });
+      return res.status(404).json({ success: false, message: 'Lead not found' });
     }
 
-    res.json({ success: true, lead });
+    res.json({ success: true, data: lead, lead, message: 'Lead status updated' });
   } catch (error) {
     console.error('Update lead status error:', error);
-    res.status(500).json({ error: 'Failed to update lead status' });
+    res.status(500).json({ success: false, message: 'Failed to update lead status' });
   }
 };
 
@@ -87,12 +99,12 @@ export const deleteLead = async (req, res) => {
     const lead = await Lead.findByIdAndDelete(id);
 
     if (!lead) {
-      return res.status(404).json({ error: 'Lead not found' });
+      return res.status(404).json({ success: false, message: 'Lead not found' });
     }
 
-    res.json({ success: true });
+    res.json({ success: true, message: 'Lead deleted' });
   } catch (error) {
     console.error('Delete lead error:', error);
-    res.status(500).json({ error: 'Failed to delete lead' });
+    res.status(500).json({ success: false, message: 'Failed to delete lead' });
   }
 };

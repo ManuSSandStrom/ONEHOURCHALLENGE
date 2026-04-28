@@ -5,6 +5,8 @@ import { getAllLeads, updateLeadStatus, deleteLead } from '../controllers/leadCo
 import { getAllContacts, updateContactStatus, deleteContact } from '../controllers/contactController.js';
 import { loginAdmin } from '../controllers/adminAuthController.js';
 import { adminAuth } from '../middleware/adminAuth.js';
+import { upload } from '../middleware/upload.js';
+import { deleteMedia, getAdminMedia, updateMediaOrder, uploadMedia } from '../controllers/mediaController.js';
 
 const router = express.Router();
 
@@ -20,6 +22,10 @@ router.delete('/leads/:id', deleteLead);
 router.get('/contacts', getAllContacts);
 router.patch('/contacts/:id/status', updateContactStatus);
 router.delete('/contacts/:id', deleteContact);
+router.post('/media/upload', upload.single('file'), uploadMedia);
+router.get('/media', getAdminMedia);
+router.patch('/media/:id/order', updateMediaOrder);
+router.delete('/media/:id', deleteMedia);
 router.get('/export/bookings', exportBookingsCSV);
 
 export default router;

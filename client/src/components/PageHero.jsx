@@ -23,7 +23,7 @@ export default function PageHero({
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
         >
-          <div className="page-hero-layout">
+          <div className="page-hero-layout page-hero-centered">
             <div className="page-hero-main">
               {badge ? <div className="section-badge">{badge}</div> : null}
               {eyebrow ? <div className="page-hero-eyebrow">{eyebrow}</div> : null}
@@ -42,32 +42,6 @@ export default function PageHero({
                   ))}
                 </div>
               ) : null}
-            </div>
-
-            <div className="page-hero-side">
-              <div className="page-hero-side-card page-hero-side-card-primary">
-                <span className="page-hero-side-kicker">OneHour Challenge</span>
-                <strong>Train with focus</strong>
-                <p>Live 1-hour sessions designed to help members stay consistent, energetic, and goal-driven.</p>
-              </div>
-
-              <div className="page-hero-side-card">
-                <span className="page-hero-side-kicker">What members get</span>
-                <div className="page-hero-side-list">
-                  <div>
-                    <strong>Expert-led sessions</strong>
-                    <span>Certified coaches guide every workout with clear pacing and practical support.</span>
-                  </div>
-                  <div>
-                    <strong>Programs for every goal</strong>
-                    <span>Build strength, improve stamina, increase flexibility, or enjoy high-energy cardio.</span>
-                  </div>
-                  <div>
-                    <strong>Simple next steps</strong>
-                    <span>Book a free session, explore plans, or register your interest in just a few clicks.</span>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </Motion.div>

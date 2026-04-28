@@ -1,9 +1,10 @@
 import axios from 'axios';
+import { API_BASE } from './constants';
 
-const ADMIN_TOKEN_KEY = 'ohc_admin_token';
+const ADMIN_TOKEN_KEY = 'admin_token';
 
 const API = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'https://onehourchallenge.onrender.com/api',
+  baseURL: API_BASE,
   timeout: 15000,
   headers: {
     'Content-Type': 'application/json',
