@@ -110,6 +110,17 @@ export default function Home() {
   return (
     <div className="home-page">
       <section className="home-hero">
+        <video
+          className="home-hero-video"
+          src="https://res.cloudinary.com/dt37ji5yp/video/upload/v1771512442/Yoga_Instructor_Video_Generation_Request_qmgjsy.mp4"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          aria-hidden="true"
+        />
+        <div className="home-hero-video-overlay" aria-hidden="true"></div>
         <div className="container">
           <Motion.div
             className="home-hero-grid"
@@ -165,6 +176,10 @@ export default function Home() {
                 <div>
                   <FiShield />
                   <span>Safe progressions for every fitness level</span>
+                </div>
+                <div>
+                  <FiZap />
+                  <span>60-minute structured sessions</span>
                 </div>
               </div>
               <a

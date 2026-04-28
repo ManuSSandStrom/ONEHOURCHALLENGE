@@ -9,7 +9,7 @@ The website does not currently sell plans through an online checkout. Visitors e
 1. Product Summary
 2. Current Website Content
 3. Routes and Navigation
-4. Hero Background URLs
+4. Hero Background Media
 5. Image and Media URLs
 6. Current Colors and Theme
 7. Pricing and Plans
@@ -514,41 +514,43 @@ Footer contact:
 - Contact
 - Join Now
 
-## 4. Hero Background URLs
+## 4. Hero Background Media
 
-The site currently uses two CSS hero background images.
+The site now uses a video-led hero on the homepage and a clean editorial hero treatment on inner pages.
 
-### Home Hero Background
+### Home Hero Background Video
 
-Used by `.home-hero`.
-
-```text
-https://res.cloudinary.com/dt37ji5yp/image/upload/v1771512241/ST_2_xhbjg9.png
-```
-
-CSS usage:
-
-```css
-background:
-  linear-gradient(rgba(20, 32, 27, 0.5), rgba(20, 32, 27, 0.56)),
-  url("https://res.cloudinary.com/dt37ji5yp/image/upload/v1771512241/ST_2_xhbjg9.png") center/cover;
-```
-
-### Inner Page Hero Background
-
-Used by `.page-hero` on About, Programs, Plans, How It Works, Trainers, Transformations, and Contact.
+Used by `.home-hero-video` on the homepage only.
 
 ```text
-https://res.cloudinary.com/dt37ji5yp/image/upload/v1771512247/Zomba_part3_v3i9y0.png
+https://res.cloudinary.com/dt37ji5yp/video/upload/v1771512442/Yoga_Instructor_Video_Generation_Request_qmgjsy.mp4
 ```
 
-CSS usage:
+Markup usage:
 
-```css
-background:
-  linear-gradient(rgba(20, 32, 27, 0.52), rgba(20, 32, 27, 0.62)),
-  url("https://res.cloudinary.com/dt37ji5yp/image/upload/v1771512247/Zomba_part3_v3i9y0.png") center/cover;
+```jsx
+<video
+  className="home-hero-video"
+  src="https://res.cloudinary.com/dt37ji5yp/video/upload/v1771512442/Yoga_Instructor_Video_Generation_Request_qmgjsy.mp4"
+  autoPlay
+  muted
+  loop
+  playsInline
+  preload="metadata"
+  aria-hidden="true"
+/>
 ```
+
+The video is covered by a dark green gradient overlay so white hero text remains readable.
+
+### Inner Page Hero Treatment
+
+Inner pages no longer use the same repeated background image. The shared `.page-hero` now uses a light professional showcase style with:
+
+- a soft off-white and pale green gradient
+- centered badge, eyebrow, heading, description, and metrics
+- no large repeated photo background
+- no right-side white content cards in the hero
 
 ## 5. Image and Media URLs
 
